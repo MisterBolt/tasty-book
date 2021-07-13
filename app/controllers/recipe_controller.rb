@@ -1,9 +1,5 @@
 class RecipeController < ApplicationController
   def index
-    @recipe = Recipe.all
-  end
-
-  def show
     @recipes = Recipe.all
   end
 
@@ -16,8 +12,8 @@ class RecipeController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(idea_params)
-    respond_to do |format|
+    @recipe = Recipe.new(recipe_params)
+    respond_to do
       if @recipe.save
         format.html { redirect_to @recipe, notice: "Recipe was successfully created."}
         format.json { render :show, status: :created, location: @recipe}
