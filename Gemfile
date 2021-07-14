@@ -35,7 +35,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails", "~> 5.0", ">= 5.0.1"
   gem "factory_bot_rails", "~> 6.1"
-  gem "standard", "~> 1.1", ">= 1.1.5"
+  gem "standard", "~> 1.1"
 end
 
 group :development do
