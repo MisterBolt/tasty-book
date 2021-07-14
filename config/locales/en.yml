@@ -30,4 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  recipes:
+    create:
+      notice: "Recipe was successfully created."
+    destroy:
+      notice: "Recipe was successfully destroyed."
+    update:
+      notice: "Recipe was successfully updated."
