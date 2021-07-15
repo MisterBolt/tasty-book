@@ -1,10 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RecipeScore, type: :model do
-  
   describe "validations" do
-    subject { RecipeScore.new(user_id: 1, recipe_id: 1, score: 5) } 
-    
+    subject { RecipeScore.new(user_id: 1, recipe_id: 1, score: 5) }
+
     it { is_expected.to validate_presence_of(:user_id) }
     it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:recipe_id) }
     it { is_expected.to validate_presence_of(:recipe_id) }
