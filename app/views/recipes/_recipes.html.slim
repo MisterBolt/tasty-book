@@ -1,24 +1,24 @@
 - unless @recipes.empty?
-  div class="w-auto"
+  .w-auto
     - @recipes.each do |recipe|
-      article class="p-4 flex space-x-4 border-solid border-2"
-        img src="" alt="" class="flex-none rounded-lg object-cover bg-gray-100" width="80" height="80"
-        div class="relative flex-auto"
+      article.p-4.flex.space-x-4.border-solid.border-2
+        img.flex-none.rounded-lg.object-cover.bg-gray-100 src="" alt="" width="80" height="80"
+        .relative.flex-auto
           = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5"
-          dl class="flex text-sm font-medium whitespace-pre"
+          dl.flex.text-sm.font-medium.whitespace-pre
             dd category
             |  • 
             dd difficulty
-            div class="absolute top-0 right-0 flex items-center"
-              div class="px-2.5 py-1 rounded-full bg-blue-50 border-2 border-blue-100 flex items-center space-x-3"
+            .absolute.top-0.right-0.flex.items-center
+              .px-2.5.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
                 = render 'shared/star'
                 dd 4.20
               
               // check if user is logged in
               - if true
-                div class="px-2.5 py-1"
+                .px-2.5.py-1
                   = render 'shared/heart', filled: false
         
 - else
-  p class="text-center mt-5"
+  p.text-center.mt-5
     | No recipes found
