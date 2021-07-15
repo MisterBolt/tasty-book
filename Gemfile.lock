@@ -103,6 +103,8 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
+    nokogiri (1.11.7-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.11.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -199,6 +201,8 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -244,6 +248,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  x86_64-darwin-17
   x86_64-linux
 
 DEPENDENCIES
@@ -259,6 +264,7 @@ DEPENDENCIES
   rails (~> 6.1.4)
   rspec-rails (~> 5.0, >= 5.0.1)
   sass-rails (>= 6)
+  shoulda-matchers (~> 5.0)
   slim-rails (~> 3.2)
   spring
   standard (~> 1.1)
