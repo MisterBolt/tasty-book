@@ -32,6 +32,7 @@ gem "slim-rails", "~> 3.2"
 gem "factory_bot_rails", "~> 6.1"
 gem "faker", "~> 2.18"
 gem "pagy", "~> 4.8"
+gem 'will_paginate', '~> 3.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
