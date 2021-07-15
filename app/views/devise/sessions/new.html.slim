@@ -1,18 +1,33 @@
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.flex.h-screen.bg-gray-200
+  .w-full.max-w-xs.m-auto
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" }) do |f|
+      .mb-4
+        - if flash[:alert]
+          = f.label :email, class: "block text-gray-700 text-sm font-bold mb-2"
+          = f.email_field :email, autofocus: true, autocomplete: "email", \
+            class: "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
+            placeholder: "Email"
+          = f.label :password, class: "block text-gray-700 text-sm font-bold mb-2"
+          = f.password_field :password, autocomplete: "current-password", \
+              class: "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline", \
+              placeholder: "******************"
+        - else
+          = f.label :email, class: "block text-gray-700 text-sm font-bold mb-2"
+          = f.email_field :email, autofocus: true, autocomplete: "email", \
+            class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
+            placeholder: "Email"
+          = f.label :password, class: "block text-gray-700 text-sm font-bold mb-2"
+          = f.password_field :password, autocomplete: "current-password", \
+              class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline", \
+              placeholder: "******************"
+      - if devise_mapping.rememberable?
+        .md:flex.md:items-center.mb-6
+          = f.check_box :remember_me, class: "mr-2 leading-tight"
+          = f.label :remember_me, class: "block text-gray-700 text-sm font-bold"
+      .flex.items-center.justify-between
+        = f.submit "Log in", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+          = link_to "Forgot your password?", new_password_path(resource_name), class: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+      = render "devise/shared/links"
+
+    p.text-center.text-gray-500.text-xs &copy;2021 Recipe Book. All rights reserved.
