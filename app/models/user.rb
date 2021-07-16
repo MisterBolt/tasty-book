@@ -9,6 +9,13 @@ class User < ApplicationRecord
     dependent: :destroy
 
   has_many :scored_recipes,
+<<<<<<< HEAD
     through: :recipe_scores,
     source: :recipe
+=======
+           through: :recipe_scores,
+           source: :recipe
+
+  has_many :recipes     
+>>>>>>> 42e70f9... Enabled author to delete his own recipe
 end

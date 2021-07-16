@@ -18,10 +18,11 @@
           - if current_user
             .px-2.5.py-1
               = render 'shared/heart', filled: false
-            //If admin enable option to delete recipe
-            - if current_user.admin?
-              .delete 
-                = link_to "DELETE", "recipes/#{recipe.id}", method: :delete, confirm: "Sure?"
+            //If admin or author enable option to delete recipe
+            - if current_user.admin? || recipe.user == current_user
+              .px-2.5.py-2
+                = link_to "DELETE", "recipes/#{recipe.id}", method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded", \
+                  data: {confirm: "Are you sure?"}
 
         
 - else
