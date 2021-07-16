@@ -5,4 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, uniqueness: true, presence: true
+
+  has_many :recipe_scores,
+            dependent: :destroy
+
+  has_many :scored_recipes,
+           through: :recipe_scores,
+           source: :recipe
 end

@@ -5,8 +5,6 @@ class RecipeScore < ApplicationRecord
   validates :recipe_id, presence: true
   validates :score, presence: true, inclusion: { in: SCORE }
 
-
   belongs_to :user
   belongs_to :recipe
-
 end
