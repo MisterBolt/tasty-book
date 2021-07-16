@@ -3,21 +3,21 @@
     - @recipes.each do |recipe|
       article.p-4.flex.space-x-4.border-solid.border-2
         img.flex-none.rounded-lg.object-cover.bg-gray-100 src="" alt="" width="80" height="80"
-        .relative.flex-auto
-          = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5"
+        .flex-1
+          = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all"
           dl.flex.text-sm.font-medium.whitespace-pre
             dd category
             |  • 
             dd difficulty
-            .absolute.top-0.right-0.flex.items-center
-              .px-2.5.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
-                = render 'shared/star'
-                dd 4.20
-              
-              // check if user is logged in
-              - if true
-                .px-2.5.py-1
-                  = render 'shared/heart', filled: false
+        .flex.items-start
+          .px-2.5.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
+            = render 'shared/star'
+            dd 4.20
+          
+          // check if user is logged in
+          - if true
+            .px-2.5.py-1
+              = render 'shared/heart', filled: false
         
 - else
   p.text-center.mt-5
