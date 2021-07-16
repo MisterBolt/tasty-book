@@ -2,6 +2,7 @@
 
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :destroy]
+  before_action :require_user, except: :index
 
   def index
     @pagy, @recipes = pagy(Recipe.all, items: per_page)
@@ -29,6 +30,7 @@ class RecipesController < ApplicationController
   end
 
   def destroy
+    @recipe = Recipe.find(params[:id])
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_path, notice: t(".notice") }

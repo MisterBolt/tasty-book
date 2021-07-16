@@ -15,9 +15,14 @@
             dd 4.20
           
           // check if user is logged in
-          - if true
+          - if current_user
             .px-2.5.py-1
               = render 'shared/heart', filled: false
+            //If admin enable option to delete recipe
+            - if current_user.admin?
+              .delete 
+                = link_to "DELETE", "recipes/#{recipe.id}", method: :delete, confirm: "Sure?"
+
         
 - else
   p.text-center.mt-5
