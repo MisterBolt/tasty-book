@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :recipes
-
-  devise_for :users
-
   root "recipes#index"
+  devise_for :users
+  resources :recipes
+  resources :recipe_scores, only: :create
 end
