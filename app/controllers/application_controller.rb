@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   DEFAULT_PER_PAGE = 10
   before_action :configure_user_params, only: [:create, :update], if: :devise_controller?
 

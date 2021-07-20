@@ -10,9 +10,9 @@
     .flex.items-start
       .px-2.5.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
         = render 'shared/star'
-        dd 4.20
+        dd #{average_score(recipe)}
       
-      - if user_signed_in? || true
+      - if user_signed_in?
         input.drop-item type="radio" name="dropdown" id="dropdown#{recipe.id}"
         .dropdown.relative.inline-block.text-left
           .mx-2
@@ -35,8 +35,7 @@
               div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
                 | Add to a cook book 
             py-1
-              / placeholder divs instead of link_to until links are defined (classes kept this way so it's easier to rewrite for link_to)
-              
+
               / check if user is the author or admin
               - if false
                 = link_to "Edit recipe", edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"

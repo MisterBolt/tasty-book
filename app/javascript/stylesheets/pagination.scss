@@ -1,57 +1,40 @@
-.digg_pagination {
-    background: white;
-    cursor: default;
-    /* self-clearing method: */
-    a, span, em {
-      padding: 0.2em 0.5em;
-      display: block;
-      float: left;
-      margin-right: 1px;
+@import "~tailwindcss/base";
+
+
+.pagy-nav{
+  @apply flex space-x-2;
+  
+  .page a,
+  .page.active,
+  .page.prev.disabled,
+  .page.next.disabled{
+    @apply block rounded-lg px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+    &:hover{
+      @apply bg-gray-300;
     }
-    .disabled {
-      color: #999999;
-      border: 1px solid #dddddd;
-    }
-    .current {
-      font-style: normal;
-      font-weight: bold;
-      background: #2e6ab1;
-      color: white;
-      border: 1px solid #2e6ab1;
-    }
-    a {
-      text-decoration: none;
-      color: #105cb6;
-      border: 1px solid #9aafe5;
-    }
-    a:hover, a:focus {
-      color: #000033;
-      border-color: #000033; 
-    }
-    .page_info {
-      background: #2e6ab1;
-      color: white;
-      padding: 0.4em 0.6em;
-      width: 22em;
-      margin-bottom: 0.3em;
-      text-align: center;
-      b {
-        color: #000033;
-        background: #6aa6ed;
-        padding: 0.1em 0.25em;
-      }
-    }
-    &:after {
-      content: ".";
-      display: block;
-      height: 0;
-      clear: both;
-      visibility: hidden;
+    &:active{
+      @apply bg-gray-400 text-white;
     }
   }
-  * html .digg_pagination {
-    height: 1%;
+
+  .page.prev.disabled,
+  .page.next.disabled{
+    @apply text-gray-400 cursor-default;
+    &:hover {
+      @apply text-gray-400 bg-gray-200;
+    }
+    &:active {
+      @apply text-gray-400 bg-gray-200;
+    }
   }
-  *:first-child + html .digg_pagination {
-    overflow: hidden;
+
+  .page.active{
+    @apply text-white cursor-default bg-gray-400;
+    &:hover {
+      @apply text-white bg-gray-400;
+    }
+    &:active {
+      @apply bg-gray-400 text-white;
+    }
   }
+}

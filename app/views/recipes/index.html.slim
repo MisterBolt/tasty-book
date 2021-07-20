@@ -1,10 +1,10 @@
 .px-10.mt-5
-  .digg_pagination.flex.justify-center.my-2
-    = will_paginate(@recipes, container: false)
+  .flex.justify-center.my-2
+    == pagy_nav(@pagy) if @pagy.pages > 1
   - if @recipes.present?
     = render @recipes
   - else 
     p.text-center.mt-5
       | No recipes found
-  .digg_pagination.flex.justify-center.my-2
-    = will_paginate(@recipes, container: false)
+  .flex.justify-center.my-2
+    == pagy_nav(@pagy) if @pagy.pages > 1

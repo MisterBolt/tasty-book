@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :destroy]
 
   def index
-    @recipes = Recipe.paginate(page: params[:page], per_page: per_page)
+    @pagy, @recipes = pagy(Recipe.all, items: per_page)
   end
 
   def show
