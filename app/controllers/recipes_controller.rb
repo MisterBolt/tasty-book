@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: t('.notice') }
+        format.html { redirect_to @recipe, notice: t(".notice") }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -26,14 +26,14 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipe_url, notice: t('.notice') }
+      format.html { redirect_to recipe_url, notice: t(".notice") }
     end
   end
 
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: t('.notice') }
+        format.html { redirect_to @recipe, notice: t(".notice") }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end

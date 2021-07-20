@@ -3,7 +3,11 @@
 require "rails_helper"
 
 RSpec.describe Recipe, type: :model do
-  it "is not valid without a title" do
-    is_expected.to validate_presence_of(:title)
+  describe "validations" do
+    it { is_expected.to validate_presence_of(:title) }
+  end
+
+  describe "associations" do
+    it { should have_many(:comments) }
   end
 end
