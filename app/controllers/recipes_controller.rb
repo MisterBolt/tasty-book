@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  DEFAULT_PER_PAGE = 10
+  before_action :set_recipe, only: [:show, :edit, :destroy]
 
   def index
     @recipes = Recipe.paginate(page: params[:page], per_page: per_page)
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -32,7 +31,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipe_url, notice: t(".notice") }
+      format.html { redirect_to recipes_path, notice: t(".notice") }
     end
   end
 
@@ -48,11 +47,11 @@ class RecipesController < ApplicationController
 
   private
 
-  def recipe_params
-    params.require(:recipe).permit(:title, :description)
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
   end
 
-  def per_page
-    params[:per_page].presence || DEFAULT_PER_PAGE
+  def recipe_params
+    params.require(:recipe).permit(:title, :description)
   end
 end

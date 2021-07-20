@@ -1,0 +1,9 @@
+.drop-menu{
+    display: none;
+}
+input[type='radio'].drop-item{
+    display: none;
+    &:checked +.dropdown>.drop-menu{
+        display: block;
+    }
+}

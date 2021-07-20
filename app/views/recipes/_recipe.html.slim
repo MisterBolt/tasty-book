@@ -12,6 +12,33 @@
         = render 'shared/star'
         dd 4.20
       
-      - if user_signed_in?
-        .px-2.5.py-1
-          = render 'shared/heart', filled: false
+      - if user_signed_in? || true
+        input.drop-item type="radio" name="dropdown" id="dropdown#{recipe.id}"
+        .dropdown.relative.inline-block.text-left
+          .mx-2
+            button type="button" onclick="document.getElementById('dropdown#{recipe.id}').checked = !document.getElementById('dropdown#{recipe.id}').checked"
+              .inline-flex.justify-center.w-auto.rounded-2xl.border.border-gray-100.shadow-sm.py-1.bg-white.text-sm.font-medium.hover:bg-gray-50.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-gray-100.focus:ring-indigo-500
+                = render 'shared/dots-vertical'
+          .drop-menu.origin-top-right.absolute.z-10.mt-2.py-1.right-0.w-56.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-200.focus:outline-nonev tabindex="-1"
+            .py-1
+              / placeholder divs instead of link_to until links are defined (classes kept this way so it's easier to rewrite for link_to)
+              
+              / check if user has the recipe in favourites
+              - if false
+                div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
+                  | Delete from favourites
+              - else 
+                div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
+                  | Add to favourites
+
+              / clicking will display a popup with cook books with the option of adding the recipe
+              div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
+                | Add to a cook book 
+            py-1
+              / placeholder divs instead of link_to until links are defined (classes kept this way so it's easier to rewrite for link_to)
+              
+              / check if user is the author or admin
+              - if false
+                = link_to "Edit recipe", edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to "Delete recipe", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure?"}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                
