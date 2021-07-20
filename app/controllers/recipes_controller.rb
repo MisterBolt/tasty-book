@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
+  DEFAULT_PER_PAGE = 10
+
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.paginate(page: params[:page], per_page: per_page)
+  end
+
+  def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -44,5 +50,9 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :description)
+  end
+
+  def per_page
+    params[:per_page].presence || DEFAULT_PER_PAGE
   end
 end

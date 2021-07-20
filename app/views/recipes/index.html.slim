@@ -1,2 +1,10 @@
-h1 Recipe#index
-p Find me in app/views/recipe/index.html.slim
+.px-10.mt-5
+  .digg_pagination.flex.justify-center.my-2
+    = will_paginate(@recipes, container: false)
+  - if @recipes.present?
+    = render @recipes
+  - else 
+    p.text-center.mt-5
+      | No recipes found
+  .digg_pagination.flex.justify-center.my-2
+    = will_paginate(@recipes, container: false)

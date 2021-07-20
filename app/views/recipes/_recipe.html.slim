@@ -1,0 +1,17 @@
+.w-auto
+  article.p-4.flex.space-x-4.border-solid.border-2
+    img.flex-none.rounded-lg.object-cover.bg-gray-100 src="" alt="" width="80" height="80"
+    .flex-1
+      = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all hover:opacity-75"
+      dl.flex.text-sm.font-medium.whitespace-pre
+        dd category
+        |  • 
+        dd difficulty
+    .flex.items-start
+      .px-2.5.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
+        = render 'shared/star'
+        dd 4.20
+      
+      - if user_signed_in?
+        .px-2.5.py-1
+          = render 'shared/heart', filled: false
