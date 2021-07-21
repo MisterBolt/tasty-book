@@ -7,6 +7,8 @@ class Recipe < ApplicationRecord
   validates :difficulty, presence: true
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
 
+  belongs_to :user
+
   has_many :recipe_scores,
     dependent: :destroy
 

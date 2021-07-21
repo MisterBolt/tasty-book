@@ -1,2 +1,29 @@
-h2.text-2xl.text-center ==@recipe.title
-h4.text-center ==@recipe.description
+.grid.justify-items-center
+  h1.text-3xl.mt-3
+    = @recipe.title
+  h2.text-xl
+    | by 
+    = @recipe.user.username
+  p
+    = @recipe.description
+- if current_user == @recipe.user
+    .mb-10
+      ul
+        li.text-blue-600.hover:text-blue-800.visited:text-purple-600
+          = link_to "Edit", edit_recipe_path(@recipe)
+        li.text-blue-600.hover:text-blue-800.visited:text-purple-600
+          = link_to "Delete", recipe_path(@recipe), method: :delete, data: { confirm: "Are you sure?" }
+
+.grid.justify-items-center
+  .mb-10.mt-3
+    h2
+      | Comments:
+      = render @recipe.comments
+    
+
+  - if  current_user.present?
+    h2
+    = render 'comments/form'
+
+
+ 
