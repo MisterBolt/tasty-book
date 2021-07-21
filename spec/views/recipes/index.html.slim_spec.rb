@@ -52,7 +52,7 @@ RSpec.describe "recipes/index", type: :view do
   end
 
   context "with 11 recipes as user" do
-    before(:each) do  
+    before do  
       allow(view).to receive(:user_signed_in?) { true }
       @recipes = create_list(:recipe, 10)
       @recipes << create(:recipe, title: "papardelle ala arrabiata")
