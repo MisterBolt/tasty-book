@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "difficulties", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "recipe_scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "recipe_id", null: false
@@ -37,9 +43,11 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "how_to_prepare"
+    t.integer "difficulty_id"
+    t.integer "time_needed"
   end
 
   create_table "users", force: :cascade do |t|

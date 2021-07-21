@@ -9,5 +9,8 @@ class Recipe < ApplicationRecord
   has_many :scorers,
     through: :recipe_scores,
     source: :user
+
   has_many :comments, dependent: :destroy
+
+  belongs_to :difficulty
 end
