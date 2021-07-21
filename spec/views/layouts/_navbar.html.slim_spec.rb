@@ -1,14 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "layouts/_navbar", type: :view do
-  before :each do
-    render
-  end
+  before { render }
 
   context "when the user is logged in" do
     let(:user) { create(:user) }
 
-    before :each do
+    before do
       sign_in user
       render
     end

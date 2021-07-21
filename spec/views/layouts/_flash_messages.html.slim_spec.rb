@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "layouts/_flash_messages", type: :view do
   context "when flash message type is notice" do
-    before :each do
+    before do
       flash.notice = "Success"
       render
     end
@@ -13,7 +13,7 @@ RSpec.describe "layouts/_flash_messages", type: :view do
   end
 
   context "when flash message type is alert" do
-    before :each do
+    before do
       flash.alert = "Error"
       render
     end
