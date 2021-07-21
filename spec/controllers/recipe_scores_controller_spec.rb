@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe RecipeScoresController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:recipe) { FactoryBot.create(:recipe) }
-  let(:other_recipe) { FactoryBot.create(:recipe) }
+  let(:user) { create(:user) }
+  let(:recipe) { create(:recipe) }
+  let(:other_recipe) { create(:recipe) }
 
   describe 'POST #create' do
     context 'score has been assigned' do
-      before(:each) do
+      before do
         sign_in user
         post :create, params: { recipe_score: { recipe_id: recipe.id, score: 5 } }
       end
@@ -18,16 +18,16 @@ RSpec.describe RecipeScoresController, type: :controller do
       end
 
       it 'displays notice flash message' do
-        expect(flash[:notice]).to eq("Recipe score has been succesfully added")
+        expect(flash[:notice]).to eq(I18n.t(".recipe_scores.create.notice"))
       end
 
       it 'redirects to recipe page' do
         expect(response).to redirect_to(recipe_path(recipe.id))
       end
     end
-    
+
     context 'score has not been assigned' do
-      before(:each) do
+      before do
         sign_in user
         post :create, params: { recipe_score: { recipe_id: recipe.id, score: nil } }
       end
@@ -38,7 +38,7 @@ RSpec.describe RecipeScoresController, type: :controller do
       end
 
       it 'displays warning flash message' do
-        expect(flash[:warning]).to eq("Recipe score has not been added")
+        expect(flash[:warning]).to eq(I18n.t(".recipe_scores.create.warning"))
       end
 
       it 'redirects to recipe page' do
