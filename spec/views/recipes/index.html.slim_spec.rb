@@ -10,15 +10,14 @@ RSpec.describe "recipes/index", type: :view do
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       assign(:recipes, @recipes)
       assign(:pagy, @pagy)
+      render
     end
 
     it "displays 0 recipes" do
-      render
       expect(rendered).not_to match /article/
     end
 
     it "displays info about lack of recipes" do
-      render
       expect(rendered).to match /No recipes found/
     end
     
@@ -31,21 +30,19 @@ RSpec.describe "recipes/index", type: :view do
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       assign(:recipes, @recipes)
       assign(:pagy, @pagy)
+      render
     end
 
     it "displays the recipe" do
-      render
       expect(rendered).to match /article/
       expect(rendered).to match /Food/
     end
 
     it "doesn't display the dropdown menu" do
-      render
       expect(rendered).not_to match /dropdown/
     end
 
     it "doesn't display pagination" do
-      render
       expect(rendered).not_to match /pagy_nav/
     end
     
@@ -59,30 +56,26 @@ RSpec.describe "recipes/index", type: :view do
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       assign(:recipes, @recipes)
       assign(:pagy, @pagy)
+      render
     end
 
     it "displays exactly 10 recipes" do
-      render
       expect(rendered).to match /^(?!(.*\/article){11})(.*\/article){10}.*$/
     end
 
     it "doesn't display the 11th recipe" do
-      render
       expect(rendered).not_to match /papardelle ala arrabiata/
     end
 
     it "displays the dropdown menu" do
-      render
       expect(rendered).to match /dropdown/
     end
 
     it "doesn't allow moving to previous page" do
-      render
       expect(rendered).to match /page prev disabled/
     end
 
     it "allows moving to next page" do
-      render
       expect(rendered).to match /page next/
       expect(rendered).not_to match /page next disabled/
     end
