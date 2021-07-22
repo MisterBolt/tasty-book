@@ -2,6 +2,9 @@
 
 class Recipe < ApplicationRecord
   validates :title, presence: true
+  validates :how_to_prepare, presence: true
+  validates :difficulty_id, presence: true
+  validates :time_needed, presence: true
 
   has_many :recipe_scores,
     dependent: :destroy

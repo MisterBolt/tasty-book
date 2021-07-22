@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "how_to_prepare"
-    t.integer "difficulty_id"
-    t.integer "time_needed"
+    t.string "how_to_prepare", null: false
+    t.integer "difficulty_id", null: false
+    t.integer "time_needed", null: false
   end
 
   create_table "users", force: :cascade do |t|
