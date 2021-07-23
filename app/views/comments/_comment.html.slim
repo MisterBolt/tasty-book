@@ -1,13 +1,11 @@
 .mt-5
   p
-    strong
-      | Commenter:  
+    em
+      strong
+        | Commenter:  
       = comment.user.username
   p
-    strong
-      | Comment:   
+    em
+      strong
+        | Comment:   
       = comment.body
-.mt-1
-  - if  current_user == comment.user
-    p.text-blue-600.hover:text-blue-800.visited:text-purple-600
-      = link_to "Delete", [comment.recipe, comment], method: :delete, data: { confirm: "Are you sure?" }

@@ -2,6 +2,7 @@
   "name": "recipe-book",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.8",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -9,7 +10,6 @@
     "autoprefixer": "^10.3.0",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4",
-    "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
