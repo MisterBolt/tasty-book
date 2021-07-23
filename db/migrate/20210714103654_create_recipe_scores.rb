@@ -7,6 +7,7 @@ class CreateRecipeScores < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :recipe_scores, :user_id
     add_index :recipe_scores, :recipe_id
     add_index :recipe_scores, [:user_id, :recipe_id], unique: true
   end
