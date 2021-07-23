@@ -17,6 +17,7 @@ class Recipe < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
+  enum status: {'draft': 0, 'published': 1}
 
   has_many :recipe_scores,
     dependent: :destroy
