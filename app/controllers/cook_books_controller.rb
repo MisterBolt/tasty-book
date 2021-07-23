@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 
 class CookBooksController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:create]
   before_action :set_cook_book, only: [:show]
 
   def index
+    @recipe = Recipe.new
     @cook_books = CookBook.all
   end
 
   def show
-  end
-
-  def new
-    @recipe = Recipe.new
   end
 
   def create

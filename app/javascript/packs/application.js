@@ -9,6 +9,9 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "stylesheets/application"
 
+// Custom js files
+import "./toggle_display"
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

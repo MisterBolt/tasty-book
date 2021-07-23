@@ -1,0 +1,18 @@
+@import "~tailwindcss/base";
+
+@mixin btn-base{
+  @apply w-auto inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 m-1 text-base font-medium;
+  &:focus{ @apply outline-none ring-2 ring-offset-2 ring-indigo-500 }
+}
+
+.btn-primary{
+  @include btn-base;
+  @apply text-gray-700 bg-white;
+  &:hover{ @apply bg-gray-50 }
+}
+
+.btn-secondary{
+  @include btn-base;
+  @apply text-white bg-blue-600;
+  &:hover{ @apply bg-blue-700 }
+}
