@@ -4,8 +4,8 @@ module RecipeScoreHelper
   end
 
   def user_recipe_score(user, recipe)
-    user_recipe_score = recipe.recipe_scores.find_by(user_id: user.id)
-    return nil unless user_recipe_score != nil
-    user_recipe_score.score
+    user_score = recipe.recipe_scores.find_by(user_id: user.id)
+    return nil if user_score.nil?
+    user_score.score
   end
 end
