@@ -1,7 +1,7 @@
 require "rails_helper"
-include Pagy::Backend
 
 RSpec.describe "recipes/index", type: :view do
+  include Pagy::Backend
 
   context "with no recipes" do
     before do  
@@ -20,7 +20,6 @@ RSpec.describe "recipes/index", type: :view do
     it "displays info about lack of recipes" do
       expect(rendered).to match /No recipes found/
     end
-    
   end
 
   context "with 1 recipe as guest" do
@@ -45,7 +44,6 @@ RSpec.describe "recipes/index", type: :view do
     it "doesn't display pagination" do
       expect(rendered).not_to match /pagy_nav/
     end
-    
   end
 
   context "with 11 recipes as user" do
@@ -79,7 +77,5 @@ RSpec.describe "recipes/index", type: :view do
       expect(rendered).to match /page next/
       expect(rendered).not_to match /page next disabled/
     end
-    
   end
-
 end

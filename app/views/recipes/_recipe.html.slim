@@ -4,13 +4,13 @@
     .flex-1
       = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all hover:opacity-75"
       dl.flex.text-sm.font-medium.whitespace-pre
-        dd category
+        dd |category|
         |  • 
-        dd difficulty
+        dd |difficulty|
         |  • 
-        dd time to prepare
+        dd |time to prepare|
       dl.flex.text-sm.font-medium.whitespace-pre
-        dd by username
+        dd.italic |username|
     .flex.items-start
       .px-3.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
         - if recipe.recipe_scores.empty?
@@ -21,31 +21,21 @@
           dd #{average_score(recipe)}
       
       - if user_signed_in?
-        input.drop-item type="radio" name="dropdown" id="dropdown#{recipe.id}"
+        input.drop-item type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
         .dropdown.relative.inline-block.text-left
           .mx-2
-            button type="button" onclick="document.getElementById('dropdown#{recipe.id}').checked = !document.getElementById('dropdown#{recipe.id}').checked"
+            button type="button" onclick="document.getElementById('dropdown_recipe#{recipe.id}').checked = !document.getElementById('dropdown_recipe#{recipe.id}').checked"
               .inline-flex.justify-center.w-auto.rounded-2xl.border.border-gray-100.shadow-sm.py-1.bg-white.text-sm.font-medium.hover:bg-gray-50.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-gray-100.focus:ring-indigo-500
                 = render 'shared/dots-vertical'
           .drop-menu.origin-top-right.absolute.z-10.mt-2.py-1.right-0.w-56.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-200.focus:outline-nonev tabindex="-1"
             .py-1
-              / placeholder divs instead of link_to until links are defined (classes kept this way so it's easier to rewrite for link_to)
-              
-              / check if user has the recipe in favourites
-              - if false
-                div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
-                  | Delete from favourites
-              - else 
-                div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
-                  | Add to favourites
-
-              / clicking will display a popup with cook books with the option of adding the recipe
-              div class="text-gray-700 block px-4 py-2 text-sm" tabindex="-1"
-                | Add to a cook book 
+              / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
+              .text-gray-700.block.px-4.py-2.text-sm tabindex="-1"
+                = t('cook_book_recipes.create.action')
             py-1
 
               / check if user is the author or admin
               - if false
-                = link_to "Edit recipe", edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-                = link_to "Delete recipe", recipe_path(recipe), method: :delete, data: {confirm: "Are you sure?"}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to t('recipes.edit.action'), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to t('recipes.destroy.action'), recipe_path(recipe), method: :delete, data: {confirm: t('confirm')}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
                 
