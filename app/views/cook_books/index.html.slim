@@ -1,5 +1,5 @@
 .px-10.mt-5 
-  if user_signed_in?
-    flex.justify-end
+  - if user_signed_in?
+    .flex.justify-end
       = render "create"
-  
+  = render @cook_books

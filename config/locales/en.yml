@@ -61,3 +61,7 @@ en:
   cook_book_recipes:
     create:
       action: "Add recipe to a cook book"
+      
+  cook_books:
+    create:
+      notice: "Cook book was successfully created."

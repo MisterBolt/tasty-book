@@ -8,27 +8,22 @@ button.btn-primary type="button" onclick="toggle_display('#{id}')"
     .fixed.inset-0.bg-gray-500.bg-opacity-75
     span.hidden.sm:inline-block.sm:align-middle.sm:h-screen &#8203;
     .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.sm:my-8.sm:align-middle.sm:max-w-lg.sm:w-full
-      .bg-white.p-4.sm:p-6
-        / body of modal
-        .flex.flex-col.md:flex-row
-          .w-full.px-3.mb-6.md:mb-0
-            label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2 for="cook_book_title"
-              | Title
-            input.appearance-none.block.w-full.bg-gray-200.text-gray-700.border.border-gray-200.rounded.py-3.px-4.leading-tight.focus:outline-none.focus:bg-white.focus:border-gray-500 id="cook_book_title" type="text" placeholder="My cook book"
-          .w-full.px-3
-            label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2 for="cook_book_visibility"
-              | Visibility
-            .relative
-              select.block.appearance-none.w-full.bg-gray-200.border.border-gray-200.text-gray-700.py-3.px-4.pr-8.rounded.leading-tight.focus:outline-none.focus:bg-white.focus:border-gray-500 id="cook_book_visibility"
-                option Public
-                option Private
-                option Followers
-              .pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-700
-                svg.fill-current.h-4.w-4 viewBox="0 0 20 20"
-                  path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+      = form_with(model: @cook_book, local: true) do |f|
+        .bg-white.p-4.sm:p-6
+    
+          .flex.flex-col.md:flex-row
+            .w-full.px-3.mb-6.md:mb-0
+              = f.label :title, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              = f.text_field :title, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "My cook book"
+            .w-full.px-3
+              = f.label :visibility, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              .relative
+                = f.select :visibility, @visibilities, {}, class: "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                .pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-700
+                  = render "shared/arrow_down"
 
-      .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
-        button.btn-secondary type="button"
-          | Create new cook book
-        button.btn-primary type="button" onclick="toggle_display('#{id}')"
-          | Cancel
+        .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
+          = f.submit class: "button btn-secondary"
+            | Create new cook book
+          button.btn-primary type="button" onclick="toggle_display('#{id}')"
+            | Cancel
