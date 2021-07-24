@@ -8,22 +8,22 @@ button.btn-primary type="button" onclick="toggle_display('#{id}')"
     .fixed.inset-0.bg-gray-500.bg-opacity-75
     span.hidden.sm:inline-block.sm:align-middle.sm:h-screen &#8203;
     .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.sm:my-8.sm:align-middle.sm:max-w-lg.sm:w-full
+      
       = form_with(model: @cook_book, local: true) do |f|
-        .bg-white.p-4.sm:p-6
-    
-          .flex.flex-col.md:flex-row
-            .w-full.px-3.mb-6.md:mb-0
-              = f.label :title, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              = f.text_field :title, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "My cook book"
-            .w-full.px-3
-              = f.label :visibility, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              .relative
-                = f.select :visibility, @visibilities, {}, class: "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                .pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-700
-                  = render "shared/arrow_down"
+        .p-4.sm:p-6.flex.flex-col.md:flex-row
+          .input-text.w-full.mb-6.md:mb-0
+            = f.label :title
+            = f.text_field :title, placeholder: "My cook book", required: true
+          .input-select.w-full
+            = f.label :visibility
+            .relative
+              = f.select :visibility, @visibilities
+              .selector
+                = render "shared/arrow_down"
 
         .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
-          = f.submit class: "button btn-secondary"
+          = f.submit class: "btn-secondary"
             | Create new cook book
           button.btn-primary type="button" onclick="toggle_display('#{id}')"
             | Cancel
+            

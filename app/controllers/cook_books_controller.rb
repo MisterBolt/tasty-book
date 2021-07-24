@@ -13,10 +13,13 @@ class CookBooksController < ApplicationController
     @cook_book = CookBook.new(cook_book_params)
     @cook_book.user = current_user
     if @cook_book.save
-      redirect_to(cook_books_path, notice: t(".notice"))
+      flash[:notice] = t(".notice")
+    elsif @cook_book.valid?
+      flash[:alert] = t(".alert")
     else
-      redirect_to(cook_books_path, alert: @cook_book.errors.full_messages[0])
+      flash[:alert] = @cook_book.errors.full_messages[0]
     end
+    redirect_to(cook_books_path)
   end
 
   private

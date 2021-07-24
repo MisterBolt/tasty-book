@@ -65,3 +65,4 @@ en:
   cook_books:
     create:
       notice: "Cook book was successfully created."
+      alert: "Error occured, cook book couldn't be created."
