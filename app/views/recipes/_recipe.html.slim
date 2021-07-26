@@ -18,7 +18,7 @@
           dd - 
         - else
           = render 'shared/star', filled: true
-          dd #{average_score(recipe)}
+          dd #{average_recipe_score(recipe)}
       
       - if user_signed_in?
         input.drop-item type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
@@ -38,4 +38,3 @@
               - if false
                 = link_to t('recipes.edit.action'), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
                 = link_to t('recipes.destroy.action'), recipe_path(recipe), method: :delete, data: {confirm: t('confirm')}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-                

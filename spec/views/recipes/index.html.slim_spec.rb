@@ -4,7 +4,7 @@ RSpec.describe "recipes/index", type: :view do
   include Pagy::Backend
 
   context "with no recipes" do
-    before do  
+    before do
       allow(view).to receive(:user_signed_in?) { false }
       @recipes = create_list(:recipe, 0)
       @pagy, @recipes = pagy_array(@recipes, items: 10)
@@ -18,12 +18,12 @@ RSpec.describe "recipes/index", type: :view do
     end
 
     it "displays info about lack of recipes" do
-      expect(rendered).to match I18n.t('recipes.not_found')
+      expect(rendered).to match I18n.t("recipes.not_found")
     end
   end
 
   context "with 1 recipe as guest" do
-    before do  
+    before do
       allow(view).to receive(:user_signed_in?) { false }
       @recipes = create_list(:recipe, 1)
       @pagy, @recipes = pagy_array(@recipes, items: 10)
@@ -47,7 +47,7 @@ RSpec.describe "recipes/index", type: :view do
   end
 
   context "with 11 recipes as user" do
-    before do  
+    before do
       allow(view).to receive(:user_signed_in?) { true }
       @recipes = create_list(:recipe, 10)
       @recipes << create(:recipe, title: "papardelle ala arrabiata")
