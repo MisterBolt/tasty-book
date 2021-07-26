@@ -39,6 +39,8 @@ group :development, :test do
   gem "standard", "~> 1.1"
   gem "shoulda-matchers", "~> 5.0"
   gem "rails-controller-testing", "~> 1.0", ">= 1.0.5"
+  gem "capybara"
+  gem "show_me_the_cookies"
 end
 
 group :development do

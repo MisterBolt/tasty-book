@@ -1,7 +1,7 @@
 .flex.bg-gray-700
   - if user_signed_in?
-    = link_to "Log out", destroy_user_session_path, method: :delete, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  focus:outline-none focus:shadow-outline"
+    = link_to t("buttons.log_out"), destroy_user_session_path, method: :delete, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  focus:outline-none focus:shadow-outline"
   - else
-    = link_to "Log in", new_user_session_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+    = link_to t("buttons.log_in"), new_user_session_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
 
-  = link_to "Recipes", recipes_path, class: "hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+  = link_to t("buttons.recipes"), recipes_path, class: "hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"

@@ -1,5 +1,6 @@
 require "spec_helper"
 require "support/factory_bot"
+require "capybara/rspec"
 
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../config/environment", __dir__)
@@ -24,6 +25,8 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include Capybara::DSL, type: :view
+  config.include ShowMeTheCookies, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
