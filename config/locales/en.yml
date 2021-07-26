@@ -37,3 +37,8 @@ en:
       notice: "Recipe was successfully destroyed."
     update:
       notice: "Recipe was successfully updated."
+  
+  recipe_scores:
+    create: 
+      notice: "Recipe score has been succesfully added"
+      warning: "Recipe score has not been added"
