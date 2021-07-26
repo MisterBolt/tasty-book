@@ -25,7 +25,7 @@
           = f.check_box :remember_me, class: "mr-2 leading-tight"
           = f.label :remember_me, class: "block text-gray-700 text-sm font-bold"
       .flex.items-center.justify-between
-        = f.submit t("buttons.log_in"), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        = f.submit t("buttons.log_in"), class: "log_in_button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         = render "devise/shared/links"
       - if devise_mapping.recoverable?
         = link_to t("buttons.forgot_password"), new_password_path(resource_name), class: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"

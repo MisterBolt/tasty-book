@@ -25,6 +25,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include Capybara::DSL, type: :view
   config.include ShowMeTheCookies, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :controller

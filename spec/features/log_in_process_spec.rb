@@ -15,7 +15,7 @@ RSpec.describe "log in process", type: :feature do
       expire_cookies
       visit root_path
 
-      expect(page).to have_content(I18n.t("buttons.log_out"))
+      expect(page).to have_link(I18n.t("buttons.log_out"), href: "/users/sign_out")
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe "log in process", type: :feature do
       expire_cookies
       visit root_path
 
-      expect(page).to have_content(I18n.t("buttons.log_in"))
+      expect(page).to have_link(I18n.t("buttons.log_in"), href: "/users/sign_in")
     end
   end
 
