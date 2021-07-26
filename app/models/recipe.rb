@@ -10,7 +10,7 @@ class Recipe < ApplicationRecord
     through: :recipe_scores,
     source: :user
 
-  has_many :comments, 
+  has_many :comments,
     dependent: :destroy
 
   has_and_belongs_to_many :cook_books

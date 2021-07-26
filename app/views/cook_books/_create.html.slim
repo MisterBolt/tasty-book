@@ -2,9 +2,9 @@
   - id = "create_cook_book"
 
   button.btn-primary type="button" onclick="toggle_display('#{id}')"
-    = t('cook_books.create.action')
+    = t("cook_books.create.action")
     
-  .modal.hidden.z-10.inset-0.overflow-y-auto id=id
+  .z-10.inset-0.overflow-y-auto.modal.hidden id=id
     .flex.items-end.justify-center.min-h-screen.pt-4.px-4.pb-20.text-center.sm:block.sm:p-0
       .fixed.inset-0.bg-gray-500.bg-opacity-75
       span.hidden.sm:inline-block.sm:align-middle.sm:h-screen &#8203;
@@ -14,7 +14,7 @@
           .p-4.sm:p-6.flex.flex-col.md:flex-row
             .input-text.w-full.mb-6.md:mb-0
               = f.label :title
-              = f.text_field :title, placeholder: t('cook_books.form.title_placeholder'), required: true
+              = f.text_field :title, placeholder: t("cook_books.form.title_placeholder"), required: true
             .input-select.w-full
               = f.label :visibility
               .relative
@@ -24,6 +24,6 @@
 
           .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
             = f.submit class: "btn-secondary"
-              = t('cook_books.create.action')
+              = t("cook_books.create.action")
             button.btn-primary type="button" onclick="toggle_display('#{id}')"
-              = t('cancel')
+              = t("cancel")

@@ -28,9 +28,7 @@
   &:focus{ @apply ring-indigo-500 }
 }
 
-.input-text{
-  @include input-base;
-}
+.input-text{ @include input-base }
 
 .input-select{
   @include input-base;
