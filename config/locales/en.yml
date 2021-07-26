@@ -31,6 +31,7 @@
 
 en:
   confirm: "Are you sure?"
+  cancel: "Cancel"
 
   recipes:
     not_found: "No recipes found"
@@ -63,6 +64,9 @@ en:
       action: "Add recipe to a cook book"
       
   cook_books:
+    form:
+      title_placeholder: "My cook book"
     create:
+      action: "Create new cook book"
       notice: "Cook book was successfully created."
       alert: "Error occured, cook book couldn't be created."
