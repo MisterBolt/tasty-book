@@ -10,7 +10,7 @@
   @apply flex space-x-2;
 
   .page{
-    & a { @include pagination-element }
+    a { @include pagination-element }
 
     &.prev.disabled,
     &.next.disabled{
