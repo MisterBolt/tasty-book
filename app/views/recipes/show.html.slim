@@ -19,12 +19,9 @@
   div id="#{dom_id(@recipe)}_comments" 
    = render @recipe.comments.order(created_at: :desc)
       
-  - if current_user.present?
-    h2
-    = render 'comments/form'
-  - else
-     .bg-red-400.mb-5.mt-3.p-3.font-black
-      | you must be looged in to add a comment 
+  h2
+  = render 'comments/form'
+
 
 
  

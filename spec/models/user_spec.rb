@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "associations" do
+    it { should have_many(:recipes) }
     it { should have_many(:recipe_scores) }
     it { should have_many(:scored_recipes) }
     it { should have_many(:cook_books) }
