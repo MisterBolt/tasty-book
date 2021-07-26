@@ -14,10 +14,10 @@
     .flex.items-start
       .px-3.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
         - if recipe.recipe_scores.empty?
-          = render 'shared/star', filled: false
+          = render "shared/star", filled: false
           dd - 
         - else
-          = render 'shared/star', filled: true
+          = render "shared/star", filled: true
           dd #{average_recipe_score(recipe)}
       
       - if user_signed_in?
@@ -26,15 +26,15 @@
           .mx-2
             button type="button" onclick="document.getElementById('dropdown_recipe#{recipe.id}').checked = !document.getElementById('dropdown_recipe#{recipe.id}').checked"
               .inline-flex.justify-center.w-auto.rounded-2xl.border.border-gray-100.shadow-sm.py-1.bg-white.text-sm.font-medium.hover:bg-gray-50.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-gray-100.focus:ring-indigo-500
-                = render 'shared/dots-vertical'
+                = render "shared/dots-vertical"
           .drop-menu.origin-top-right.absolute.z-10.mt-2.py-1.right-0.w-56.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-200.focus:outline-nonev tabindex="-1"
             .py-1
               / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
               .text-gray-700.block.px-4.py-2.text-sm tabindex="-1"
-                = t('cook_book_recipes.create.action')
+                = t("cook_book_recipes.create.action")
             py-1
 
               / check if user is the author or admin
               - if false
-                = link_to t('recipes.edit.action'), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-                = link_to t('recipes.destroy.action'), recipe_path(recipe), method: :delete, data: {confirm: t('confirm')}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"

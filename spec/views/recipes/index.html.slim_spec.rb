@@ -2,10 +2,10 @@ require "rails_helper"
 
 RSpec.describe "recipes/index", type: :view do
   include Pagy::Backend
+  let(:user) { create(:user) }
 
   context "with no recipes" do
     before do
-      allow(view).to receive(:user_signed_in?) { false }
       @recipes = create_list(:recipe, 0)
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       assign(:recipes, @recipes)
@@ -24,8 +24,7 @@ RSpec.describe "recipes/index", type: :view do
 
   context "with 1 recipe as guest" do
     before do
-      allow(view).to receive(:user_signed_in?) { false }
-      @recipes = create_list(:recipe, 1)
+      @recipes = create_list(:recipe, 1, title: "Food")
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       assign(:recipes, @recipes)
       assign(:pagy, @pagy)
@@ -48,7 +47,7 @@ RSpec.describe "recipes/index", type: :view do
 
   context "with 11 recipes as user" do
     before do
-      allow(view).to receive(:user_signed_in?) { true }
+      sign_in user
       @recipes = create_list(:recipe, 10)
       @recipes << create(:recipe, title: "papardelle ala arrabiata")
       @pagy, @recipes = pagy_array(@recipes, items: 10)
