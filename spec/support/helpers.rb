@@ -6,5 +6,5 @@ def fill_in_and_log_in(email, password, check_rememeber_me = false)
     check "user_remember_me" if check_rememeber_me
   end
 
-  click_button "Log in"
+  click_button I18n.t("buttons.log_in")
 end

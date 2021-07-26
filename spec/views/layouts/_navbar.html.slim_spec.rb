@@ -12,17 +12,17 @@ RSpec.describe "layouts/_navbar", type: :view do
     end
 
     it "displays \"Log out\" button" do
-      expect(rendered).to match(/Log out/)
+      expect(rendered).to match(I18n.t("buttons.log_out"))
     end
   end
 
   context "when the user is not logged in" do
     it "displays \"Log in\" button" do
-      expect(rendered).to match(/Log in/)
+      expect(rendered).to match(I18n.t("buttons.log_in"))
     end
   end
 
   it "displays \"Recipes\" button" do
-    expect(rendered).to match(/Recipes/)
+    expect(rendered).to match(I18n.t("buttons.recipes"))
   end
 end

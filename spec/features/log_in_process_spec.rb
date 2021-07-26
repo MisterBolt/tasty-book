@@ -8,14 +8,14 @@ RSpec.describe "log in process", type: :feature do
     before { fill_in_and_log_in(user.email, user.password, true) }
 
     it "signs me in" do
-      expect(page).to have_content(I18n.t(".devise.sessions.signed_in"))
+      expect(page).to have_content(I18n.t("devise.sessions.signed_in"))
     end
 
     it "remembers me after browser restart" do
       expire_cookies
       visit root_path
 
-      expect(page).to have_content("Log out")
+      expect(page).to have_content(I18n.t("buttons.log_out"))
     end
   end
 
@@ -23,14 +23,14 @@ RSpec.describe "log in process", type: :feature do
     before { fill_in_and_log_in(user.email, user.password) }
 
     it "signs me in" do
-      expect(page).to have_content(I18n.t(".devise.sessions.signed_in"))
+      expect(page).to have_content(I18n.t("devise.sessions.signed_in"))
     end
 
     it "does not remember me after browser restart" do
       expire_cookies
       visit root_path
 
-      expect(page).to have_content("Log in")
+      expect(page).to have_content(I18n.t("buttons.log_in"))
     end
   end
 
@@ -38,7 +38,7 @@ RSpec.describe "log in process", type: :feature do
     before { fill_in_and_log_in("incorrect_user@example.com", user.password) }
 
     it "does not sign me in" do
-      expect(page).to have_content(I18n.t(".devise.failure.not_found_in_database"))
+      expect(page).to have_content(I18n.t("devise.failure.not_found_in_database"))
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe "log in process", type: :feature do
     before { fill_in_and_log_in(user.email, "incorrect_password") }
 
     it "does not sign me in" do
-      expect(page).to have_content(I18n.t(".devise.failure.invalid"))
+      expect(page).to have_content(I18n.t("devise.failure.invalid"))
     end
   end
 end

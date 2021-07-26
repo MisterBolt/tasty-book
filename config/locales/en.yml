@@ -37,8 +37,15 @@ en:
       notice: "Recipe was successfully destroyed."
     update:
       notice: "Recipe was successfully updated."
-  
+
   recipe_scores:
-    create: 
+    create:
       notice: "Recipe score has been succesfully added"
       warning: "Recipe score has not been added"
+
+  buttons:
+    sign_up: "Sign up"
+    log_in: "Log in"
+    log_out: "Log out"
+    recipes: "Recipes"
+    forgot_password: "Forgot your password?"
