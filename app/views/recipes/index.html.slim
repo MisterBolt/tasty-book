@@ -5,6 +5,6 @@
     = render @recipes
   - else 
     p.text-center.mt-5
-      | No recipes found
+      = t('recipes.not_found')
   .flex.justify-center.my-2
     == pagy_nav(@pagy) if @pagy.pages > 1

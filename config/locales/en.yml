@@ -33,6 +33,7 @@ en:
   confirm: "Are you sure?"
 
   recipes:
+    not_found: "No recipes found"
     edit:
       action: "Edit recipe"
     create:

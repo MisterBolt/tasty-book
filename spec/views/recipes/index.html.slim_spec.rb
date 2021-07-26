@@ -18,7 +18,7 @@ RSpec.describe "recipes/index", type: :view do
     end
 
     it "displays info about lack of recipes" do
-      expect(rendered).to match /No recipes found/
+      expect(rendered).to match I18n.t('recipes.not_found')
     end
   end
 
