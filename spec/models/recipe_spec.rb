@@ -10,6 +10,7 @@ RSpec.describe Recipe, type: :model do
     it { is_expected.to validate_presence_of(:difficulty) }
     it { is_expected.to validate_presence_of(:categories) }
     it { should define_enum_for(:difficulty).with_values([:EASY, :MEDIUM, :HARD]) }
+    it { is_expected.to validate_presence_of(:status) }}
   end
 
   describe "associations" do
