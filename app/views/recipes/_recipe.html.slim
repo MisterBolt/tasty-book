@@ -34,7 +34,7 @@
                 = t("cook_book_recipes.create.action")
             py-1
 
-              / check if user is the author or admin
+              / TODO: check if user is the author or admin
               - if false
                 = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
                 = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
