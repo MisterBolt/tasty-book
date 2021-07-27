@@ -3,8 +3,8 @@
 class Recipe < ApplicationRecord
   validates :title, presence: true
   validates :how_to_prepare, presence: true
-  validates :difficulty_id, presence: true
   validates :time_needed, presence: true
+  enum difficulty: {"EASY": 0, "MEDIUM": 1, "HARD": 2}
 
   has_many :recipe_scores,
     dependent: :destroy
@@ -16,6 +16,4 @@ class Recipe < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   has_and_belongs_to_many :ingredients
-
-  belongs_to :difficulty
 end
