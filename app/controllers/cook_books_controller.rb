@@ -6,7 +6,7 @@ class CookBooksController < ApplicationController
 
   def index
     @cook_book = CookBook.new
-    @cook_books = CookBook.all
+    @cook_books = CookBook.where(favourite: false, visibility: :public)
   end
 
   def create
@@ -25,7 +25,7 @@ class CookBooksController < ApplicationController
   private
 
   def set_visibilities
-    @visibilities = CookBook.visibilities.map { |key, value| [key.humanize, key] }
+    @visibilities = CookBook.visibilities.map { |key, value| [t("cook_books.visibilities.#{key}"), key] }
   end
 
   def cook_book_params

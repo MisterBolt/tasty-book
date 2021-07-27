@@ -4,6 +4,7 @@ class CreateCookBooks < ActiveRecord::Migration[6.1]
       t.bigint :user_id, null: false, foreign_key: true
       t.text :title, null: false
       t.integer :visibility, null: false
+      t.boolean :favourite, null: false, default: false
       t.index :user_id
 
       t.timestamps

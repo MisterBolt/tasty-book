@@ -3,5 +3,6 @@ FactoryBot.define do
     user
     title { "Title" }
     visibility { :public }
+    favourite { false }
   end
 end

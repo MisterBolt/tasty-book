@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
     t.bigint "user_id", null: false
     t.text "title", null: false
     t.integer "visibility", null: false
+    t.boolean "favourite", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_cook_books_on_user_id"

@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe CookBooksController, type: :controller do
-  def posting(title: "Title", visibility: :public)
-    post :create, params: {cook_book: {title: title, visibility: visibility}}
+  def posting(title: "Title", visibility: :public, favourite: false)
+    post :create, params: {cook_book: {title: title, visibility: visibility, favourite: favourite}}
   end
   let(:user) { create(:user) }
 
@@ -32,6 +32,11 @@ RSpec.describe CookBooksController, type: :controller do
 
       it { expect(-> { posting(title: nil) }).not_to change { CookBook.count } }
       it { expect(-> { posting(visibility: nil) }).not_to change { CookBook.count } }
+
+      it "doesn't let changing the favourite flag" do
+        posting(favourite: true, title: "Fake favourites")
+        expect(CookBook.where(title: "Fake favourites").first.favourite).to eq(false)
+      end
 
       it "display alert flash message" do
         posting(title: nil)
