@@ -1,8 +1,7 @@
-
 puts "Seeding db: "
 
 user = User.where(username: "John Doe").first_or_create \
-  username:"John Doe", \
+  username: "John Doe", \
   email: "john.doe@example.com", \
   password: "password"
 
@@ -17,8 +16,8 @@ print "."
 comment = Comment.where(body: "the best apple cake ever!").first_or_create \
   body: "the best apple cake ever!", \
   user: user, \
-  recipe: recipe 
+  recipe: recipe
 
 print "."
 
-puts "\nDB seeded!" 
+puts "\nDB seeded!"

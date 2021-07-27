@@ -1,2 +1,10 @@
-h1 Recipe#index
-p Find me in app/views/recipe/index.html.slim
+.px-10.mt-5
+  .flex.justify-center.my-2
+    == pagy_nav(@pagy) if @pagy.pages > 1
+  - if @recipes.present?
+    = render @recipes
+  - else 
+    p.text-center.mt-5
+      = t("recipes.not_found")
+  .flex.justify-center.my-2
+    == pagy_nav(@pagy) if @pagy.pages > 1

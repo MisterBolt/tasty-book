@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:show, :edit, :destroy]
+
   def index
-    @recipes = Recipe.all
+    @pagy, @recipes = pagy(Recipe.all, items: per_page)
+  end
+
+  def show
   end
 
   def new
@@ -26,7 +31,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipe_url, notice: t(".notice") }
+      format.html { redirect_to recipes_path, notice: t(".notice") }
     end
   end
 
@@ -41,6 +46,10 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
   def recipe_params
     params.require(:recipe).permit(:title, :description)

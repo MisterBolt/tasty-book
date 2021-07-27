@@ -2,3 +2,7 @@
 @import "tailwindcss/components";
 //Custom styles here
 @import "tailwindcss/utilities";
+
+//Other scss files in /stylesheets
+@import "./pagination";
+@import "./dropdown";

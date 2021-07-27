@@ -30,11 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  confirm: "Are you sure?"
+
   recipes:
+    not_found: "No recipes found"
+    edit:
+      action: "Edit recipe"
     create:
+      action: "Add new recipe"
       notice: "Recipe was successfully created."
     destroy:
-      notice: "Recipe was successfully destroyed."
+      action: "Delete recipe"
+      notice: "Recipe was successfully deleted."
     update:
       notice: "Recipe was successfully updated."
 
@@ -49,3 +56,7 @@ en:
     log_out: "Log out"
     recipes: "Recipes"
     forgot_password: "Forgot your password?"
+    
+  cook_book_recipes:
+    create:
+      action: "Add recipe to a cook book"
