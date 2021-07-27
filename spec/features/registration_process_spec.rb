@@ -3,58 +3,53 @@ require 'rails_helper'
 RSpec.describe "registration process", type: :feature do
     before { visit new_user_registration_path }
 
-    scenario 'filling in correct data' do
-        fill_in 'Username', with: 'username'
-        fill_in 'Email', with: 'user@example.com'
-        fill_in 'Password', with: 'password'
-        fill_in 'Password confirmation', with: "password"
-        expect{
-        click_button 'Sign up'
-        }.to change(User, :count).by(1)
+    context 'filling in correct data' do
+        it "saves user in database" do
+            expect{
+                fill_in_and_sign_up("Username", "email@example.com", "123456", "123456")
+            }.to change(User, :count).by(1)
+        end
     end
 
-    scenario 'leaving fields empty' do
-        click_button "Sign up"
-        expect(page).to have_content("can't be blank")
+    context 'leaving fields empty' do
+        before{ fill_in_and_sign_up("", "", "", "") }
+
+        it "displays error" do
+            expect(page).to have_content("can't be blank")
+        end
     end
 
-    scenario 'filling in too short password' do
-        fill_in 'Username', with: "username"
-        fill_in 'Email', with: "user@example.com"
-        fill_in 'Password', with: "p"
-        fill_in "Password confirmation", with: "p"
-        click_button "Sign up"
-        expect(page).to have_content("Password is too short")
+    context 'filling in too short password' do
+        before { fill_in_and_sign_up("Username", "email@example.com", "1", "1") }
+
+        it "displays error" do
+            expect(page).to have_content("Password is too short")
+        end
     end
 
-    scenario 'filling in wrong password confirmation' do
-        fill_in 'Username', with: "username"
-        fill_in 'Email', with: "user@example.com"
-        fill_in 'Password', with: "password"
-        fill_in "Password confirmation", with: "different_password"
-        click_button "Sign up"
-        expect(page).to have_content("Password confirmation doesn't match Password")
+    context 'filling in wrong password confirmation' do
+        before { fill_in_and_sign_up("Username", "email@example.com", "123456", "654321") }
+
+        it "displays error" do
+            expect(page).to have_content("Password confirmation doesn't match Password")
+        end
     end
 
-    scenario 'filling in taken username' do
-        create(:user)
-
-        fill_in 'Username', with: "John Doe"
-        fill_in 'Email', with: "user@example.com"
-        fill_in 'Password', with: "password"
-        fill_in "Password confirmation", with: "password"
-        click_button "Sign up"
-        expect(page).to have_content("Username has already been taken")
+    context 'filling in taken username' do
+        before { create(:user) }
+        before { fill_in_and_sign_up(User.last.username, "email@exmaple.com", '123456', '123456') }
+        
+        it "displays error" do
+            expect(page).to have_content("Username has already been taken")
+        end
     end
 
-    scenario 'filling in taken email' do
-        create(:user)
+    context 'filling in taken email' do
+        before { create(:user) }
+        before { fill_in_and_sign_up("Username", User.last.email, '123456', '123456') }
 
-        fill_in 'Username', with: "username"
-        fill_in 'Email', with: "john.doe@example.com"
-        fill_in 'Password', with: "password"
-        fill_in "Password confirmation", with: "password"
-        click_button "Sign up"
-        expect(page).to have_content("Email has already been taken")
+        it "displays error" do
+            expect(page).to have_content("Email has already been taken")
+        end
     end
 end
