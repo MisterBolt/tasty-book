@@ -2,8 +2,9 @@
 
 class Recipe < ApplicationRecord
   validates :title, presence: true
-  validates :how_to_prepare, presence: true
+  validates :preperation_description, presence: true
   validates :time_needed, presence: true
+  validates :difficulty, presence: true
   enum difficulty: {"EASY": 0, "MEDIUM": 1, "HARD": 2}
 
   has_many :recipe_scores,
