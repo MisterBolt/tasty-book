@@ -35,6 +35,6 @@
             py-1
 
               / TODO: check if user is the author or admin
-              - if false
+              - if current_user.admin? || recipe.user == current_user
                 = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
                 = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
