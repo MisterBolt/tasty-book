@@ -2,7 +2,6 @@
 
 class Recipe < ApplicationRecord
   validates :title, presence: true
-  validates :user_id, presence: true
 
   has_many :recipe_scores,
     dependent: :destroy
