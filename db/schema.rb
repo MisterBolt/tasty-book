@@ -25,29 +25,18 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "difficulties", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "ingredients", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_ingredients_on_name", unique: true
   end
 
-  create_table "ingredients_recipes", id: false, force: :cascade do |t|
-    t.bigint "ingredient_id", null: false
+  create_table "ingredients_recipes", force: :cascade do |t|
     t.bigint "recipe_id", null: false
-  end
-
-  create_table "recipe_ingredients", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "ingredient_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "ingredient_id", null: false
+    t.index ["ingredient_id"], name: "index_ingredients_recipes_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_ingredients_recipes_on_recipe_id"
   end
 
   create_table "recipe_scores", force: :cascade do |t|
@@ -62,12 +51,11 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
+    t.text "preperation_description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "how_to_prepare"
-    t.integer "difficulty_id"
-    t.integer "time_needed"
-    t.bigint "user_id", null: false
+    t.integer "difficulty", default: 0, null: false
+    t.integer "time_needed", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,11 +71,11 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.string "username", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "recipes", "users"
+  add_foreign_key "ingredients_recipes", "ingredients"
+  add_foreign_key "ingredients_recipes", "recipes"
 end
