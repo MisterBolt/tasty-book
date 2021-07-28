@@ -12,15 +12,17 @@
         li.text-blue-600.hover:text-blue-800.visited:text-purple-600
           = link_to "Edit", edit_recipe_path(@recipe)
         li.text-blue-600.hover:text-blue-800.visited:text-purple-600
-          = link_to "Delete", recipe_path(@recipe), method: :delete, data: { confirm: "Are you sure?" }
+          = link_to "Delete", recipe_path(@recipe), method: :delete, data: { info: t("confirm") }
 .grid.justify-items-center
   .mb-10.mt-3
+  h2
+  = render 'comments/form'
+  
   = turbo_stream_from @recipe, :comments
   div id="#{dom_id(@recipe)}_comments" 
    = render @recipe.comments.order(created_at: :desc)
       
-  h2
-  = render 'comments/form'
+  
 
 
 

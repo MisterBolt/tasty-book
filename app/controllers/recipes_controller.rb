@@ -18,9 +18,6 @@ class RecipesController < ApplicationController
   def edit
   end
 
-  def show
-  end
-
   def create
     @recipe = Recipe.new(recipe_params)
     respond_to do |format|

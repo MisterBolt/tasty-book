@@ -25,6 +25,7 @@ RSpec.describe "recipes/show", type: :view do
 
     describe "who isn't the author of the recipe" do
       let(:user2) { create(:user) }
+
       it "shouldn't display edit and delete recipe options" do
         login_as(user2)
         visit recipe_path(recipe)

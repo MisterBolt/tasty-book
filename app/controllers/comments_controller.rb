@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @recipe.comments.find(params[:id])
     @comment.destroy
-    redirect_to(recipe_path(@recipe), info: "Destroyed!")
+    redirect_to(recipe_path(@recipe), t.call(".notice"))
   end
 
   private
@@ -28,6 +28,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:user, :body)
+    params.require(:comment).permit(:body)
   end
 end
