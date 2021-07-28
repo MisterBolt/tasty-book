@@ -10,7 +10,7 @@ import "channels"
 import "stylesheets/application"
 
 // Custom js files
-import "./toggle_display"
+import "./toggleDisplay"
 
 Rails.start()
 Turbolinks.start()

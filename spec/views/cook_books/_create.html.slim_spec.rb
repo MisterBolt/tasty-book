@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "cook_books/_create", type: :view do
   let(:user) { create(:user) }
   let(:cook_book) { CookBook.new }
-  let(:visibilities) { CookBook.visibilities.map { |key, value| [key.humanize, key] } }
+  let(:visibilities) { CookBook.visibilities.map { |key, value| [t("cook_books.visibilities.#{key}"), key] } }
   before do
     assign(:cook_book, cook_book)
     assign(:visibilities, visibilities)

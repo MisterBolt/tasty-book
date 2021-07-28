@@ -56,22 +56,22 @@ en:
     log_out: "Log out"
     recipes: "Recipes"
     forgot_password: "Forgot your password?"
-    cook_books: "Cook books"
+    cook_books: "Tasty books"
     cancel: "Cancel"
     
   cook_book_recipes:
     create:
-      action: "Add recipe to a cook book"
+      action: "Add recipe to a tasty book"
       
   cook_books:
     form:
-      title_placeholder: "My cook book"
+      title_placeholder: "My tasty book"
     visibilities:
-      private: "private"
-      public: "public"
-      followers: "followers"
+      private: "Private"
+      public: "Public"
+      followers: "Followers"
     create:
-      action: "Create new cook book"
-      notice: "Cook book was successfully created."
-      alert: "Error occured, cook book couldn't be created."
+      action: "Create new tasty book"
+      notice: "Tasty book was successfully created."
+      alert: "Error occured, tasty book couldn't be created."
       

@@ -24,5 +24,9 @@ recipe = Recipe.where(title: "Apple Cake").first_or_create(
 
 print "."
 
-comment = Comment.where(body: "the best apple cake ever!").first_or_create
+comment = Comment.where(body: "the best apple cake ever!").first_or_create(
+  body: "the best apple cake ever!",
+  user: user,
+  recipe: recipe
+)
 puts "\nDB seeded!"

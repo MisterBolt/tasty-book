@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class RegistrationsController < Devise::RegistrationsController
-  protected
-
-  def after_sign_up_path_for(resource)
-    CookBook.create!(user: resource, title: "Favourites", visibility: :private, favourite: true)
-    after_sign_in_path_for(resource)
+  def create
+    super do
+      if resource.persisted?
+        CookBook.create!(user: resource, title: "Favourites", visibility: :private, favourite: true)
+      end
+    end
   end
 end

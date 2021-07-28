@@ -4,7 +4,6 @@ RSpec.describe CookBook, type: :model do
   subject { create(:cook_book, user: create(:user), visibility: :public) }
 
   describe "validations" do
-    it { is_expected.to validate_presence_of(:user_id) }
     it { is_expected.to validate_presence_of(:title) }
   end
 

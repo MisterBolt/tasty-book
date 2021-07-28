@@ -1,7 +1,7 @@
 - if user_signed_in?
   - id = "create_cook_book"
 
-  button.btn-primary type="button" onclick="toggle_display('#{id}')"
+  button.btn-primary type="button" onclick="toggleDisplay('#{id}')"
     = t("cook_books.create.action")
     
   .z-10.inset-0.overflow-y-auto.modal.hidden id=id
@@ -23,7 +23,6 @@
                   = render "shared/arrow_down"
 
           .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
-            = f.submit class: "btn-secondary"
-              = t("cook_books.create.action")
-            button.btn-primary type="button" onclick="toggle_display('#{id}')"
+            = f.submit class: "btn-secondary", value: t("cook_books.create.action")
+            button.btn-primary type="button" onclick="toggleDisplay('#{id}')"
               = t("buttons.cancel")
