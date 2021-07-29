@@ -54,6 +54,9 @@ en:
       method: "Method"
       comments: "Comments"
       added: "Added by"
+    update_cook_books:
+      notice: "Tasty books were successfully assigned to the recipe."
+      alert: "Error occured, tasty books couldn't be assigned to the recipe."
 
   recipe_scores:
     create:

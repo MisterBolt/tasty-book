@@ -1,4 +1,4 @@
-= form_with(model: form_data[:model], local: true) do |f|
+= form_with(url: update_cook_books_recipe_path(form_data[:model]), model: form_data[:model], local: true) do |f|
   = f.collection_check_boxes(:cook_book_ids, current_user.cook_books, :id, :title) do |b|
     = b.label("data-value": b.value) { b.check_box + b.text }
   .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
