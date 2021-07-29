@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   include RecipeScoreHelper
 
   before_action :set_recipe, only: [:show, :edit, :destroy]
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @pagy, @recipes = pagy(Recipe.all, items: per_page)
@@ -45,13 +45,14 @@ class RecipesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: t(".notice") }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    cook_books_flash = "" 
+    cook_books_flash = ".cook_books" if "cook_book_ids" in params
+    if @recipe.update(recipe_params)
+      flash[:notice] = t("#{cook_books_flash}.notice")
+    else
+      flash[:alert] = t("#{cook_books_flash}.alert")
     end
+    redirect_to(recipes_path)
   end
 
   private

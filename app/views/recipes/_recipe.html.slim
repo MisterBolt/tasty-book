@@ -21,6 +21,8 @@
           dd #{average_recipe_score(recipe)}
       
       - if user_signed_in?
+        - id = "modal_add_recipe#{recipe.id}"
+
         input.drop-btn-hidden type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
         .dropdown
           .mx-2
@@ -28,12 +30,10 @@
               .drop-btn
                 = render "shared/dots-vertical"
           .drop-menu tabindex="-1"
-            .py-1
-              / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
-              .drop-item tabindex="-1"
-                = t("cook_book_recipes.create.action")
-            py-1
-
-              - if current_user.admin? || recipe.user == current_user
-                = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-                = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+            / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
+            button.drop-item type="button" onclick="toggleDisplay('#{id}')" tabindex="-1"
+              = t("cook_book_recipes.create.action")\
+            - if current_user.admin? || recipe.user == current_user
+              = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+              = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+        = render "shared/modal", id: id, body: "recipes/form", form_data: { model: recipe }

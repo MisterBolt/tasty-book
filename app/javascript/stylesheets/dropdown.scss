@@ -10,13 +10,13 @@
   }
 
   .drop-item{
-    @apply text-gray-700 block px-4 py-2 text-sm;
+    @apply text-gray-700 w-full block px-4 py-2 text-sm text-left;
     &:hover{ @apply bg-gray-50 opacity-80 }
-    &:focus{ @apply ring-gray-200 }
+    &:focus{ @apply outline-none }
   }
 
   .drop-menu{
-    @apply hidden origin-top-right absolute z-10 mt-2 py-1 right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200;
+    @apply hidden origin-top-right absolute z-10 mt-2 py-2 right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5;
     &:focus{ @apply outline-none }
   }
 }
