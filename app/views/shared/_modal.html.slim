@@ -1,0 +1,7 @@
+// Pass id of modal for enabling hiding and displaying possibility
+.z-10.inset-0.overflow-y-auto.modal.hidden id=id
+  .flex.items-end.justify-center.min-h-screen.pt-4.px-4.pb-20.text-center.sm:block.sm:p-0
+    .fixed.inset-0.bg-gray-500.bg-opacity-75 onclick="toggleDisplay('#{id}')"
+    span.hidden.sm:inline-block.sm:align-middle.sm:h-screen &#8203;
+    .inline-block.align-bottom.bg-white.rounded-lg.text-left.overflow-hidden.shadow-xl.transform.sm:my-8.sm:align-middle.sm:max-w-lg.sm:w-full
+      = render body, id: id, form_data: form_data

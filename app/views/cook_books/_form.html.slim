@@ -1,0 +1,15 @@
+= form_with(model: form_data[:model], local: true) do |f|
+  .p-4.sm:p-6.flex.flex-col.md:flex-row
+    .input-text.w-full.mb-6.md:mb-0
+      = f.label :title
+      = f.text_field :title, placeholder: t("cook_books.form.title_placeholder"), required: true
+    .input-select.w-full
+      = f.label :visibility
+      .relative
+        = f.select :visibility, @visibilities
+        .selector
+          = render "shared/arrow_down"
+  .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
+    = f.submit class: "btn-secondary", value: t("cook_books.create.action")
+    button.btn-primary type="button" onclick="toggleDisplay('#{id}')"
+      = t("buttons.cancel")

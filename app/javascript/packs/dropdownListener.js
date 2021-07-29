@@ -1,7 +1,8 @@
 document.onclick = (e) => {
-  dropdowns = document.getElementsByClassName("dropdown")
+  let dropdowns = document.getElementsByClassName("dropdown")
   for(let i = 0; i < dropdowns.length; i++){
     if(dropdowns[i].contains(e.target)) return;
   }
-  document.querySelector('input[name="dropdown"]:checked').checked = false;
+  let dropdownInput = document.querySelector('input[name="dropdown"]:checked');
+  if(dropdownInput) dropdownInput.checked = false;
 }

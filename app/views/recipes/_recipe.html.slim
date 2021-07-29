@@ -21,16 +21,16 @@
           dd #{average_recipe_score(recipe)}
       
       - if user_signed_in?
-        input.drop-item type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
-        .dropdown.relative.inline-block.text-left
+        input.drop-btn-hidden type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
+        .dropdown
           .mx-2
             button type="button" onclick="document.getElementById('dropdown_recipe#{recipe.id}').checked = !document.getElementById('dropdown_recipe#{recipe.id}').checked"
-              .inline-flex.justify-center.w-auto.rounded-2xl.border.border-gray-100.shadow-sm.py-1.bg-white.text-sm.font-medium.hover:bg-gray-50.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-gray-100.focus:ring-indigo-500
+              .drop-btn
                 = render "shared/dots-vertical"
-          .drop-menu.origin-top-right.absolute.z-10.mt-2.py-1.right-0.w-56.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-200.focus:outline-nonev tabindex="-1"
+          .drop-menu tabindex="-1"
             .py-1
               / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
-              .text-gray-700.block.px-4.py-2.text-sm tabindex="-1"
+              .drop-item tabindex="-1"
                 = t("cook_book_recipes.create.action")
             py-1
 
