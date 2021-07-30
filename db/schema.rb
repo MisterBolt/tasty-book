@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
     t.text "preparation_description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
     t.bigint "user_id", null: false
     t.integer "difficulty", default: 0, null: false
     t.integer "time_in_minutes_needed", null: false
@@ -132,6 +133,8 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
     t.integer "status", default: 0, null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
     t.integer "status"
+=======
+>>>>>>> 914ae52... Update db schema
   end
 
   create_table "users", force: :cascade do |t|
