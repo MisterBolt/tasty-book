@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_081117) do
+ActiveRecord::Schema.define(version: 2021_07_29_053956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,32 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "cook_books", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "title", null: false
+    t.integer "visibility", null: false
+    t.boolean "favourite", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cook_books_on_user_id"
+  end
+
+  create_table "cook_books_recipes", id: false, force: :cascade do |t|
+    t.bigint "cook_book_id", null: false
+    t.bigint "recipe_id", null: false
+    t.index ["cook_book_id", "recipe_id"], name: "index_cook_books_recipes_on_cook_book_id_and_recipe_id"
+    t.index ["recipe_id", "cook_book_id"], name: "index_cook_books_recipes_on_recipe_id_and_cook_book_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followed_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_user_id"], name: "index_follows_on_followed_user_id"
+    t.index ["follower_id", "followed_user_id"], name: "index_follows_on_follower_id_and_followed_user_id", unique: true
   end
 
   create_table "ingredients", force: :cascade do |t|
