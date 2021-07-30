@@ -8,8 +8,8 @@ user1 = User.where(username: "John Doe").first_or_create(
 
 print "."
 
-cook_book = CookBook.where(user: user, favourite: true).first_or_create(
-  user: user,
+CookBook.where(user: user1, favourite: true).first_or_create(
+  user: user1,
   title: "Favourites",
   visibility: :private,
   favourite: true
