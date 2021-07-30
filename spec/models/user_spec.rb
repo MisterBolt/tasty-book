@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+
   describe "validations" do
     subject { create(:user) }
 
@@ -17,5 +18,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:followings) }
     it { should have_many(:received_follows) }
     it { should have_many(:followers) }
+    it { should have_many(:comments) }
+    it { should have_many(:recipes) }
   end
 end

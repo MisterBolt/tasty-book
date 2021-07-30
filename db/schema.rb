@@ -25,14 +25,6 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "follows", force: :cascade do |t|
-    t.bigint "follower_id", null: false
-    t.bigint "followed_user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_user_id"], name: "index_follows_on_followed_user_id"
-    t.index ["follower_id", "followed_user_id"], name: "index_follows_on_follower_id_and_followed_user_id", unique: true
-  
   create_table "cook_books", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "title", null: false
@@ -50,6 +42,15 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
     t.index ["recipe_id", "cook_book_id"], name: "index_cook_books_recipes_on_recipe_id_and_cook_book_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followed_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_user_id"], name: "index_follows_on_followed_user_id"
+    t.index ["follower_id", "followed_user_id"], name: "index_follows_on_follower_id_and_followed_user_id", unique: true
+  end
+
   create_table "recipe_scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "recipe_id", null: false
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
     t.string "username", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
