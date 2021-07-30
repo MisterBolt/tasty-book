@@ -1,0 +1,38 @@
+@import "~tailwindcss/base";
+
+@mixin btn-base{
+  @apply w-auto inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 m-1 text-base font-medium;
+  &:focus{ @apply outline-none ring-2 ring-offset-2 }
+}
+
+@mixin input-base{
+  @apply px-3;
+  label{ @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 }
+  input, select{
+    @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight;
+    &:focus{ @apply outline-none bg-white border-gray-500 }
+  }
+}
+
+.btn-primary{
+  @include btn-base;
+  @apply text-gray-700 bg-white;
+  &:hover{ @apply bg-gray-50 }
+  &:focus{ @apply ring-gray-500 }
+}
+
+.btn-secondary{
+  @include btn-base;
+  @apply text-white bg-blue-600;
+  &:hover{ @apply bg-blue-700 }
+  &:focus{ @apply ring-indigo-500 }
+}
+
+.input-text{ @include input-base }
+
+.input-select{
+  @include input-base;
+  .selector{
+    @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700;
+  }
+}
