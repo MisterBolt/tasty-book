@@ -11,6 +11,7 @@ class User < ApplicationRecord
     through: :recipe_scores,
     source: :recipe
 
+  has_many :recipes     
   has_many :cook_books,
     dependent: :destroy
 
