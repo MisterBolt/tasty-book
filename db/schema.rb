@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-<<<<<<< HEAD
   create_table "cook_books", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "title", null: false
@@ -95,16 +94,11 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name", null: false
-=======
-  create_table "ingredients", force: :cascade do |t|
-    t.string "name"
->>>>>>> 4c89b19... Added scope for published recipes
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_ingredients_on_name", unique: true
   end
 
-<<<<<<< HEAD
   create_table "ingredients_recipes", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "ingredient_id", null: false
@@ -114,11 +108,6 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ingredient_id"], name: "index_ingredients_recipes_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredients_recipes_on_recipe_id"
-=======
-  create_table "ingredients_recipes", id: false, force: :cascade do |t|
-    t.bigint "ingredient_id", null: false
-    t.bigint "recipe_id", null: false
->>>>>>> 4c89b19... Added scope for published recipes
   end
 
   create_table "recipe_scores", force: :cascade do |t|
@@ -133,28 +122,16 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
-<<<<<<< HEAD
     t.text "preparation_description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-<<<<<<< HEAD
     t.bigint "user_id", null: false
     t.integer "difficulty", default: 0, null: false
     t.integer "time_in_minutes_needed", null: false
     t.integer "layout", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
-=======
     t.integer "status"
->>>>>>> 0e7ad1f... Added status enum to recipe
-=======
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "how_to_prepare", null: false
-    t.integer "difficulty", default: 0, null: false
-    t.integer "time_needed", null: false
-    t.integer "status", default: 0, null: false
->>>>>>> 4c89b19... Added scope for published recipes
   end
 
   create_table "users", force: :cascade do |t|
