@@ -28,7 +28,7 @@
           .mx-2
             button type="button" onclick="document.getElementById('dropdown_recipe#{recipe.id}').checked = !document.getElementById('dropdown_recipe#{recipe.id}').checked"
               .drop-btn
-                = render "shared/dots-vertical"
+                = render "shared/dots_vertical"
           .drop-menu tabindex="-1"
             / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
             button.drop-item type="button" onclick="toggleDisplay('#{id}')" tabindex="-1"

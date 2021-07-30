@@ -1,6 +1,13 @@
 = form_with(url: update_cook_books_recipe_path(form_data[:model]), model: form_data[:model], local: true) do |f|
-  = f.collection_check_boxes(:cook_book_ids, current_user.cook_books, :id, :title) do |b|
-    = b.label("data-value": b.value) { b.check_box + b.text }
+  .checkbox-list
+    = f.collection_check_boxes(:cook_book_ids, current_user.cook_books, :id, :title) do |b|
+      .input-checkbox
+        = b.check_box
+        = b.label
+          .label-text
+            = b.text
+          .checkboxer
+            = render "shared/check"
   .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
     = f.submit class: "btn-secondary", value: "Modify tasty books", onclick: "toggleDisplay('#{id}')"
     button.btn-primary type="button" onclick="toggleDisplay('#{id}')"

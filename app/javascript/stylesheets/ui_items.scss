@@ -38,7 +38,26 @@
 
 .input-select{
   @include input-base;
-  .selector{
-    @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700;
+  .selector{ @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 }
+}
+
+.checkbox-list{
+  @apply px-5 py-1 overflow-auto sm:px-6;
+  max-height: 300px;
+}
+
+.input-checkbox{
+  @apply border-b-2 border-gray-200 px-1;
+  &:last-child{ @apply border-none }
+  &:hover{ @apply bg-gray-100 opacity-80 }
+  input{ @apply pointer-events-none opacity-0 absolute }
+  label{ @apply flex py-1 }
+  .label-text{ @apply cursor-pointer flex-grow flex items-center justify-center }
+  .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 }
+  svg{ @apply opacity-0 }
+  
+  input:checked +label{
+    .checkboxer{ @apply border-none bg-green-400 }
+    svg{ @apply opacity-100 }
   }
 }
