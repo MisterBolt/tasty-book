@@ -54,7 +54,8 @@ class RecipesController < ApplicationController
   end
 
   def update_cook_books
-    if @recipe.update(cook_books_params)
+    if cook_books_params[:cook_book_ids].detect { |cb| cb == "" || current_user.cook_books.ids.include?(cb.to_i) } &&
+        @recipe.update(cook_books_params)
       flash[:notice] = t(".notice")
     else
       flash[:alert] = t(".alert")

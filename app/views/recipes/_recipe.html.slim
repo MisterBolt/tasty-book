@@ -30,7 +30,6 @@
               .drop-btn
                 = render "shared/dots_vertical"
           .drop-menu tabindex="-1"
-            / clicking will display a popup with cook books (alongside with the 'favourites' one) with the option of adding the recipe
             button.drop-item type="button" onclick="toggleDisplay('#{id}')" tabindex="-1"
               = t("cook_book_recipes.create.action")\
             - if current_user.admin? || recipe.user == current_user
