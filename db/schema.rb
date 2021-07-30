@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_ingredients_on_name", unique: true
+  end
+
+  create_table "ingredients_recipes", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.index ["ingredient_id"], name: "index_ingredients_recipes_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_ingredients_recipes_on_recipe_id"
+  end
+
   create_table "recipe_scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "recipe_id", null: false
@@ -37,9 +51,11 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
+    t.text "preperation_description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "difficulty", default: 0, null: false
+    t.integer "time_in_minutes_needed", null: false
     t.bigint "user_id", null: false
   end
 
@@ -62,4 +78,6 @@ ActiveRecord::Schema.define(version: 2021_07_23_081117) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "ingredients_recipes", "ingredients"
+  add_foreign_key "ingredients_recipes", "recipes"
 end
