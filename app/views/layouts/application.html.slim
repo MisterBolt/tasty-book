@@ -11,6 +11,7 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body.flex.flex-col.h-screen.bg-gray-100
     = render "layouts/navbar"
-    .flex-grow.flex.flex-col.mt-14
+      .flex-grow.flex.flex-col.mt-14
+        = render "layouts/navbar"
       = render "layouts/flash_messages"
       = yield
