@@ -9,5 +9,6 @@ RSpec.describe Recipe, type: :model do
 
   describe "associations" do
     it { should have_many(:comments) }
+    it { should have_and_belong_to_many(:cook_books) }
   end
 end
