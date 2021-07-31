@@ -10,6 +10,6 @@
         .selector
           = render "shared/arrow_down"
   .flex.flex-col.bg-gray-50.px-4.py-3.sm:px-6.sm:flex-row-reverse
-    = f.submit class: "btn-secondary", value: t("cook_books.create.action")
+    = f.submit t("cook_books.create.action"), class: "btn-secondary"
     button.btn-primary type="button" onclick="toggleDisplay('#{id}')"
       = t("buttons.cancel")

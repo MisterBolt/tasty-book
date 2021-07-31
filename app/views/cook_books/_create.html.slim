@@ -3,5 +3,4 @@
 
   button.btn-primary type="button" onclick="toggleDisplay('#{id}')"
     = t("cook_books.create.action")
-    
   = render "shared/modal", id: id, body: "cook_books/form", form_data: { model: @cook_book }

@@ -31,8 +31,8 @@
                 = render "shared/dots_vertical"
           .drop-menu tabindex="-1"
             button.drop-item type="button" onclick="toggleDisplay('#{id}')" tabindex="-1"
-              = t("cook_book_recipes.create.action")\
+              = t("cook_book_recipes.create.action")
             - if current_user.admin? || recipe.user == current_user
               = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
               = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-        = render "shared/modal", id: id, body: "recipes/form", form_data: { model: recipe }
+        = render "shared/modal", id: id, body: "recipes/form_cook_books", form_data: { model: recipe }

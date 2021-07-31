@@ -14,7 +14,6 @@ def fill_in_and_sign_up(username, email, password, password_conf)
   fill_in "Username", with: username
   fill_in "Password", with: password
   fill_in "Password confirmation", with: password_conf
-
   click_button I18n.t("buttons.sign_up")
 end
 
