@@ -31,11 +31,11 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:id])
-    
+
     @recipe.destroy if @recipe.user == current_user || current_user.admin?
 
     respond_to do |format|
-      format.html { redirect_to recipes_path, notice: t('.notice') }
+      format.html { redirect_to recipes_path, notice: t(".notice") }
     end
   end
 

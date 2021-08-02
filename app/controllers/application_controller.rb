@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_user_params, only: [:create, :update], if: :devise_controller?
 
   def require_admin
-      authenticate_user!
-      redirect_to new_user_session_path unless current_user.admin?
+    authenticate_user!
+    redirect_to new_user_session_path unless current_user.admin?
   end
 
   protected
