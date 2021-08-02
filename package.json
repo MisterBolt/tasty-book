@@ -9,15 +9,24 @@
     "@rails/webpacker": "5.4.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "autoprefixer": "^10.3.0",
     "postcss": "^8.3.5",
     "stimulus": "^2.0.0",
 =======
+=======
+>>>>>>> 0469048... Style recipe show page
     "autoprefixer": "^10.3.1",
     "postcss": "^8.3.6",
 >>>>>>> 3d74e44... Added autocomplete after refreshing
     "tailwind-scrollbar-hide": "^1.0.3",
     "tailwindcss": "^2.2.7",
+=======
+    "autoprefixer": "^10.3.0",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4",
+    "turbolinks": "^5.2.0",
+>>>>>>> d2e027c... Style recipe show page
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },

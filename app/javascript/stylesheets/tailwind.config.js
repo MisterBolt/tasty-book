@@ -39,7 +39,6 @@ module.exports = {
         "16": "repeat(16, minmax(0, 1fr))",
       },
       gridTemplateRows: {
-<<<<<<< HEAD
        'layout1': '10vh minmax(0, 1fr) 10vh',
        'layout2': "10vh 30vh minmax(0, 1fr) 10vh",
       },
@@ -59,9 +58,7 @@ module.exports = {
       },
       textColor: {
         'mustard': '#c89c4c',
-=======
        'layout1': '15vh minmax(0, 1fr) 8vh',
->>>>>>> 69e0c32... Add recipe show page
       }
     },
   },
