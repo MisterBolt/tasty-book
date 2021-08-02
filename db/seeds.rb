@@ -73,10 +73,4 @@ Comment.where(body: "amazing!").first_or_create(
 
 print "."
 
-comment = Comment.where(body: "the best apple cake ever!").first_or_create(
-  body: "the best apple cake ever!",
-  user: user,
-  recipe: recipe
-)
-
 puts "\nDB seeded!"
