@@ -44,7 +44,7 @@ RSpec.describe CommentsController, type: :controller do
       end
 
       it "deletes comment" do
-        expect(Comment.count).to eq(0)
+        expect(Comment.where(id: comment.id).exists?).to eq(false)
       end
 
       it "displays notice flash message" do
@@ -53,10 +53,6 @@ RSpec.describe CommentsController, type: :controller do
 
       it "redirects to recipe page" do
         expect(response).to redirect_to(recipe_path(recipe.id))
-      end
-
-      it "checks that comment doesn't exist" do
-        expect(Comment.find_by(body: "test")).to be_nil
       end
     end
 
