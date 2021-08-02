@@ -16,7 +16,8 @@ class Recipe < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  has_and_belongs_to_many :ingredients
+  has_many :ingredients_recipes
+  has_many :ingredients, through: :ingredients_recipes
   
   belongs_to :user
 

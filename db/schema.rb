@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_29_053956) do
+ActiveRecord::Schema.define(version: 2021_08_02_193742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
   create_table "ingredients_recipes", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "ingredient_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["ingredient_id"], name: "index_ingredients_recipes_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredients_recipes_on_recipe_id"
   end
@@ -80,9 +83,9 @@ ActiveRecord::Schema.define(version: 2021_07_29_053956) do
     t.text "preparation_description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.integer "difficulty", default: 0, null: false
     t.integer "time_in_minutes_needed", null: false
-    t.bigint "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|

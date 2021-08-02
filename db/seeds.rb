@@ -19,7 +19,8 @@ print "."
 
 recipe = Recipe.where(title: "Apple Cake").first_or_create(
   title: "Apple Cake",
-  description: "With chunks of sweet apples nestled in a tender and buttery rum cake, this apple cake is the essence of simplicity."
+  description: "With chunks of sweet apples nestled in a tender and buttery rum cake, this apple cake is the essence of simplicity.",
+  user: user
 )
 
 print "."
@@ -29,4 +30,5 @@ comment = Comment.where(body: "the best apple cake ever!").first_or_create(
   user: user,
   recipe: recipe
 )
+
 puts "\nDB seeded!"
