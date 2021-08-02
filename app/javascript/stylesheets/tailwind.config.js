@@ -22,12 +22,18 @@ module.exports = {
         "16": "repeat(16, minmax(0, 1fr))",
       },
       gridTemplateRows: {
-       'layout1': '15vh minmax(0, 1fr) 8vh',
+       'layout1': '10vh minmax(0, 1fr) 8vh',
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['active'],
+      textColor: ['active'],
+      fontWeight: ['active'],
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio')
+  ],
 }
