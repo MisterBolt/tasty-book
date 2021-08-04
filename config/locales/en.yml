@@ -58,11 +58,11 @@ en:
     forgot_password: "Forgot your password?"
     cook_books: "Tasty Books"
     cancel: "Cancel"
-    
+
   cook_book_recipes:
     create:
       action: "Add recipe to a tasty book"
-      
+
   cook_books:
     form:
       title_placeholder: "My tasty book"
@@ -74,4 +74,28 @@ en:
       action: "Create new tasty book"
       notice: "Tasty book was successfully created."
       alert: "Error occured, tasty book couldn't be created."
-      
+
+  users:
+    show:
+      title: "Recipes"
+    followings:
+      title: "Followings"
+      not_found: "No followings found"
+    followers:
+      title: "Followers"
+      not_found: "No followers found"
+
+
+  follows:
+    create:
+      action: "Follow"
+      notice: "Followed"
+    destroy:
+      action: "Unfollow"
+      notice: "Unfollowed"
+    followings:
+      one: "1 Following"
+      other: "%{count} Followings"
+    followers:
+      one: "1 Follower"
+      other: "%{count} Followers"
