@@ -28,6 +28,11 @@
   &:focus{ @apply ring-indigo-500 }
 }
 
+.btn-nav{
+  @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
+  &:hover{ color: #C89C4C }
+}
+
 .input-text{ @include input-base }
 
 .input-select{
