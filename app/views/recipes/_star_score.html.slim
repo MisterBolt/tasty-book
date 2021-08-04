@@ -1,6 +1,7 @@
 .flex.flex-col.items-center
-  = render 'shared/star', filled: false
-  = render 'shared/star', filled: false
-  = render 'shared/star', filled: false
-  = render 'shared/star', filled: false
-  = render 'shared/star', filled: false
+  - stars_count(@recipe, :empty).times do
+    = render 'shared/star', filled: false
+  - stars_count(@recipe, :percent).times do
+    = render 'shared/star', filled: :percent
+  - stars_count(@recipe, :full).times do
+    = render 'shared/star', filled: :full 
