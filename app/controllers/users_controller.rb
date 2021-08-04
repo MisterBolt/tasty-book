@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :followings, :followers]
+  before_action :set_user
 
   def show
     @pagy, @recipes = pagy(@user.recipes, items: per_page)
