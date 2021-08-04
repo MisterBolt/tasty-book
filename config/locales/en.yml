@@ -68,6 +68,8 @@ en:
       action: "Update tasty books"
       notice: "Tasty books were successfully assigned to the recipe."
       alert: "Error occured, tasty books couldn't be assigned to the recipe."
+    show:
+      warning: "Recipe with this id doesn't exists"
 
   recipe_scores:
     create:

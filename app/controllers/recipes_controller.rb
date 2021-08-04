@@ -15,8 +15,14 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
-    @ingredients_recipe = @recipe.ingredients_recipes
-    gon.avgScore = @recipe.average_score
+    if @recipe.draft? && @recipe.user != current_user
+      respond_to do |format|
+        format.html { redirect_to recipes_path, notice: t(".warning") }
+      end
+    else 
+      @ingredients_recipe = @recipe.ingredients_recipes
+      gon.avgScore = @recipe.average_score
+    end
   end
 
   def new
