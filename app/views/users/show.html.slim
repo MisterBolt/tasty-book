@@ -1,0 +1,17 @@
+.w-auto.flex.p-4.space-x-4
+  article.w-1/3.h-52.p-4.space-x-4.border-solid.border-2.flex
+    = render "user_profile", user: @user
+
+  article.w-2/3.p-4.space-x-4.border-solid.border-2
+    .px-5
+      .text-6xl.font-bold
+        = @title
+      .flex.justify-center.my-2
+        == pagy_nav(@pagy) if @pagy.pages > 1
+      - if @recources.present?
+        = render @recources
+      - else
+        p.text-center.mt-5
+          = @not_found_message
+      .flex.justify-center.my-2
+        == pagy_nav(@pagy) if @pagy.pages > 1
