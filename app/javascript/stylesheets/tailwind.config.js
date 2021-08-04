@@ -22,7 +22,7 @@ module.exports = {
         "16": "repeat(16, minmax(0, 1fr))",
       },
       gridTemplateRows: {
-       'layout1': '10vh minmax(0, 1fr) 8vh',
+       'layout1': '10vh minmax(0, 1fr) 10vh',
       }
     },
   },

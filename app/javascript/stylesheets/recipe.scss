@@ -1,3 +1,4 @@
 .selected {
-  @apply bg-yellow-400 text-gray-900 font-bold
+  @apply bg-yellow-400 text-gray-900 font-bold;
+  &:hover { @apply bg-yellow-400 }
 }

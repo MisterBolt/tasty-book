@@ -13,6 +13,7 @@ import "stylesheets/application"
 // Custom js files
 import "./toggleDisplay"
 import "packs/recipe"
+import "packs/recipe_score"
 
 Rails.start()
 ActiveStorage.start()
