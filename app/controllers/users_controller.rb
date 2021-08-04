@@ -1,26 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user, only: [:show, :followings, :followers]
 
   def show
-    @title = t(".title")
-    @user = User.find(params[:id])
-    @pagy, @recources = pagy(@user.recipes, items: per_page)
-    @not_found_message = t("recipes.not_found")
+    @pagy, @recipes = pagy(@user.recipes, items: per_page)
   end
 
   def followings
-    @title = t(".title")
-    @user = User.find(params[:id])
-    @pagy, @recources = pagy(@user.followings, items: per_page)
-    @not_found_message = t(".not_found")
-    render "show"
+    @pagy, @followings = pagy(@user.followings, items: per_page)
   end
 
   def followers
-    @title = t(".title")
+    @pagy, @followers = pagy(@user.followers, items: per_page)
+  end
+
+  private
+
+  def set_user
     @user = User.find(params[:id])
-    @pagy, @recources = pagy(@user.followers, items: per_page)
-    @not_found_message = t(".not_found")
-    render "show"
   end
 end

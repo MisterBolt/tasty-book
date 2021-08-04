@@ -85,7 +85,6 @@ en:
       title: "Followers"
       not_found: "No followers found"
 
-
   follows:
     create:
       action: "Follow"
