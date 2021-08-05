@@ -21,9 +21,10 @@ module.exports = {
         "2-screen": "200vh",
       },
       minHeight: {
-       '92v': '92vh',
-       '82v': '82vh',
-       '164v': '164vh',
+        '10v': '10vh',
+        '92v': '92vh',
+        '82v': '82vh',
+        '164v': '164vh',
       },
       gridTemplateColumns: {
         "16": "repeat(16, minmax(0, 1fr))",
