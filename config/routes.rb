@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     get :followings, :followers, on: :member
   end
-  resources :recipes
+  resources :recipes do
+    resources :comments
+  end
   resources :cook_books
   resources :recipe_scores, only: :create
   resources :follows, only: [:create, :destroy]

@@ -14,11 +14,10 @@ gem "sass-rails", ">= 6"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem "webpacker", "~> 5.0"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem "redis", "~> 4.0"
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -33,6 +32,7 @@ gem "factory_bot_rails", "~> 6.1"
 gem "faker", "~> 2.18"
 gem "pagy", "~> 4.8"
 gem "cloudinary"
+gem "turbo-rails", "~> 0.5.12"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +44,7 @@ group :development, :test do
   gem "capybara"
   gem "show_me_the_cookies"
   gem "dotenv-rails"
+  gem "selenium-webdriver", "~> 3.142"
 end
 
 group :development do

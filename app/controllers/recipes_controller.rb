@@ -2,7 +2,7 @@
 
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :destroy]
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
     @pagy, @recipes = pagy(Recipe.all, items: per_page)
@@ -56,6 +56,6 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description)
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed)
   end
 end
