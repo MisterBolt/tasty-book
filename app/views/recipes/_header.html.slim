@@ -1,5 +1,8 @@
-.min-h-10v.w-full.flex.flex-row.justify-between.items-center
+.min-h-10v.flex.flex-col 
+  .w-full.h-2/3.flex.flex-row.justify-between.items-end
     .text-3xl.font-semibold
       = @recipe.title     
     .text-xl
-      | Easy
+      = @recipe.difficulty.capitalize
+  .w-full.text-sm.text-left
+    | #{@recipe.time_in_minutes_needed} min.
