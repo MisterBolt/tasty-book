@@ -1,2 +1,11 @@
-h1 Recipe#new
-p Find me in app/views/recipe/new.html.slim
+= form_with(model: @recipe, local:true, url: "/recipes", method: :post) do |f|
+
+    = f.label :title
+    = f.text_field :title
+    = f.label :preparation_description
+    = f.text_area :preparation_description
+    = f.label :time_in_minutes_needed
+    = f.number_field :time_in_minutes_needed
+    = f.label :difficulty
+    = f.select :difficulty, Recipe.difficulties.keys
+    = f.submit
