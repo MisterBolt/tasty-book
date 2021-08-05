@@ -1,6 +1,5 @@
 fillPercent = () => {
-  let score_text = document.getElementById('avg-score').innerText;
-  let score = parseFloat(score_text).toFixed(1);
+  let score = gon.avgScore;
   let decimal = score % 1;
   let percent = (decimal * 100)+"%";
   document.getElementById('stop1').setAttribute("offset", percent);

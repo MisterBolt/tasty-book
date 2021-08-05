@@ -32,7 +32,11 @@ gem "factory_bot_rails", "~> 6.1"
 gem "faker", "~> 2.18"
 gem "pagy", "~> 4.8"
 gem "cloudinary"
+<<<<<<< HEAD
 gem "turbo-rails", "~> 0.5.12"
+=======
+gem 'gon', '~> 6.4'
+>>>>>>> 662d0e1... Add Gon gem and refactor fillPercent function in recipe_score.js
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

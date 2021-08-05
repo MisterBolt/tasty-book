@@ -1,6 +1,6 @@
 module RecipeScoreHelper
   def average_recipe_score(recipe)
-    recipe.recipe_scores.average(:score).to_f
+    recipe.recipe_scores.average(:score).to_f.round(1)
   end
 
   def user_recipe_score(user, recipe)
