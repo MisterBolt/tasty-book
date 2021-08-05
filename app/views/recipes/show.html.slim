@@ -1,6 +1,11 @@
 .grid.grid-cols-16.h-92v
   = render 'left_panel'
-  = render 'layout_3'
+  - if @recipe.layout == "layout_1"
+    = render 'layout_1'
+  - elsif @recipe.layout == "layout_2"
+    = render 'layout_2'
+  - else 
+    = render 'layout_3'
   = render 'right_margin'
   
   
