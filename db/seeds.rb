@@ -1,78 +1,58 @@
-puts "Seeding db: "
+require 'faker'
+require 'factory_bot_rails'
 
-user1 = User.where(username: "John Doe").first_or_create(
-  username: "John Doe",
-  email: "john.doe@example.com",
-  password: "password"
-)
+puts "Seeding users"
+users = FactoryBot.create_list(:user, 20)
 
-print "."
+puts "Seeding ingredients"
+ingredients = FactoryBot.create_list(:ingredient, 10)
 
-CookBook.where(user: user1, favourite: true).first_or_create(
-  user: user1,
-  title: "Favourites",
-  visibility: :private,
-  favourite: true
-)
 
-print "."
+puts "Seeding recipes"
+puts "Seeding cookbooks"
+puts "Adding followings"
+users.each do |user|
+  rand(0..4).times do
+    FactoryBot.create(:recipe, user_id: user.id)
+  end
+  rand(0..3).times do
+    FactoryBot.create(:cook_book, user_id: user.id)
+  end
+  rand(0..4).times do
+    following = users.sample
+    user.followings << following if !user.followings.includes(following)
+  end
+end  
 
-user2 = User.where(username: "Bruce Lee").first_or_create(
-  username: "Bruce Lee",
-  email: "bruce.lee@example.com",
-  password: "password"
-)
+recipes = Recipe.all
 
-print "."
+puts "Choosing recipe ingredients"
+recipes.each do |recipe|
+  rand(3..9).times do
+    FactoryBot.create(:ingredients_recipe, recipe_id: recipe.id, ingredient: ingredients.sample)
+  end
+end
 
-recipe1 = Recipe.where(title: "Apple Cake").first_or_create(
-  title: "Apple Cake",
-  preparation_description: "With chunks of sweet apples nestled in a tender and buttery rum cake, this apple cake is the essence of simplicity.",
-  time_in_minutes_needed: 100,
-  user: user1
-)
+puts "Generating comments"
+puts "Scoring recipes"
+users.each do |user|
+  recipes.each do |recipe|
+    rand(0..3).times do
+      FactoryBot.create(:comment, user_id: user.id, recipe_id: recipe.id)
+    end
+    rand(0..1).times do
+      FactoryBot.create(:recipe_score, user_id: user.id, recipe_id: recipe.id)
+    end
+  end
+end
 
-print "."
+puts "Adding recipes to cookbooks"
+cook_books = CookBook.all
+  cook_books.each do |book|
+    rand(5..20).times do
+      recipe = recipes.sample
+      book.recipes << recipe
+    end
+  end
 
-recipe2 = Recipe.where(title: "Chicken Nuggets").first_or_create(
-  title: "Chicken Nuggets",
-  preparation_description: "Easy and a quick kids meal.",
-  time_in_minutes_needed: 100,
-  user: user2
-)
-
-print "."
-
-Comment.where(body: "the best apple cake ever!").first_or_create(
-  body: "the best apple cake ever!",
-  user: user1,
-  recipe: recipe1
-)
-
-print "."
-
-Comment.where(body: "the best chicken nuggets ever!").first_or_create(
-  body: "the best chicken nuggets ever!",
-  user: user2,
-  recipe: recipe2
-)
-
-print "."
-
-Comment.where(body: "wow!").first_or_create(
-  body: "wow!",
-  user: user2,
-  recipe: recipe1
-)
-
-print "."
-
-Comment.where(body: "amazing!").first_or_create(
-  body: "amazing!",
-  user: user1,
-  recipe: recipe2
-)
-
-print "."
-
-puts "\nDB seeded!"
+puts "DB seeded!"
