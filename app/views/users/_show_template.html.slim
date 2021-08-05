@@ -1,8 +1,7 @@
-.w-auto.flex.p-4.space-x-4
-  article.w-1/3.h-52.p-4.space-x-4.border-solid.border-2.flex
-    = render "user_profile", user: @user
+.w-auto.p-4.space-y-4
+  = render "user", user: @user, size: "150x150"
 
-  article.w-2/3.p-4.space-x-4.border-solid.border-2
+  article.p-4.space-x-4.border-solid.border-2
     .px-5
       .text-6xl.font-bold
         = title

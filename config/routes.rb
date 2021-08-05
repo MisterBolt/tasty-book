@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "landing_page#index"
   devise_for :users, controllers: {registrations: "registrations"}
-  resources :users , only: [:show] do
+  resources :users, only: [:show] do
     get :followings, :followers, on: :member
   end
   resources :recipes
