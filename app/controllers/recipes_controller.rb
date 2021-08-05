@@ -28,6 +28,9 @@ class RecipesController < ApplicationController
       if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
+        for e in @recipe.errors.full_messages do
+          flash.now[:error] = e
+        end
         format.html { render :new, status: :unprocessable_entity }
       end
     end

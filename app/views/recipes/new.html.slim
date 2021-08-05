@@ -1,11 +1,20 @@
-= form_with(model: @recipe, local:true, url: "/recipes", method: :post) do |f|
+.flex.flex-grow.w-full
+    .w-full.max-w-xs.m-auto.content-center
+        = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
 
-    = f.label :title
-    = f.text_field :title
-    = f.label :preparation_description
-    = f.text_area :preparation_description
-    = f.label :time_in_minutes_needed
-    = f.number_field :time_in_minutes_needed
-    = f.label :difficulty
-    = f.select :difficulty, Recipe.difficulties.keys
-    = f.submit
+            .mb-4
+                = f.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4
+                = f.label :preparation_description, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.text_area :preparation_description, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4
+                = f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4
+                = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.select :difficulty, Recipe.difficulties.keys, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4 
+                p Ingredients:
+                    
+            = f.submit(class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
