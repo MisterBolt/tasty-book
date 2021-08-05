@@ -26,6 +26,10 @@ module.exports = {
         '82v': '82vh',
         '164v': '164vh',
       },
+      width: {
+         '3/8': '37.5%',
+         '5/8': '62.5%',
+      },
       gridTemplateColumns: {
         "16": "repeat(16, minmax(0, 1fr))",
       },

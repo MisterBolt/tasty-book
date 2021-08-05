@@ -14,9 +14,12 @@
           li#comments-button.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md href="#"  Comment
       #recipe-field.w-full.h-full.border-r-2.border-yellow-300
         #ingredients-content
-          = render 'ingredients'
+          .text-center 
+            = render 'ingredients'
         #method-content.hidden
-          = render 'description'
+          .text-center 
+            = render 'description'
         #comments-content.hidden 
-          = render 'comments'
+          .text-center 
+            = render 'comments'
       .h-8v
