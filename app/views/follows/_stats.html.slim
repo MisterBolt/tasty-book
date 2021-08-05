@@ -1,0 +1,15 @@
+- followings_count = user.followings.count
+- followers_count = user.followers.count
+
+.space-x-4.font-medium.text-gray-500.flex#follows-stats
+  .hover:opacity-40#followings
+    - if followings_count == 1
+      = link_to t("follows.followings.one"), followings_user_path(user)
+    - else
+      = link_to t("follows.followings.other", count: followings_count), followings_user_path(user)
+
+  .hover:opacity-40#followers
+    - if followers_count == 1
+      = link_to t("follows.followers.one"), followers_user_path(user)
+    - else
+      = link_to t("follows.followers.other", count: followers_count), followers_user_path(user)

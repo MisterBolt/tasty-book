@@ -1,0 +1,16 @@
+.w-auto.p-4.space-y-4
+  = render "user", user: @user, size: "150x150"
+
+  article.p-4.space-x-4.border-solid.border-2
+    .px-5
+      .text-6xl.font-bold
+        = title
+      .flex.justify-center.my-2
+        == pagy_nav(@pagy) if @pagy.pages > 1
+      - if recources.present?
+        = render recources
+      - else
+        p.text-center.mt-5
+          = not_found_message
+      .flex.justify-center.my-2
+        == pagy_nav(@pagy) if @pagy.pages > 1

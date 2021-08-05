@@ -1,0 +1,15 @@
+article.p-4.space-x-4.border-solid.border-2.flex#user-profile
+  = user_avatar_for(user, size: local_assigns[:size])
+
+  .flex-1.relative
+    .text-2xl.font-bold.hover:opacity-50
+      = link_to user.username, user_path(user)
+    = render "follows/stats", user: user
+    .text-sm.font-medium.text-gray-500
+      = t("users.recipes_count", count: user.recipes.count)
+    - if current_user != user
+      .absolute.bottom-0.right-0
+        - if current_user.following?(user)
+          = render "follows/unfollow", user: user
+        - else
+          = render "follows/follow", user: user

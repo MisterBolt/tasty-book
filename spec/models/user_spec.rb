@@ -20,4 +20,35 @@ RSpec.describe User, type: :model do
     it { should have_many(:comments) }
     it { should have_many(:recipes) }
   end
+
+  describe "following methods" do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+
+    context "when user follow other user" do
+      before { user.follow(other_user) }
+
+      it "following?" do
+        expect(user.following?(other_user)).to eq(other_user.followers.include?(user))
+      end
+
+      it "follow" do
+        expect(user.following?(other_user)).to eq(true)
+      end
+
+      it "unfollow" do
+        user.unfollow(other_user)
+
+        expect(user.following?(other_user)).to eq(false)
+      end
+    end
+
+    context "when user try to follow himself" do
+      before { user.follow(user) }
+
+      it "doesn't follow" do
+        expect(user.following?(user)).to eq(false)
+      end
+    end
+  end
 end
