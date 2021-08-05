@@ -27,7 +27,8 @@ print "."
 
 recipe1 = Recipe.where(title: "Apple Cake").first_or_create(
   title: "Apple Cake",
-  description: "With chunks of sweet apples nestled in a tender and buttery rum cake, this apple cake is the essence of simplicity.",
+  preparation_description: "With chunks of sweet apples nestled in a tender and buttery rum cake, this apple cake is the essence of simplicity.",
+  time_in_minutes_needed: 100,
   user: user1
 )
 
@@ -35,7 +36,8 @@ print "."
 
 recipe2 = Recipe.where(title: "Chicken Nuggets").first_or_create(
   title: "Chicken Nuggets",
-  description: "Easy and a quick kids meal.",
+  preparation_description: "Easy and a quick kids meal.",
+  time_in_minutes_needed: 100,
   user: user2
 )
 

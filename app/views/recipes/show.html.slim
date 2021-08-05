@@ -4,8 +4,12 @@
   h2.text-xl
     | by 
     = @recipe.user.username
+  h3.light
+    | Estimated preparation time :
+    = @recipe.time_in_minutes_needed
+    |  minutes
   p
-    = @recipe.description
+    = @recipe.preparation_description
 - if current_user == @recipe.user
     .mb-10
       ul
