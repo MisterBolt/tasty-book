@@ -52,11 +52,11 @@ en:
 
   buttons:
     sign_up: "Sign up"
-    log_in: "Log in"
-    log_out: "Log out"
+    log_in: "Login"
+    log_out: "Logout"
     recipes: "Recipes"
     forgot_password: "Forgot your password?"
-    cook_books: "Tasty books"
+    cook_books: "Tasty Books"
     cancel: "Cancel"
     
   cook_book_recipes:

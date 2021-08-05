@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "recipes#index"
+  root "landing_page#index"
   devise_for :users, controllers: {registrations: "registrations"}
   resources :recipes
   resources :cook_books

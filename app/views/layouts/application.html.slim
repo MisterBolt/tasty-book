@@ -9,7 +9,8 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body.flex.flex-col.h-screen.bg-gray-100
     = render "layouts/navbar"
-    = render "layouts/flash_messages"
-    = yield
+    .flex-grow.flex.flex-col.mt-14
+      = render "layouts/flash_messages"
+      = yield
