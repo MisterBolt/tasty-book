@@ -14,16 +14,28 @@ module.exports = {
 				"60v": "60vh",
 				"70v": "70vh",
 				"80v": "80vh",
+        "82v": "82vh",
 				"90v": "90vh",
 				"92v": "92vh",
         "95v": "95vh",
+        "2-screen": "200vh",
+      },
+      minHeight: {
+       '92v': '92vh',
+       '82v': '82vh',
+       '164v': '164vh',
       },
       gridTemplateColumns: {
         "16": "repeat(16, minmax(0, 1fr))",
       },
       gridTemplateRows: {
        'layout1': '10vh minmax(0, 1fr) 10vh',
-      }
+       'layout2': "10vh 30vh minmax(0, 1fr) 10vh",
+      },
+      gridColumn: {
+         'span-13': 'span 13 / span 13',
+        }
+
     },
   },
   variants: {
@@ -34,6 +46,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/aspect-ratio')
+    require('@tailwindcss/aspect-ratio'),
+    require('tailwind-scrollbar-hide')
   ],
 }
