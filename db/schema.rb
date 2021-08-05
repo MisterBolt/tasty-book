@@ -100,7 +100,6 @@ ActiveRecord::Schema.define(version: 2021_08_10_164718) do
     t.bigint "user_id", null: false
     t.integer "difficulty", default: 0, null: false
     t.integer "time_in_minutes_needed", null: false
-    t.bigint "user_id", null: false
     t.integer "layout", default: 0, null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
