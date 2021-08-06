@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :cook_book do
     user
     title { "Title" }
-    visibility { :public }
-    favourite { false }
+    visibility { rand(0..2) }
+    favourite { [true, false].sample }
   end
 end
