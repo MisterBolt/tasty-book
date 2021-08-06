@@ -13,7 +13,7 @@ class User < ApplicationRecord
     source: :recipe
 
   has_many :recipes
-  
+
   has_many :cook_books,
     dependent: :destroy
 

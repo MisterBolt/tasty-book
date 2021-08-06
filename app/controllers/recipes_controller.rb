@@ -54,8 +54,7 @@ class RecipesController < ApplicationController
   end
 
   def update_cook_books
-    if cook_books_params[:cook_book_ids].detect { |cb| cb == "" || current_user.cook_books.ids.include?(cb.to_i) } &&
-        @recipe.update(cook_books_params)
+    if cook_books_updated?
       flash[:notice] = t(".notice")
     else
       flash[:alert] = t(".alert")
@@ -64,6 +63,17 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def cook_books_updated?
+    cook_book_id_strings = cook_books_params[:cook_book_ids].filter { |cook_book_id| cook_book_id != "" }
+    cook_book_ids = cook_book_id_strings.map { |cook_book_id| cook_book_id.to_i }
+    if cook_book_ids.all? { |cook_book_id| current_user.cook_books.ids.include?(cook_book_id) }
+      @recipe.cook_books.delete(CookBook.where(user_id: current_user.id))
+      @recipe.cook_books << CookBook.where(id: cook_book_ids)
+    else
+      false
+    end
+  end
 
   def set_recipe
     @recipe = Recipe.find(params[:id])
