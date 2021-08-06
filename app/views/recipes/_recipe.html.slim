@@ -18,7 +18,7 @@
           dd - 
         - else
           = render "shared/star", filled: true
-          dd #{average_recipe_score(recipe)}
+          dd #{average_recipe_score(recipe).round(2)}
       
       - if user_signed_in?
         input.drop-item type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
