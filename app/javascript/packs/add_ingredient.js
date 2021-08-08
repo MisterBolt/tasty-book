@@ -17,19 +17,21 @@ function addIngredient(){
 
         //Write values to main array
         let ingredientSet = {
-            ingredient: ingredient.value,
-            unit: unit.value,
-            quantity: quantity.value
+            ingredient: parseInt(ingredient.value),
+            ingredientName: ingredient[ingredient.selectedIndex].text,
+            unit: parseInt(unit.value),
+            unitName: unit[unit.selectedIndex].text,
+            quantity: parseFloat(quantity.value)
         }
         ingredients.push(ingredientSet);
 
         //Add DOM element for added ingredient
         let newItem = document.createElement("li");
-        let unitStr = unit.options[unit.selectedIndex].text;
+        let unitStr = ingredientSet.unitName;
         if(quantity.value > 1){
             unitStr = unitStr + "s";
         }
-        newItem.innerHTML = ingredient.options[ingredient.selectedIndex].text + " " + quantity.value + " " + unitStr;
+        newItem.innerHTML = ingredientSet.ingredientName + " " + quantity.value + " " + unitStr;
         newItem.setAttribute("ingredient_id", ingredient.value);
         let deleteButton = document.createElement('button');
         deleteButton.innerText = "X";
@@ -40,7 +42,7 @@ function addIngredient(){
         //Delete ingredient from ingredient
         let childCount = ingredient.childElementCount;
         ingredient.childNodes.forEach(item=>{
-            if(ingredients.some(i => i.ingredient === item.value)){
+            if(ingredients.some(i => i.ingredient == item.value)){
                 item.style.display = "none";
                 childCount--;
             }
@@ -91,4 +93,11 @@ function updateInputValueWithJSON(){
     hiddenInput.value = json;
 }
 
+function currentState(){
+    const state = JSON.parse(document.getElementById("recipe_ingredients").value);
+    console.log(state);
+
+}
+
+currentState();
 addIngredient();

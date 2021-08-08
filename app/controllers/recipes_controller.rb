@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @ingredients = []
+    @ingredients = [].to_json
   end
 
   def edit
@@ -24,7 +24,7 @@ class RecipesController < ApplicationController
 
   def create
     params = recipe_params
-    @ingredients = JSON.parse(params[:ingredients])
+    @ingredients = params[:ingredients]
     params.delete(:ingredients)
     @recipe = Recipe.new(params)
     @recipe.user = current_user
