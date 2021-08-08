@@ -7,8 +7,8 @@
           = image_tag("/images/pexels-daria-shevtsova-704569 3.jpg", class: "object-cover")  
       .h-8v
     .w-1/2.flex.flex-col.items-center
-      .h-10v.flex.flex-col.justify-center
-        ul#recipe-nav.flex.flex-row.text-yellow-400.font-bold.text-2xl.rounded-md
+      .min-h-10v.flex.flex-col.justify-center
+        ul#recipe-nav.flex.flex-row.items-center.text-yellow-400.font-bold.text-2xl.rounded-md
           li#ingredients-button.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-l-md.selected Ingredients
           li#method-button.py-2.px-4.bg-gray-900.hover:bg-gray-700 Method
           li#comments-button.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md href="#"  Comment
@@ -19,7 +19,6 @@
         #method-content.hidden
           .text-center 
             = render 'description'
-        #comments-content.hidden 
-          .text-center 
-            = render 'comments'
-      .h-8v
+        #comments-content.hidden.h-74v.overflow-y-scroll.scrollbar-hide
+          = render 'comments/comments'
+      .min-h-8v.w-full

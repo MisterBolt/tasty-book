@@ -13,6 +13,7 @@ module.exports = {
 				"50v": "50vh",
 				"60v": "60vh",
 				"70v": "70vh",
+        "74v": "74vh",
 				"80v": "80vh",
         "82v": "82vh",
 				"90v": "90vh",
@@ -21,6 +22,7 @@ module.exports = {
         "2-screen": "200vh",
       },
       minHeight: {
+        '8v': '8vh',
         '10v': '10vh',
         '92v': '92vh',
         '82v': '82vh',
