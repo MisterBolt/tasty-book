@@ -16,18 +16,13 @@
                 = f.select :difficulty, Recipe.difficulties.keys, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             .mb-4 
                 p Ingredients:
-                ul
-                - if @recipe.ingredients.any?
-                    - for ingredient in @recipe.ingredients do 
-                        li = ingredient
-                - else
-                    li There are no ingredients
+                ul id="ingredients"
 
                 = f.fields_for IngredientsRecipe.new do |fields|
                     = fields.label :ingredient_id
                     = fields.select :ingredient_id, Ingredient.all.map { |ingredient| [ingredient.name, ingredient.id] }
                     = fields.label :quantity
-                    = fields.number_field :quantity, min: 1
+                    = fields.number_field :quantity, min: 1, value: 1
                     = fields.label :unit
                     = fields.select :unit, IngredientsRecipe.units
                     = fields.submit "Add ingredient", id: "add_ingredient"
