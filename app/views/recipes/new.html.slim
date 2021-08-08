@@ -19,12 +19,15 @@
                 ul id="ingredients"
 
                 = f.fields_for IngredientsRecipe.new do |fields|
-                    = fields.label :ingredient_id
-                    = fields.select :ingredient_id, Ingredient.all.map { |ingredient| [ingredient.name, ingredient.id] }
+                    = fields.label :ingredient
+                    = fields.select :ingredient, Ingredient.all.map { |ingredient| [ingredient.name, ingredient.id] }
                     = fields.label :quantity
                     = fields.number_field :quantity, min: 1, value: 1
                     = fields.label :unit
                     = fields.select :unit, IngredientsRecipe.units
                     = fields.submit "Add ingredient", id: "add_ingredient"
 
+            = f.hidden_field :ingredients, value: ""
             = f.submit(class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
+
+= javascript_pack_tag "add_ingredient"

@@ -16,14 +16,19 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @ingredients = []
   end
 
   def edit
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    params = recipe_params
+    @ingredients = JSON.parse(params[:ingredients])
+    params.delete(:ingredients)
+    @recipe = Recipe.new(params)
     @recipe.user = current_user
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
@@ -71,7 +76,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id)
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :ingredients)
   end
 
   def cook_books_params

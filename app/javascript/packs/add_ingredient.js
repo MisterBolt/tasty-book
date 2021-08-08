@@ -1,30 +1,27 @@
+const ingredients = [];
+
 function addIngredient(){
     const submit = document.getElementById("add_ingredient");
-  const ingredientList = document.getElementById("ingredients");
+    const ingredientList = document.getElementById("ingredients");
 
-    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient_id");  
+    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");  
     const unit = document.getElementById("recipe_ingredients_recipe_unit");
     const quantity = document.getElementById("recipe_ingredients_recipe_quantity");
-    const ingredients = []
+
     submit.addEventListener('click', e=>{
         e.preventDefault();
         
-        if(ingredient.value == ""){
+        if(ingredient.value == "" || quantity.value == ""){
             return
         }
-        
-        if(quantity.value == ""){
-            quantity.value = 1;
-        }
 
-        //Write values to hidden input with JSON
+        //Write values to main array
         let ingredientSet = {
             ingredient: ingredient.value,
             unit: unit.value,
             quantity: quantity.value
         }
         ingredients.push(ingredientSet);
-        let json = JSON.stringify(ingredients);
 
         //Add DOM element for added ingredient
         let newItem = document.createElement("li");
@@ -32,10 +29,8 @@ function addIngredient(){
         if(quantity.value > 1){
             unitStr = unitStr + "s";
         }
-        let span = document.createElement("span");
-        span.innerText = ingredient.options[ingredient.selectedIndex].text
-        newItem.appendChild(span);
-        newItem.innerHTML += " " + quantity.value + " " + unitStr;
+        newItem.innerHTML = ingredient.options[ingredient.selectedIndex].text + " " + quantity.value + " " + unitStr;
+        newItem.setAttribute("ingredient_id", ingredient.value);
         let deleteButton = document.createElement('button');
         deleteButton.innerText = "X";
         deleteButton.addEventListener("click", e=>{deleteIngredient(e)})
@@ -50,32 +45,50 @@ function addIngredient(){
                 childCount--;
             }
         })
+        ingredient.value = "";
         if(childCount == 0){
-            ingredient.value = "";
             ingredient.disabled = true;
         }
-
+        updateInputValueWithJSON();
     })
+
 }
 
 function deleteIngredient(e){
     e.preventDefault();
     
     const ingredientList = document.getElementById("ingredients");
-    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient_id");
+    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");
     const li = e.target.parentNode;
 
+    //Delete ingredient from ingredients list
     ingredientList.removeChild(li);
 
+    //Add select option
     ingredient.childNodes.forEach(i=>{
-        if(i.innerText == li.getElementsByTagName('span')[0].innerText){
+        if(i.value == li.getAttribute('ingredient_id')){
             i.style.display = 'block';
             if(ingredient.disabled == true){
                 ingredient.disabled = false
-                ingredient.selectedIndex = 0
             }
         }
     })
+
+    //Update JSON 
+    let id = li.getAttribute("ingredient_id");
+    for(let i=0;i<ingredients.length;i++){
+        if(ingredients[i].ingredient == id){
+            ingredients.splice(i,1);
+        }
+    }
+
+    updateInputValueWithJSON();
 }
 
-window.onload = addIngredient;
+function updateInputValueWithJSON(){
+    let hiddenInput = document.getElementById("recipe_ingredients");
+    let json = JSON.stringify(ingredients);
+    hiddenInput.value = json;
+}
+
+addIngredient();
