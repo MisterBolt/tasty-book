@@ -5,7 +5,3 @@ fillPercent = () => {
   document.getElementById('stop1').setAttribute("offset", percent);
   document.getElementById('stop1').setAttribute("offset", percent);
 }
-
-document.addEventListener("turbolinks:load", () => {
-  fillPercent();
-})

@@ -36,6 +36,6 @@ let displayContent = (button_id) => {
   }
 }
 
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("turbo:load", () => {
   loadRecipeTabContent();
 })
