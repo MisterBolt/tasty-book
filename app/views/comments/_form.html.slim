@@ -1,5 +1,5 @@
 .flex.flex-row.items-center
-  =  image_tag("/images/cook.png", class: "rounded-full h-12 mr-4 shadow-md")
+  =  image_tag("/images/cook.png", class: "rounded-full h-14 mr-4 shadow-md")
   .flex-grow
     = turbo_frame_tag "comment_form" do
       = form_with model: [ @recipe, @recipe.comments.build ], class: "flex flex-row items-center" do |form|
