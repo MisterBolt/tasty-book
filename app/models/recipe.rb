@@ -32,4 +32,15 @@ class Recipe < ApplicationRecord
   has_and_belongs_to_many :cook_books
 
   has_and_belongs_to_many :categories
+  
+  def cook_books_update(cook_book_ids_raw, user)
+    cook_book_id_strings = cook_book_ids_raw.filter { |cook_book_id| cook_book_id != "" }
+    cook_book_ids = cook_book_id_strings.map { |cook_book_id| cook_book_id.to_i }
+    if cook_book_ids.all? { |cook_book_id| user.cook_books.ids.include?(cook_book_id) }
+      self.cook_books.delete(CookBook.where(user_id: user.id))
+      self.cook_books << CookBook.where(id: cook_book_ids)
+    else
+      false
+    end
+  end
 end
