@@ -30,9 +30,12 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     respond_to do |format|
-      if @recipe.save
+      ingredient_list = JSON.parse(@ingredients)
+      if ingredient_list.length == 0
+        flash.now[:error] = t('.not_enough_ingredients')
+        format.html { render :new, status: :unprocessable_entity }
+      elsif @recipe.save
         # Add ingredients
-        ingredient_list = JSON.parse(@ingredients)
         ingredient_list.each do |ingredient|
           link = IngredientsRecipe.new
           link.recipe_id = @recipe.id

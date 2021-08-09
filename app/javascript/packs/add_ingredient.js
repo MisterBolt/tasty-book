@@ -38,6 +38,7 @@ function addIngredient(){
 function deleteIngredient(e){
     e.preventDefault();
     
+    let submit = document.getElementById("add_ingredient");
     let ingredientList = document.getElementById("ingredients");
     let ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");
     let li = e.target.parentNode;
@@ -45,11 +46,18 @@ function deleteIngredient(e){
     //Delete ingredient from ingredients list
     ingredientList.removeChild(li);
 
+    if(ingredientList.childElementCount == 0){
+        let p = document.createElement("p");
+        p.innerText = "There are no ingredients";
+        ingredientList.appendChild(p);
+    }
+
     //Add select option
     Array.from(ingredient.options).forEach(i=>{
         if(i.value == li.getAttribute('ingredient_id')){
             i.style.display = 'block';
             if(ingredient.disabled == true){
+                submit.classList.remove('cursor-not-allowed');
                 ingredient.disabled = false
             }
         }
@@ -76,21 +84,38 @@ function createIngredientItem(ingredientObj){
     let ingredientList = document.getElementById("ingredients");
 
     let newItem = document.createElement("li");
+    newItem.setAttribute("class", "space-x-2 justify-center");
     let unitStr = ingredientObj.unitName;
     if(ingredientObj.quantity > 1){
         unitStr = unitStr + "s";
     }
-    newItem.innerHTML = ingredientObj.ingredientName + " " + ingredientObj.quantity + " " + unitStr;
+    //Ingredient name
+    let ingredientSpan = document.createElement("span")
+    ingredientSpan.innerText = ingredientObj.ingredientName;
+    newItem.appendChild(ingredientSpan);
+    //Qunatity + unit
+    let qunatitySpan = document.createElement("span");
+    qunatitySpan.innerText = ingredientObj.quantity + " " + unitStr;
+    newItem.appendChild(qunatitySpan);
+
     newItem.setAttribute("ingredient_id", ingredientObj.ingredient);
+    //Delete button
     let deleteButton = document.createElement('button');
     deleteButton.innerText = "X";
+    deleteButton.setAttribute('class', "bg-red-500 hover:bg-red-400 text-white font-bold px-2 border-b-4 border-red-700 hover:border-red-500 rounded")
     deleteButton.addEventListener("click", e=>{deleteIngredient(e)})
     newItem.appendChild(deleteButton);
+
+    if(ingredientList.childElementCount == 1 && ingredientList.firstChild.nodeName == 'P'){
+        ingredientList.innerHTML = "";
+    }
+
     ingredientList.appendChild(newItem);
 }
 
 function updateSelectOptions(){
     let ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");  
+    let submit = document.getElementById("add_ingredient");
 
     let childCount = ingredient.childElementCount;
     Array.from(ingredient.options).forEach(item=>{
@@ -102,12 +127,20 @@ function updateSelectOptions(){
     ingredient.value = "";
     if(childCount == 0){
         ingredient.disabled = true;
+        submit.classList.add('cursor-not-allowed');
     }
 }
 
 function currentState(){ 
     //Read current state and implement it
+    let ingredientList = document.getElementById("ingredients");
     let state = JSON.parse(document.getElementById("recipe_ingredients").value);
+    if(state.length == 0){
+        let p = document.createElement("p");
+        p.innerText = "There are no ingredients";
+        ingredientList.appendChild(p);
+    }
+    
     state.forEach(ingr => {
         createIngredientItem(ingr);
         ingredients.push(ingr);

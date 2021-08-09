@@ -14,7 +14,7 @@
             .mb-4
                 = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-            .mb-4
+            .mb-4.border-t-2.pt-3.border-gray-500
                 ul id="ingredients"
             .mb-4.border-2.p-4.border-gray-500
                 p.text-lg.text-gray-700.font-bold Add ingredient:
