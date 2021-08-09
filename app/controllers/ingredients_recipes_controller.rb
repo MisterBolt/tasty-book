@@ -1,17 +1,16 @@
 class IngredientsRecipesController < ApplicationController
-    before_action :permit_params, only: :create
-    
-    def create
-        byebug
-    end
+  before_action :permit_params, only: :create
 
-    def destroy
+  def create
+    byebug
+  end
 
-    end
+  def destroy
+  end
 
-    private 
+  private
 
-    def permit_params
-        #params.require()
-    end
+  def permit_params
+    # params.require()
+  end
 end

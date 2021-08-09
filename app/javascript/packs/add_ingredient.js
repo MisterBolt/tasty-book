@@ -2,7 +2,6 @@ const ingredients = [];
 
 function addIngredient(){
     const submit = document.getElementById("add_ingredient");
-    const ingredientList = document.getElementById("ingredients");
 
     const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");  
     const unit = document.getElementById("recipe_ingredients_recipe_unit");
@@ -26,31 +25,11 @@ function addIngredient(){
         ingredients.push(ingredientSet);
 
         //Add DOM element for added ingredient
-        let newItem = document.createElement("li");
-        let unitStr = ingredientSet.unitName;
-        if(quantity.value > 1){
-            unitStr = unitStr + "s";
-        }
-        newItem.innerHTML = ingredientSet.ingredientName + " " + quantity.value + " " + unitStr;
-        newItem.setAttribute("ingredient_id", ingredient.value);
-        let deleteButton = document.createElement('button');
-        deleteButton.innerText = "X";
-        deleteButton.addEventListener("click", e=>{deleteIngredient(e)})
-        newItem.appendChild(deleteButton);
-        ingredientList.appendChild(newItem);
+        createIngredientItem(ingredientSet);
 
         //Delete ingredient from ingredient
-        let childCount = ingredient.childElementCount;
-        ingredient.childNodes.forEach(item=>{
-            if(ingredients.some(i => i.ingredient == item.value)){
-                item.style.display = "none";
-                childCount--;
-            }
-        })
-        ingredient.value = "";
-        if(childCount == 0){
-            ingredient.disabled = true;
-        }
+        updateSelectOptions();
+
         updateInputValueWithJSON();
     })
 
@@ -59,15 +38,15 @@ function addIngredient(){
 function deleteIngredient(e){
     e.preventDefault();
     
-    const ingredientList = document.getElementById("ingredients");
-    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");
-    const li = e.target.parentNode;
+    let ingredientList = document.getElementById("ingredients");
+    let ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");
+    let li = e.target.parentNode;
 
     //Delete ingredient from ingredients list
     ingredientList.removeChild(li);
 
     //Add select option
-    ingredient.childNodes.forEach(i=>{
+    Array.from(ingredient.options).forEach(i=>{
         if(i.value == li.getAttribute('ingredient_id')){
             i.style.display = 'block';
             if(ingredient.disabled == true){
@@ -93,10 +72,48 @@ function updateInputValueWithJSON(){
     hiddenInput.value = json;
 }
 
-function currentState(){
-    const state = JSON.parse(document.getElementById("recipe_ingredients").value);
-    console.log(state);
+function createIngredientItem(ingredientObj){
+    let ingredientList = document.getElementById("ingredients");
 
+    let newItem = document.createElement("li");
+    let unitStr = ingredientObj.unitName;
+    if(ingredientObj.quantity > 1){
+        unitStr = unitStr + "s";
+    }
+    newItem.innerHTML = ingredientObj.ingredientName + " " + ingredientObj.quantity + " " + unitStr;
+    newItem.setAttribute("ingredient_id", ingredientObj.ingredient);
+    let deleteButton = document.createElement('button');
+    deleteButton.innerText = "X";
+    deleteButton.addEventListener("click", e=>{deleteIngredient(e)})
+    newItem.appendChild(deleteButton);
+    ingredientList.appendChild(newItem);
+}
+
+function updateSelectOptions(){
+    let ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");  
+
+    let childCount = ingredient.childElementCount;
+    Array.from(ingredient.options).forEach(item=>{
+        if(ingredients.some(i => i.ingredient == item.value)){
+            item.style.display = "none";
+            childCount--;
+        }
+    })
+    ingredient.value = "";
+    if(childCount == 0){
+        ingredient.disabled = true;
+    }
+}
+
+function currentState(){ 
+    //Read current state and implement it
+    let state = JSON.parse(document.getElementById("recipe_ingredients").value);
+    state.forEach(ingr => {
+        createIngredientItem(ingr);
+        ingredients.push(ingr);
+    })
+
+    updateSelectOptions();
 }
 
 currentState();

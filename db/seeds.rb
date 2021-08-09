@@ -49,8 +49,11 @@ users.each do |user|
 end
 
 cook_books = CookBook.all
+<<<<<<< HEAD
 
 puts "Adding recipes to cookbooks"
+=======
+>>>>>>> af4daf0... Handled adding ingredients to DB
 cook_books.each do |book|
   rand(5..20).times do
     recipe = recipes.sample

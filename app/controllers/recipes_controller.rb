@@ -31,9 +31,26 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
+        # Add ingredients
+        ingredient_list = JSON.parse(@ingredients)
+        ingredient_list.each do |ingredient|
+          link = IngredientsRecipe.new
+          link.recipe_id = @recipe.id
+          link.ingredient_id = ingredient["ingredient"]
+          link.quantity = ingredient["quantity"]
+          link.unit = ingredient["unit"]
+
+          if !link.save
+            link.errors.full_messages.each do |e|
+              flash.now[:error] = e
+            end
+            format.html { render :new, status: :unprocessable_entity }
+          end
+        end
+
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
-        for e in @recipe.errors.full_messages do
+        @recipe.errors.full_messages.each do |e|
           flash.now[:error] = e
         end
         format.html { render :new, status: :unprocessable_entity }
