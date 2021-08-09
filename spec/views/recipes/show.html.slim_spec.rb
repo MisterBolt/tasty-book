@@ -11,7 +11,7 @@ RSpec.describe "recipes/show", type: :view do
       visit recipe_path(recipe)
       expect(page).to have_content(recipe.title)
       expect(page).to have_content(recipe.user.username)
-      expect(page).to have_content(recipe.description)
+      expect(page).to have_content(recipe.preparation_description)
     end
 
     describe "who is the author of the recipe" do
@@ -55,7 +55,7 @@ RSpec.describe "recipes/show", type: :view do
       visit recipe_path(recipe)
       expect(page).to have_content(recipe.title)
       expect(page).to have_content(recipe.user.username)
-      expect(page).to have_content(recipe.description)
+      expect(page).to have_content(recipe.preparation_description)
     end
 
     it "shouldn't display edit and delete recipe options" do

@@ -1,12 +1,11 @@
-require 'faker'
-require 'factory_bot_rails'
+require "faker"
+require "factory_bot_rails"
 
 puts "Seeding users"
 users = FactoryBot.create_list(:user, 20)
 
 puts "Seeding ingredients"
 ingredients = FactoryBot.create_list(:ingredient, 10)
-
 
 puts "Seeding recipes"
 puts "Seeding cookbooks"
@@ -20,9 +19,9 @@ users.each do |user|
   end
   rand(0..4).times do
     following = users.sample
-    user.followings << following if !user.followings.includes(following)
+    user.followings << following unless user.followings.includes(following)
   end
-end  
+end
 
 recipes = Recipe.all
 
@@ -46,13 +45,14 @@ users.each do |user|
   end
 end
 
-puts "Adding recipes to cookbooks"
 cook_books = CookBook.all
-  cook_books.each do |book|
-    rand(5..20).times do
-      recipe = recipes.sample
-      book.recipes << recipe
-    end
+
+puts "Adding recipes to cookbooks"
+cook_books.each do |book|
+  rand(5..20).times do
+    recipe = recipes.sample
+    book.recipes << recipe
   end
+end
 
 puts "DB seeded!"
