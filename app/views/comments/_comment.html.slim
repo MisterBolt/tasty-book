@@ -3,7 +3,10 @@
     em
       strong
         | Commenter:  
-      = comment.user.username
+      - if comment.user.present?
+         = comment.user.username
+      - else 
+        | Guest
   p
     em
       strong
