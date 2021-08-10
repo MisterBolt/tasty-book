@@ -5,7 +5,7 @@
     .flex.flex-col.items-center
       .mb-3  
         | Average score:
-      = render 'average_star_score'
+      = render 'recipe_scores/average_star_score'
       #avg-score.text-4xl.font-semibold.mr-2
         | #{average_recipe_score(@recipe).round(1)} 
       .text-gray-500.mb-6
@@ -14,7 +14,7 @@
       - if user_recipe_score(current_user, @recipe)
         .mb-2  
           | Your score:
-        = render 'current_user_star_score'
+        = render 'recipe_scores/current_user_star_score'
       - else
         .mb-2
           | Score this recipe:
