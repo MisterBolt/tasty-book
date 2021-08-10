@@ -7,12 +7,15 @@ users = FactoryBot.create_list(:user, 20)
 puts "Seeding ingredients"
 ingredients = FactoryBot.create_list(:ingredient, 10)
 
+puts "Seeding categories"
+categories = FactoryBot.create_list(:category, 10)
+
 puts "Seeding recipes"
 puts "Seeding cookbooks"
 puts "Adding followings"
 users.each do |user|
   rand(0..4).times do
-    FactoryBot.create(:recipe, user_id: user.id)
+    FactoryBot.create(:recipe, user_id: user.id, categories: categories.sample(rand(1..3)))
   end
   rand(0..3).times do
     FactoryBot.create(:cook_book, user_id: user.id)
