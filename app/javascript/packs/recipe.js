@@ -3,9 +3,9 @@ let elementSiblings = (ele) => {
 }
 
 let loadRecipeTabContent = () => {
-  let recipe_nav = document.getElementById('recipe-nav');
-  for (let i = 0; i < recipe_nav.children.length; i++) { 
-    recipe_nav.children[i].addEventListener('click', (e) => {
+  let recipeNav = document.getElementById('recipe-nav');
+  for (let i = 0; i < recipeNav.children.length; i++) { 
+    recipeNav.children[i].addEventListener('click', (e) => {
       console.log(elementSiblings(e.target));
       siblings = elementSiblings(e.target);
       siblings.forEach((sibling) => sibling.classList.remove('selected'));
@@ -15,12 +15,12 @@ let loadRecipeTabContent = () => {
   }
 }
  
-let displayContent = (button_id) => {
+let displayContent = (buttonId) => {
   let ingredients = document.getElementById('ingredients-content');
   let method = document.getElementById('method-content');
   let comments = document.getElementById('comments-content');
 
-  switch (button_id) {
+  switch (buttonId) {
     case 'ingredients-button':
       ingredients.classList.remove('hidden');
       Array.from(ingredients.parentNode.children).filter(el => el !== ingredients).forEach((sibling) => sibling.classList.add('hidden'));
