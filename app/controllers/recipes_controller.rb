@@ -16,40 +16,23 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @ingredients = [].to_json
+    @ingredients = []
   end
 
   def edit
   end
 
   def create
-    params = recipe_params
-    @ingredients = params[:ingredients]
-    params.delete(:ingredients)
-    @recipe = Recipe.new(params)
+    @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
     respond_to do |format|
-      ingredient_list = JSON.parse(@ingredients)
-      if ingredient_list.length == 0
+      if @ingredients.length == 0
         flash.now[:error] = t('.not_enough_ingredients')
         format.html { render :new, status: :unprocessable_entity }
       elsif @recipe.save
         # Add ingredients
-        ingredient_list.each do |ingredient|
-          link = IngredientsRecipe.new
-          link.recipe_id = @recipe.id
-          link.ingredient_id = ingredient["ingredient"]
-          link.quantity = ingredient["quantity"]
-          link.unit = ingredient["unit"]
-
-          if !link.save
-            link.errors.full_messages.each do |e|
-              flash.now[:error] = e
-            end
-            format.html { render :new, status: :unprocessable_entity }
-          end
-        end
+        add_ingredients_to_recipe(format)
 
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
@@ -96,7 +79,33 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :ingredients)
+    recipe_params_all = params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :ingredients, :ingredients_recipe)
+    @ingredients = JSON.parse(recipe_params_all[:ingredients])
+    recipe_params_all.delete(:ingredients)
+    return recipe_params_all
+  end
+
+  def add_ingredients_to_recipe(format)
+    @ingredients.each do |ingredient|
+      link = IngredientsRecipe.new
+      link.recipe_id = @recipe.id
+      link.ingredient_id = ingredient["ingredient"]
+      link.quantity = ingredient["quantity"]
+      link.unit = ingredient["unit"]
+      
+      #If user added new ingredient, create it then complete link object
+      if link.ingredient_id == nil
+        new_ingredient = Ingredient.create(name: ingredient["ingredientName"])
+        link.ingredient_id = new_ingredient.id
+      end
+
+      if !link.save
+        link.errors.full_messages.each do |e|
+          flash.now[:error] = e
+        end
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
   end
 
   def cook_books_params

@@ -3,21 +3,28 @@ const ingredients = [];
 function addIngredient(){
     const submit = document.getElementById("add_ingredient");
 
-    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");  
+    const ingredient = document.getElementById("recipe_ingredients_recipe_ingredient"); 
     const unit = document.getElementById("recipe_ingredients_recipe_unit");
     const quantity = document.getElementById("recipe_ingredients_recipe_quantity");
 
     submit.addEventListener('click', e=>{
         e.preventDefault();
         
+        let seletedOption = document.querySelector(`option[value="${ingredient.value}"]`);
+        try{
+            var ingredient_id = seletedOption.getAttribute("data_ingredient_id")
+        }catch{
+            var ingredient_id = null
+        }
+
         if(ingredient.value == "" || quantity.value == ""){
             return
         }
 
         //Write values to main array
         let ingredientSet = {
-            ingredient: parseInt(ingredient.value),
-            ingredientName: ingredient[ingredient.selectedIndex].text,
+            ingredient: parseInt(ingredient_id),
+            ingredientName: ingredient.value,
             unit: parseInt(unit.value),
             unitName: unit[unit.selectedIndex].text,
             quantity: parseFloat(quantity.value)
@@ -26,9 +33,6 @@ function addIngredient(){
 
         //Add DOM element for added ingredient
         createIngredientItem(ingredientSet);
-
-        //Delete ingredient from ingredient
-        updateSelectOptions();
 
         updateInputValueWithJSON();
     })
@@ -51,17 +55,6 @@ function deleteIngredient(e){
         p.innerText = "There are no ingredients";
         ingredientList.appendChild(p);
     }
-
-    //Add select option
-    Array.from(ingredient.options).forEach(i=>{
-        if(i.value == li.getAttribute('ingredient_id')){
-            i.style.display = 'block';
-            if(ingredient.disabled == true){
-                submit.classList.remove('cursor-not-allowed');
-                ingredient.disabled = false
-            }
-        }
-    })
 
     //Update JSON 
     let id = li.getAttribute("ingredient_id");
@@ -113,24 +106,6 @@ function createIngredientItem(ingredientObj){
     ingredientList.appendChild(newItem);
 }
 
-function updateSelectOptions(){
-    let ingredient = document.getElementById("recipe_ingredients_recipe_ingredient");  
-    let submit = document.getElementById("add_ingredient");
-
-    let childCount = ingredient.childElementCount;
-    Array.from(ingredient.options).forEach(item=>{
-        if(ingredients.some(i => i.ingredient == item.value)){
-            item.style.display = "none";
-            childCount--;
-        }
-    })
-    ingredient.value = "";
-    if(childCount == 0){
-        ingredient.disabled = true;
-        submit.classList.add('cursor-not-allowed');
-    }
-}
-
 function currentState(){ 
     //Read current state and implement it
     let ingredientList = document.getElementById("ingredients");
@@ -145,8 +120,6 @@ function currentState(){
         createIngredientItem(ingr);
         ingredients.push(ingr);
     })
-
-    updateSelectOptions();
 }
 
 currentState();

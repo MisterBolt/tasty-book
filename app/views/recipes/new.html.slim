@@ -21,7 +21,10 @@
                 = f.fields_for IngredientsRecipe.new do |fields|
                     .mb-4
                         = fields.label :ingredient, class: "block text-gray-700 text-sm font-bold mb-2"
-                        = fields.select :ingredient, Ingredient.all.map { |ingredient| [ingredient.name, ingredient.id] }, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                        = fields.text_field :ingredient, list: :ingredients_dropdown, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                        datalist id="ingredients_dropdown"
+                            = options_for_select(Ingredient.all.map { |ingredient| [ingredient.name, :data_ingredient_id => ingredient.id] })
+
                     .mb-4
                         = fields.label :quantity, class: "block text-gray-700 text-sm font-bold mb-2"
                         = fields.number_field :quantity, min: 1, value: 1, step: 0.1, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -30,7 +33,7 @@
                         = fields.select :unit, IngredientsRecipe.units
                     = fields.submit "Add ingredient", id: "add_ingredient", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
 
-            = f.hidden_field :ingredients, value: @ingredients
-            = f.submit(class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
+            = f.hidden_field :ingredients, value: @ingredients.to_json
+            = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
 
 = javascript_pack_tag "add_ingredient"
