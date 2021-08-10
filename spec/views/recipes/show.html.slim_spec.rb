@@ -70,11 +70,12 @@ RSpec.describe "recipes/show", type: :view do
       expect(page).to have_content(comment.body)
     end
 
-    it "can't add a comment", js: true do
+    it "can add a comment", js: true do
       visit recipe_path(recipe)
       fill_in "comment[body]", with: "Test content"
       find("input[name='commit']").click
-      expect(page).to have_no_content("Test content")
+      expect(page).to have_content("Test content")
+      expect(page).to have_content("Guest")
     end
   end
 end
