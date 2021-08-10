@@ -44,8 +44,16 @@ module.exports = {
       },
       margin: {
         '8v': '8vh',
+      },
+      backgroundColor: {
+        'mustard': '#c89c4c',
+      },
+      borderColor: {
+        'mustard': '#c89c4c',
+      },
+      textColor: {
+        'mustard': '#c89c4c',
       }
-
     },
   },
   variants: {

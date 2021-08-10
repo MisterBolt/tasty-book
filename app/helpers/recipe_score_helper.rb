@@ -9,7 +9,7 @@ module RecipeScoreHelper
     user_score.score
   end
 
-  def stars_count(recipe, filling)
+  def average_stars_count(recipe, filling)
     avg_score = average_recipe_score(recipe)
     if filling == :full 
       avg_score.floor
@@ -20,9 +20,20 @@ module RecipeScoreHelper
     end
   end
 
+  def user_stars_count(recipe, filling)
+    user_score = user_recipe_score(current_user, recipe)
+    if filling == :full
+      return 0 if !user_score
+      user_score
+    else
+      return 5 if !user_score
+      5 - user_score
+    end
+  end
+
   def star_fill(filling)
     if filling == :full
-      "#fbbf24"
+      "#c89c4c"
     elsif filling == :percent
       "url(#gradient)"
     else

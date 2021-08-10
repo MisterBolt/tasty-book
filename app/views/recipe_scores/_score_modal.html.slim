@@ -1,0 +1,15 @@
+#score-modal.z-10.absolute.inset-0.bg-gray-500.bg-opacity-75.flex.justify-center.items-center.hidden
+  .h-44.w-1/4.bg-gray-50.rounded-lg.flex.flex-col.items-center.p-5
+    .text-xl
+      | Your score for this recipe is 
+    #your-score.text-4xl.font-semibold
+      | 5
+    .flex.flex-row
+      = form_with url: recipe_scores_url, method: :post do |form|
+        = form.hidden_field 'authenticity_token', value: form_authenticity_token
+        = form.hidden_field 'recipe_score[user_id]', value: current_user.id
+        = form.hidden_field 'recipe_score[recipe_id]', value: @recipe.id
+        = form.hidden_field 'recipe_score[score]', value: 0
+        = form.submit 'Confirm', class: 'bg-mustard px-5 py-2 m-6 rounded-md'
+      button#close-modal.bg-white.px-5.py-2.m-6.rounded-md.border
+        | Cancel

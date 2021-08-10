@@ -1,0 +1,5 @@
+.flex.flex-row.items-center
+  - user_stars_count(@recipe, :full).times do
+    = render 'shared/star', filled: :full 
+  - user_stars_count(@recipe, :empty).times do
+    = render 'shared/star', filled: false

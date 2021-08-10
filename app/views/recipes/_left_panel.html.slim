@@ -3,13 +3,24 @@
     = render "shared/heart", filled: false
   .flex.flex-col.flex-grow.justify-between.items-center
     .flex.flex-col.items-center
-      .flex.flex-row.mb-5
-        p#avg-score.font-semibold.mr-1
-          | #{average_recipe_score(@recipe).round(1)} 
-        p
-          | (#{@recipe.recipe_scores.count})
-      p
-        = render 'star_score'
+      .mb-3  
+        | Average score:
+      = render 'average_star_score'
+      #avg-score.text-4xl.font-semibold.mr-2
+        | #{average_recipe_score(@recipe).round(1)} 
+      .text-gray-500.mb-6
+        | (#{@recipe.recipe_scores.count} scored)
+      .mt-6.mb-3 
+      - if user_recipe_score(current_user, @recipe)
+        .mb-2  
+          | Your score:
+        = render 'current_user_star_score'
+      - else
+        .mb-2
+          | Score this recipe:
+        = render 'recipe_scores/new_score'
+      .text-4xl.font-semibold
+        = user_recipe_score(current_user, @recipe)
     .justify-self-end.w-1/2
       .text-sm
         | Added by 
