@@ -3,6 +3,13 @@ module RecipeScoreHelper
     recipe.recipe_scores.average(:score).to_f.round(1)
   end
 
+  def average_recipes_score(recipes)
+    recipes_scores_raw = recipes.map{ |recipe| average_recipe_score(recipe) }
+    recipes_scores = recipes_scores_raw.filter{ |score| score > 0 }
+    return 0 if recipes_scores.size == 0
+    recipes_scores.sum(0.0) / recipes_scores.size
+  end
+
   def user_recipe_score(user, recipe)
     user_score = recipe.recipe_scores.find_by(user_id: user.id)
     return nil if user_score.nil?

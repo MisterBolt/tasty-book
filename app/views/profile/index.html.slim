@@ -1,4 +1,56 @@
-.px-10.mt-6.flex.flex-grow
-  .px-1
-    = render "sidebar", current: "dashboard"
-  .px-1
+.px-7.my-6.flex.flex-grow
+  .px-3
+    = render "sidebar"
+  .px-3.flex-grow.flex.flex-col
+    .grid.grid-cols-3.gap-6.mb-6
+      = render "stats", title: "Social", items: [{title: "Followers", number: @statistics[:followers]}, {title: "Following", number: @statistics[:following]}], svg_path: "M256 73.825a182.175 182.175 0 1 0 182.18 182.18A182.177 182.177 0 0 0 256 73.825zm0 71.833a55.05 55.05 0 1 1-55.054 55.046A55.046 55.046 0 0 1 256 145.658zm.52 208.723h-80.852c0-54.255 29.522-73.573 48.885-90.906a65.68 65.68 0 0 0 62.885 0c19.363 17.333 48.885 36.651 48.885 90.906z"
+      = render "stats", title: "Comments", items: [{title: "From you", number: @statistics[:user_comments]}, {title: "For you", number: @statistics[:comments_for_user]}], svg_path: "M256 73.825a182.175 182.175 0 0 0-182.172 182.18c0 100.6 81.563 182.17 182.172 182.17s182.17-81.57 182.17-182.17c.001-100.618-81.561-182.18-182.17-182.18zm0 284.546a130.638 130.638 0 0 1-58.992-13.825c-4.65 3.717-25.674 19.15-46.53 11.935a45.77 45.77 0 0 0 14.608-35.56c-16.673-17.666-26.684-40.272-26.684-64.916 0-56.54 52.647-102.375 117.598-102.375s117.606 45.835 117.606 102.375c0 56.531-52.654 102.365-117.606 102.365z"
+      = render "stats", title: "Recognition", items: [{title: "Your recipes in tasty books", number: @statistics[:user_recipes_in_cook_books]}], svg_path: "M256 73.825a182.18 182.18 0 0 0-182.18 182.18c0 100.608 81.567 182.17 182.18 182.17 100.608 0 182.179-81.562 182.179-182.17A182.182 182.182 0 0 0 256 73.825zm83.144 195.803c-20.364 22.623-82.942 73.485-82.942 73.485h-.404s-62.574-50.862-82.934-73.485c-18.562-20.637-19.626-51.442 0-71.069a50.245 50.245 0 0 1 71.05 0l11.884 11.883.202-.194.202.194 11.883-11.883a50.256 50.256 0 0 1 71.06 0c19.617 19.636 18.558 50.432 0 71.069z"
+    .grid.grid-cols-3.gap-6
+      .rounded-lg.shadow-lg.bg-white.flex.col-span-2.p-3.items-center
+        svg viewBox = "0 0 100 100" height = "120" width = "120" fill = "#4D4B48"
+          path d = "M23.333 36.666C15.974 36.666 10 42.637 10 50c0 7.356 5.974 13.333 13.333 13.333h53.334C84.026 63.333 90 57.356 90 50c0-7.363-5.974-13.334-13.333-13.334a13.281 13.281 0 0 0-9.428 3.906l-4.717-4.713c3.571-3.574 8.262-5.605 13.281-5.82C72.852 18.521 62.432 10 50 10c-12.435 0-22.852 8.521-25.801 20.032 10.638.456 19.141 9.206 19.141 19.961h-6.667c0-7.363-5.977-13.333-13.333-13.333l-.007.006zM68.545 68.333l-3.75 15H60v-15h-6.667v15h-6.666v-15H40v15h-4.795l-3.75-15h-6.872L30 90h40l5.417-21.667z"
+        .h-full.mx-6.border.rounded-xl.border-gray-300
+        .text-lg.flex.flex-grow.flex-col.px-5.pb-2
+          .flex.w-full.justify-between.mb-1.px-2
+            div
+              span.text-bold class = (@statistics[:recipes] == 0 ? "text-gray-500" : (@statistics[:recipes] < 0 ? "text-red-700" : "text-green-700"))
+                = @statistics[:recipes]
+              = " recipes"
+            div
+              span.text-bold class = (@statistics[:recipe_drafts] == 0 ? "text-gray-500" : (@statistics[:recipe_drafts] < 0 ? "text-red-700" : "text-green-700"))
+                = @statistics[:recipe_drafts]
+              = " drafts"
+          .flex.w-full.rounded-3xl.overflow-hidden 
+            - if (@statistics[:recipes] + @statistics[:recipe_drafts] > 0)
+              - recipes_width = @statistics[:recipes].to_f / (@statistics[:recipes] + @statistics[:recipe_drafts]) * 100
+              - recipe_drafts_width = 100 - recipes_width
+              .bg-green-700.flex.items-center.justify-center.text-white.text-bold.h-8 style = "width: #{recipes_width}%"
+                - if(recipes_width > 15)
+                  = "#{recipes_width.ceil}%"
+              .bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8 style = "width: #{recipe_drafts_width}%"
+                - if(recipe_drafts_width > 15)
+                  = "#{recipe_drafts_width.floor}%"
+            - else
+              .w-full.bg-gray-200.h-8
+          .mt-5.mb-1.px-2
+            = "Average recipes score"
+          .flex.w-full.rounded-3xl.overflow-hidden 
+            - if (@statistics[:recipes_average_score] > 0)
+              - score_width = @statistics[:recipes_average_score] / 5 * 100
+              - score_complement_width = 100 - score_width
+              .bg-green-700.flex.items-center.justify-center.text-white.text-bold.h-8 style = "width: #{score_width}%"
+                - if(score_width > 15)
+                  = "#{@statistics[:recipes_average_score].round(2)}"
+              .bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8 style = "width: #{score_complement_width}%"
+            - else
+              .w-full.bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8
+      .rounded-lg.shadow-lg.bg-white.flex.p-3.items-center
+        .items-center.justify-center.flex.flex-col.flex-grow
+          .text-center.text-lg.font-medium.mb-2
+            = "Tasty Books"
+          .text-5xl.font-black class = (@statistics[:cook_books] == 0 ? "text-gray-500" : (@statistics[:cook_books] < 0 ? "text-red-700" : "text-green-700"))
+            = @statistics[:cook_books]
+        .h-full.mx-6.border.rounded-xl.border-gray-300
+        svg viewBox = "0 0 128 128" height = "120" width = "120" fill = "#4D4B48"
+          path d = "M101.486 0H26.558c-4.378 0-7.944 3.566-7.944 7.944l-.044 100.364c0 4.378 3.566 7.944 7.944 7.944h4.899V128l8.476-4.413L48.365 128v-11.748h53.121c4.387 0 7.944-3.566 7.944-7.944V7.944c0-4.378-3.557-7.944-7.944-7.944zM35.949 19.86h56.102v5.296H35.949V19.86zm-4.537 89.59h-2.769a3.282 3.282 0 0 1-3.272-3.272v-5.264h6.04v8.536zm4.537-71.054V33.1h56.102v5.296H35.949zm66.679 67.782a3.272 3.272 0 0 1-3.272 3.272H48.365v-8.535h54.263v5.263z"

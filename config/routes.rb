@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get :followings, :followers, on: :member
   end
   resources :profile do
-    collection { get :index, :recipes, :recipes_draft, :cook_books, :settings }
+    collection { get :index, :recipes, :recipe_drafts, :cook_books, :settings }
   end
   resources :recipes do
     resources :comments
