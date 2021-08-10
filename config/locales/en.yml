@@ -44,15 +44,33 @@ en:
       notice: "Recipe was successfully deleted."
     update:
       notice: "Recipe was successfully updated."
+    show:
+      ingredients: "Ingredients"
+      method: "Method"
+      comments: "Comments"
+      added: "Added by" 
+
 
   recipe_scores:
     create:
       notice: "Recipe score has been succesfully added"
       warning: "Recipe score has not been added"
-  
+    show:
+      avg_score: "Average score:"
+      user_score: "Your score:"
+      prompt_score: "Score this recipe:"
+      count_score: "scored"
+    form:
+      text: "Your score for this recipe is"
+      confirm: "Confirm"
+      cancel: "Change"
+
   comments:
     destroy:
       notice: "Deleted!"
+    form:
+      placeholder: "Comment"
+      add: "Add"
 
   buttons:
     sign_up: "Sign up"

@@ -4,26 +4,26 @@
   .flex.flex-col.flex-grow.justify-between.items-center
     .flex.flex-col.items-center
       .mb-3  
-        | Average score:
+        = t("recipe_scores.show.avg_score")
       = render 'recipe_scores/average_star_score'
       #avg-score.text-4xl.font-semibold.mr-2
         | #{average_recipe_score(@recipe).round(1)} 
       .text-gray-500.mb-6
-        | (#{@recipe.recipe_scores.count} scored)
+        | (#{@recipe.recipe_scores.count} #{t("recipe_scores.show.count_score")})
       .mt-6.mb-3 
       - if user_recipe_score(current_user, @recipe)
         .mb-2  
-          | Your score:
+          = t("recipe_scores.show.user_score")
         = render 'recipe_scores/current_user_star_score'
       - else
         .mb-2
-          | Score this recipe:
+          = t("recipe_scores.show.prompt_score")
         = render 'recipe_scores/new_score'
       .text-4xl.font-semibold
         = user_recipe_score(current_user, @recipe)
     .justify-self-end.w-1/2
       .text-sm
-        | Added by 
+        = t("recipes.show.added")
       .mb-2
         = @recipe.user.username
       .rounded-2xl.shadow-lg.overflow-hidden

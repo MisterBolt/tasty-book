@@ -8,12 +8,12 @@
       .flex.flex-row.mt-10
         .w-1/2.border-r-2.border-mustard
           .text-3xl.text-center.mt-6
-            | Ingredients
+            = t("recipes.show.ingredients")
           .text-center  
             = render 'ingredients'
         .w-1/2
           .text-3xl.text-center.mt-6
-            | Method
+            = t("recipes.show.method")
           .text-center 
             = render 'description'
     .min-h-74v

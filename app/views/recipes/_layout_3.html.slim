@@ -13,11 +13,11 @@
         .flex.flex-row.flex-grow 
           .w-2/5.min-h-full.border-r-2.border-mustard
             .text-3xl.text-left.ml-16
-              | Ingredients
+              = t("recipes.show.ingredients")
             = render 'ingredients'
           .w-3/5 
             .text-3xl.text-left.ml-16
-              | Method
+              = t("recipes.show.method")
             = render 'description'
         .h-8v
       .min-h-74v

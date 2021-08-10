@@ -4,6 +4,6 @@
     = turbo_frame_tag "comment_form" do
       = form_with model: [ @recipe, @recipe.comments.build ], class: "flex flex-row items-center" do |form|
         .border-2.border-gray-300.rounded-md.flex-grow
-          = form.text_area :body, placeholder: "Comment", class: "comment-input-field"
+          = form.text_area :body, placeholder: t("comments.form.placeholder"), class: "comment-input-field"
         .ml-4
-          = form.submit "Add", class: "bg-gray-800 px-4 py-2 rounded-md text-white font-semibold"
+          = form.submit t("comments.form.add"), class: "bg-gray-800 px-4 py-2 rounded-md text-white font-semibold"
