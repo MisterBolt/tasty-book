@@ -45,7 +45,7 @@ RSpec.describe "recipes/show", type: :view do
       login_as(user1)
       visit recipe_path(recipe)
       fill_in "comment[body]", with: "Test content"
-      find("input[name='commit']").click
+      click_on t("comments.form.add")
       expect(page).to have_content("Test content")
     end
   end
