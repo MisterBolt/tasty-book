@@ -1,7 +1,7 @@
-.flex.flex-row.items-center
-  =  image_tag("/images/cook.png", class: "rounded-full h-14 mr-4 shadow-md")
-  .flex-grow
-    = turbo_frame_tag "comment_form" do
+= turbo_frame_tag "comment_form" do 
+  .flex.flex-row.items-center
+    =  image_tag("/images/cook.png", class: "rounded-full h-14 mr-4 shadow-md")
+    .flex-grow
       = form_with model: [ @recipe, @recipe.comments.build ], class: "flex flex-row items-center" do |form|
         .border-2.border-gray-300.rounded-md.flex-grow
           = form.text_area :body, placeholder: t("comments.form.placeholder"), class: "comment-input-field"
