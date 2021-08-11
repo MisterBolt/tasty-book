@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "recipes/show", type: :view do
   let!(:user1) { create(:user) }
-  let!(:recipe) { create(:recipe, user: user1) }
+  let!(:recipe) { create(:recipe, layout: 2, user: user1) }
   let!(:comment) { create(:comment, user: user1, recipe: recipe) }
 
   context "when site is used by the user" do

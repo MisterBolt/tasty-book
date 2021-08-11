@@ -4,12 +4,12 @@
       = t("recipe_scores.form.text") 
     #your-score.text-4xl.font-semibold
       | 5
-    .flex.flex-row
+    .flex.flex-row.mt-3
       = form_with url: recipe_scores_url, method: :post do |form|
         = form.hidden_field 'authenticity_token', value: form_authenticity_token
         = form.hidden_field 'recipe_score[user_id]', value: current_user.id
         = form.hidden_field 'recipe_score[recipe_id]', value: @recipe.id
         = form.hidden_field 'recipe_score[score]', value: 0
-        = form.submit t("recipe_scores.form.confirm"), class: 'cursor-pointer bg-mustard px-5 py-2 m-6 rounded-md'
-      button#close-modal.bg-white.px-5.py-2.m-6.rounded-md.border
+        = form.submit t("recipe_scores.form.confirm"), class: 'btn-primary'
+      button#close-modal.btn-secondary
         = t("recipe_scores.form.cancel")
