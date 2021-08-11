@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :ingredient do
-    name { Faker::Verb.base }
+    name { Faker::Food.unique.ingredient }
   end
 end
