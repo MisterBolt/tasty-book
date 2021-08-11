@@ -1,1 +1,6 @@
-.col-start-16.h-92v
+.col-start-16.h-92v.flex.flex-col.justify-items-end
+  .flex-grow
+  - if @recipe.user == current_user
+    .flex.flex-col.mx-4.mb-8v
+      = link_to t("recipes.edit.action"), edit_recipe_url(@recipe), class: "text-center btn-primary"
+      = link_to t("recipes.destroy.action"), recipe_url(@recipe), method: :delete, class: "text-center btn-primary"
