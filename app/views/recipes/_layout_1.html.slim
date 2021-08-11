@@ -8,11 +8,11 @@
   .w-1/2.flex.flex-col.items-center
     .min-h-10v.flex.flex-col.justify-center
       ul#recipe-nav.flex.flex-row.items-center.text-mustard.font-bold.text-2xl.rounded-md
-        li#ingredients-button.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-l-md.selected 
+        li#ingredients-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-l-md.selected 
           = t("recipes.show.ingredients")
-        li#method-button.py-2.px-4.bg-gray-900.hover:bg-gray-700
+        li#method-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700
           = t("recipes.show.method")
-        li#comments-button.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md
+        li#comments-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md
           = t("recipes.show.comments")
     #recipe-field.w-full.h-full.border-r-2.border-mustard
       #ingredients-content
