@@ -1,9 +1,14 @@
 class CommentsController < ApplicationController
   before_action :set_recipe
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:destroy]
 
   def create
-    @comment = current_user.comments.new(**comment_params, recipe_id: @recipe.id)
+    @comment = if current_user.present?
+      current_user.comments.new(**comment_params, recipe_id: @recipe.id)
+    else
+      Comment.new(**comment_params, recipe_id: @recipe.id)
+    end
+
     respond_to do |format|
       if @comment.save
         format.turbo_stream {
