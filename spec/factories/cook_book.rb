@@ -4,5 +4,6 @@ FactoryBot.define do
     title { "Title" }
     visibility { rand(0..2) }
     favourite { [true, false].sample }
+    recipes { [] }
   end
 end

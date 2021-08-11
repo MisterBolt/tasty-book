@@ -9,5 +9,5 @@
       .items-center.justify-center.flex.flex-col
         .text-center.text-lg.font-medium.mb-2
           = item[:title]
-        .text-5xl.font-black class = (item[:number] == 0 ? "text-gray-500" : (item[:number] < 0 ? "text-red-700" : "text-green-700"))
+        .text-5xl.font-black.text-gray-700 id = "dashboard_#{item[:title].parameterize.underscore}"
           = item[:number]

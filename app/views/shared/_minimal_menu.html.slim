@@ -1,0 +1,7 @@
+/ pass 'items' and 'check_parameters' arguments like:
+/ items: [{title: "title", urls: ["/your/url", "/your/optional/url"]}, ...], check_parameters: false
+.minimal-menu
+  - items.each do |item|
+    .menu-item class = (item[:urls].any?{ |url| current_page?(url, check_parameters: check_parameters) } ? "current" : "")
+      = link_to item[:title], item[:urls][0]
+      .underline
