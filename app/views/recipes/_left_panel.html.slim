@@ -11,16 +11,17 @@
       .text-gray-500.mb-6
         | (#{@recipe.recipe_scores.count} #{t("recipe_scores.show.count_score")})
       .mt-6.mb-3 
-      - if user_recipe_score(current_user, @recipe)
-        .mb-2  
-          = t("recipe_scores.show.user_score")
-        = render 'recipe_scores/current_user_star_score'
-      - else
-        .mb-2
-          = t("recipe_scores.show.prompt_score")
-        = render 'recipe_scores/new_score'
-      .text-4xl.font-semibold
-        = user_recipe_score(current_user, @recipe)
+      - if current_user
+        - if user_recipe_score(current_user, @recipe)
+          .mb-2  
+            = t("recipe_scores.show.user_score")
+          = render 'recipe_scores/current_user_star_score'
+        - else
+          .mb-2
+            = t("recipe_scores.show.prompt_score")
+          = render 'recipe_scores/new_score'
+        .text-4xl.font-semibold
+          = user_recipe_score(current_user, @recipe)
     .justify-self-end.w-1/2
       .text-sm
         = t("recipes.show.added")
