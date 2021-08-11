@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   resources :cook_books
   resources :recipe_scores, only: :create
   resources :follows, only: [:create, :destroy]
+
+  namespace "api" do
+    resources :recipes, only: [:show]
+  end
 end
