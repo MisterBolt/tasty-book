@@ -1,5 +1,7 @@
 module Api
-  class RecipesController < ApplicationController
+  class RecipesController < ActionController::API
+    include ExceptionHandler
+
     def show
       recipe = Recipe.find(params[:id])
 
