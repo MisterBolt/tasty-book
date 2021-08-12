@@ -1,6 +1,6 @@
 .mx-16
   .w-full
-    = render 'comments/form' if current_user
+    = render 'comments/form'
   = turbo_stream_from @recipe, :comments
   div id="#{dom_id(@recipe)}_comments" 
   = render @recipe.comments.order(created_at: :desc)

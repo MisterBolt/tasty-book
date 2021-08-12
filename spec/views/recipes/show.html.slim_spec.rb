@@ -75,7 +75,7 @@ RSpec.describe "recipes/show", type: :view do
       fill_in "comment[body]", with: "Test content"
       find("input[name='commit']").click
       expect(page).to have_content("Test content")
-      expect(page).to have_content("Guest")
+      expect(page).to have_content(t("comments.show.guest"))
     end
   end
 end

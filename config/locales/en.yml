@@ -71,6 +71,8 @@ en:
     form:
       placeholder: "Comment"
       add: "Add"
+    show:
+      guest: "Guest"
 
   buttons:
     sign_up: "Sign up"

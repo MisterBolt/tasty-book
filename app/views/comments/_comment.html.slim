@@ -3,7 +3,10 @@
   .flex.flex-col
     .flex.flex-row.items-center
       .mr-4
-        = comment.user.username
+        - if comment.user.present?
+          = comment.user.username
+        - else 
+          = t("comments.show.guest")
       .text-gray-400.text-sm 
         | #{ time_ago_in_words(comment.created_at) } ago
     .text-xl
