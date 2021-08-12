@@ -1,3 +1,5 @@
+- widths = dashboard_widths(@statistics[:recipes], @statistics[:recipe_drafts], @statistics[:recipes_average_score])
+
 .px-7.my-6.flex.flex-grow
   .px-3
     = render "sidebar"
@@ -25,26 +27,19 @@
               = t("profile.index.recipe_drafts", count: @statistics[:recipe_drafts])
           .flex.w-full.rounded-3xl.overflow-hidden 
             - if (@statistics[:recipes] + @statistics[:recipe_drafts] > 0)
-              - recipes_width = @statistics[:recipes].to_f / (@statistics[:recipes] + @statistics[:recipe_drafts]) * 100
-              - recipe_drafts_width = 100 - recipes_width
-              .bg-green-700.flex.items-center.justify-center.text-white.text-bold.h-8 style = "width: #{recipes_width}%" id = "dashboard_recipes_percent"
-                - if(recipes_width > 15)
-                  = "#{recipes_width.ceil}%"
-              .bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8 style = "width: #{recipe_drafts_width}%" id = "dashboard_drafts_percent"
-                - if(recipe_drafts_width > 15)
-                  = "#{recipe_drafts_width.floor}%"
+              .bg-green-700.flex.items-center.justify-center.text-white.text-bold.h-8 style = "width: #{widths[:recipes]}%" id = "dashboard_recipes_percent"
+                = dashboard_bar_text(widths[:recipes], "#{widths[:recipes].ceil}%")
+              .bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8 style = "width: #{widths[:recipe_drafts]}%" id = "dashboard_drafts_percent"
+                = dashboard_bar_text(widths[:recipe_drafts], "#{widths[:recipe_drafts].floor}%")
             - else
               .w-full.bg-gray-200.h-8
           .mt-5.mb-1.px-2
             = t("profile.index.average_recipes_score")
           .flex.w-full.rounded-3xl.overflow-hidden 
             - if (@statistics[:recipes_average_score] > 0)
-              - score_width = @statistics[:recipes_average_score] / 5 * 100
-              - score_complement_width = 100 - score_width
-              .bg-green-700.flex.items-center.justify-center.text-white.text-bold.h-8 style = "width: #{score_width}%" id = "dashboard_score"
-                - if(score_width > 15)
-                  = "#{@statistics[:recipes_average_score].round(1)}"
-              .bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8 style = "width: #{score_complement_width}%"
+              .bg-green-700.flex.items-center.justify-center.text-white.text-bold.h-8 style = "width: #{widths[:score]}%" id = "dashboard_score"
+                = dashboard_bar_text(widths[:score], @statistics[:recipes_average_score].round(1))
+              .bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8 style = "width: #{widths[:score_complement]}%"
             - else
               .w-full.bg-gray-200.flex.items-center.justify-center.text-gray-500.text-bold.h-8
       .rounded-lg.shadow-lg.bg-white.flex.p-3.items-center
