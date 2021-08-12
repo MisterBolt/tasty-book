@@ -9,8 +9,8 @@
         .w-1/2.border-r-2.border-mustard
           .text-3xl.text-center.mt-6
             = t("recipes.show.ingredients")
-          .text-center  
-            = render 'ingredients'
+          .m-16
+            = render @ingredients_recipe, position: :center
         .w-1/2
           .text-3xl.text-center.mt-6
             = t("recipes.show.method")

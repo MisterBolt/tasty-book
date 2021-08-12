@@ -16,8 +16,8 @@
           = t("recipes.show.comments")
     #recipe-field.w-full.h-full.border-r-2.border-mustard
       #ingredients-content
-        .text-center 
-          = render 'ingredients'
+        .m-16
+          = render @ingredients_recipe, position: :center
       #method-content.hidden
         .text-center 
           = render 'description'

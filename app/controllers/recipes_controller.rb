@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
+    @ingredients_recipe = @recipe.ingredients_recipes
     gon.avgScore = average_recipe_score(@recipe)
   end
 

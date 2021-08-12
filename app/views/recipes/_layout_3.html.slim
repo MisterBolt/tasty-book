@@ -14,7 +14,8 @@
           .w-2/5.min-h-full.border-r-2.border-mustard
             .text-3xl.text-left.ml-16
               = t("recipes.show.ingredients")
-            = render 'ingredients'
+            .m-16
+              = render @ingredients_recipe, position: :start
           .w-3/5 
             .text-3xl.text-left.ml-16
               = t("recipes.show.method")
