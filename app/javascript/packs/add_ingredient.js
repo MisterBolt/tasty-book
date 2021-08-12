@@ -136,8 +136,13 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
         obj.querySelector(".delete-ingredient").addEventListener('click', e=>{
             e.preventDefault()
             e.target.parentNode.parentNode.style.display = 'none';
+            e.target.parentNode.querySelector("input[name='_destroy']").value = '1';
         })
-        //let hidden_input
+        let hidden_input = document.createElement("input");
+        hidden_input.name = "_destroy"
+        hidden_input.value = '0'
+        hidden_input.hidden = true
+        obj.appendChild(hidden_input);
         i.parentNode.insertBefore(obj, i);
     })
 })
