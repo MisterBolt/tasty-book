@@ -19,9 +19,7 @@
                 p.text-lg.text-gray-700.font-bold Add ingredient:
                 = f.fields_for :ingredients_recipes do |fields|
                     = render "ingredient_fields", f: fields
-                    /= fields.submit t('buttons.add_ingredient'), id: "add_ingredient", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
-            / = f.hidden_field :ingredients, value: @ingredients.to_json
             = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
 
 = javascript_pack_tag "add_ingredient"

@@ -133,6 +133,11 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
         let obj = document.createElement('fieldset')
         let newIndex = new Date().getTime()
         obj.innerHTML = i.getAttribute("data-form-prepend").replaceAll("FIELDSET_INDEX", newIndex);
+        obj.querySelector(".delete-ingredient").addEventListener('click', e=>{
+            e.preventDefault()
+            e.target.parentNode.parentNode.style.display = 'none';
+        })
+        //let hidden_input
         i.parentNode.insertBefore(obj, i);
     })
 })
