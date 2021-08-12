@@ -5,18 +5,10 @@ module Api
     def show
       recipe = Recipe.find(params[:id])
 
-      sql = "SELECT I.name
-                  , Ir.quantity
-                  , Ir.unit
-             FROM Ingredients I
-             JOIN  Ingredients_recipes Ir
-             ON I.id = Ir.ingredient_id
-             WHERE Ir.recipe_id = #{params[:id]}"
-
-      ingredients = ActiveRecord::Base.connection.execute(sql).to_a
-      ingredients.each do |ingredient|
-        ingredient["unit"] = IngredientsRecipe.units.key(ingredient["unit"])
-      end
+      ingredients = Ingredient
+        .includes(:ingredients_recipes)
+        .where("ingredients_recipes.recipe_id = ?", params[:id])
+        .pluck(:name, :quantity, :unit)
 
       render json: {status: "SUCCESS", title: recipe.title, ingredients: ingredients}, status: :ok
     end
