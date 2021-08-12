@@ -3,6 +3,6 @@ FactoryBot.define do
     recipe
     ingredient
     quantity { rand(1..100) }
-    unit { rand(0..3) }
+    unit { rand(0..4) }
   end
 end
