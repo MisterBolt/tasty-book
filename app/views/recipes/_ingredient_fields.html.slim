@@ -1,0 +1,12 @@
+= f.hidden_field :id
+.mb-4
+    = f.label :ingredient_name, class: "block text-gray-700 text-sm font-bold mb-2"
+    = f.text_field :ingredient_name, list: :ingredients_dropdown, class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+    datalist id="ingredients_dropdown"
+        = options_for_select(Ingredient.all.map { |ingredient| [ingredient.name, ingredient.name] })
+.mb-4
+    = f.label :quantity, class: "block text-gray-700 text-sm font-bold mb-2"
+    = f.number_field :quantity, min: 1, value: 1, step: 0.1, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+.mb-4
+    = f.label :unit, class: "block text-gray-700 text-sm font-bold mb-2"
+    = f.select :unit, IngredientsRecipe.units

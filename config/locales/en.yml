@@ -91,6 +91,7 @@ en:
     cook_books: "Tasty Books"
     cancel: "Cancel"
     create_new_recipe: "Create new recipe"
+    add_ingredient: "Add ingredient"
     
   cook_book_recipes:
     create:

@@ -24,13 +24,16 @@ RSpec.describe "recipes/create", type: :view do
         end
     end
 
-    # context "with valid data" do
-    #     it "saves recipe" do
-    #         fill_in_recipe_data("Soup", "test", "20")
-    #         5.times do
-    #             ingredient = create(:ingredient)
-    #             add_ingredient(add_ingredient.name)
-    #         end
-    #     end
-    # end
+    context "with valid data" do
+        it "saves recipe" do
+            fill_in_recipe_data("Soup", "test", "20")
+            5.times do
+                ingredient = create(:ingredient)
+                add_ingredient_to_recipe(ingredient.name, "4", "gram")
+            end
+            expect {
+                click_button I18n.t("buttons.create_new_recipe")
+            }.to change(Recipe, :count).by(1)
+        end
+    end
 end

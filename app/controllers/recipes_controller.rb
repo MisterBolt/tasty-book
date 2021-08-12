@@ -27,12 +27,13 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     respond_to do |format|
-      if @ingredients.length == 0
-        flash.now[:error] = t('.not_enough_ingredients')
-        format.html { render :new, status: :unprocessable_entity }
-      elsif @recipe.save
+      # if @ingredients.length == 0
+      #   flash.now[:error] = t('.not_enough_ingredients')
+        # format.html { render :new, status: :unprocessable_entity }
+      # byebug
+      if @recipe.save
         # Add ingredients
-        add_ingredients_to_recipe(format)
+        # add_ingredients_to_recipe(format)
 
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
@@ -79,33 +80,13 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    recipe_params_all = params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :ingredients, :ingredients_recipe)
-    @ingredients = JSON.parse(recipe_params_all[:ingredients])
-    recipe_params_all.delete(:ingredients)
-    return recipe_params_all
-  end
+    # recipe_params_all = params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :ingredients, :ingredients_recipe)
+    # @ingredients = JSON.parse(recipe_params_all[:ingredients])
+    # recipe_params_all.delete(:ingredients)
+    # return recipe_params_all
 
-  def add_ingredients_to_recipe(format)
-    @ingredients.each do |ingredient|
-      link = IngredientsRecipe.new
-      link.recipe_id = @recipe.id
-      link.ingredient_id = ingredient["ingredient"]
-      link.quantity = ingredient["quantity"]
-      link.unit = ingredient["unit"]
-      
-      #If user added new ingredient, create it then complete link object
-      if link.ingredient_id == nil
-        new_ingredient = Ingredient.create(name: ingredient["ingredientName"])
-        link.ingredient_id = new_ingredient.id
-      end
-
-      if !link.save
-        link.errors.full_messages.each do |e|
-          flash.now[:error] = e
-        end
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, 
+      ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 
   def cook_books_params

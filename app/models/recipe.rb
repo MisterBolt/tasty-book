@@ -8,6 +8,8 @@ class Recipe < ApplicationRecord
   validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
 
+  validates :ingredients_recipes, length: { minimum: 1 }
+  
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
 
@@ -53,4 +55,7 @@ class Recipe < ApplicationRecord
       .pluck("avg(recipe_scores.score)")[0]
       .to_f.round(1)
   end
+  accepts_nested_attributes_for :ingredients_recipes, 
+                                allow_destroy: true, 
+                                reject_if: -> (attributes) { attributes[:ingredient_name].blank? }
 end

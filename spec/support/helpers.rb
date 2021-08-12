@@ -31,8 +31,9 @@ def fill_in_recipe_data(title, description, time)
   fill_in "Time needed (in minutes)", with: time
 end
 
-def add_ingredient(ingredient, quantity, unit)
-  select ingredient, from: "ingredient"
+def add_ingredient_to_recipe(ingredient, quantity, unit)
+  fill_in "Ingredient", with: ingredient
   fill_in "Quantity", with: quantity
-  select unit, from: "unit"
+  select unit, from: "Unit"
+  click_button I18n.t("buttons.add_ingredient")
 end
