@@ -9,6 +9,7 @@ RSpec.describe "log in process", type: :feature do
 
     it "signs me in" do
       expect(page).to have_content(I18n.t("devise.sessions.signed_in"))
+      expect(page).to have_css("#flash-success")
     end
 
     it "remembers me after browser restart" do
