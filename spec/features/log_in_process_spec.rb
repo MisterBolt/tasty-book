@@ -9,6 +9,7 @@ RSpec.describe "log in process", type: :feature do
 
     it "signs me in" do
       expect(page).to have_content(I18n.t("devise.sessions.signed_in"))
+      expect(page).to have_css("#flash-success")
     end
 
     it "remembers me after browser restart" do
@@ -39,6 +40,7 @@ RSpec.describe "log in process", type: :feature do
 
     it "does not sign me in" do
       expect(page).to have_content(I18n.t("devise.failure.not_found_in_database"))
+      expect(page).to have_css("#flash-error")
     end
   end
 
@@ -47,6 +49,7 @@ RSpec.describe "log in process", type: :feature do
 
     it "does not sign me in" do
       expect(page).to have_content(I18n.t("devise.failure.invalid"))
+      expect(page).to have_css("#flash-error")
     end
   end
 end
