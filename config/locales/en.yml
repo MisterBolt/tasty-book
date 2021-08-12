@@ -142,10 +142,10 @@ en:
       recognition: "Recognition"
       your_recipes_in_tasty_books: "Your recipes in tasty books"
       recipes:
-        singular: "recipe"
-        plural: "recipes"
-      drafts:
-        singular: "draft"
-        plural: "drafts"
+        one: " recipe"
+        other: " recipes"
+      recipe_drafts:
+        one: " draft"
+        other: " drafts"
       average_recipes_score": "Average recipes score"
       cook_books: "Tasty books"
