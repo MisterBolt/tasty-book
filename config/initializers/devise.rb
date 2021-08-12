@@ -43,7 +43,7 @@ Devise.setup do |config|
     manager.failure_app = TurboFailureApp
   end
 
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "no-reply@tasty-book.com"
 
   require "devise/orm/active_record"
 
