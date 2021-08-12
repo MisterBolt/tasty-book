@@ -38,28 +38,9 @@ starHighlight = () => {
 fillScoreForm = (starId) => {
   let scoreFormField = document.getElementById('recipe_score[score]');
   let scoreDisplayed = document.getElementById('your-score');
-  switch (starId) {
-    case 'score-one':
-      scoreFormField.setAttribute("value", 1);
-      scoreDisplayed.innerHTML = 1;
-      break;
-    case 'score-two':
-      scoreFormField.setAttribute("value", 2);
-      scoreDisplayed.innerHTML = 2;
-      break;
-    case 'score-three':
-      scoreFormField.setAttribute("value", 3);
-      scoreDisplayed.innerHTML = 3;
-      break;
-    case 'score-four':
-      scoreFormField.setAttribute("value", 4);
-      scoreDisplayed.innerHTML = 4;
-      break;
-    case 'score-five':
-      scoreFormField.setAttribute("value", 5);
-      scoreDisplayed.innerHTML = 5;
-      break;
-  }
+  let scoreOptions = { "score-one": 1, "score-two": 2, "score-three": 3, "score-four": 4, "score-five": 5 };  
+  scoreFormField.setAttribute("value", scoreOptions[starId]);
+  scoreDisplayed.innerHTML = scoreOptions[starId];
 }
 
 closeModal = () => {
