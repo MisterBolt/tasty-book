@@ -31,6 +31,7 @@
 
 en:
   confirm: "Are you sure?"
+  all_rights: "©2021 Tasty Book. All rights reserved."
 
   recipes:
     not_found: "No recipes found"
@@ -48,7 +49,7 @@ en:
       ingredients: "Ingredients"
       method: "Method"
       comments: "Comments"
-      added: "Added by" 
+      added: "Added by"
 
 
   recipe_scores:
@@ -79,7 +80,6 @@ en:
     log_in: "Login"
     log_out: "Logout"
     recipes: "Recipes"
-    forgot_password: "Forgot your password?"
     cook_books: "Tasty Books"
     cancel: "Cancel"
 
