@@ -131,7 +131,7 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
     i.addEventListener("click", e=>{
         e.preventDefault()
         let obj = document.createElement('fieldset')
-        obj.setAttribute('class', "flex flex-row justify-around border-t-2 border-gray-500 p-2")
+        //obj.setAttribute('class', "flex flex-row justify-around border-t-2 border-gray-500 p-2")
         let newIndex = new Date().getTime()
         obj.innerHTML = i.getAttribute("data-form-prepend").replaceAll("FIELDSET_INDEX", newIndex);
         obj.querySelector(".delete-ingredient").addEventListener('click', e=>{
