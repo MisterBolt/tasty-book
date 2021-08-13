@@ -4,7 +4,6 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
 
-
   def index
     @pagy, @recipes = pagy(Recipe.all, items: per_page)
   end
@@ -36,7 +35,7 @@ class RecipesController < ApplicationController
         end
         @ingredients = []
         if recipe_params[:ingredients_recipes_attributes]
-          for i in recipe_params[:ingredients_recipes_attributes].values do
+          recipe_params[:ingredients_recipes_attributes].values.each do |i|
             if i[:_destroy] != 1
               @ingredients.append(i.except(:_destroy))
             end
@@ -57,7 +56,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def update 
+  def update
     respond_to do |format|
       params = recipe_params
       if !params.key?(:category_ids)
@@ -98,7 +97,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [], 
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [],
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 
@@ -108,8 +107,8 @@ class RecipesController < ApplicationController
 
   def set_ingredients
     @ingredients = []
-    for i in IngredientsRecipe.where("recipe_id=#{@recipe.id}") do
-      j = { ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit] }
+    IngredientsRecipe.where("recipe_id=#{@recipe.id}").each do |i|
+      j = {ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit]}
       @ingredients.append(j)
     end
   end

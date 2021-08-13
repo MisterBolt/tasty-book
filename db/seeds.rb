@@ -52,7 +52,7 @@ cook_books = CookBook.all
 
 puts "Adding recipes to cookbooks"
 cook_books.each do |book|
-  rand(5..20).times do
+  rand(1..20).times do
     recipe = recipes.sample
     book.recipes << recipe
   end

@@ -1,28 +1,29 @@
-.w-auto
-  article.p-4.flex.space-x-4.border-solid.border-2.bg-white
-    = image_tag("/images/default_recipe_thumbnail.png", class: "flex-none rounded-lg object-cover bg-gray-100", alt: "", size:"100x100")
-    .flex-1
-      = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all hover:opacity-75"
-      dl.flex.text-sm.font-medium.whitespace-pre
-        dd 
+article.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
+  = image_tag("/images/default_recipe_thumbnail.png", class: "flex-none rounded-lg object-cover bg-gray-100", alt: "", size:"100x100")
+  .flex-1
+    = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all hover:opacity-75"
+    dl.flex.text-sm.font-medium.whitespace-pre
+      dd
         = recipe.categories.map{|c| c.name}.join(", ")
-        |  • 
-        dd = recipe.difficulty
-        |  • 
-        dd = "#{recipe.time_in_minutes_needed} min" 
-
-      dl.flex.text-sm.font-medium.whitespace-pre
-        dd.italic = recipe.user.username
-    .flex.items-start
-      .px-3.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
-        - if recipe.recipe_scores.empty?
-          = render "shared/star", filled: :false
-          dd - 
-        - else
-          = render "shared/star", filled: :full
-          dd #{recipe.average_score}
-      
-      - if user_signed_in?
+      |  • 
+      dd
+        = recipe.difficulty.downcase
+      |  • 
+      dd
+        = "#{recipe.time_in_minutes_needed} #{t("minutes")}"
+    dl.flex.text-sm.font-medium.whitespace-pre
+      dd.italic
+        = link_to recipe.user.username, user_path(recipe.user), class: "hover:opacity-75"
+  .flex.items-start
+    .px-3.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
+      - if recipe.recipe_scores.empty?
+        = render "shared/star", filled: false
+        dd - 
+      - else
+        = render "shared/star", filled: :full
+        dd #{recipe.average_score}
+    
+    - if user_signed_in?
         - id = "modal_add_recipe#{recipe.id}"
 
         input.drop-btn-hidden type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
@@ -34,7 +35,7 @@
           .drop-menu tabindex="-1"
             button.drop-item type="button" onclick="toggleDisplay('#{id}')" tabindex="-1"
               = t("cook_book_recipes.create.action")
-            - if current_user.admin? || recipe.user == current_user
-              = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-              = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-        = render "shared/modal", id: id, body: "recipes/form_cook_books", form_data: { model: recipe }
+            py-1
+              - if current_user.admin? || recipe.user == current_user
+                = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"

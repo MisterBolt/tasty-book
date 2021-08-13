@@ -3,10 +3,14 @@
 class CookBooksController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :set_visibilities, only: [:index]
+  before_action :set_cook_book, only: [:show]
 
   def index
     @cook_book = CookBook.new
-    @cook_books = CookBook.where(favourite: false, visibility: :public)
+    @pagy, @cook_books = pagy(CookBook.where(favourite: false, visibility: :public), items: per_page)
+  end
+
+  def show
   end
 
   def create
@@ -26,6 +30,10 @@ class CookBooksController < ApplicationController
 
   def set_visibilities
     @visibilities = CookBook.visibilities.map { |key, value| [t("cook_books.visibilities.#{key}"), key] }
+  end
+
+  def set_cook_book
+    @cook_book = CookBook.find(params[:id])
   end
 
   def cook_book_params
