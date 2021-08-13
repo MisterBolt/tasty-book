@@ -1,5 +1,5 @@
 .flex.flex-grow.w-full
-    .w-full.max-w-xs.m-auto.content-center
+    .w-full.m-auto.content-center
         = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
             .mb-4
                 = f.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
@@ -19,7 +19,7 @@
             .mb-4.border-t-2.pt-3.border-gray-500
                 ul id="ingredients"
             .mb-4.border-2.p-4.border-gray-500
-                p.text-lg.text-gray-700.font-bold Add ingredient:
+                p.text-lg.text-gray-700.font-bold Ingredients:
                 = f.fields_for :ingredients_recipes do |fields|
                     = render "ingredient_fields", f: fields
                 = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
