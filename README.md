@@ -37,6 +37,12 @@ yarn install
 ```sh
 rails db:setup
 ```
+4. Add required environments in `app/.env`
+```sh
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+```
 
 <!-- DEVELOPMENT -->
 ## Development
@@ -45,7 +51,7 @@ List of usefull commands
 ```sh
 rails s
 ```
-2. Manually run standard
+2. Manually run standardrb
 ```sh
 bundle exec standardrb
 ```
@@ -57,6 +63,12 @@ rails db:migrate
 ```sh
 rails db:seed
 rails db:seed:replant
+```
+5. Catch mails in browser with MailCatcher
+```sh
+gem install mailcatcher
+rbenv rehash
+mailcatcher `(to run MailCatcher server)`
 ```
 
 <!-- TEST -->
