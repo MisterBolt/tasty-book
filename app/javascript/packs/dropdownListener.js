@@ -6,3 +6,8 @@ document.onclick = (e) => {
   let dropdownInput = document.querySelector('input[name="dropdown"]:checked');
   if(dropdownInput) dropdownInput.checked = false;
 }
+
+uncheckDropdown = ((id) => {
+  let dropdownRecipe = document.getElementById(id);
+  dropdownRecipe.checked = !dropdownRecipe.checked;
+})

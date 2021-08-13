@@ -42,16 +42,15 @@
 }
 
 .checkbox-list{
-  @apply px-5 py-1 overflow-auto sm:px-6;
+  @apply px-5 py-3 space-y-2 overflow-auto sm:px-6;
   max-height: 300px;
 }
 
 .input-checkbox{
-  @apply border-b-2 border-gray-200 px-1;
-  &:last-child{ @apply border-none }
+  @apply border-2 border-gray-200 p-3 rounded-lg shadow-md;
   &:hover{ @apply bg-gray-100 opacity-80 }
   input{ @apply pointer-events-none opacity-0 absolute }
-  label{ @apply flex py-1 }
+  label{ @apply flex }
   .label-text{ @apply cursor-pointer flex-grow flex items-center justify-center }
   .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 }
   svg{ @apply opacity-0 }

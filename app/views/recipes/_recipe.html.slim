@@ -26,7 +26,7 @@
         input.drop-btn-hidden type="radio" name="dropdown" id="dropdown_recipe#{recipe.id}"
         .dropdown
           .mx-2
-            button type="button" onclick="document.getElementById('dropdown_recipe#{recipe.id}').checked = !document.getElementById('dropdown_recipe#{recipe.id}').checked"
+            button type="button" onclick="uncheckDropdown('dropdown_recipe#{recipe.id}')"
               .drop-btn
                 = render "shared/dots_vertical"
           .drop-menu tabindex="-1"
