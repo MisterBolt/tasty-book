@@ -17,3 +17,9 @@ def fill_in_and_sign_up(username, email, password, password_conf)
 
   click_button I18n.t("buttons.sign_up")
 end
+
+def fill_in_and_resend_confirmation(email)
+  within("#new_user") { fill_in "Email", with: email }
+
+  click_button I18n.t("devise.confirmations.resend_confirmation")
+end

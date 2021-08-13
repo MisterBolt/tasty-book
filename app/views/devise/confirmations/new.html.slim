@@ -8,6 +8,6 @@
           class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
           placeholder: "Email"
       .flex.items-center.justify-between
-        = f.submit t("devise.confirmations.resend_confirmation"), class: "btn-primary"
+        = f.submit t("devise.confirmations.resend_confirmation"), class: "btn-primary", id: "resend_confirmation"
       = render "devise/shared/links"
     = render "devise/shared/all_rights"

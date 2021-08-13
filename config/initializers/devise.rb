@@ -49,7 +49,7 @@ Devise.setup do |config|
 
   config.case_insensitive_keys = [:email]
 
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = ["*/*", :html, :turbo_stream]
 
   config.strip_whitespace_keys = [:email]
 
