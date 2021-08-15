@@ -6,6 +6,40 @@ RSpec.describe CookBooksController, type: :controller do
   end
   let(:user) { create(:user) }
 
+  describe "GET #index" do
+    def get_index_action(page: 1, per_page: 12)
+      get :index, params: {page: page, per_page: per_page}
+    end
+    let(:cook_books) { assigns(:cook_books) }
+    let(:pagy) { assigns(:pagy) }
+    before { create_list(:cook_book, 13, visibility: "public", favourite: false) }
+
+    context "when page = 1, per_page = 12 and cook_books.size = 13" do
+      before { get_index_action(page: 1, per_page: 12) }
+
+      it { expect(response.status).to eq(200) }
+      it { expect(cook_books.size).to eq(12) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(2) }
+      it { expect(pagy.count).to eq(13) }
+      it { expect(pagy.from).to eq(1) }
+      it { expect(pagy.to).to eq(12) }
+      it { expect(pagy.next).to eq(2) }
+      it { expect(pagy.prev).to eq(nil) }
+    end
+
+    context "when page = 1, per_page = 15 and cook_books.size = 13" do
+      before { get_index_action(page: 1, per_page: 15) }
+
+      it { expect(cook_books.size).to eq(13) }
+      it { expect(pagy.pages).to eq(1) }
+      it { expect(pagy.from).to eq(1) }
+      it { expect(pagy.to).to eq(13) }
+      it { expect(pagy.prev).to eq(nil) }
+      it { expect(pagy.next).to eq(nil) }
+    end
+  end
+
   describe "POST #create" do
     context "when user isn't signed in" do
       it { expect(-> { post_create_action }).not_to change { CookBook.count } }

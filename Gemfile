@@ -44,6 +44,7 @@ group :development, :test do
   gem "shoulda-matchers", "~> 5.0"
   gem "rails-controller-testing", "~> 1.0", ">= 1.0.5"
   gem "capybara"
+  gem "rspec-html-matchers"
   gem "show_me_the_cookies"
   gem "dotenv-rails"
   gem "selenium-webdriver", "~> 3.142"
