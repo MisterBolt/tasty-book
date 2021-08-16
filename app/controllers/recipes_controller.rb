@@ -3,9 +3,13 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
+  before_action :validate_sort_params!, only: [:index]
 
   def index
-    @pagy, @recipes = pagy(Recipe.all, items: per_page)
+    @sort_order = sort_order
+    @sort_kind = sort_kind
+    recipes = Recipe.sort_by_kind_and_order(@sort_kind, @sort_order)
+    @pagy, @recipes = pagy(recipes, items: per_page)
   end
 
   def show
@@ -111,5 +115,10 @@ class RecipesController < ApplicationController
       j = {ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit]}
       @ingredients.append(j)
     end
+  
+  def validate_sort_params!
+    validator = RecipesSortParamsValidator.new(params)
+    return if validator.valid?
+    redirect_to recipes_path
   end
 end

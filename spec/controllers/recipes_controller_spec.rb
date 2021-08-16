@@ -4,15 +4,15 @@ RSpec.describe RecipesController, type: :controller do
   let(:user) { create(:user) }
 
   describe "GET #index" do
-    def get_index_action(page: 1, per_page: 10)
-      get :index, params: {page: page, per_page: per_page}
+    def get_index_action(page: 1, items: 10)
+      get :index, params: {page: page, items: items}
     end
     let(:recipes) { assigns(:recipes) }
     let(:pagy) { assigns(:pagy) }
     before { create_list(:recipe, 12) }
 
-    context "when page = 1, per_page = 10 and recipes.length = 12" do
-      before { get_index_action(page: 1, per_page: 10) }
+    context "when page = 1, items = 10 and recipes.length = 12" do
+      before { get_index_action(page: 1, items: 10) }
 
       it { expect(response.status).to eq(200) }
       it { expect(recipes.length).to eq(10) }
@@ -25,8 +25,8 @@ RSpec.describe RecipesController, type: :controller do
       it { expect(pagy.prev).to eq(nil) }
     end
 
-    context "when page = 1, per_page = 15 and recipes.length = 12" do
-      before { get_index_action(page: 1, per_page: 15) }
+    context "when page = 1, items = 15 and recipes.length = 12" do
+      before { get_index_action(page: 1, items: 15) }
 
       it { expect(recipes.length).to eq(12) }
       it { expect(pagy.pages).to eq(1) }
@@ -36,8 +36,8 @@ RSpec.describe RecipesController, type: :controller do
       it { expect(pagy.next).to eq(nil) }
     end
 
-    context "when page = 2, per_page = 5 and recipes.length = 12" do
-      before { get_index_action(page: 2, per_page: 5) }
+    context "when page = 2, items = 5 and recipes.length = 12" do
+      before { get_index_action(page: 2, items: 5) }
 
       it { expect(recipes.length).to eq(5) }
       it { expect(pagy.page).to eq(2) }

@@ -35,6 +35,26 @@ class Recipe < ApplicationRecord
 
   has_and_belongs_to_many :categories
 
+  scope :sort_by_default, ->(sort_kind, sort_order) do
+    order("#{sort_kind} #{sort_order}")
+  end
+
+  scope :sort_by_score, ->(sort_order) do
+    joins(:recipe_scores)
+      .select("recipes.*, avg(recipe_scores.score)")
+      .group("recipes.id")
+      .order("avg(recipe_scores.score) #{sort_order}")
+  end
+
+  scope :sort_by_kind_and_order, ->(sort_kind, sort_order) do
+    case sort_kind
+    when "title", "difficulty", "time_in_minutes_needed"
+      sort_by_default(sort_kind, sort_order)
+    when "score"
+      sort_by_score(sort_order)
+    end
+  end
+
   def cook_books_update(cook_book_ids_raw, user)
     cook_book_id_strings = cook_book_ids_raw.filter { |cook_book_id| cook_book_id != "" }
     cook_book_ids = cook_book_id_strings.map { |cook_book_id| cook_book_id.to_i }
