@@ -14,14 +14,20 @@
                 = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
             / .mb-4 
-            /     = f.label :category, class: "block text-gray-700 text-sm font-bold mb-2"
-            /     = f.select :category, Category.all.collect {|p| [ p.name, p.id ] }, { :prompt => "Please select"}, { :multiple => true, :size => 5 }
+            /     = f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
+            /     = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
+            .mb-4.
+                p class="block text-gray-700 text-sm font-bold mb-2" Categories:
+                .flex.flex-row.justify-start
+                    - Category.all.each do |cat|
+                        .p-3
+                            = check_box_tag "recipe[categories][]", cat.id
+                            = label_tag :category_id, cat.name
+            
             .mb-4.border-t-2.pt-3.border-gray-500
                 ul id="ingredients"
             .mb-4.border-2.p-4.border-gray-500
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
-                = f.fields_for :ingredients_recipes do |fields|
-                    = render "ingredient_fields", f: fields
                 = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
             = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
 

@@ -23,18 +23,15 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(recipe_params.except(:categories))
     @recipe.user = current_user
 
-    respond_to do |format|
-      # if @ingredients.length == 0
-      #   flash.now[:error] = t('.not_enough_ingredients')
-        # format.html { render :new, status: :unprocessable_entity }
-      # byebug
-      if @recipe.save
-        # Add ingredients
-        # add_ingredients_to_recipe(format)
+    for category in recipe_params['categories'] do
+      @recipe.categories << Category.find(category)
+    end
 
+    respond_to do |format|
+      if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
         @recipe.errors.full_messages.each do |e|
@@ -80,12 +77,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    # recipe_params_all = params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :ingredients, :ingredients_recipe)
-    # @ingredients = JSON.parse(recipe_params_all[:ingredients])
-    # recipe_params_all.delete(:ingredients)
-    # return recipe_params_all
-
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, 
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, categories: [], 
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 
