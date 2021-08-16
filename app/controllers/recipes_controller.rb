@@ -25,9 +25,11 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params.except(:categories))
     @recipe.user = current_user
-
-    for category in recipe_params['categories'] do
-      @recipe.categories << Category.find(category)
+    
+    if recipe_params.has_key?(:categories)
+      for category in recipe_params['categories'] do
+        @recipe.categories << Category.find(category)
+      end
     end
 
     respond_to do |format|

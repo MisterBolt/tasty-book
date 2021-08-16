@@ -1,0 +1,34 @@
+.flex.flex-grow.w-full
+    .w-4/5.m-auto.content-center
+        = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
+            .mb-4
+                = f.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4
+                = f.label :preparation_description, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.text_area :preparation_description, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4
+                = f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            .mb-4
+                = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
+            / .mb-4 
+            /     = f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
+            /     = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
+            .mb-4.
+                p class="block text-gray-700 text-sm font-bold mb-2" Categories:
+                .flex.flex-row.justify-start
+                    - Category.all.each do |cat|
+                        .p-3
+                            = check_box_tag "recipe[categories][]", cat.id
+                            = label_tag :category_id, cat.name
+            
+            .mb-4.border-t-2.pt-3.border-gray-500
+                ul id="ingredients"
+            .mb-4.border-2.p-4.border-gray-500
+                p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
+                = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
+            = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
+
+= javascript_pack_tag "add_ingredient"
