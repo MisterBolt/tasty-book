@@ -4,6 +4,26 @@ RSpec.describe "log in process", type: :feature do
   let!(:user) { create(:user) }
   before { visit user_session_path }
 
+  context "when trigger log in button from landing page" do
+    before { fill_in_and_log_in(user.email, user.password) }
+
+    it "redirects me to recipes path" do
+      expect(page).to have_current_path(recipes_path)
+    end
+  end
+
+  context "when trigger log in button from other page" do
+    before do
+      visit cook_books_path
+      visit user_session_path
+      fill_in_and_log_in(user.email, user.password)
+    end
+
+    it "redirects me back to this page" do
+      expect(page).to have_current_path(cook_books_path)
+    end
+  end
+
   context "when enter correct email and password with checked \"Remember me\" box" do
     before { fill_in_and_log_in(user.email, user.password, true) }
 
@@ -25,6 +45,7 @@ RSpec.describe "log in process", type: :feature do
 
     it "signs me in" do
       expect(page).to have_content(I18n.t("devise.sessions.signed_in"))
+      expect(page).to have_css("#flash-success")
     end
 
     it "does not remember me after browser restart" do
