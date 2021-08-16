@@ -4,13 +4,15 @@
     .flex-1
       = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all hover:opacity-75"
       dl.flex.text-sm.font-medium.whitespace-pre
-        dd |category|
+        dd 
+        = recipe.categories.map{|c| c.name}.join(", ")
         |  • 
-        dd |difficulty|
+        dd = recipe.difficulty
         |  • 
-        dd |time to prepare|
+        dd = recipe.time_in_minutes_needed
+        | m
       dl.flex.text-sm.font-medium.whitespace-pre
-        dd.italic |username|
+        dd.italic = recipe.user.username
     .flex.items-start
       .px-3.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
         - if recipe.recipe_scores.empty?

@@ -24,7 +24,8 @@ RSpec.describe "recipes/index", type: :view do
 
   context "with 1 recipe as guest" do
     before do
-      @recipes = create_list(:recipe, 1, title: "Food")
+      @categories = create_list(:category, 1, name: "achievement")
+      @recipes = create_list(:recipe, 1, title: "Food", difficulty: "EASY", time_in_minutes_needed: 15, categories: @categories)
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       assign(:recipes, @recipes)
       assign(:pagy, @pagy)
@@ -34,6 +35,9 @@ RSpec.describe "recipes/index", type: :view do
     it "displays the recipe" do
       expect(rendered).to match /article/
       expect(rendered).to match /Food/
+      expect(rendered).to match /EASY/
+      expect(rendered).to have_content("15m")
+      expect(rendered).to have_content("achievement")
     end
 
     it "doesn't display the dropdown menu" do
