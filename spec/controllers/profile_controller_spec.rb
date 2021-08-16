@@ -20,15 +20,15 @@ RSpec.describe ProfileController, type: :controller do
       end
       let(:statistics) { assigns(:statistics) }
 
-      it { expect(statistics[:followers]).to eq(0) }
-      it { expect(statistics[:following]).to eq(0) }
-      it { expect(statistics[:user_comments]).to eq(0) }
-      it { expect(statistics[:comments_for_user]).to eq(0) }
-      it { expect(statistics[:user_recipes_in_cook_books]).to eq(0) }
-      it { expect(statistics[:recipes]).to eq(0) }
-      it { expect(statistics[:recipe_drafts]).to eq(0) }
-      it { expect(statistics[:recipes_average_score]).to eq(0) }
-      it { expect(statistics[:cook_books]).to eq(1) }
+      it { expect(statistics.followers).to eq(0) }
+      it { expect(statistics.following).to eq(0) }
+      it { expect(statistics.user_comments).to eq(0) }
+      it { expect(statistics.comments_for_user).to eq(0) }
+      it { expect(statistics.user_recipes_in_cook_books).to eq(0) }
+      it { expect(statistics.recipes).to eq(0) }
+      it { expect(statistics.recipe_drafts).to eq(0) }
+      it { expect(statistics.recipes_average_score).to eq(0) }
+      it { expect(statistics.cook_books).to eq(1) }
     end
 
     context "when user increases his statistics" do
@@ -48,14 +48,14 @@ RSpec.describe ProfileController, type: :controller do
       end
       let(:statistics) { assigns(:statistics) }
 
-      it { expect(statistics[:followers]).to eq(3) }
-      it { expect(statistics[:following]).to eq(1) }
-      it { expect(statistics[:user_comments]).to eq(1) }
-      it { expect(statistics[:comments_for_user]).to eq(1) }
-      it { expect(statistics[:user_recipes_in_cook_books]).to eq(1) }
-      it { expect(statistics[:recipes]).to eq(2) }
-      it { expect(statistics[:recipes_average_score]).to eq(3) }
-      it { expect(statistics[:cook_books]).to eq(2) }
+      it { expect(statistics.followers).to eq(3) }
+      it { expect(statistics.following).to eq(1) }
+      it { expect(statistics.user_comments).to eq(1) }
+      it { expect(statistics.comments_for_user).to eq(1) }
+      it { expect(statistics.user_recipes_in_cook_books).to eq(1) }
+      it { expect(statistics.recipes).to eq(2) }
+      it { expect(statistics.recipes_average_score).to eq(3) }
+      it { expect(statistics.cook_books).to eq(2) }
       # TODO: recipes_draft test
     end
   end
