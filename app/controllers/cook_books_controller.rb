@@ -7,7 +7,11 @@ class CookBooksController < ApplicationController
 
   def index
     @cook_book = CookBook.new
-    @pagy, @cook_books = pagy(CookBook.where(favourite: false, visibility: :public), items: per_page)
+    @cook_books = CookBook.visible_publicly
+    if user_signed_in?
+      @cook_books = @cook_books.or(CookBook.followers(current_user.followings, current_user.id))
+    end
+    @pagy, @cook_books = pagy(@cook_books, items: per_page)
   end
 
   def show

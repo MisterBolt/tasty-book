@@ -12,10 +12,12 @@ RSpec.describe CookBooksController, type: :controller do
     end
     let(:cook_books) { assigns(:cook_books) }
     let(:pagy) { assigns(:pagy) }
-    before { create_list(:cook_book, 13, visibility: "public", favourite: false) }
 
     context "when page = 1, per_page = 12 and cook_books.size = 13" do
-      before { get_index_action(page: 1, per_page: 12) }
+      before do
+        create_list(:cook_book, 13, visibility: "public", favourite: false)
+        get_index_action(page: 1, per_page: 12)
+      end
 
       it { expect(response.status).to eq(200) }
       it { expect(cook_books.size).to eq(12) }
@@ -29,7 +31,10 @@ RSpec.describe CookBooksController, type: :controller do
     end
 
     context "when page = 1, per_page = 15 and cook_books.size = 13" do
-      before { get_index_action(page: 1, per_page: 15) }
+      before do
+        create_list(:cook_book, 13, visibility: "public", favourite: false)
+        get_index_action(page: 1, per_page: 15)
+      end
 
       it { expect(cook_books.size).to eq(13) }
       it { expect(pagy.pages).to eq(1) }
@@ -37,6 +42,25 @@ RSpec.describe CookBooksController, type: :controller do
       it { expect(pagy.to).to eq(13) }
       it { expect(pagy.prev).to eq(nil) }
       it { expect(pagy.next).to eq(nil) }
+    end
+
+    context "when cook_books have different visibilities" do
+      before do
+        sign_in user
+        other_user = create(:user)
+        create(:follow, follower_id: user.id, followed_user_id: other_user.id)
+        create(:cook_book, visibility: "public", favourite: false)
+        create(:cook_book, visibility: "private", favourite: false)
+        create(:cook_book, visibility: "private", favourite: false, user: other_user)
+        create(:cook_book, visibility: "followers", favourite: false)
+        create(:cook_book, visibility: "followers", favourite: false, user: user)
+        create(:cook_book, visibility: "followers", favourite: false, user: other_user)
+        get_index_action(page: 1, per_page: 15)
+      end
+
+      it { expect(cook_books.pluck(:visibility)).not_to include("private") }
+      it { expect(cook_books.pluck(:visibility)).to include("public", "followers") }
+      it { expect(cook_books.count).to eq(3) }
     end
   end
 

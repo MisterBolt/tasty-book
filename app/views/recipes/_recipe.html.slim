@@ -15,12 +15,12 @@ article.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
       dd.italic
         = link_to recipe.user.username, user_path(recipe.user), class: "hover:opacity-75"
   .flex.items-start
-    .px-3.py-1.rounded-full.bg-blue-50.border-2.border-blue-100.flex.items-center.space-x-3
+    .px-3.py-1.rounded-full.bg-mustard-50.border-2.border-mustard-100.flex.items-center.space-x-3
       - if recipe.recipe_scores.empty?
-        = render "shared/star", filled: false
+        = render "shared/star", filled: false, size: 23
         dd - 
       - else
-        = render "shared/star", filled: :full
+        = render "shared/star", filled: :full, size: 23
         dd #{recipe.average_score}
     
     - if user_signed_in?
