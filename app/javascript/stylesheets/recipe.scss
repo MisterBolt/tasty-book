@@ -1,0 +1,4 @@
+.selected {
+  @apply bg-mustard text-gray-900 font-bold;
+  &:hover { @apply bg-mustard }
+}

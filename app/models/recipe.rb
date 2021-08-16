@@ -6,7 +6,10 @@ class Recipe < ApplicationRecord
   validates :time_in_minutes_needed, presence: true
   validates :difficulty, presence: true
   validates :categories, presence: true
+  validates :layout, presence: true
+  
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
+  enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
 
   belongs_to :user
 

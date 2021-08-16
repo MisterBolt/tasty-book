@@ -1,0 +1,27 @@
+.col-start-3.col-span-13.h-92v.flex.flex-row
+  .w-1/2.flex.flex-col
+    = render 'header'
+    .rounded-md.overflow-hidden.shadow-lg
+      .aspect-w-4.aspect-h-5
+        = image_tag("/images/pexels-daria-shevtsova-704569 3.jpg", class: "object-cover")  
+    .h-8v
+  .w-1/2.flex.flex-col.items-center
+    .min-h-10v.flex.flex-col.justify-center
+      ul#recipe-nav.flex.flex-row.items-center.text-mustard.font-bold.text-2xl.rounded-md
+        li#ingredients-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-l-md.selected 
+          = t("recipes.show.ingredients")
+        li#method-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700
+          = t("recipes.show.method")
+        li#comments-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md
+          = t("recipes.show.comments")
+    #recipe-field.w-full.h-full.border-r-2.border-mustard
+      #ingredients-content
+        .m-16
+          = render @ingredients_recipe, position: :center
+      #method-content.hidden
+        .text-center 
+          = render 'description'
+      #comments-content.hidden.h-74v.overflow-y-scroll.scrollbar-hide
+        = render 'comments/comments'
+    .min-h-8v.w-full
+= javascript_pack_tag 'recipe_layout'

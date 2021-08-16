@@ -1,14 +1,13 @@
-.mt-5
-  p
-    em
-      strong
-        | Commenter:  
-      - if comment.user.present?
-         = comment.user.username
-      - else 
-        | Guest
-  p
-    em
-      strong
-        | Comment:   
+.flex.flex-row.items-center.my-8
+  =  image_tag("/images/cook.png", class: "rounded-full h-14 mr-4 shadow-md")
+  .flex.flex-col
+    .flex.flex-row.items-center
+      .mr-4
+        - if comment.user.present?
+          = comment.user.username
+        - else 
+          = t("comments.show.guest")
+      .text-gray-400.text-sm 
+        | #{ time_ago_in_words(comment.created_at) } ago
+    .text-xl
       = comment.body

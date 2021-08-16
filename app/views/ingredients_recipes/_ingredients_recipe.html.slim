@@ -1,0 +1,5 @@
+.pb-2.flex.flex-row.items-center *{class: "justify-#{position}"}
+  .font-semibold.text-xl.mr-2
+    = ingredients_recipe.ingredient.name
+  .font-normal.text-xl
+    | #{ingredients_recipe.quantity} #{unit_short(ingredients_recipe.unit)}

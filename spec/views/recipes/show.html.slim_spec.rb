@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "recipes/show", type: :view do
   let!(:user1) { create(:user) }
-  let!(:recipe) { create(:recipe, user: user1) }
+  let!(:recipe) { create(:recipe, layout: 2, user: user1) }
   let!(:comment) { create(:comment, user: user1, recipe: recipe) }
 
   context "when site is used by the user" do
@@ -45,7 +45,7 @@ RSpec.describe "recipes/show", type: :view do
       login_as(user1)
       visit recipe_path(recipe)
       fill_in "comment[body]", with: "Test content"
-      find("input[name='commit']").click
+      click_on t("comments.form.add")
       expect(page).to have_content("Test content")
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe "recipes/show", type: :view do
       fill_in "comment[body]", with: "Test content"
       find("input[name='commit']").click
       expect(page).to have_content("Test content")
-      expect(page).to have_content("Guest")
+      expect(page).to have_content(t("comments.show.guest"))
     end
   end
 end
