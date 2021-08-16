@@ -23,14 +23,8 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params.except(:categories))
+    @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-    
-    if recipe_params.has_key?(:categories)
-      for category in recipe_params['categories'] do
-        @recipe.categories << Category.find(category)
-      end
-    end
 
     respond_to do |format|
       if @recipe.save
@@ -79,7 +73,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, categories: [], 
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, category_ids: [], 
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 

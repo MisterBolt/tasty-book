@@ -21,7 +21,7 @@
                 .flex.flex-row.justify-start
                     - Category.all.each do |cat|
                         .p-3
-                            = check_box_tag "recipe[categories][]", cat.id
+                            = check_box_tag "recipe[category_ids][]", cat.id
                             = label_tag :category_id, cat.name
             
             .mb-4.border-t-2.pt-3.border-gray-500
