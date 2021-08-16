@@ -5,7 +5,7 @@ class Recipe < ApplicationRecord
   validates :preparation_description, presence: true
   validates :time_in_minutes_needed, presence: true
   validates :difficulty, presence: true
-  validates :categories, presence: true
+  validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
   
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
