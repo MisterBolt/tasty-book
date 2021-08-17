@@ -33,7 +33,6 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-    byebug
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }

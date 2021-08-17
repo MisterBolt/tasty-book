@@ -2,8 +2,7 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
     i.addEventListener("click", e=>{
         e.preventDefault()
         let obj = document.createElement('fieldset')
-        let newIndex = new Date().getTime()
-        obj.innerHTML = i.getAttribute("data-form-prepend").replaceAll("FIELDSET_INDEX", newIndex);
+        obj.innerHTML = i.getAttribute("data-form-prepend").replaceAll("FIELDSET_INDEX", Math.floor(100000 + Math.random() * 900000));
         obj.querySelector(".delete-ingredient").addEventListener('click', e=>{
             e.preventDefault()
             e.target.parentNode.style.display = 'none';
@@ -24,8 +23,7 @@ document.querySelectorAll("fieldset[data_form]").forEach(i => {
     i.removeAttribute("data_ingredient")
     i.removeAttribute("data_quantity")
 
-    let newIndex = new Date().getTime()
-    i.innerHTML = data.replaceAll("FIELDSET_INDEX", newIndex);
+    i.innerHTML = data.replaceAll("FIELDSET_INDEX", Math.floor(100000 + Math.random() * 900000));
     i.querySelector("input[list]").value = ingredient;
     i.querySelector("input[step]").value = quantity;
     i.querySelector("select").selectedIndex = unit;
