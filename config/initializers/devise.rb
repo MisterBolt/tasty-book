@@ -43,13 +43,13 @@ Devise.setup do |config|
     manager.failure_app = TurboFailureApp
   end
 
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "no-reply@tasty-book.com"
 
   require "devise/orm/active_record"
 
   config.case_insensitive_keys = [:email]
 
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  config.navigational_formats = ["*/*", :html, :turbo_stream]
 
   config.strip_whitespace_keys = [:email]
 
