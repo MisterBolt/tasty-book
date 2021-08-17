@@ -4,7 +4,7 @@ RSpec.describe "log in process", type: :feature do
   let!(:user) { create(:user) }
   before { visit user_session_path }
 
-  context "when trigger log in button from landing page" do
+  context "when logging in from landing page" do
     before { fill_in_and_log_in(user.email, user.password) }
 
     it "redirects me to recipes path" do
@@ -12,7 +12,7 @@ RSpec.describe "log in process", type: :feature do
     end
   end
 
-  context "when trigger log in button from other page" do
+  context "when logging in from other page" do
     before do
       visit cook_books_path
       visit user_session_path

@@ -11,11 +11,11 @@ module RecipeScoreHelper
 
   def average_stars_count(recipe, filling)
     avg_score = average_recipe_score(recipe)
-    if filling == :full 
+    if filling == :full
       avg_score.floor
     elsif filling == :percent
       (avg_score % 1) == 0 ? 0 : 1
-    else 
+    else
       (avg_score % 1) == 0 ? 5 - avg_score.floor : 4 - avg_score.floor
     end
   end
@@ -23,10 +23,10 @@ module RecipeScoreHelper
   def user_stars_count(recipe, filling)
     user_score = user_recipe_score(current_user, recipe)
     if filling == :full
-      return 0 if !user_score
+      return 0 unless user_score
       user_score
     else
-      return 5 if !user_score
+      return 5 unless user_score
       5 - user_score
     end
   end

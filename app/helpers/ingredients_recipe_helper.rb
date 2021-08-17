@@ -9,6 +9,6 @@ module IngredientsRecipeHelper
       :tsp
     when "piece"
       :pcs
-    end  
+    end
   end
 end
