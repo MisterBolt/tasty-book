@@ -12,3 +12,16 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
         i.parentNode.insertBefore(obj, i);
     })
 })
+
+document.querySelectorAll("fieldset[data_form]").forEach(i => {
+    let data = i.getAttribute("data_form");
+    let unit = i.getAttribute('data_unit');
+    let quantity = i.getAttribute("data_quantity");
+    let ingredient = i.getAttribute("data_ingredient");
+
+    let newIndex = new Date().getTime()
+    i.innerHTML = data.replaceAll("FIELDSET_INDEX", newIndex);
+    i.querySelector("input[list]").value = ingredient;
+    i.querySelector("input[step]").value = quantity;
+    i.querySelector("select").selectedIndex = unit;
+});

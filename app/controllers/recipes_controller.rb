@@ -33,6 +33,10 @@ class RecipesController < ApplicationController
         @recipe.errors.full_messages.each do |e|
           flash.now[:error] = e
         end
+        @ingredients = []
+        for i in recipe_params[:ingredients_recipes_attributes].values do
+          @ingredients.append(i.except(:_destroy))
+        end
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -73,7 +77,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, category_ids: [], 
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [], 
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 

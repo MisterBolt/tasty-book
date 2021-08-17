@@ -13,22 +13,23 @@
             .mb-4
                 = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-            / .mb-4 
-            /     = f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
-            /     = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
+            .mb-4 
+                = f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
+                = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
             .mb-4.
                 p class="block text-gray-700 text-sm font-bold mb-2" Categories:
                 .flex.flex-row.justify-start
+                    - categories = @recipe.categories.map { |cat| cat.id }
                     - Category.all.each do |cat|
                         .p-3
-                            = check_box_tag "recipe[category_ids][]", cat.id
+                            = check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id)
                             = label_tag :category_id, cat.name
-            
-            .mb-4.border-t-2.pt-3.border-gray-500
-                ul id="ingredients"
             .mb-4.border-2.p-4.border-gray-500
+                - html_options = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
-                = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
+                - for link in @ingredients do 
+                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link[:ingredient_name], data_quantity: link[:quantity], data_unit: link[:unit]
+                = link_to t("buttons.add_ingredient"), "#", html_options
             = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
 
 = javascript_pack_tag "add_ingredient"
