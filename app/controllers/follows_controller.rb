@@ -5,7 +5,7 @@ class FollowsController < ApplicationController
     @user = User.find(params[:followed_user_id])
     @follow = current_user.follow(@user)
     flash[:notice] = t(".notice")
-    @follow.send_notification_email
+    @follow.send_notification_email if @user != current_user
     redirect_back fallback_location: @user
   end
 
