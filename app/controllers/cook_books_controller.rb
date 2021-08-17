@@ -7,10 +7,7 @@ class CookBooksController < ApplicationController
 
   def index
     @cook_book = CookBook.new
-    @cook_books = CookBook.visible_publicly
-    if user_signed_in?
-      @cook_books = @cook_books.or(CookBook.followers(current_user.followings, current_user.id))
-    end
+    @cook_books = policy_scope(CookBook)
     @pagy, @cook_books = pagy(@cook_books, items: per_page)
   end
 

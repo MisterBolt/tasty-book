@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   include Pagy::Backend
   DEFAULT_PER_PAGE = 12
   before_action :store_user_location!, if: :storable_location?

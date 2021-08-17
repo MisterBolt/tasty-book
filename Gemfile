@@ -35,6 +35,7 @@ gem "cloudinary"
 gem "gon", "~> 6.4"
 gem "active_model_serializers", "~> 0.10.12"
 gem "hotwire-rails", "~> 0.1.3"
+gem "pundit"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
