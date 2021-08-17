@@ -33,7 +33,7 @@ end
 
 def add_ingredient_to_recipe(ingredient, quantity, unit)
   find(:css, "#add_ingredient").click
-  #find(:css, "input[list='ingredients_dropdown']").set(ingredient)
+  find(:css, "input[list]").set(ingredient)
   fill_in "Quantity", with: quantity
   select unit, from: "Unit"
   click_button I18n.t("buttons.add_ingredient")

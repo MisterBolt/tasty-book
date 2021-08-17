@@ -41,9 +41,11 @@ class RecipesController < ApplicationController
           flash.now[:error] = e
         end
         @ingredients = []
-        for i in recipe_params[:ingredients_recipes_attributes].values do
-          if i[:_destroy] != 1
-            @ingredients.append(i.except(:_destroy))
+        if recipe_params[:ingredients_recipes_attributes]
+          for i in recipe_params[:ingredients_recipes_attributes].values do
+            if i[:_destroy] != 1
+              @ingredients.append(i.except(:_destroy))
+            end
           end
         end
         format.html { render :new, status: :unprocessable_entity }
