@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   resources :recipe_scores, only: :create
   resources :follows, only: [:create, :destroy]
 
-  namespace "api" do
-    resources :recipes, only: [:show]
+  namespace :api do
+    namespace :v1 do
+      resources :recipes, only: [:show]
+    end
   end
 end
