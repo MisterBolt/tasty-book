@@ -31,7 +31,7 @@
 
 .btn-nav{
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
-  &:hover{ color: #C89C4C }
+  &:hover{ @apply text-mustard }
 }
 
 .input-text{ @include input-base }
@@ -47,12 +47,12 @@
 }
 
 .input-checkbox{
-  @apply border-2 border-gray-200 p-3 rounded-lg shadow-md;
+  @apply border-2 border-gray-200 rounded-lg shadow-md;
   &:hover{ @apply bg-gray-100 opacity-80 }
   input{ @apply pointer-events-none opacity-0 absolute }
-  label{ @apply flex }
-  .label-text{ @apply cursor-pointer flex-grow flex items-center justify-center }
-  .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 }
+  label{ @apply flex cursor-pointer }
+  .label-text{ @apply flex-grow flex items-center justify-center m-3 mr-0 }
+  .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 m-3 ml-0 }
   svg{ @apply opacity-0 }
   
   input:checked +label{
