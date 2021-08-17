@@ -53,6 +53,7 @@ RSpec.describe "recipes/create", type: :view do
     end
   end
 
+<<<<<<< HEAD
   context "with valid data" do
     it "saves recipe", js: true do
       fill_in_recipe_data("Soup", "test", "20")
@@ -64,6 +65,31 @@ RSpec.describe "recipes/create", type: :view do
         sleep(1)
       }.to change { Recipe.count }.by(1)
       expect(page).to have_content("Soup")
+=======
+    context "with no categories" do
+        it "displays error" do
+            fill_in_recipe_data("Soup", "test", "20")
+            5.times do
+                ingredient = create(:ingredient)
+                add_ingredient_to_recipe(ingredient.name, "4", "ml")
+            end
+        end
+    end
+
+    context "with valid data" do
+        it "saves recipe" do
+            fill_in_recipe_data("Soup", "test", "20")
+            5.times do
+                ingredient = create(:ingredient)
+                add_ingredient_to_recipe(ingredient.name, "4", "ml")
+            end
+            c = create(:category)
+            find(:css, "input[value='#{c.id}']").set(true)
+            expect {
+                click_button I18n.t("buttons.create_new_recipe")
+            }.to change(Recipe, :count).by(1)
+        end
+>>>>>>> 3d74e44... Added autocomplete after refreshing
     end
   end
 end

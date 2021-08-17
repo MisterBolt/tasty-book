@@ -8,9 +8,14 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
+<<<<<<< HEAD
     "autoprefixer": "^10.3.0",
     "postcss": "^8.3.5",
     "stimulus": "^2.0.0",
+=======
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.3.6",
+>>>>>>> 3d74e44... Added autocomplete after refreshing
     "tailwind-scrollbar-hide": "^1.0.3",
     "tailwindcss": "^2.2.7",
     "webpack": "^4.46.0",
