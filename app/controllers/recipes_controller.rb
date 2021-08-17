@@ -117,7 +117,8 @@ class RecipesController < ApplicationController
     end
   
   def validate_sort_params!
-    validator = RecipesSortParamsValidator.new(params)
+    sort_params = params.permit(:page, :items, :kind, :order)
+    validator = RecipesSortParamsValidator.new(sort_params)
     return if validator.valid?
     redirect_to recipes_path
   end

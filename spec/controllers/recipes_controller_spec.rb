@@ -4,8 +4,8 @@ RSpec.describe RecipesController, type: :controller do
   let(:user) { create(:user) }
 
   describe "GET #index" do
-    def get_index_action(page: 1, items: 10)
-      get :index, params: {page: page, items: items}
+    def get_index_action(page: 1, items: 10, kind: "title", order: "ASC")
+      get :index, params: {page: page, items: items, kind: kind, order: order}
     end
     let(:recipes) { assigns(:recipes) }
     let(:pagy) { assigns(:pagy) }
@@ -44,6 +44,53 @@ RSpec.describe RecipesController, type: :controller do
       it { expect(pagy.pages).to eq(3) }
       it { expect(pagy.next).to eq(3) }
       it { expect(pagy.prev).to eq(1) }
+    end
+
+    context "when kind: title, order: ASC" do
+      before { get_index_action }
+      subject { recipes.order("title ASC") }
+
+      it { expect(recipes).to eq(subject) }
+    end
+
+    context "when kind: title, order: DESC" do
+      before { get_index_action(order: "DESC") }
+      subject { recipes.order("title DESC") }
+
+      it { expect(recipes).to eq(subject) }
+    end
+
+    context "when kind: difficulty, order: DESC" do
+      before { get_index_action(kind: "difficulty", order: "DESC") }
+      subject { recipes.order("difficulty DESC") }
+
+      it { expect(recipes).to eq(subject) }
+    end
+
+    context "when kind: time_in_minutes_needed, order: DESC" do
+      before { get_index_action(kind: "time_in_minutes_needed", order: "DESC") }
+      subject { recipes.order("time_in_minutes_needed DESC") }
+
+      it { expect(recipes).to eq(subject) }
+    end
+
+    context "when kind: score, order: ASC" do
+      before do
+        recipes.each do |recipe|
+          3.times do
+            create(:recipe_score, recipe: recipe)
+          end
+        end
+        get_index_action(kind: "score", order: "ASC")
+      end
+      subject do
+        recipes.joins(:recipe_scores)
+          .select("recipes.*, avg(recipe_scores.score)")
+          .group("recipes.id")
+          .order("avg(recipe_scores.score) ASC")
+      end
+
+      it { expect(recipes).to eq(subject) }
     end
   end
 

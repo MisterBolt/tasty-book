@@ -2,14 +2,14 @@ module RecipeHelper
   def recipes_sort_options
     {
       kind: {
-        "By title": "title",
-        "By score": "score",
-        "By time": "time_in_minutes_needed",
-        "By difficulty": "difficulty"
+        "#{t("sort.by_title")}": "title",
+        "#{t("sort.by_score")}": "score",
+        "#{t("sort.by_time")}": "time_in_minutes_needed",
+        "#{t("sort.by_difficulty")}": "difficulty"
       },
       order: {
-        Ascending: "ASC",
-        Descending: "DESC"
+        "#{t("sort.ascending")}": "ASC",
+        "#{t("sort.descending")}": "DESC"
       }
     }
   end
