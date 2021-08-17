@@ -35,7 +35,9 @@ class RecipesController < ApplicationController
         end
         @ingredients = []
         for i in recipe_params[:ingredients_recipes_attributes].values do
-          @ingredients.append(i.except(:_destroy))
+          if i[:_destroy] != 1
+            @ingredients.append(i.except(:_destroy))
+          end
         end
         format.html { render :new, status: :unprocessable_entity }
       end

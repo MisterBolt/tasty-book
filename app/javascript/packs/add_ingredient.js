@@ -24,4 +24,10 @@ document.querySelectorAll("fieldset[data_form]").forEach(i => {
     i.querySelector("input[list]").value = ingredient;
     i.querySelector("input[step]").value = quantity;
     i.querySelector("select").selectedIndex = unit;
+
+    i.querySelector(".delete-ingredient").addEventListener('click', e=>{
+        e.preventDefault()
+        e.target.parentNode.style.display = 'none';
+        e.target.parentNode.querySelector(".destroy_flag").value = '1';
+    })
 });
