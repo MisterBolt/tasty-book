@@ -1,0 +1,10 @@
+p
+  | Hello 
+  = @user.username
+  | !
+p 
+  | Your #{@comment.recipe.title} recipe has been commented by 
+  = @comment.user.nil? ? t("comments.show.guest").downcase : @comment.user.username
+  | :
+p 
+  | "#{@comment.body}"

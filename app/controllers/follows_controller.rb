@@ -3,8 +3,9 @@ class FollowsController < ApplicationController
 
   def create
     @user = User.find(params[:followed_user_id])
-    current_user.follow(@user)
+    @follow = current_user.follow(@user)
     flash[:notice] = t(".notice")
+    @follow.send_notification_email
     redirect_back fallback_location: @user
   end
 

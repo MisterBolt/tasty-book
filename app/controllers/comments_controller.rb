@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        @comment.send_notification_email
         format.turbo_stream {
           render turbo_stream: turbo_stream.replace("comment_form",
             partial: "comments/form", locals: {comment: Comment.new})
