@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   DEFAULT_PER_PAGE = 10
+  before_action :store_user_location!, if: :storable_location?
   before_action :configure_user_params, only: [:create, :update], if: :devise_controller?
 
   def require_admin
@@ -19,5 +20,13 @@ class ApplicationController < ActionController::Base
 
   def per_page
     params[:per_page].presence || DEFAULT_PER_PAGE
+  end
+
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
   end
 end

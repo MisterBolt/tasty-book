@@ -2,7 +2,7 @@
 
 class RecipesController < ApplicationController
   include RecipeScoreHelper
-  
+
   before_action :set_recipe, only: [:show, :edit, :destroy]
   before_action :authenticate_user!, only: [:create, :destroy]
 
