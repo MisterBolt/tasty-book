@@ -32,6 +32,12 @@ RSpec.describe FollowsController, type: :controller do
         expect(flash[:notice]).to eq(I18n.t("follows.create.notice"))
       end
 
+      it "sends follow notification email" do
+        expect do
+          post :create, params: {followed_user_id: other_user.id}
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
       it "redirects to followed user page" do
         post :create, params: {followed_user_id: other_user.id}
         expect(response).to redirect_to(user_path(other_user))
