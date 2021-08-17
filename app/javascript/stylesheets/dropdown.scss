@@ -1,10 +1,27 @@
-.drop-menu{
-    display: none;
+@import "~tailwindcss/base";
+
+.dropdown{
+  @apply relative inline-block text-left;
+
+  .drop-btn{
+    @apply inline-flex justify-center w-auto rounded-2xl border border-gray-100 shadow-sm py-1 bg-white text-sm font-medium;
+    &:hover{ @apply bg-gray-50 }
+    &:focus{ @apply outline-none ring-2 ring-offset-2 ring-offset-gray-100 ring-indigo-500 }
+  }
+
+  .drop-item{
+    @apply text-gray-700 w-full block px-4 py-2 text-sm text-left;
+    &:hover{ @apply bg-gray-50 opacity-80 }
+    &:focus{ @apply outline-none }
+  }
+
+  .drop-menu{
+    @apply hidden origin-top-right absolute z-10 mt-2 py-2 right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5;
+    &:focus{ @apply outline-none }
+  }
 }
 
-input[type='radio'].drop-item{
-    display: none;
-    &:checked +.dropdown>.drop-menu{
-        display: block;
-    }
+input[type='radio'].drop-btn-hidden{
+  @apply hidden;
+  &:checked +.dropdown>.drop-menu{ @apply block }
 }

@@ -18,7 +18,6 @@ class User < ApplicationRecord
     dependent: :destroy
 
   has_many :comments
-  has_many :recipes
 
   # returns an array of follows a user gave to someone else
   has_many :given_follows,

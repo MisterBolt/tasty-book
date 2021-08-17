@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   resources :recipes do
     resources :comments
+    patch :update_cook_books, on: :member
   end
   resources :cook_books
   resources :recipe_scores, only: :create
