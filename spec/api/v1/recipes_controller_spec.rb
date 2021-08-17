@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe RecipesController, type: :request do
-  describe "requests" do
+  describe "api/v1/recipes:id" do
     context "with valid params" do
       let(:user) { create(:user) }
       let(:ingredient) { create(:ingredient) }
@@ -9,7 +9,7 @@ RSpec.describe RecipesController, type: :request do
       let!(:ingredients_recipe) { create(:ingredients_recipe, recipe: recipe, ingredient: ingredient) }
 
       it "should return json containing recipe ingredients data with status:'SUCCESS'" do
-        get "/api/recipes/#{recipe.id}"
+        get "/api/v1/recipes/#{recipe.id}"
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:ok)
         expect(json["status"]).to eq("SUCCESS")
@@ -22,9 +22,9 @@ RSpec.describe RecipesController, type: :request do
       end
     end
 
-    context "with invalid params" do
+    context "with unknown recipe's id" do
       it "should return json with status:'NOT_FOUND'" do
-        get "/api/recipes/0"
+        get "/api/v1/recipes/0"
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:not_found)
         expect(json["status"]).to eq("NOT_FOUND")
