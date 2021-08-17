@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
+  include RecipeScoreHelper
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
+
 
   def index
     @pagy, @recipes = pagy(Recipe.all, items: per_page)
@@ -20,12 +23,17 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    @ingredients = []
+    for i in IngredientsRecipe.where("recipe_id=#{@recipe.id}") do
+      j = { ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit] }
+      @ingredients.append(j)
+    end
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-
+    byebug
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
@@ -55,10 +63,17 @@ class RecipesController < ApplicationController
   end
 
   def update
-    if @recipe.update(recipe_params)
-      flash[:notice] = t(".notice")
-    else
-      flash[:alert] = t(".alert")
+    IngredientsRecipe.where("recipe_id=#{@recipe.id}").destroy_all
+    @ingredients = []
+    respond_to do |format|
+      if @recipe.update(recipe_params)
+        format.html { redirect_to @recipe, notice: t(".notice") }
+      else
+        @recipe.errors.full_messages.each do |e|
+          flash.now[:error] = e
+        end
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
     redirect_to(@recipe)
   end

@@ -19,6 +19,11 @@ document.querySelectorAll("fieldset[data_form]").forEach(i => {
     let quantity = i.getAttribute("data_quantity");
     let ingredient = i.getAttribute("data_ingredient");
 
+    i.removeAttribute("data_form")
+    i.removeAttribute("data_unit")
+    i.removeAttribute("data_ingredient")
+    i.removeAttribute("data_quantity")
+
     let newIndex = new Date().getTime()
     i.innerHTML = data.replaceAll("FIELDSET_INDEX", newIndex);
     i.querySelector("input[list]").value = ingredient;
