@@ -2,9 +2,9 @@ class CookBookPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user
-        scope.visible_publicly.or(scope.followers(user.followings, user.id))
+        scope.for_public.or(scope.for_specific_followers(user.followings.ids)).or(user.cook_books)
       else
-        scope.visible_publicly
+        scope.for_public
       end
     end
   end

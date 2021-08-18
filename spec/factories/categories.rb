@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { Faker::Verb.unique.base }
+    sequence(:name) { |n| "Dinner##{n}" }
   end
 end

@@ -59,7 +59,7 @@ RSpec.describe CookBooksController, type: :controller do
       end
 
       it { expect(cook_books.pluck(:visibility)).not_to include("private") }
-      it { expect(cook_books.pluck(:visibility)).to include("public", "followers") }
+      it { expect(cook_books.pluck(:visibility).uniq).to contain_exactly("public", "followers") }
       it { expect(cook_books.count).to eq(3) }
     end
   end

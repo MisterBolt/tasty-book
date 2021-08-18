@@ -7,7 +7,7 @@ class CookBooksController < ApplicationController
 
   def index
     @cook_book = CookBook.new
-    @cook_books = policy_scope(CookBook)
+    @cook_books = policy_scope(CookBook).for_public_and_followers
     @pagy, @cook_books = pagy(@cook_books, items: per_page)
   end
 
@@ -34,7 +34,7 @@ class CookBooksController < ApplicationController
   end
 
   def set_cook_book
-    @cook_book = CookBook.find(params[:id])
+    @cook_book = policy_scope(CookBook).find(params[:id])
   end
 
   def cook_book_params

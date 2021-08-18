@@ -35,8 +35,8 @@ RSpec.describe "recipes/index", type: :view do
     it "displays the recipe" do
       expect(rendered).to match /article/
       expect(rendered).to match /Food/
-      expect(rendered).to match /EASY/
-      expect(rendered).to have_content("15m")
+      expect(rendered).to match /easy/
+      expect(rendered).to have_content("15 #{t("minutes")}")
       expect(rendered).to have_content("achievement")
     end
 
