@@ -1,4 +1,4 @@
-module ExceptionHandler
+module Api::Concerns::ErrorSerializer
   extend ActiveSupport::Concern
 
   included do

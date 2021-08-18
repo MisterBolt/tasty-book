@@ -12,13 +12,14 @@ RSpec.describe RecipesController, type: :request do
         get "/api/v1/recipes/#{recipe.id}"
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:ok)
-        expect(json["status"]).to eq("SUCCESS")
-        expect(json["title"]).to eq(recipe.title)
-        expect(json["ingredients"]).to contain_exactly(
-          [ingredient.name,
-            ingredients_recipe.quantity,
-            ingredients_recipe.unit]
+
+        expect(json["data"]).to contain_exactly(
+          ["ingredients",
+            [{"name" => ingredient.name, "quantity" => ingredients_recipe.quantity, "unit" => ingredients_recipe.unit}]],
+          ["title", recipe.title.to_s]
         )
+        expect(json["status"]).to eq(200)
+        expect(json["type"]).to eq("Success")
       end
     end
 
