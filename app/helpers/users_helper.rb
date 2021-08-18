@@ -1,6 +1,13 @@
 module UsersHelper
   def user_avatar_for(user, size: nil)
-    # TODO select correct foto for user
-    image_tag("/images/blank-profile-picture.png", class: "flex-none rounded-lg object-cover bg-gray-100", id: "user-image", size: size)
+    image_tag(check_avatar(user), class: "flex-none rounded-lg object-cover bg-gray-100", id: "user-image", size: size)
+  end
+
+  def check_avatar(user)
+    if user.avatar.attached?
+      user.avatar
+    else
+      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629268606/sample/blank-profile-picture.png"
+    end
   end
 end
