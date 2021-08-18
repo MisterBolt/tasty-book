@@ -113,6 +113,7 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(cook_book_ids: [])
   end
 
+<<<<<<< HEAD
   def set_ingredients
     @ingredients = []
     IngredientsRecipe.where("recipe_id=#{@recipe.id}").each do |i|
@@ -130,5 +131,10 @@ class RecipesController < ApplicationController
 
   def sort_kind
     params[:kind].presence || DEFAULT_SORT_KIND
+=======
+  def query_params
+    query_params = params[:query]
+    query_params ? query_params.permit(:text) : {}
+>>>>>>> 87f6d8f (Add searching)
   end
 end

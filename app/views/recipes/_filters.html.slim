@@ -1,0 +1,12 @@
+.flex.justify-end
+  = form_for :query, url: recipes_path, method: :get do |form|
+    .shadow.flex.mb-3
+      .w-30.rounded.p-2.bg-white
+        = form.text_field :text, placeholder: 'Search...', value: params.dig('query', 'text') 
+      button.bg-white.w-auto.flex.justify-end.items-center.text-blue-500.p-2.hover:text-blue-400
+        i.material-icons.opacity-50.hover:opacity-100
+          | 
+          = image_submit_tag("/images/loupe.png")
+ 
+
+  

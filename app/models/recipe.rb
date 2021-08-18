@@ -90,4 +90,5 @@ class Recipe < ApplicationRecord
     resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(1280, 1920)
     image.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
   end
+  scope :filtered, ->(query_params) { Recipe::Filter.new.filter(self, query_params) }
 end
