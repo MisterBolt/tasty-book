@@ -60,3 +60,30 @@
     svg{ @apply opacity-100 }
   }
 }
+
+.side-menu{
+  @apply flex flex-col;
+  a{
+    @apply opacity-60 inline-flex justify-center items-center text-center font-medium px-8 py-4 bg-white border-b-2 border-gray-200 overflow-hidden mb-1;
+    &:hover{ @apply opacity-100 }
+    &:first-child{ @apply rounded-t-2xl }
+    &:last-child{ @apply rounded-b-2xl }
+  }
+  .current{ @apply opacity-100 shadow-md }
+}
+
+.minimal-menu{
+  @apply flex space-x-4;
+  .menu-item{
+    @apply font-medium text-black opacity-70;
+    .underline{
+      @apply mt-1 w-full border border-mustard rounded-xl opacity-0;
+    }
+    &:hover{ @apply opacity-80 }
+  }
+  .current{
+    @apply opacity-90;
+    .underline{ @apply opacity-100 }
+    &:hover{ @apply opacity-100 }
+  }
+}

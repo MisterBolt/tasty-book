@@ -43,4 +43,14 @@ class Recipe < ApplicationRecord
       false
     end
   end
+
+  def average_score
+    recipe_scores.average(:score).to_f.round(1)
+  end
+
+  def self.average_score
+    joins(:recipe_scores)
+      .pluck("avg(recipe_scores.score)")[0]
+      .to_f.round(1)
+  end
 end

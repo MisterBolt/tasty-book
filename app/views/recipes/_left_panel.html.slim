@@ -7,7 +7,7 @@
         = t("recipe_scores.show.avg_score")
       = render 'recipe_scores/average_star_score'
       #avg-score.text-4xl.font-semibold.mr-2
-        | #{average_recipe_score(@recipe).round(1)} 
+        | #{@recipe.average_score} 
       .text-gray-500.mb-6
         | (#{@recipe.recipe_scores.count} #{t("recipe_scores.show.count_score")})
       .mt-6.mb-3 

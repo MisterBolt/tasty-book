@@ -1,0 +1,13 @@
+.rounded-lg.shadow-lg.bg-white.flex.flex-col.items-center
+  svg viewBox = "0 0 512 512" height = "120" width = "120" fill = "#4D4B48"
+    path d = svg_path
+  .text-gray-500.text-lg.font-bold.mb-1
+    = title
+  .w-10/12.mx-3.border.rounded-xl.border-gray-300
+  .flex.justify-around.w-full.py-8
+    - items.each do |item|
+      .items-center.justify-center.flex.flex-col
+        .text-center.text-lg.font-medium.mb-2
+          = item[:title]
+        .text-5xl.font-black.text-gray-700 id = "dashboard_#{item[:title].parameterize.underscore}"
+          = item[:number]

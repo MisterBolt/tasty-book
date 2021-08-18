@@ -130,3 +130,22 @@ en:
     followers:
       one: "1 Follower"
       other: "%{count} Followers"
+
+  profile:
+    index:
+      social: "Social"
+      followers: "Followers"
+      following: "Following"
+      comments: "Comments"
+      for_you: "For you"
+      from_you: "From you"
+      recognition: "Recognition"
+      your_recipes_in_tasty_books: "Your recipes in tasty books"
+      recipes:
+        one: " recipe"
+        other: " recipes"
+      recipe_drafts:
+        one: " draft"
+        other: " drafts"
+      average_recipes_score": "Average recipes score"
+      cook_books: "Tasty books"

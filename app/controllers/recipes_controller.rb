@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  include RecipeScoreHelper
-
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
 
@@ -13,7 +11,7 @@ class RecipesController < ApplicationController
   def show
     @recipe = Recipe.find_by(id: params[:id])
     @ingredients_recipe = @recipe.ingredients_recipes
-    gon.avgScore = average_recipe_score(@recipe)
+    gon.avgScore = @recipe.average_score
   end
 
   def new
