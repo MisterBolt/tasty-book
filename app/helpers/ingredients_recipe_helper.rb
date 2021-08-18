@@ -1,14 +1,20 @@
 module IngredientsRecipeHelper
-  def unit_short(unit)
-    case unit
+  def unit(name,quantity)
+    case name
     when "gram"
       :g
-    when "mililiter"
+    when "ml"
       :ml
     when "teaspoon"
       :tsp
-    when "piece"
-      :pcs
+    when "tablespoon"
+      :tbsp
+    when "glass"
+      if quantity > 1
+        :glasses
+      else
+        :glass
+      end
     end
   end
 end

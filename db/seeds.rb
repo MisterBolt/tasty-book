@@ -5,7 +5,7 @@ puts "Seeding users"
 users = FactoryBot.create_list(:user, 20)
 
 puts "Seeding ingredients"
-ingredients = FactoryBot.create_list(:ingredient, 10)
+ingredients = FactoryBot.create_list(:ingredient, 30)
 
 puts "Seeding categories"
 categories = FactoryBot.create_list(:category, 10)
