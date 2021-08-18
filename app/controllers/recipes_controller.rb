@@ -114,6 +114,7 @@ class RecipesController < ApplicationController
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   def set_ingredients
     @ingredients = []
     IngredientsRecipe.where("recipe_id=#{@recipe.id}").each do |i|
@@ -136,5 +137,10 @@ class RecipesController < ApplicationController
     query_params = params[:query]
     query_params ? query_params.permit(:text) : {}
 >>>>>>> 87f6d8f (Add searching)
+=======
+  def query_params
+    query_params = params[:query]
+    query_params ? query_params.permit(:text) : {}
+>>>>>>> a46a42f (Add searching)
   end
 end
