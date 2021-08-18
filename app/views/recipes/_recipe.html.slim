@@ -18,7 +18,7 @@
           dd - 
         - else
           = render "shared/star", filled: :full
-          dd #{average_recipe_score(recipe)}
+          dd #{recipe.average_score}
       
       - if user_signed_in?
         - id = "modal_add_recipe#{recipe.id}"

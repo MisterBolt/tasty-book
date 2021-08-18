@@ -1,6 +1,4 @@
-class Dashboard
-  include RecipeScoreHelper
-
+class User::Dashboard
   def initialize(user)
     @user = user
   end
@@ -35,7 +33,7 @@ class Dashboard
   end
 
   def recipes_average_score
-    average_recipes_score(@user.recipes)
+    @user.recipes.average_score
   end
 
   def cook_books

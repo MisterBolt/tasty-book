@@ -4,7 +4,7 @@ class ProfileController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @statistics = Dashboard.new(current_user)
+    @statistics = User::Dashboard.new(current_user)
   end
 
   def recipes

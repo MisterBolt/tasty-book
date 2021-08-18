@@ -5,7 +5,7 @@
     = render "sidebar"
   .px-3.flex-grow.flex.flex-col
     .text-4xl.text-gray-400.font-black.p-2.mb-2 id="dashboard_username"
-      = current_user.username
+      = link_to current_user.username, user_path(current_user), class: "hover:opacity-80"
     .grid.grid-cols-3.gap-6.mb-6
       = render "stats", title: t("profile.index.social"), items: [{title: t("profile.index.followers"), number: @statistics.followers}, {title: t("profile.index.following"), number: @statistics.following}], svg_path: "M256 73.825a182.175 182.175 0 1 0 182.18 182.18A182.177 182.177 0 0 0 256 73.825zm0 71.833a55.05 55.05 0 1 1-55.054 55.046A55.046 55.046 0 0 1 256 145.658zm.52 208.723h-80.852c0-54.255 29.522-73.573 48.885-90.906a65.68 65.68 0 0 0 62.885 0c19.363 17.333 48.885 36.651 48.885 90.906z"
       = render "stats", title: t("profile.index.comments"), items: [{title: t("profile.index.from_you"), number: @statistics.user_comments}, {title: t("profile.index.for_you"), number: @statistics.comments_for_user}], svg_path: "M256 73.825a182.175 182.175 0 0 0-182.172 182.18c0 100.6 81.563 182.17 182.172 182.17s182.17-81.57 182.17-182.17c.001-100.618-81.561-182.18-182.17-182.18zm0 284.546a130.638 130.638 0 0 1-58.992-13.825c-4.65 3.717-25.674 19.15-46.53 11.935a45.77 45.77 0 0 0 14.608-35.56c-16.673-17.666-26.684-40.272-26.684-64.916 0-56.54 52.647-102.375 117.598-102.375s117.606 45.835 117.606 102.375c0 56.531-52.654 102.365-117.606 102.365z"
