@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, presence: true
   validates_with UsernameValidator
+  validates_with ImageValidator
 
   has_one_attached :avatar
 
