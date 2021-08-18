@@ -2,4 +2,4 @@
   .font-semibold.text-xl.mr-2
     = ingredients_recipe.ingredient.name
   .font-normal.text-xl
-    | #{ingredients_recipe.quantity} #{unit_short(ingredients_recipe.unit)}
+    | #{ingredients_recipe.quantity} #{unit(ingredients_recipe.unit, ingredients_recipe.quantity)} 
