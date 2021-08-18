@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
+  include RecipeScoreHelper
+  DEFAULT_SORT_KIND = "title"
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
   before_action :validate_sort_params!, only: [:index]
@@ -121,5 +123,9 @@ class RecipesController < ApplicationController
     validator = RecipesSortParamsValidator.new(sort_params)
     return if validator.valid?
     redirect_to recipes_path
+  end
+
+  def sort_kind
+    params[:kind].presence || DEFAULT_SORT_KIND
   end
 end

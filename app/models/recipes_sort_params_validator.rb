@@ -1,4 +1,4 @@
-class RecipesSortParamsValidator < ActiveModel::Validator
+class RecipesSortParamsValidator
   include ActiveModel::Model
 
   AVAILABLE_KINDS = ["title", "difficulty", "time_in_minutes_needed", "score"]
