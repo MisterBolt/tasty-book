@@ -31,10 +31,21 @@ def fill_in_recipe_data(title, description, time)
   fill_in "Time needed (in minutes)", with: time
 end
 
-def add_ingredient_to_recipe(ingredient, quantity, unit)
+def add_ingredients_to_recipe(how_many)
+  how_many.times do
+    add_ingredient(Ingredient.find(Ingredient.ids.sample).name, rand(1..10), rand(0..3))
+  end
+end
+
+def add_ingredient(name, quantity, unit)
   find(:css, "#add_ingredient").click
-  find(:css, "input[list]").set(ingredient)
-  fill_in "Quantity", with: quantity
-  select unit, from: "Unit"
-  click_button I18n.t("buttons.add_ingredient")
+  all("fieldset input[list='ingredients_dropdown']").last.set(name)
+  all("fieldset input[type='number']").last.set(quantity)
+  all("fieldset select option")[unit].select_option
+end
+
+def add_categories()
+  for c in Category.all do
+    find(:css, "input[value='#{c.id}']").set(true)
+  end
 end
