@@ -15,4 +15,13 @@ RSpec.describe RecipeScore, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:recipe) }
   end
+
+  describe 'class methods' do
+    describe '#send_notification_email' do
+      let(:recipe_score) { FactoryBot.create(:recipe_score) }
+      it 'sends notification email' do
+        expect { recipe_score.send_notification_email }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+    end
+  end
 end
