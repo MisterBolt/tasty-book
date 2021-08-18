@@ -21,7 +21,7 @@ RSpec.describe Recipe, type: :model do
     it { should have_and_belong_to_many(:categories) }
   end
 
-  describe "average_score method" do
+  describe "#average_score" do
     subject { create(:recipe) }
 
     context "when there are no scores" do
@@ -38,7 +38,7 @@ RSpec.describe Recipe, type: :model do
     end
   end
 
-  describe "self.average_score method" do
+  describe ".average_score" do
     let(:user) { create(:user) }
     let(:recipes) { create_list(:recipe, 5, user: user) }
     before { create_list(:recipe_score, 5) }
@@ -49,8 +49,8 @@ RSpec.describe Recipe, type: :model do
 
     context "when all recipes has scores" do
       before do
-        (1..5).each do |i|
-          create(:recipe_score, recipe: recipes[i - 1], score: i)
+        5.times do |i|
+          create(:recipe_score, recipe: recipes[i], score: i+1)
         end
       end
 

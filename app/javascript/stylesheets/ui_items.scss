@@ -77,8 +77,7 @@
   .menu-item{
     @apply font-medium text-black opacity-70;
     .underline{
-      @apply mt-1 w-full border rounded-xl opacity-0;
-      border-color: #C89C4C;
+      @apply mt-1 w-full border border-mustard rounded-xl opacity-0;
     }
     &:hover{ @apply opacity-80 }
   }
