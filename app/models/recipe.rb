@@ -15,11 +15,11 @@ class Recipe < ApplicationRecord
 
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
+  enum status: {'draft': 0, 'published': 1}
 
   has_one_attached :image
 
   belongs_to :user
-  enum status: {'draft': 0, 'published': 1}
 
   has_many :recipe_scores,
     dependent: :destroy
@@ -80,6 +80,7 @@ class Recipe < ApplicationRecord
       .pluck("avg(recipe_scores.score)")[0]
       .to_f.round(1)
   end
+  
   accepts_nested_attributes_for :ingredients_recipes,
     allow_destroy: true,
     reject_if: ->(attributes) { attributes[:ingredient_name].blank? }

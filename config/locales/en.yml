@@ -105,6 +105,10 @@ en:
     my_profile: "My Profile"
     cancel: "Cancel"
     create_new_recipe: "Create new recipe"
+    publish_recipe: "Publish recipe"
+    save_recipe_as_draft: "Save recipe as draft"
+    update_and_publish: "Save changes and publish"
+    update_and_save_as_draft: "Save changes and save as draft"
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
     

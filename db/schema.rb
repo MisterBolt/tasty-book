@@ -131,7 +131,6 @@ ActiveRecord::Schema.define(version: 2021_08_17_144933) do
     t.integer "layout", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
-    t.integer "status"
   end
 
   create_table "users", force: :cascade do |t|
