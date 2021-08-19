@@ -9,11 +9,13 @@ def fill_in_and_log_in(email, password, check_rememeber_me = false)
   click_button I18n.t("buttons.log_in")
 end
 
-def fill_in_and_sign_up(username, email, password, password_conf)
+def fill_in_and_sign_up(username, email, password, password_conf, avatar = "#{Rails.root}/spec/files/avatar.png")
   fill_in "Email", with: email
   fill_in "Username", with: username
   fill_in "Password", with: password
   fill_in "Password confirmation", with: password_conf
+  attach_file "user_avatar", avatar
+
   click_button I18n.t("buttons.sign_up")
 end
 
