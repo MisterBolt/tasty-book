@@ -2,3 +2,13 @@
   .px-3
     = render "sidebar"
   .px-3.flex-grow.flex.flex-col
+    .flex.justify-between.my-2
+      == pagy_nav(@pagy) if @pagy.pages > 1
+      = render "profile/create_cook_book"
+    - if @cook_books.present?
+      = render @cook_books
+    - else 
+      p.text-center.mt-5
+        = t("cook_books.not_found")
+    .flex.justify-end.my-2
+      == pagy_nav(@pagy) if @pagy.pages > 1

@@ -2,3 +2,13 @@
   .px-3
     = render "sidebar"
   .px-3.flex-grow.flex.flex-col
+    .flex.justify-between.my-2
+      == pagy_nav(@pagy) if @pagy.pages > 1
+      = link_to "Create new recipe", new_recipe_path, class: "btn-primary"
+    - if @recipes.present?
+      = render @recipes
+    - else 
+      p.text-center.mt-5
+        = t("recipes.not_found")
+    .flex.my-2
+      == pagy_nav(@pagy) if @pagy.pages > 1

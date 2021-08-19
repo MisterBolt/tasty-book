@@ -8,5 +8,5 @@
   - else 
     p.text-center.mt-4
       = t("recipes.not_found")
-  .pl-2.my-2
+  .flex.my-2
     == pagy_nav(@pagy) if @pagy.pages > 1

@@ -1,7 +1,7 @@
 - current_class = "current"
 .side-menu 
-  = link_to "Dashboard", profile_index_path, class: (current_page?(profile_index_path) ? current_class : "")
-  = link_to "Recipes", recipes_profile_index_path, class: (current_page?(recipes_profile_index_path) ? current_class : "")
-  = link_to "Recipes (draft)", recipe_drafts_profile_index_path, class: (current_page?(recipe_drafts_profile_index_path) ? current_class : "")
-  = link_to "Tasty books", cook_books_profile_index_path, class: (current_page?(cook_books_profile_index_path) ? current_class : "")
-  = link_to "Settings", settings_profile_index_path, class: (current_page?(settings_profile_index_path) ? current_class : "")
+  = link_to t("profile.sidebar.dashboard"), profile_index_path, class: (current_page?(profile_index_path) ? current_class : "")
+  = link_to t("profile.sidebar.recipes"), recipes_profile_index_path, class: (current_page?(recipes_profile_index_path) ? current_class : "")
+  = link_to t("profile.sidebar.recipe_drafts"), recipe_drafts_profile_index_path, class: (current_page?(recipe_drafts_profile_index_path) ? current_class : "")
+  = link_to t("profile.sidebar.cook_books"), cook_books_profile_index_path, class: (current_page?(cook_books_profile_index_path) ? current_class : "")
+  = link_to t("profile.sidebar.settings"), settings_profile_index_path, class: (current_page?(settings_profile_index_path) ? current_class : "")

@@ -9,12 +9,16 @@ class ProfileController < ApplicationController
   end
 
   def recipes
+    @pagy, @recipes = pagy(current_user.recipes, items: per_page)
   end
 
   def recipe_drafts
   end
 
   def cook_books
+    @cook_book = CookBook.new
+    @visibilities = CookBook.visibilities_strings
+    @pagy, @cook_books = pagy(current_user.cook_books, items: per_page)
   end
 
   def settings

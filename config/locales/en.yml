@@ -167,6 +167,12 @@ en:
       other: "%{count} Followers"
 
   profile:
+    sidebar:
+      dashboard: "Dashboard"
+      recipes: "Recipes"
+      recipe_drafts: "Recipes (draft)"
+      cook_books: "Tasty Books"
+      settings: "Settings"
     index:
       social: "Social"
       followers: "Followers"

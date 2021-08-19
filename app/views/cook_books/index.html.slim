@@ -1,15 +1,10 @@
 .px-10.mt-3
-  / TODO: when creating tasty books from approriate places will be possible, delete this button
-  .flex.justify-end
-    = render "create"
-  .flex.justify-center.mt-1.my-4
+  .flex.justify-between.my-2
     == pagy_nav(@pagy) if @pagy.pages > 1
   - if @cook_books.present?
-    .flex.flex-wrap.justify-center.items-stretch
-      = render @cook_books
+    = render @cook_books
   - else 
-    p.text-center
+    p.text-center.mt-5
       = t("cook_books.not_found")
-  .flex.justify-center.my-4
+  .flex.my-2
     == pagy_nav(@pagy) if @pagy.pages > 1
-  
