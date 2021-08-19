@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates_with UsernameValidator
   validates_with ImageValidator
 
+  before_save :resize_avatar
+
   has_one_attached :avatar
 
   has_many :recipe_scores,
@@ -51,5 +53,17 @@ class User < ApplicationRecord
 
   def following?(other_user)
     followings.include?(other_user)
+  end
+
+  private
+
+  def resize_avatar
+    if avatar.attached?
+      path = attachment_changes["avatar"].attachable.tempfile.path
+      v_filename = avatar.filename
+      v_content_type = avatar.content_type
+      resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(150, 150)
+      avatar.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
+    end
   end
 end
