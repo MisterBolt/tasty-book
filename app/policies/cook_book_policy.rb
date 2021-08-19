@@ -8,4 +8,8 @@ class CookBookPolicy < ApplicationPolicy
       end
     end
   end
+
+  def destroy?
+    user && (record.user == user || user.admin?)
+  end
 end

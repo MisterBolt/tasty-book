@@ -18,18 +18,35 @@ RSpec.describe CookBookPolicy, type: :policy do
       create(:cook_book, title: "TitleH", favourite: false, visibility: :private, user: user)
     end
 
-    context "user" do
+    context "with user" do
       subject { Pundit.policy_scope!(user, CookBook).map { |cook_book| cook_book.title } }
       let(:titles) { ["Favourites", "TitleA", "TitleD", "TitleF", "TitleG", "TitleH"] }
 
       it { expect(subject).to match_array(titles) }
     end
 
-    context "guest" do
+    context "with guest" do
       subject { Pundit.policy_scope!(nil, CookBook).map { |cook_book| cook_book.title } }
       let(:titles) { ["TitleA", "TitleF"] }
 
       it { expect(subject).to match_array(titles) }
+    end
+  end
+
+  permissions :destroy? do
+    subject { CookBookPolicy }
+    let(:user) { create(:user) }
+
+    context "with user owning the cook book" do
+      it { expect(subject).to permit(user, create(:cook_book, user: user)) }
+    end
+
+    context "with user not owning the cook book" do
+      it { expect(subject).not_to permit(user, create(:cook_book)) }
+    end
+
+    context "with guest" do
+      it { expect(subject).not_to permit(nil, create(:cook_book)) }
     end
   end
 end

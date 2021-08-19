@@ -114,6 +114,12 @@ en:
       action: "Create new Tasty Book"
       notice: "Tasty Book was successfully created."
       alert: "Error occured, Tasty Book couldn't be created."
+    destroy:
+      action: "Delete Tasty Book"
+      notice: "Tasty Book was successfully deleted."
+      alert: "Tasty Book couldn't be deleted."
+    edit:
+      action: "Edit Tasty Book"
 
   users:
     recipes_count: "Recipes: %{count}"

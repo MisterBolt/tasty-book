@@ -87,7 +87,7 @@ class RecipesController < ApplicationController
     else
       flash[:alert] = t(".alert")
     end
-    redirect_to(recipes_path)
+    redirect_back(fallback_location: recipes_path)
   end
 
   private

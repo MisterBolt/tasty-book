@@ -37,6 +37,6 @@ article.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
               = t("cook_book_recipes.create.action")
             py-1
               - if current_user.admin? || recipe.user == current_user
-                = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
-                = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "text-gray-700 block px-4 py-2 text-sm", tab_index: "-1"
+                = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "drop-item", tab_index: "-1"
+                = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "drop-item", tab_index: "-1"
         = render "shared/modal", id: id, body: "recipes/form_cook_books", form_data: { model: recipe }

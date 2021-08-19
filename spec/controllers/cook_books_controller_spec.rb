@@ -1,9 +1,6 @@
 require "rails_helper"
 
 RSpec.describe CookBooksController, type: :controller do
-  def post_create_action(title: "Title", visibility: :public, favourite: false)
-    post :create, params: {cook_book: {title: title, visibility: visibility, favourite: favourite}}
-  end
   let(:user) { create(:user) }
 
   describe "GET #index" do
@@ -65,6 +62,10 @@ RSpec.describe CookBooksController, type: :controller do
   end
 
   describe "POST #create" do
+    def post_create_action(title: "Title", visibility: :public, favourite: false)
+      post :create, params: {cook_book: {title: title, visibility: visibility, favourite: favourite}}
+    end
+
     context "when user isn't signed in" do
       it { expect(-> { post_create_action }).not_to change { CookBook.count } }
 
@@ -100,6 +101,25 @@ RSpec.describe CookBooksController, type: :controller do
         post_create_action(title: nil)
         should set_flash[:alert]
       end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    def delete_destroy_action(cook_book)
+      delete :destroy, params: {id: cook_book.id}
+    end
+    before { sign_in user }
+
+    context "when user is the owner of the cook book" do
+      let!(:cook_book) { create(:cook_book, user: user) }
+
+      it { expect(-> { delete_destroy_action(cook_book) }).to change { CookBook.count }.by(-1) }
+    end
+
+    context "when user isn't the owner of the cook book" do
+      let!(:cook_book) { create(:cook_book) }
+
+      it { expect(-> { delete_destroy_action(cook_book) }).to raise_error(ActiveRecord::RecordNotFound) }
     end
   end
 end

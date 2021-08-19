@@ -6,7 +6,7 @@ RSpec.describe "cook_books/index", type: :view do
 
   context "with no cook books" do
     before do
-      cook_books = create_list(:cook_book, 0, visibility: "public", favourite: false)
+      cook_books = create_list(:cook_book, 0, visibility: :public, favourite: false)
       pagy, cook_books = pagy_array(cook_books, items: 12)
       assign(:cook_books, cook_books)
       assign(:pagy, pagy)
@@ -69,5 +69,37 @@ RSpec.describe "cook_books/index", type: :view do
         without_tag("span", text: "3")
       end
     end
+  end
+
+  context "when user isn't owner of listed cook_book" do
+    before do
+      sign_in user
+      cook_books = create_list(:cook_book, 1, visibility: :public, favourite: false)
+      pagy, cook_books = pagy_array(cook_books, items: 12)
+      assign(:cook_books, cook_books)
+      assign(:visibilities, CookBook.visibilities_strings)
+      assign(:pagy, pagy)
+      render
+    end
+
+    it { expect(rendered).not_to have_tag("div.drop-menu") }
+    it { expect(rendered).not_to have_text(t("cook_books.edit.action")) }
+    it { expect(rendered).not_to have_text(t("cook_books.destroy.action")) }
+  end
+
+  context "when user is owner of listed cook_book" do
+    before do
+      sign_in user
+      cook_books = create_list(:cook_book, 1, user: user, visibility: :public, favourite: false)
+      pagy, cook_books = pagy_array(cook_books, items: 12)
+      assign(:cook_books, cook_books)
+      assign(:visibilities, CookBook.visibilities_strings)
+      assign(:pagy, pagy)
+      render
+    end
+
+    it { expect(rendered).to have_tag("div.drop-menu") }
+    it { expect(rendered).to have_text(t("cook_books.edit.action")) }
+    it { expect(rendered).to have_text(t("cook_books.destroy.action")) }
   end
 end

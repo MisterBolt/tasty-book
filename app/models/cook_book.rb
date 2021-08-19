@@ -14,4 +14,8 @@ class CookBook < ApplicationRecord
   scope :for_specific_followers, ->(followings_ids) do
     where(visibility: :followers, user_id: followings_ids)
   end
+
+  def self.visibilities_strings
+    CookBook.visibilities.map { |key, value| [I18n.t("cook_books.visibilities.#{key}"), key] }
+  end
 end
