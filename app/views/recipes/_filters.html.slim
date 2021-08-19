@@ -1,12 +1,81 @@
-.flex.justify-end
+.flex.justify-end.relative
+  button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
+    .flex.justify-end
+      .mr-1.ml-2.mt-1
+        = image_tag("/images/filter.png")
+      .mr-2
+        | Filter
+
   = form_for :query, url: recipes_path, method: :get do |form|
-    .shadow.flex.mb-3
+    .shadow.flex.mb-4.mt-1
       .w-30.rounded.p-2.bg-white
         = form.text_field :text, placeholder: 'Search...', value: params.dig('query', 'text') 
       button.bg-white.w-auto.flex.justify-end.items-center.text-blue-500.p-2.hover:text-blue-400
         i.material-icons.opacity-50.hover:opacity-100
           | 
           = image_submit_tag("/images/loupe.png")
+
+#filters.my-3.mx-56.w-30.h-30.bg-white.shadow.rounded.flex.justify-start.relative.hidden
+  .filter-subbox
+      | Difficulty:
+      div
+      input#easy[type="checkbox" name="difficulty" value="easy" checked]
+      label[for="easy"]
+        |  Easy
+      div
+      input#medium[type="checkbox" name="difficulty" value="medium"]
+      label[for="medium"]
+        |  Medium
+      div
+      input#medium[type="checkbox" name="difficulty" value="hard"]
+      label[for="hard"]
+        |  Hard
+
+  .filter-subbox
+    | Time: 
+    div
+      input#all[type="radio" name="time" value="all"   checked]
+      label[for="all"]
+        |  all
+    div
+      input#less_than_15_minutes[type="radio" name="time" value="<15m"]
+      label[for="less_than_15_minutes"]
+        |  <  15m
+    div
+    input#less_than_30_minutes[type="radio" name="time" value="<30m"]
+    label[for="less_than_30_minutes"]
+      |  <  30m
+    div
+    input#less_than_hour[type="radio" name="time" value="<1h"]
+    label[for="less_than_hour"]
+      |  <  1h
+    div
+    input#longer_than_hour[type="radio" name="time" value=">=1h"]
+    label[for="longer_than_hour"]
+      |  >=  1h
+
+  .filter-subbox 
+    | Categories:
+    
+  .filter-subbox
+    | Ingredients:
+
+  .grid-flow-col.grid-cols-2.m-auto
+    .btn-filter-box
+      .m-auto
+        | Apply
+
+    .btn-filter-box
+      .m-auto
+        | Cancel
+  
+      
+= javascript_pack_tag "toggleColor"
+
+
+
+    
+ 
  
 
   

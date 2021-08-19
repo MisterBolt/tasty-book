@@ -17,6 +17,10 @@
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
+#btn_filter{
+  @apply shadow mb-4 mt-1 mr-5 w-20 h-11 border-yellow-400 relative rounded;
+}
+
 .btn-primary{
   @include btn-base;
   @apply text-gray-700 bg-white;
@@ -38,6 +42,11 @@
 .btn-nav-active{
   @apply inline-flex justify-center items-center text-base font-medium text-mustard bg-none;
   &:hover{ @apply opacity-80 }
+}
+
+.btn-filter-box{
+  @include btn-base;
+  @apply text-gray-400 bg-white;
 }
 
 .input-text{ @include input-base }
@@ -133,4 +142,8 @@
     .underline{ @apply opacity-100 }
     &:hover{ @apply opacity-100 }
   }
+}
+
+.filter-subbox {
+  @apply my-5 mx-3 p-6 relative shadow;
 }
