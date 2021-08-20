@@ -22,6 +22,10 @@ RSpec.describe CommentsController, type: :controller do
         subject
         expect(Comment.last.user).to eq(user)
       end
+
+      it "sends new comment notification email" do
+        expect { subject }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
     end
 
     context "with invalid params" do

@@ -12,6 +12,8 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body.flex.flex-col.h-screen.bg-gray-100
     = render "layouts/navbar"
+    - if current_user
+      = render partial: "shared/notification", locals: { user_id: current_user.id }
     .flex-grow.flex.flex-col.mt-8v
       = render "layouts/flash_messages"
       = yield

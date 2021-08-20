@@ -21,6 +21,12 @@ RSpec.describe RecipeScoresController, type: :controller do
         expect(flash[:notice]).to eq(I18n.t(".recipe_scores.create.notice"))
       end
 
+      it "sends new score notification email" do
+        expect do
+          post :create, params: {recipe_score: {recipe_id: other_recipe.id, score: 5}}
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
       it "redirects to recipe page" do
         expect(response).to redirect_to(recipe_path(recipe.id))
       end

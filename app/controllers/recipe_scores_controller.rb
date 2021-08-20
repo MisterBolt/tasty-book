@@ -7,6 +7,7 @@ class RecipeScoresController < ApplicationController
 
     if @recipe_score.save
       flash[:notice] = t(".notice")
+      @recipe_score.send_notification_email
     else
       flash[:warning] = t(".warning")
     end
