@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  include RecipeScoreHelper
   DEFAULT_SORT_KIND = "title"
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
