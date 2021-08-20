@@ -13,6 +13,7 @@ import "stylesheets/application"
 // Custom js files
 import "./toggleDisplay"
 import "./dropdownListener"
+import "./remove"
 
 Rails.start()
 ActiveStorage.start()

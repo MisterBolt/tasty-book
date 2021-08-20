@@ -8,6 +8,8 @@ class RecipeScore < ApplicationRecord
   belongs_to :user
   belongs_to :recipe
 
+  after_create_commit -> { RecipeScoreServices::Broadcaster.new(self).notify_about_new_score }
+
   def send_notification_email
     NotificationMailer.recipe_score_notification(recipe.user, self).deliver_now
   end
