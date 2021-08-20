@@ -23,11 +23,7 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @ingredients = []
-    for i in IngredientsRecipe.where("recipe_id=#{@recipe.id}") do
-      j = { ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit] }
-      @ingredients.append(j)
-    end
+    set_ingredients
   end
 
   def create
@@ -63,20 +59,25 @@ class RecipesController < ApplicationController
     end
   end
 
-  def update
-    IngredientsRecipe.where("recipe_id=#{@recipe.id}").destroy_all
-    @ingredients = []
+  def update 
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      params = recipe_params
+      if !params.key?(:category_ids)
+        params[:category_ids] = []
+      end
+      @recipe.attributes = params
+      if @recipe.valid?
+        IngredientsRecipe.where("recipe_id=#{@recipe.id}").destroy_all
+        @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
+        set_ingredients
         @recipe.errors.full_messages.each do |e|
           flash.now[:error] = e
         end
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
-    redirect_to(@recipe)
   end
 
   def update_cook_books
@@ -101,5 +102,13 @@ class RecipesController < ApplicationController
 
   def cook_books_params
     params.require(:recipe).permit(cook_book_ids: [])
+  end
+
+  def set_ingredients
+    @ingredients = []
+    for i in IngredientsRecipe.where("recipe_id=#{@recipe.id}") do
+      j = { ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit] }
+      @ingredients.append(j)
+    end
   end
 end
