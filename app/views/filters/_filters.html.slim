@@ -1,10 +1,14 @@
 .flex.justify-end.relative
+  button#btn_filter_selector1.bg-white.hover:bg-yellow-100  [onclick="toggleColor('btn_filter_selector1'); toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');"]
+    = t("filters.buttons.my_books")
+  button#btn_filter_selector2.bg-yellow-200  [onclick="toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white'); toggleColor('btn_filter_selector1');"]
+    = t("filters.buttons.all")
   button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
     .flex.justify-end
       .mr-1.ml-2.mt-1
         = image_tag("/images/filter.png")
       .mr-2
-        | Filter
+        = t("filters.buttons.filter")
 
   = render "filters/search_bar"
 
