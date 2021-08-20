@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates_with UsernameValidator
   validates_with ImageValidator
 
-  before_save :resize_avatar
+  before_save :resize_avatar, unless: :persisted?
 
   has_one_attached :avatar
 
