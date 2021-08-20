@@ -58,12 +58,12 @@ class User < ApplicationRecord
   private
 
   def resize_avatar
-    if avatar.attached?
-      path = attachment_changes["avatar"].attachable.tempfile.path
-      v_filename = avatar.filename
-      v_content_type = avatar.content_type
-      resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(150, 150)
-      avatar.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
-    end
+    return unless avatar.attached?
+
+    path = attachment_changes["avatar"].attachable.tempfile.path
+    v_filename = avatar.filename
+    v_content_type = avatar.content_type
+    resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(150, 150)
+    avatar.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
   end
 end

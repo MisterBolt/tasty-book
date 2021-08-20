@@ -1,5 +1,5 @@
 module IngredientsRecipeHelper
-  def unit(name,quantity)
+  def unit(name, quantity)
     case name
     when "gram"
       :g
