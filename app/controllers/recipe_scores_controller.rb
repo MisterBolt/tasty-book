@@ -4,7 +4,6 @@ class RecipeScoresController < ApplicationController
   def create
     @recipe = Recipe.find_by(id: params[:recipe_score][:recipe_id])
     @recipe_score = current_user.recipe_scores.build(recipe_score_params)
-    @author = @recipe.user
 
     if @recipe_score.save
       flash[:notice] = t(".notice")

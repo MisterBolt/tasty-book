@@ -16,10 +16,10 @@ module CommentServices
     end
 
     def notify_about_created_comment
-      @comment.broadcast_append_to :notifications, 
-        target: "#{@comment.recipe.user.id}_toast", 
+      @comment.broadcast_append_to :notifications,
+        target: "#{@comment.recipe.user.id}_toast",
         partial: "shared/toast",
-        locals: {message: "Your #{@comment.recipe.title} recipe has been commented by #{@comment.user.nil? ? t("comments.show.guest").downcase : @comment.user.username }" }
+        locals: {message: "Your #{@comment.recipe.title} recipe has been commented by #{@comment.user.nil? ? t("comments.show.guest").downcase : @comment.user.username}"}
     end
   end
 end
