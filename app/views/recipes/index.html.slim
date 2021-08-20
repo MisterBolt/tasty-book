@@ -4,7 +4,7 @@
       == pagy_nav(@pagy) if @pagy.pages > 1
     = render "sort_form"
   - if @recipes.present?
-    = render "filters"
+    = render "filters/filters"
     = render @recipes
   - else 
     p.text-center.mt-4

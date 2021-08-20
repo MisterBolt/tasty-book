@@ -1,0 +1,21 @@
+.flex.justify-end.relative
+  button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
+    .flex.justify-end
+      .mr-1.ml-2.mt-1
+        = image_tag("/images/filter.png")
+      .mr-2
+        | Filter
+
+  = render "filters/search_bar"
+
+= render "filters/filters_box"
+     
+= javascript_pack_tag "toggleColor"
+
+
+
+    
+ 
+ 
+
+  

@@ -1,81 +1,54 @@
-.flex.justify-end.relative
-  button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
-    .flex.justify-end
-      .mr-1.ml-2.mt-1
-        = image_tag("/images/filter.png")
-      .mr-2
-        | Filter
-
-  = form_for :query, url: recipes_path, method: :get do |form|
-    .shadow.flex.mb-4.mt-1
-      .w-30.rounded.p-2.bg-white
-        = form.text_field :text, placeholder: 'Search...', value: params.dig('query', 'text') 
-      button.bg-white.w-auto.flex.justify-end.items-center.text-blue-500.p-2.hover:text-blue-400
-        i.material-icons.opacity-50.hover:opacity-100
-          | 
-          = image_submit_tag("/images/loupe.png")
-
 #filters.my-3.mx-56.w-30.h-30.bg-white.shadow.rounded.flex.justify-start.relative.hidden
   .filter-subbox
-      | Difficulty:
+      = t("filters.filter_box.difficulty")
       div
       input#easy[type="checkbox" name="difficulty" value="easy" checked]
       label[for="easy"]
-        |  Easy
+         = t("filters.filter_box.difficulty_box.easy")
       div
       input#medium[type="checkbox" name="difficulty" value="medium"]
-      label[for="medium"]
-        |  Medium
+      label[for="medium"] 
+        = t("filters.filter_box.difficulty_box.medium")
       div
       input#medium[type="checkbox" name="difficulty" value="hard"]
       label[for="hard"]
-        |  Hard
+        = t("filters.filter_box.difficulty_box.hard")
 
   .filter-subbox
-    | Time: 
+    = t("filters.time")
     div
       input#all[type="radio" name="time" value="all"   checked]
       label[for="all"]
-        |  all
+        = t("filters.filter_box.time_box.all")
     div
       input#less_than_15_minutes[type="radio" name="time" value="<15m"]
       label[for="less_than_15_minutes"]
-        |  <  15m
+        = t("filters.filter_box.time_box.15m")
     div
     input#less_than_30_minutes[type="radio" name="time" value="<30m"]
     label[for="less_than_30_minutes"]
-      |  <  30m
+      = t("filters.filter_box.time_box.30m")
     div
     input#less_than_hour[type="radio" name="time" value="<1h"]
     label[for="less_than_hour"]
-      |  <  1h
+      = t("filters.filter_box.time_box.1h")
     div
     input#longer_than_hour[type="radio" name="time" value=">=1h"]
     label[for="longer_than_hour"]
-      |  >=  1h
+      = t("filters.filter_box.time_box.more_than_an_hour")
 
   .filter-subbox 
-    | Categories:
+     = t("filters.filter_box.categories")
     
   .filter-subbox
-    | Ingredients:
+    = t("filters.filter_box.ingredients")
 
   .grid-flow-col.grid-cols-2.m-auto
     .btn-filter-box
       .m-auto
-        | Apply
+        = t("buttons.apply")
 
     .btn-filter-box
       .m-auto
-        | Cancel
-  
-      
-= javascript_pack_tag "toggleColor"
-
-
-
-    
- 
- 
-
+        = t("buttons.cancel")
   
