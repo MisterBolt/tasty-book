@@ -50,7 +50,7 @@ RSpec.describe Recipe, type: :model do
     context "when all recipes has scores" do
       before do
         5.times do |i|
-          create(:recipe_score, recipe: recipes[i], score: i+1)
+          create(:recipe_score, recipe: recipes[i], score: i + 1)
         end
       end
 
