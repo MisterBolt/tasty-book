@@ -1,4 +1,4 @@
-#filters.my-3.mx-56.w-30.h-30.bg-white.shadow.rounded.flex.justify-start.relative.hidden
+#filters.w-4/5.m-auto.bg-white.shadow.rounded.flex.justify-start.relative.hidden
   .filter-subbox
       = t("filters.filter_box.difficulty")
       div
@@ -37,11 +37,16 @@
     label[for="longer_than_hour"]
       = t("filters.filter_box.time_box.more_than_an_hour")
 
-  .filter-subbox 
-     = t("filters.filter_box.categories")
-    
-  .filter-subbox
+  .filter-subbox.w-1/4 
+    = t("filters.filter_box.categories")
+    div#categories.pt-2
+    = link_to_add_fields("filters/categories_field", "category")
+
+
+  .filter-subbox.w-1/4
     = t("filters.filter_box.ingredients")
+    div#ingredients.pt-2
+    = link_to_add_fields("filters/ingredient_field", "ingredient")
 
   .grid-flow-col.grid-cols-2.m-auto
     .btn-filter-box
@@ -51,4 +56,5 @@
     .btn-filter-box
       .m-auto
         = t("buttons.cancel")
-  
+
+= javascript_pack_tag('filters')

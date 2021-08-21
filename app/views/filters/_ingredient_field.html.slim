@@ -1,0 +1,5 @@
+.flex.flex-row.w-full.m-1
+    input#ingredient[type='text' list='ingredients_dropdown' name="ingredients[]" class="w-10/12 border-2 border-gray-500 m-1"]
+    datalist id="ingredients_dropdown"
+        = options_for_select(Ingredient.all.map { |ingredient| [ingredient.name, ingredient.name] })
+    button.delete.w-1/6.bg-red-500.hover:bg-red-700.text-white.font-bold.py-1.px-1.border.border-red-700.rounded X

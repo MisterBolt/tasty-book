@@ -112,6 +112,7 @@ en:
     add_ingredient: "Add ingredient"
     
     apply: "Apply"
+    add: "Add"
 
   cook_book_recipes:
     create:
