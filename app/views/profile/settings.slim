@@ -9,9 +9,9 @@
     = form_with(model: @user, url: update_avatar_profile_index_path, local: true) do |f|
       .input-file
         = f.label :avatar
-        = f.file_field :avatar, accept: "image/png,image/jpeg", required: true
+        = f.file_field :avatar, accept: "image/png,image/jpeg", required: true, id: "user-image-file"
       .m-2.flex.flex-col.lg:flex-row
-        = f.submit t(".change_avatar"), class: "btn-secondary"
+        = f.submit t(".change_avatar"), class: "btn-secondary", id: "change-avatar"
 
     .text-2xl.text-gray-500.mt-6.mb-4
       = t(".change_username")
