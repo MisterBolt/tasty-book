@@ -8,13 +8,18 @@
 
 @mixin input-base{
   @apply px-3;
-  label{ @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 }
+  label{ @apply block capitalize tracking-wide text-gray-700 text-xs font-bold mb-2 }
   input, select{
     @apply appearance-none block w-full bg-gray-200 border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
     &:hover{ @apply bg-gray-300 cursor-pointer }
   }
-  input[type=text]:hover{ @apply cursor-text }
+  input[type=text]:hover, input[type=password]:hover{ @apply cursor-text }
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
+}
+
+@mixin input-file-inner-button{
+  @apply text-white text-sm font-normal bg-black opacity-80 border-none p-2.5 mr-2;
+  &:hover{ @apply opacity-75 }
 }
 
 .btn-primary{
@@ -26,9 +31,9 @@
 
 .btn-secondary{
   @include btn-base;
-  @apply text-white bg-blue-600;
-  &:hover{ @apply bg-blue-700 }
-  &:focus{ @apply ring-indigo-500 }
+  @apply text-white bg-black opacity-80;
+  &:hover{ @apply opacity-90 }
+  &:focus{ @apply ring-gray-700 }
 }
 
 .btn-nav{
@@ -46,6 +51,17 @@
   @include input-base;
   select{ @apply pr-6 }
   .selector{ @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 }
+}
+
+.input-file{
+  @include input-base;
+  *{ @apply cursor-pointer }
+  ::-webkit-file-upload-button{ @include input-file-inner-button }
+  ::file-selector-button{ @include input-file-inner-button }
+  input{
+    @apply p-0;
+    &:focus{ @apply bg-gray-100 }
+  }
 }
 
 .checkbox-list{

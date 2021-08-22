@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     get :followings, :followers, on: :member
   end
   resources :profile do
-    collection { get :index, :recipes, :recipe_drafts, :cook_books, :settings }
+    collection do
+      get :index, :recipes, :recipe_drafts, :cook_books, :settings
+      patch :update_password, :update_username, :update_avatar
+    end
   end
   resources :recipes do
     resources :comments

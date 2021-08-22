@@ -175,6 +175,23 @@ en:
         other: " drafts"
       average_recipes_score": "Average recipes score"
       cook_books: "Tasty books"
+    settings:
+      change_avatar: "Change avatar"
+      change_username: "Change username"
+      change_password: "Change password"
+      new_username: "New username"
+      new_password: "New password"
+      confirm_new_password: "Confirm new password"
+      current_password: "Current password"
+    update_password:
+      notice: "Password changed succesfully"
+      alert: "Password couldn't be changed"
+    update_username:
+      notice: "Username changed succesfully"
+      alert: "Username couldn't be changed"
+    update_avatar:
+      notice: "Avatar changed succesfully"
+      alert: "Avatar couldn't be changed"
   
   notifications:
     hello: "Hello %{user}!"
