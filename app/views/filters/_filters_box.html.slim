@@ -1,57 +1,48 @@
-#filters.w-4/5.m-auto.bg-white.shadow.rounded.flex.justify-start.relative.hidden
+= form_for :query, url: filter_recipes_path(format: :turbo_stream), method: :post, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
   .filter-subbox
       = t("filters.filter_box.difficulty")
       div
-      input#easy[type="checkbox" name="difficulty" value="easy" checked]
-      label[for="easy"]
-         = t("filters.filter_box.difficulty_box.easy")
+        = form.check_box :difficulties, {id: "query_easy", multiple: true, include_hidden: false, checked: true}, 0
+        = form.label "easy", t("filters.filter_box.difficulty_box.easy")
       div
-      input#medium[type="checkbox" name="difficulty" value="medium"]
-      label[for="medium"] 
-        = t("filters.filter_box.difficulty_box.medium")
+        = form.check_box :difficulties, {id: "query_medium", include_hidden: false, multiple: true}, 1
+        = form.label "medium", t("filters.filter_box.difficulty_box.medium")
       div
-      input#medium[type="checkbox" name="difficulty" value="hard"]
-      label[for="hard"]
-        = t("filters.filter_box.difficulty_box.hard")
+        = form.check_box :difficulties, {id: "query_hard", include_hidden: false, multiple: true}, 2
+        = form.label "hard", t("filters.filter_box.difficulty_box.hard")
 
   .filter-subbox
     = t("filters.time")
     div
-      input#all[type="radio" name="time" value="all"   checked]
-      label[for="all"]
-        = t("filters.filter_box.time_box.all")
+      = form.radio_button :time, "all", {checked: true}
+      = form.label "time_all", t("filters.filter_box.time_box.all")
     div
-      input#less_than_15_minutes[type="radio" name="time" value="<15m"]
-      label[for="less_than_15_minutes"]
-        = t("filters.filter_box.time_box.15m")
+      = form.radio_button :time, "less_than_15_minutes"
+      = form.label "time_less_then_15_minutes", t("filters.filter_box.time_box.15m")
     div
-    input#less_than_30_minutes[type="radio" name="time" value="<30m"]
-    label[for="less_than_30_minutes"]
-      = t("filters.filter_box.time_box.30m")
+      = form.radio_button :time, "less_than_30_minutes"
+      = form.label "time_less_then_30_minutes", t("filters.filter_box.time_box.30m")
     div
-    input#less_than_hour[type="radio" name="time" value="<1h"]
-    label[for="less_than_hour"]
-      = t("filters.filter_box.time_box.1h")
+    = form.radio_button :time, "less_than_hour"
+    = form.label "time_less_then_hour", t("filters.filter_box.time_box.1h")
     div
-    input#longer_than_hour[type="radio" name="time" value=">=1h"]
-    label[for="longer_than_hour"]
-      = t("filters.filter_box.time_box.more_than_an_hour")
+    = form.radio_button :time, "longer_then_hour"
+    = form.label "time_longer_then_hour", t("filters.filter_box.time_box.more_than_an_hour")
 
   .filter-subbox.w-1/4 
     = t("filters.filter_box.categories")
     div#categories.pt-2
-    = link_to_add_fields("filters/categories_field", "category")
+    = link_to_add_fields("filters/categories_field", "category", form)
 
 
   .filter-subbox.w-1/4
     = t("filters.filter_box.ingredients")
     div#ingredients.pt-2
-    = link_to_add_fields("filters/ingredient_field", "ingredient")
+    = link_to_add_fields("filters/ingredient_field", "ingredient", form)
 
   .grid-flow-col.grid-cols-2.m-auto
-    .btn-filter-box
-      .m-auto
-        = t("buttons.apply")
+    .m-auto
+      = form.submit t("buttons.apply"), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded"
 
     .btn-filter-box
       .m-auto
