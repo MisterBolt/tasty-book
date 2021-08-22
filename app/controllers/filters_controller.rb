@@ -1,6 +1,5 @@
 class FiltersController < ApplicationController
   def index
-    byebug
     respond_to do |format|
       format.turbo_stream {
         @pagy, @recipes = pagy(Recipe.filtered(query_params), items: per_page)

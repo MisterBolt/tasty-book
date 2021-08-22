@@ -1,5 +1,6 @@
 let ingredients_list = document.getElementById("ingredients");
 let categories_list = document.getElementById("categories");
+let closeBtn = document.getElementById("cancel");
 
 document.querySelectorAll("a[data-prepend]").forEach(i=>{
     i.addEventListener("click", e=>{
@@ -13,6 +14,11 @@ document.querySelectorAll("a[data-prepend]").forEach(i=>{
             categories_list.appendChild(fieldset);
         }
     })
+})
+
+closeBtn.addEventListener('click', e => {
+    toggleDisplay('filters','block'); 
+    toggleColor('btn_filter');
 })
 
 function deleteFromList(fieldset, type){
