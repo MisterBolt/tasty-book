@@ -21,12 +21,12 @@
   @apply shadow mb-4 mt-1 mr-5 w-20 h-11 relative rounded;
 }
 
-#btn_filter_selector1{
-  @apply mb-4 mt-1 w-16 rounded-l-lg relative shadow border-r-2 border-black;
+.btn_filter_selector1{
+  @apply mb-4 mt-1 w-20 rounded-l-lg relative shadow border-r-2 border-black;
 }
 
-#btn_filter_selector2{
-  @apply mb-4 mt-1 mr-5 w-16 rounded-r-lg relative shadow;
+.btn_filter_selector2{
+  @apply mb-4 mt-1 mr-5 w-20 rounded-r-lg relative shadow;
 }
 
 .btn-primary{

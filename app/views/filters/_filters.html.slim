@@ -1,6 +1,13 @@
 .flex.justify-end.relatived
-  = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "cursor-pointer bg-white hover:bg-yellow-100", form: "search_title", data: { disable_with: false }
-  = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: "cursor-pointer bg-yellow-200" , form: "search_title", data: { disable_with: false }
+  - if user_signed_in?
+    = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "btn_filter_selector1 cursor-pointer bg-white hover:bg-yellow-100", form: "search_title", data: { disable_with: false }
+    = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: " btn_filter_selector2 cursor-pointer bg-yellow-200" , form: "search_title", data: { disable_with: false }
+  - else 
+    button.btn_filter_selector1.bg-gray.cursor-not-allowed   
+      = t("filters.buttons.my_books")
+    button.btn_filter_selector2.bg-yellow-200.cursor-default
+      = t("filters.buttons.all")
+
   button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
     .flex.justify-end
       .mr-1.ml-2.mt-1
