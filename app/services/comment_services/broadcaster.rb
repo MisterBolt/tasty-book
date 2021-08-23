@@ -19,7 +19,9 @@ module CommentServices
       @comment.broadcast_append_to :notifications,
         target: "#{@comment.recipe.user.id}_toast",
         partial: "shared/toast",
-        locals: {message: "Your #{@comment.recipe.title} recipe has been commented by #{@comment.user.nil? ? "guest" : @comment.user.username}"}
+        locals: {message: @comment.user_id.nil? ?
+                    I18n.t("notifications.guest_comment", title: @comment.recipe.title) :
+                    I18n.t("notifications.comment", title: @comment.recipe.title, user: @comment.user.username)}
     end
   end
 end

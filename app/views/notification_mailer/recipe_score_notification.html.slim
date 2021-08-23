@@ -1,6 +1,4 @@
 p
-  | Hello 
-  = @user.username
-  | !
+  = t("notifications.hello", user: @user.username) 
 p 
-  | Your #{@recipe_score.recipe.title} recipe has been scored #{@recipe_score.score} by #{@recipe_score.user.username}!
+  = t("notifications.recipe_score", title: @recipe_score.recipe.title, score: @recipe_score.score, user: @recipe_score.user.username)

@@ -149,3 +149,10 @@ en:
         other: " drafts"
       average_recipes_score": "Average recipes score"
       cook_books: "Tasty books"
+  
+  notifications:
+    hello: "Hello %{user}!"
+    guest_comment: "Your %{title} recipe has been commented by guest"
+    comment: "Your %{title} recipe has been commented by %{user}"
+    follow: "%{follower} is now following you"
+    recipe_score: "Your %{title} recipe has been scored %{score} by %{user}"
