@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProfileController < ApplicationController
-  before_action :set_user, only: [:update_avatar, :update_password, :update_username, :settings]
+  before_action :set_user, except: %i[index recipes recipe_drafts cook_books]
   before_action :authenticate_user!
 
   def index

@@ -5,7 +5,7 @@
 
     .text-2xl.text-gray-500.mb-4
       = t(".change_avatar")
-    = image_tag(@user.check_avatar, class:"w-36 h-36 object-cover rounded-lg border border-gray-300 mx-2 mb-3 self-center lg:self-start", id:"user_avatar_image")
+    = image_tag(@user.default_or_attached_avatar, class:"w-36 h-36 object-cover rounded-lg border border-gray-300 mx-2 mb-3 self-center lg:self-start", id:"user_avatar_image")
     = form_with(model: @user, url: update_avatar_profile_index_path, local: true) do |f|
       .input-file.w-full.lg:w-72
         = f.label :avatar

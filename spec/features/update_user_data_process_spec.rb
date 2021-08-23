@@ -4,7 +4,7 @@ RSpec.describe "update user data process", type: :feature do
   let(:user) { create(:user, username: "oldUsername", password: "oldPassword") }
 
   context "when user changes avatar" do
-    let!(:old_avatar) { user.check_avatar }
+    let!(:old_avatar) { user.default_or_attached_avatar }
     before do
       visit user_session_path
       fill_in_and_log_in(user.email, user.password)
@@ -14,11 +14,11 @@ RSpec.describe "update user data process", type: :feature do
     end
 
     it { expect(page).to have_css("#flash-success", text: I18n.t("profile.update_avatar.notice")) }
-    it { expect(user.reload.check_avatar).not_to eq(old_avatar) }
+    it { expect(user.reload.default_or_attached_avatar).not_to eq(old_avatar) }
   end
 
   context "when user tries to change avatar with invalid data" do
-    let!(:old_avatar) { user.check_avatar }
+    let!(:old_avatar) { user.default_or_attached_avatar }
     before do
       visit user_session_path
       fill_in_and_log_in(user.email, user.password)
@@ -28,7 +28,7 @@ RSpec.describe "update user data process", type: :feature do
     end
 
     it { expect(page).to have_css("#flash-error") }
-    it { expect(user.reload.check_avatar).to eq(old_avatar) }
+    it { expect(user.reload.default_or_attached_avatar).to eq(old_avatar) }
   end
 
   context "when user changes username" do
