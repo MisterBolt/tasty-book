@@ -5,37 +5,37 @@
 
     .text-2xl.text-gray-500.mb-4
       = t(".change_avatar")
-    = image_tag(@user.check_avatar, class: "mx-2 mb-4 border-2 border-gray-300 rounded-lg object-cover self-center lg:self-start", id: "user-image", size: "160")
+    = image_tag(@user.check_avatar, class:"w-36 h-36 object-cover rounded-lg border border-gray-300 mx-2 mb-3 self-center lg:self-start", id:"user_avatar_image")
     = form_with(model: @user, url: update_avatar_profile_index_path, local: true) do |f|
-      .input-file
+      .input-file.w-full.lg:w-72
         = f.label :avatar
-        = f.file_field :avatar, accept: "image/png,image/jpeg", required: true, id: "user-image-file"
+        = f.file_field :avatar, accept: "image/png,image/jpeg", required: true
       .m-2.flex.flex-col.lg:flex-row
-        = f.submit t(".change_avatar"), class: "btn-secondary", id: "change-avatar"
+        = f.submit t(".change_avatar"), class: "btn-secondary", id: "change_avatar"
 
     .text-2xl.text-gray-500.mt-6.mb-4
       = t(".change_username")
     = form_with(model: @user, url: update_username_profile_index_path, local: true) do |f|
       .flex.flex-col.space-y-2.lg:flex-row.lg:space-y-0.lg:space-x-2
-        .input-text
+        .input-text.w-full.lg:w-72
           = f.label :username
           = f.text_field :username, placeholder: t(".new_username"), required: true
       .m-2.flex.flex-col.lg:flex-row
-        = f.submit t(".change_username"), data: {confirm: t("confirm")}, class: "btn-secondary"
+        = f.submit t(".change_username"), data: {confirm: t("confirm")}, class: "btn-secondary", id: "change_username"
 
     .text-2xl.text-gray-500.mt-6.mb-4
       = t(".change_password")
     = form_with(model: @user, url: update_password_profile_index_path, local: true) do |f|
       .flex.flex-col.space-y-2.lg:flex-row.lg:space-y-0.lg:space-x-2
-        .input-text
+        .input-text.w-full.lg:w-72
           = f.label :password
           = f.password_field :password, placeholder: t(".new_password"), required: true, minLength: @minimum_password_length
-        .input-text
+        .input-text.w-full.lg:w-72
           = f.label :password_confirmation
           = f.password_field :password_confirmation, placeholder: t(".confirm_new_password"), required: true, minLength: @minimum_password_length
-        .input-text
+        .input-text.w-full.lg:w-72
           = f.label :current_password
           = f.password_field :current_password, placeholder: t(".current_password"), required: true, minLength: @minimum_password_length
       .m-2.flex.flex-col.lg:flex-row
-        = f.submit t(".change_password"), data: {confirm: t("confirm")},class: "btn-secondary"
+        = f.submit t(".change_password"), data: {confirm: t("confirm")},class: "btn-secondary", id: "change_password"
         

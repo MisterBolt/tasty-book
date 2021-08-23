@@ -7,6 +7,5 @@ RSpec.describe "devise/confirmations/new", type: :view do
 
   it { expect(page).to have_field("user_email", type: "email") }
   it { expect(page).to have_css("input", id: "resend_confirmation") }
-  it { expect(page).to have_link(I18n.t("devise.passwords.forgot_password"), href: "/users/password/new") }
   it { expect(page).to have_content(I18n.t("all_rights")) }
 end

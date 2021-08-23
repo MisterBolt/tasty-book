@@ -17,11 +17,6 @@
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
-@mixin input-file-inner-button{
-  @apply text-white text-sm font-normal bg-black opacity-80 border-none p-2.5 mr-2;
-  &:hover{ @apply opacity-75 }
-}
-
 .btn-primary{
   @include btn-base;
   @apply text-gray-700 bg-white;
@@ -68,9 +63,15 @@
   }
 }
 
+
+@mixin input-file-inner-button{
+  @apply text-white text-sm font-normal bg-black opacity-80 border-none p-2.5 mr-2;
+  &:hover{ @apply opacity-75 }
+}
 @mixin input-file{
   @include input-base;
   *{ @apply cursor-pointer }
+  label{ @apply cursor-default }
   ::-webkit-file-upload-button{ @include input-file-inner-button }
   ::file-selector-button{ @include input-file-inner-button }
   input{
