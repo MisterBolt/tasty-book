@@ -68,42 +68,42 @@ RSpec.describe RecipesController, type: :controller do
 
     context "when kind: title, order: ASC" do
       before { get_index_action }
-      subject { recipes.map { |recipe| recipe.title } }
+      subject { recipes.map(&:title) }
 
       it { expect(subject).to eq(("A".."J").map { |letter| "Title#{letter}" }) }
     end
 
     context "when kind: title, order: DESC" do
       before { get_index_action(order: "DESC") }
-      subject { recipes.map { |recipe| recipe.title } }
+      subject { recipes.map(&:title) }
 
       it { expect(subject).to eq(("C".."L").to_a.reverse.map { |letter| "Title#{letter}" }) }
     end
 
     context "when kind: difficulty, order: DESC" do
       before { get_index_action(kind: "difficulty", order: "DESC") }
-      subject { recipes.map { |recipe| recipe.difficulty } }
+      subject { recipes.map(&:difficulty) }
 
       it { expect(subject).to eq(["HARD"] * 5 + ["MEDIUM"] * 5) }
     end
 
     context "when kind: time_in_minutes_needed, order: DESC" do
       before { get_index_action(kind: "time_in_minutes_needed", order: "DESC") }
-      subject { recipes.map { |recipe| recipe.time_in_minutes_needed } }
+      subject { recipes.map(&:time_in_minutes_needed) }
 
       it { expect(subject).to eq([29, 29, 29, 19, 19, 19, 12, 11, 10, 10]) }
     end
 
     context "when kind: score, order: DESC" do
       before { get_index_action(kind: "score", order: "DESC") }
-      subject { recipes.map { |recipe| recipe.average_score } }
+      subject { recipes.map(&:average_score) }
 
       it { expect(subject).to eq([5.0, 4.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 0.0, 0.0]) }
     end
 
     context "when kind: score, order: ASC" do
       before { get_index_action(kind: "score", order: "ASC") }
-      subject { recipes.map { |recipe| recipe.average_score } }
+      subject { recipes.map(&:average_score) }
 
       it { expect(subject).to eq([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0]) }
     end
