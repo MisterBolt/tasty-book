@@ -3,7 +3,9 @@ class FiltersController < ApplicationController
     respond_to do |format|
       format.turbo_stream {
         params = query_params
-        params[:current_user] = current_user.id
+        if current_user
+          params[:current_user] = current_user.id
+        end
         @pagy, @recipes = pagy(Recipe.filtered(params), items: per_page)
         render turbo_stream: turbo_stream.replace(
           "recipes_listing",

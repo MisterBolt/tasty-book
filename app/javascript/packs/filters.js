@@ -43,7 +43,6 @@ myBooks.addEventListener("click", e => {
         i.value = 1;
     })
     current_scope = "my_books";
-    console.log("XD")
 })
 
 all.addEventListener("click", e => {
