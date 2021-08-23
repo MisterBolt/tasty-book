@@ -13,7 +13,7 @@
         = form.label "hard", t("filters.filter_box.difficulty_box.hard")
 
   .filter-subbox
-    = t("filters.time")
+    = t("filters.filter_box.time")
     div
       = form.radio_button :time, "all", {checked: true}
       = form.label "time_all", t("filters.filter_box.time_box.all")
@@ -43,9 +43,9 @@
 
   .grid-flow-col.grid-cols-2.m-auto.w-1/6
     .m-auto
-      = form.submit t("buttons.apply"), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded"
+      = form.submit t("buttons.apply"), class: "bg-blue-500 w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded"
 
     .m-auto
-      = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-gray-700 rounded")
+      = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "bg-gray-500 w-24 hover:bg-gray-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-gray-700 rounded")
 
 = javascript_pack_tag('filters')
