@@ -23,10 +23,5 @@ module CommentServices
                     I18n.t("notifications.guest_comment", title: @comment.recipe.title) :
                     I18n.t("notifications.comment", title: @comment.recipe.title, user: @comment.user.username)}
     end
-
-    def locale_to_hash
-      hash = YAML.load_file("config/locales/en.yml")
-      puts hash
-    end
   end
 end
