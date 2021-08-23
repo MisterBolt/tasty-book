@@ -1,6 +1,4 @@
 p
-  | Hello 
-  = @user.username
-  | !
+  = t("notifications.hello", user: @user.username)
 p 
-  | #{@follower.username} is now following you.
+  = t("notifications.follow", follower: @follower.username)

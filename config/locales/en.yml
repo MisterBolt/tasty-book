@@ -151,7 +151,8 @@ en:
       cook_books: "Tasty books"
   
   notifications:
+    hello: "Hello %{user}!"
     guest_comment: "Your %{title} recipe has been commented by guest"
     comment: "Your %{title} recipe has been commented by %{user}"
-    follow: "%{user} is now following you."
-    recipe_score: "Your %{recipe} recipe has been scored %{score} by %{user}"
+    follow: "%{follower} is now following you"
+    recipe_score: "Your %{title} recipe has been scored %{score} by %{user}"
