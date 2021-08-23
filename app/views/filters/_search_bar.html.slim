@@ -1,7 +1,8 @@
-= form_for :query, url: recipes_path, method: :get do |form|
+= form_for :query, url: filter_recipes_path(format: :turbo_stream), method: :post, html: {id: "search_title"}, data: { controller: 'filters', filters_target: "form" } do |form|
     .shadow.flex.mb-4.mt-1
       .w-30.rounded.p-2.bg-white
-        = form.text_field :text, placeholder: true, value: params.dig('query', 'text') 
+        = form.hidden_field :my_books, value: 0
+        = form.text_field :text, placeholder: true, value: params.dig('query', 'text'), data: { action: "input->filters#search" }
       button.bg-white.w-auto.flex.justify-end.items-center.text-blue-500.p-2.hover:text-blue-400
         i.material-icons.opacity-50.hover:opacity-100
           | 

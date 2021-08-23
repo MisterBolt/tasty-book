@@ -1,4 +1,5 @@
 = form_for :query, url: filter_recipes_path(format: :turbo_stream), method: :post, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
+  = form.hidden_field :my_books, value: 0
   .filter-subbox
       = t("filters.filter_box.difficulty")
       div

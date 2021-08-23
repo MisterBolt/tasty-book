@@ -1,6 +1,10 @@
 let ingredients_list = document.getElementById("ingredients");
 let categories_list = document.getElementById("categories");
 let closeBtn = document.getElementById("cancel");
+let myBooks = document.getElementById("btn_filter_selector1");
+let all = document.getElementById("btn_filter_selector2");
+let scopes = document.querySelectorAll("input[name='query[my_books]']");
+let current_scope = 'all';
 
 document.querySelectorAll("a[data-prepend]").forEach(i=>{
     i.addEventListener("click", e=>{
@@ -28,3 +32,28 @@ function deleteFromList(fieldset, type){
         categories_list.removeChild(fieldset);
     }
 }
+
+myBooks.addEventListener("click", e => {
+    if(current_scope == "my_books"){
+        return
+    }
+    toggleColor('btn_filter_selector1'); 
+    toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
+    scopes.forEach(i=>{
+        i.value = 1;
+    })
+    current_scope = "my_books";
+    console.log("XD")
+})
+
+all.addEventListener("click", e => {
+    if(current_scope == "all"){
+        return
+    }
+    toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
+    toggleColor('btn_filter_selector1');
+    scopes.forEach(i=>{
+        i.value = 0;
+    })
+    current_scope = 'all';
+})

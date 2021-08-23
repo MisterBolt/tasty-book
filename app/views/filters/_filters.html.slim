@@ -1,8 +1,6 @@
-.flex.justify-end.relative
-  button#btn_filter_selector1.bg-white.hover:bg-yellow-100  [onclick="toggleColor('btn_filter_selector1'); toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');"]
-    = t("filters.buttons.my_books")
-  button#btn_filter_selector2.bg-yellow-200  [onclick="toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white'); toggleColor('btn_filter_selector1');"]
-    = t("filters.buttons.all")
+.flex.justify-end.relatived
+  = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "cursor-pointer bg-white hover:bg-yellow-100", form: "search_title", data: { disable_with: false }
+  = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: "cursor-pointer bg-yellow-200" , form: "search_title", data: { disable_with: false }
   button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
     .flex.justify-end
       .mr-1.ml-2.mt-1

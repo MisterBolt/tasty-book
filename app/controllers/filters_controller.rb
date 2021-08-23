@@ -2,7 +2,9 @@ class FiltersController < ApplicationController
   def index
     respond_to do |format|
       format.turbo_stream {
-        @pagy, @recipes = pagy(Recipe.filtered(query_params), items: per_page)
+        params = query_params
+        params[:current_user] = current_user.id
+        @pagy, @recipes = pagy(Recipe.filtered(params), items: per_page)
         render turbo_stream: turbo_stream.replace(
           "recipes_listing",
           partial: "recipes/recipes"
@@ -15,6 +17,6 @@ class FiltersController < ApplicationController
 
   def query_params
     query_params = params[:query]
-    query_params ? query_params.permit(:text, :time, categories: [], ingredients: [], difficulties: []) : {}
+    query_params ? query_params.permit(:text, :time, :my_books, categories: [], ingredients: [], difficulties: []) : {}
   end
 end
