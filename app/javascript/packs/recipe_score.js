@@ -29,7 +29,6 @@ starHighlight = () => {
       let modal = document.getElementById('score-modal');
       modal.classList.remove('hidden');
       let starId = starScore.children[i].id;
-      console.log(starId);
       fillScoreForm(starId);
     });
   }
