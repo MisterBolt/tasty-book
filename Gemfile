@@ -32,9 +32,9 @@ gem "factory_bot_rails", "~> 6.1"
 gem "faker", "~> 2.18"
 gem "pagy", "~> 4.8"
 gem "cloudinary"
-gem "turbo-rails", "~> 0.5.12"
 gem "gon", "~> 6.4"
 gem "active_model_serializers", "~> 0.10.12"
+gem "hotwire-rails", "~> 0.1.3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
