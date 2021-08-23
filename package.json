@@ -10,6 +10,7 @@
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "autoprefixer": "^10.3.0",
     "postcss": "^8.3.5",
+    "stimulus": "^2.0.0",
     "tailwind-scrollbar-hide": "^1.0.3",
     "tailwindcss": "^2.2.4",
     "webpack": "^4.46.0",
