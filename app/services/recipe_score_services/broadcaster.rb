@@ -8,7 +8,7 @@ module RecipeScoreServices
       @recipe_score.broadcast_append_to :notifications,
         target: "#{@recipe_score.recipe.user.id}_toast",
         partial: "shared/toast",
-        locals: {message: "Your #{@recipe_score.recipe.title} recipe has been scored #{@recipe_score.score} by #{@recipe_score.user.username}"}
+        locals: {message: I18n.t("notifications.recipe_score", recipe: @recipe_score.recipe.title, score: @recipe_score.score, user: @recipe_score.user.username)}
     end
   end
 end

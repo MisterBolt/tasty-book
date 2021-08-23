@@ -8,7 +8,7 @@ module FollowServices
       @follow.broadcast_append_to :notifications,
         target: "#{@follow.followed_user.id}_toast",
         partial: "shared/toast",
-        locals: {message: "#{@follow.follower.username} is now following you."}
+        locals: {message: I18n.t("notifications.follow", user: @follow.follower.username)}
     end
   end
 end
