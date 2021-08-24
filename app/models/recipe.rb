@@ -7,11 +7,16 @@ class Recipe < ApplicationRecord
   validates :difficulty, presence: true
   validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
+  validates_with RecipeImageValidator
 
   validates :ingredients_recipes, length: {minimum: 1}
 
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
+
+  before_save :resize_image, unless: :persisted
+
+  has_one_attached :image
 
   belongs_to :user
 
@@ -77,4 +82,16 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients_recipes,
     allow_destroy: true,
     reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
+
+  private
+
+  def resize_image
+    return unless avatar.attached?
+
+    path = attachment_changes["image"].attachable.tempfile.path
+    v_filename = image.filename
+    v_content_type = image.content_type
+    resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(1280, 1920)
+    image.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
+  end
 end
