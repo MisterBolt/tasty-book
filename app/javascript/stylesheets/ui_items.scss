@@ -35,6 +35,10 @@
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
   &:hover{ @apply text-mustard }
 }
+.btn-nav-active{
+  @apply inline-flex justify-center items-center text-base font-medium text-mustard bg-none;
+  &:hover{ @apply opacity-80 }
+}
 
 .input-text{ @include input-base }
 

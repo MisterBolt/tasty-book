@@ -1,14 +1,14 @@
 .fixed.top-0.z-40.w-full.flex.justify-between.bg-black.px-6.py-2.h-14
   .flex.space-x-5.items-center
     = link_to image_tag("/images/logo.png", alt: ""), root_path, class: "w-2/12 h-2/12 mr-3 hover:opacity-75"
-    = link_to t("buttons.recipes"), recipes_path, class: "btn-nav"
-    = link_to t("buttons.cook_books"), cook_books_path, class: "btn-nav"
+    = link_to t("buttons.recipes"), recipes_path, class: btn_nav_class_for_recipes(recipes_path)
+    = link_to t("buttons.cook_books"), cook_books_path, class: btn_nav_class_overall(cook_books_path)
   .flex.space-x-5.items-center
     - if user_signed_in?
-      = link_to t("buttons.add_new_recipe"), new_recipe_path, class: "btn-nav"
+      = link_to t("buttons.add_new_recipe"), new_recipe_path, class: btn_nav_class_overall(new_recipe_path)
       input.drop-btn-hidden.ml-5 type="radio" name="dropdown" id="dropdown_navbar"
       .dropdown
-        button.dark-drop-btn onclick="uncheckDropdown('dropdown_navbar')"
+        button.dark-drop-btn onclick="uncheckDropdown('dropdown_navbar')" id="dropdown_navbar_button"
           = image_tag(current_user.default_or_attached_avatar, class:"w-8 h-8 object-cover rounded-full border border-gray-600", id:"navbar_user_avatar_image")
           .px-3
             = current_user.username
@@ -18,5 +18,5 @@
           = link_to t("buttons.my_profile"), user_path(current_user), class: "dark-drop-item"
           = link_to t("buttons.log_out"), destroy_user_session_path, method: :delete, class: "dark-drop-item"
     - else
-      = link_to t("buttons.log_in"), new_user_session_path, class: "btn-nav"
-      = link_to t("buttons.sign_up"), new_user_registration_path, class: "btn-nav"
+      = link_to t("buttons.log_in"), new_user_session_path, class: btn_nav_class_overall(new_user_session_path)
+      = link_to t("buttons.sign_up"), new_user_registration_path, class: btn_nav_class_overall(new_user_registration_path)
