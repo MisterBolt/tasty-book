@@ -63,8 +63,12 @@ class RecipesController < ApplicationController
       if !params.key?(:category_ids)
         params[:category_ids] = []
       end
+      if !params.key?(:ingredients_recipes_attributes)
+        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
+        params[:ingredients_recipes_attributes] = {}
+      end
       @recipe.attributes = params
-      if @recipe.valid?
+      if @recipe.valid? && params[:ingredients_recipes_attributes] != {}
         IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
         @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
