@@ -14,7 +14,7 @@ class Recipe < ApplicationRecord
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
 
-  before_save :resize_image, unless: :persisted
+  before_save :resize_image, unless: :persisted?
 
   has_one_attached :image
 
@@ -86,7 +86,7 @@ class Recipe < ApplicationRecord
   private
 
   def resize_image
-    return unless avatar.attached?
+    return unless image.attached?
 
     path = attachment_changes["image"].attachable.tempfile.path
     v_filename = image.filename
