@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  include RecipeScoreHelper
-
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
 
@@ -67,7 +65,7 @@ class RecipesController < ApplicationController
       end
       @recipe.attributes = params
       if @recipe.valid?
-        IngredientsRecipe.where("recipe_id=#{@recipe.id}").destroy_all
+        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
         @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
       else

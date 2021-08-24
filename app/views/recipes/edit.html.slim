@@ -25,7 +25,7 @@
                             = check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id)
                             = label_tag :category_id, cat.name
             .mb-4.border-2.p-4.border-gray-500
-                - html_options = link_to_add_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
+                - html_options = link_to_add__ingredients_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
                 - for link in @ingredients do 
                     = field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link[:ingredient_name], data_quantity: link[:quantity], data_unit: link[:unit]

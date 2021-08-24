@@ -14,7 +14,7 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
 
 document.querySelectorAll("fieldset[data_form]").forEach(i => {
     let data = i.getAttribute("data_form");
-    let unit = i.getAttribute('data_unit');
+    let unit = i.getAttribute("data_unit");
     let quantity = i.getAttribute("data_quantity");
     let ingredient = i.getAttribute("data_ingredient");
 
@@ -28,9 +28,9 @@ document.querySelectorAll("fieldset[data_form]").forEach(i => {
     i.querySelector("input[step]").value = quantity;
     i.querySelector("select").selectedIndex = unit;
 
-    i.querySelector(".delete-ingredient").addEventListener('click', e=>{
+    i.querySelector(".delete-ingredient").addEventListener("click", e=>{
         e.preventDefault()
-        e.target.parentNode.style.display = 'none';
-        e.target.parentNode.querySelector(".destroy_flag").value = '1';
+        e.target.parentNode.style.display = "none";
+        e.target.parentNode.querySelector(".destroy_flag").value = "1";
     })
 });

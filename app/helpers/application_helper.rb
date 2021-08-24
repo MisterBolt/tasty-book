@@ -1,7 +1,7 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  def link_to_add_fields(name = nil, f = nil, association = nil, options = nil, html_options = nil, &block)
+  def link_to_add__ingredients_fields(name = nil, f = nil, association = nil, options = nil, html_options = nil, &block)
     # If a block is provided there is no name attribute and the arguments are
     # shifted with one position to the left. This re-assigns those values.
     f, association, options, html_options = name, f, association, options if block_given?
