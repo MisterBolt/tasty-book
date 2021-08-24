@@ -1,3 +1,6 @@
 .m-16.flex.flex-col
   .pb-3.text-lg 
-    = @recipe.preparation_description
+    - for section in @recipe.sections do 
+      .border-b-2.border-gray-500
+        p.font-bold.mb-3.mt-4 = section.title 
+        p.text-left = section.body

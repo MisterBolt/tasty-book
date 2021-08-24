@@ -41,6 +41,9 @@ en:
       action: "Add new recipe"
       notice: "Recipe was successfully created."
       not_enough_ingredients: "Recipe must has at least one ingredient"
+      section: "Sections:"
+      section_title: "Name of section"
+      section_body: "Description of section"
     destroy:
       action: "Delete recipe"
       notice: "Recipe was successfully deleted."
@@ -93,6 +96,7 @@ en:
     create_new_recipe: "Create new recipe"
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
+    add_section: "Add section"
     
   cook_book_recipes:
     create:

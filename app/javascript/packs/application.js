@@ -14,7 +14,6 @@ import "stylesheets/application"
 import "./toggleDisplay"
 import "./dropdownListener"
 import "./remove"
-import "./add_ingredient"
 
 Rails.start()
 ActiveStorage.start()

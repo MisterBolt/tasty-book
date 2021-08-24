@@ -1,0 +1,6 @@
+section.border-t-2.border-gray-300
+    = f.label :title, t("recipes.create.section_title"), class: "block text-gray-700 text-sm font-bold mb-2 mt-3"
+    = f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    = f.label :body, t("recipes.create.section_body"), class: "block text-gray-700 text-sm font-bold mb-2 mt-3"
+    = f.text_area :body, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    p class="delete mb-4 bg-transparent hover:bg-red-500 text-red-700 font-semibold cursor-pointer hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" Delete section    

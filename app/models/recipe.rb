@@ -2,13 +2,13 @@
 
 class Recipe < ApplicationRecord
   validates :title, presence: true
-  validates :preparation_description, presence: true
   validates :time_in_minutes_needed, presence: true
   validates :difficulty, presence: true
   validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
 
   validates :ingredients_recipes, length: { minimum: 1 }
+  validates :sections, length: { minimum: 1 }
   
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
@@ -35,6 +35,8 @@ class Recipe < ApplicationRecord
 
   has_and_belongs_to_many :categories
 
+  has_many :sections, dependent: :destroy
+
   def cook_books_update(cook_book_ids_raw, user)
     cook_book_id_strings = cook_book_ids_raw.filter { |cook_book_id| cook_book_id != "" }
     cook_book_ids = cook_book_id_strings.map { |cook_book_id| cook_book_id.to_i }
@@ -55,7 +57,9 @@ class Recipe < ApplicationRecord
       .pluck("avg(recipe_scores.score)")[0]
       .to_f.round(1)
   end
-  accepts_nested_attributes_for :ingredients_recipes, 
-                                allow_destroy: true, 
+  accepts_nested_attributes_for :ingredients_recipes,
                                 reject_if: -> (attributes) { attributes[:ingredient_name].blank? }
+
+  accepts_nested_attributes_for :sections,
+                                reject_if: -> (attributes) { attributes[:title].blank? || attributes[:body].blank? }
 end

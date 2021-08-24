@@ -3,17 +3,15 @@ document.querySelectorAll("a[data-form-prepend]").forEach(i => {
         e.preventDefault()
         let obj = document.createElement('fieldset')
         obj.innerHTML = i.getAttribute("data-form-prepend").replaceAll("FIELDSET_INDEX", Math.floor(100000 + Math.random() * 900000));
-        obj.querySelector(".delete-ingredient").addEventListener('click', e=>{
+        obj.querySelector(".delete").addEventListener('click', e=>{
             e.preventDefault()
             e.target.parentNode.parentNode.remove()
-            // e.target.parentNode.style.display = 'none';
-            // e.target.parentNode.querySelector(".destroy_flag").value = '1';
         })
         i.parentNode.insertBefore(obj, i);
     })
 })
 
-document.querySelectorAll("fieldset[data_form]").forEach(i => {
+document.querySelectorAll(".ingredient").forEach(i => {
     let data = i.getAttribute("data_form");
     let unit = i.getAttribute("data_unit");
     let quantity = i.getAttribute("data_quantity");
@@ -29,10 +27,27 @@ document.querySelectorAll("fieldset[data_form]").forEach(i => {
     i.querySelector("input[step]").value = quantity;
     i.querySelector("select").selectedIndex = unit;
 
-    i.querySelector(".delete-ingredient").addEventListener("click", e=>{
+    i.querySelector(".delete").addEventListener("click", e=>{
         e.preventDefault()
         e.target.parentNode.parentNode.remove()
-        // e.target.parentNode.style.display = "none";
-        // e.target.parentNode.querySelector(".destroy_flag").value = "1";
+    })
+});
+
+document.querySelectorAll(".section").forEach(i => {
+    let data = i.getAttribute("data_form");
+    let title = i.getAttribute("data_title");
+    let body = i.getAttribute("data_body");
+
+    i.removeAttribute("data_form")
+    i.removeAttribute("data_title")
+    i.removeAttribute("data_body")
+
+    i.innerHTML = data.replaceAll("FIELDSET_INDEX", Math.floor(100000 + Math.random() * 900000));
+    i.querySelector("input").value = title;
+    i.querySelector("textarea").value = body;
+
+    i.querySelector(".delete").addEventListener("click", e=>{
+        e.preventDefault()
+        e.target.parentNode.parentNode.remove()
     })
 });
