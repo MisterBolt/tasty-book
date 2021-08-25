@@ -68,6 +68,10 @@ en:
       action: "Update tasty books"
       notice: "Tasty books were successfully assigned to the recipe."
       alert: "Error occured, tasty books couldn't be assigned to the recipe."
+    update_favourite:
+      notice: "Favourites updated."
+      add_favourite: "Add to favourites"
+      remove_favourite: "Remove from favourites"
     show:
       warning: "Recipe with this id doesn't exists"
 
@@ -111,7 +115,7 @@ en:
     update_and_save_as_draft: "Save changes and save as draft"
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
-    
+
   cook_book_recipes:
     create:
       action: "Add recipe to a Tasty Book"
@@ -198,7 +202,7 @@ en:
     update_avatar:
       notice: "Avatar changed succesfully"
       alert: "Avatar couldn't be changed"
-  
+
   notifications:
     hello: "Hello %{user}!"
     guest_comment: "Your %{title} recipe has been commented by guest"

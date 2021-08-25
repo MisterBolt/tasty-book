@@ -1,3 +1,12 @@
-  svg class="heart" width="30" height="30" viewBox="-1 -2 34 34" fill=(filled ? "red" : "#acb1b7")
-    path id="decimal-star" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-    
+- if current_user.cook_books[0].recipes.include?(@recipe)
+  - hover_title = t("recipes.update_favourite.remove_favourite")
+  - filled = "fill-red-500"
+- else
+  - hover_title = t("recipes.update_favourite.add_favourite")
+
+= form_for(@recipe, url: update_favourite_recipe_path(@recipe), html: { class: "hide-submit" }) do |f|
+  label
+    = f.submit
+    svg class="heart-button #{filled}" width="30" height="30" viewBox="-1 -2 34 34"
+      title=hover_title
+      path id="decimal-star" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"

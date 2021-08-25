@@ -72,6 +72,14 @@ class Recipe < ApplicationRecord
     end
   end
 
+  def toggle_favourite(user)
+    if user.cook_books[0].recipes.include?(self)
+      user.cook_books[0].recipes.delete(self)
+    else
+      user.cook_books[0].recipes << self
+    end
+  end
+
   def average_score
     recipe_scores.average(:score).to_f.round(1)
   end

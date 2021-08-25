@@ -58,7 +58,11 @@ module.exports = {
       },
       textColor: {
         'mustard': '#c89c4c',
-      }
+      },
+      fill: theme => ({
+        'red-500': theme('colors.red.500'),
+        'red-700': theme('colors.red.700')
+      })
     },
   },
   variants: {

@@ -3,7 +3,7 @@
 class RecipesController < ApplicationController
   DEFAULT_SORT_KIND = "title"
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
+  before_action :set_recipe, except: [:index, :new, :create]
   before_action :validate_sort_params!, only: [:index]
 
   def index
@@ -109,6 +109,12 @@ class RecipesController < ApplicationController
       flash[:alert] = t(".alert")
     end
     redirect_back(fallback_location: recipes_path)
+  end
+
+  def update_favourite
+    @recipe.toggle_favourite(current_user)
+    flash[:notice] = t(".notice")
+    redirect_to(@recipe)
   end
 
   private
