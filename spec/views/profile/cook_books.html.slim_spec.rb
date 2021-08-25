@@ -15,7 +15,7 @@ RSpec.describe "profile/cook_books", type: :view do
   context "when user hasn't created any cook books yet" do
     before do
       @pagy, @cook_books = pagy_array(user.cook_books, items: 12)
-      assign(:recipes, @recipes)
+      assign(:cook_books, @cook_books)
       assign(:pagy, @pagy)
       visit user_session_path
       fill_in_and_log_in(user.email, user.password)
@@ -25,5 +25,6 @@ RSpec.describe "profile/cook_books", type: :view do
 
     it { expect(current_path).to eql(cook_books_profile_index_path) }
     it { expect(rendered).to have_tag("a.current", text: t("profile.sidebar.cook_books")) }
+    it { expect(rendered).to have_tag("button.btn-secondary", text: t("cook_books.create.action")) }
   end
 end

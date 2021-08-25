@@ -172,14 +172,14 @@ RSpec.describe ProfileController, type: :controller do
     end
     let(:cook_books) { assigns(:cook_books) }
     let(:pagy) { assigns(:pagy) }
-    before do 
+    before do
       create_list(:cook_book, 10, user: user)
       create_list(:cook_book, 5)
     end
 
     context "when user isn't signed in" do
       before { get_cook_books_action }
-      
+
       it { expect(response).to redirect_to(new_user_session_path) }
     end
 
@@ -188,7 +188,7 @@ RSpec.describe ProfileController, type: :controller do
         sign_in user
         get_cook_books_action(page: 1, items: 8)
       end
-      
+
       it { expect(cook_books.size).to eq(8) }
       it { expect(pagy.page).to eq(1) }
       it { expect(pagy.pages).to eq(2) }
@@ -212,14 +212,14 @@ RSpec.describe ProfileController, type: :controller do
     end
     let(:recipes) { assigns(:recipes) }
     let(:pagy) { assigns(:pagy) }
-    before do 
+    before do
       create_list(:recipe, 10, user: user)
       create_list(:recipe, 5)
     end
 
     context "when user isn't signed in" do
       before { get_recipes_action }
-      
+
       it { expect(response).to redirect_to(new_user_session_path) }
     end
 
@@ -228,7 +228,7 @@ RSpec.describe ProfileController, type: :controller do
         sign_in user
         get_recipes_action(page: 1, items: 8)
       end
-      
+
       it { expect(recipes.size).to eq(8) }
       it { expect(pagy.page).to eq(1) }
       it { expect(pagy.pages).to eq(2) }
