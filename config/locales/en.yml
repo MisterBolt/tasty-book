@@ -96,6 +96,10 @@ en:
       add: "Add"
     show:
       guest: "Guest"
+    statuses:
+      awaiting: "Awaiting"
+      approved: "Approved"
+      rejected: "Rejected"
 
   buttons:
     sign_up: "Sign up"

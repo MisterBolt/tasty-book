@@ -4,9 +4,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = if current_user.present?
-      current_user.comments.new(**comment_params, recipe_id: @recipe.id)
+      current_user.comments.new(**comment_params, recipe_id: @recipe.id, status: :approved)
     else
-      Comment.new(**comment_params, recipe_id: @recipe.id)
+      Comment.new(**comment_params, recipe_id: @recipe.id, status: :awaiting)
     end
 
     respond_to do |format|
