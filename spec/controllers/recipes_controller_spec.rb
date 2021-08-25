@@ -116,7 +116,7 @@ RSpec.describe RecipesController, type: :controller do
     let(:recipe) { create(:recipe) }
     before { create_list(:cook_book, 3, user: user) }
 
-    context "user is not signed in" do
+    context "when user is not signed in" do
       before { patch_update_action }
 
       it { expect(response).to redirect_to(new_user_session_path) }
@@ -168,6 +168,43 @@ RSpec.describe RecipesController, type: :controller do
       end
 
       it { expect(subject).to change { recipe.cook_books.count }.by(user.cook_books.count + user2.cook_books.count) }
+    end
+  end
+
+  describe "PATCH #update_favourite" do
+    def patch_update_action
+      patch :update_favourite, params: {use_route: "recipes/:id/", id: recipe.id}
+    end
+    let(:recipe) { create(:recipe) }
+
+    context "when user is not signed in" do
+      before { patch_update_action }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when user is signed in" do
+      before { sign_in user }
+
+      context "and adding recipe to favourites" do
+        it { expect(-> { patch_update_action }).to change { user.cook_books[0].recipes.count }.by(1) }
+
+        it "displays notice flash message" do
+          patch_update_action
+          expect(flash[:notice]).to eq(I18n.t(".recipes.update_favourite.notice"))
+        end
+      end
+
+      context "and removing recipe from favourites" do
+        before { patch_update_action }
+
+        it { expect(-> { patch_update_action }).to change { user.cook_books[0].recipes.count }.by(-1) }
+
+        it "displays notice flash message" do
+          patch_update_action
+          expect(flash[:notice]).to eq(I18n.t(".recipes.update_favourite.notice"))
+        end
+      end
     end
   end
 end
