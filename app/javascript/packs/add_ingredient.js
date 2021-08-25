@@ -1,13 +1,11 @@
 document.querySelectorAll("a[data-form-prepend]").forEach(i => {
-    i.addEventListener("click", e=>{
+    i.addEventListener("click", e => {
         e.preventDefault()
         let obj = document.createElement('fieldset')
         obj.innerHTML = i.getAttribute("data-form-prepend").replaceAll("FIELDSET_INDEX", Math.floor(100000 + Math.random() * 900000));
-        obj.querySelector(".delete-ingredient").addEventListener('click', e=>{
+        obj.querySelector(".delete-ingredient").addEventListener('click', e => {
             e.preventDefault()
             e.target.parentNode.parentNode.remove()
-            // e.target.parentNode.style.display = 'none';
-            // e.target.parentNode.querySelector(".destroy_flag").value = '1';
         })
         i.parentNode.insertBefore(obj, i);
     })
@@ -29,10 +27,8 @@ document.querySelectorAll("fieldset[data_form]").forEach(i => {
     i.querySelector("input[step]").value = quantity;
     i.querySelector("select").selectedIndex = unit;
 
-    i.querySelector(".delete-ingredient").addEventListener("click", e=>{
+    i.querySelector(".delete-ingredient").addEventListener("click", e => {
         e.preventDefault()
         e.target.parentNode.parentNode.remove()
-        // e.target.parentNode.style.display = "none";
-        // e.target.parentNode.querySelector(".destroy_flag").value = "1";
     })
 });
