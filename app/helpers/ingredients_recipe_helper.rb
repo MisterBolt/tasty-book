@@ -15,6 +15,8 @@ module IngredientsRecipeHelper
       else
         :glass
       end
+    when "piece"
+      :pcs
     end
   end
 end

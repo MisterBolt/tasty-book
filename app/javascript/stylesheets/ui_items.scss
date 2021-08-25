@@ -10,9 +10,11 @@
   @apply px-3;
   label{ @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 }
   input, select{
-    @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight;
-    &:focus{ @apply outline-none bg-white border-gray-500 }
+    @apply appearance-none block w-full bg-gray-200 border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
+    &:hover{ @apply bg-gray-300 cursor-pointer }
   }
+  input[type=text]:hover{ @apply cursor-text }
+  input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
 .btn-primary{
@@ -38,6 +40,7 @@
 
 .input-select{
   @include input-base;
+  select{ @apply pr-6 }
   .selector{ @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 }
 }
 

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
   DEFAULT_PER_PAGE = 12
+  DEFAULT_SORT_ORDER = "ASC"
   before_action :store_user_location!, if: :storable_location?
   before_action :configure_user_params, only: [:create, :update], if: :devise_controller?
 
@@ -20,7 +21,11 @@ class ApplicationController < ActionController::Base
   private
 
   def per_page
-    params[:per_page].presence || DEFAULT_PER_PAGE
+    params[:items].presence || DEFAULT_PER_PAGE
+  end
+
+  def sort_order
+    params[:order].presence || DEFAULT_SORT_ORDER
   end
 
   def storable_location?

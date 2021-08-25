@@ -4,16 +4,16 @@ RSpec.describe CookBooksController, type: :controller do
   let(:user) { create(:user) }
 
   describe "GET #index" do
-    def get_index_action(page: 1, per_page: 12)
-      get :index, params: {page: page, per_page: per_page}
+    def get_index_action(page: 1, items: 12)
+      get :index, params: {page: page, items: items}
     end
     let(:cook_books) { assigns(:cook_books) }
     let(:pagy) { assigns(:pagy) }
 
-    context "when page = 1, per_page = 12 and cook_books.size = 13" do
+    context "when page = 1, items = 12 and cook_books.size = 13" do
       before do
         create_list(:cook_book, 13, visibility: "public", favourite: false)
-        get_index_action(page: 1, per_page: 12)
+        get_index_action(page: 1, items: 12)
       end
 
       it { expect(response.status).to eq(200) }
@@ -27,10 +27,10 @@ RSpec.describe CookBooksController, type: :controller do
       it { expect(pagy.prev).to eq(nil) }
     end
 
-    context "when page = 1, per_page = 15 and cook_books.size = 13" do
+    context "when page = 1, items = 15 and cook_books.size = 13" do
       before do
         create_list(:cook_book, 13, visibility: "public", favourite: false)
-        get_index_action(page: 1, per_page: 15)
+        get_index_action(page: 1, items: 15)
       end
 
       it { expect(cook_books.size).to eq(13) }
@@ -52,7 +52,7 @@ RSpec.describe CookBooksController, type: :controller do
         create(:cook_book, visibility: "followers", favourite: false)
         create(:cook_book, visibility: "followers", favourite: false, user: user)
         create(:cook_book, visibility: "followers", favourite: false, user: other_user)
-        get_index_action(page: 1, per_page: 15)
+        get_index_action(page: 1, items: 15)
       end
 
       it { expect(cook_books.pluck(:visibility)).not_to include("private") }

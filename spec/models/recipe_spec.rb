@@ -66,4 +66,74 @@ RSpec.describe Recipe, type: :model do
       it { expect(user.recipes.average_score).to eq(3.5) }
     end
   end
+
+  describe ".sort_by_kind_and_order" do
+    before do
+      recipes = [
+        create(:recipe, title: "TitleF", difficulty: "EASY", time_in_minutes_needed: 29),
+        create(:recipe, title: "TitleG", difficulty: "EASY", time_in_minutes_needed: 29),
+        create(:recipe, title: "TitleH", difficulty: "MEDIUM", time_in_minutes_needed: 12),
+        create(:recipe, title: "TitleI", difficulty: "MEDIUM", time_in_minutes_needed: 7),
+        create(:recipe, title: "TitleA", difficulty: "HARD", time_in_minutes_needed: 10),
+        create(:recipe, title: "TitleB", difficulty: "HARD", time_in_minutes_needed: 19),
+        create(:recipe, title: "TitleC", difficulty: "HARD", time_in_minutes_needed: 19),
+        create(:recipe, title: "TitleD", difficulty: "HARD", time_in_minutes_needed: 19),
+        create(:recipe, title: "TitleE", difficulty: "HARD", time_in_minutes_needed: 29),
+        create(:recipe, title: "TitleJ", difficulty: "MEDIUM", time_in_minutes_needed: 10),
+        create(:recipe, title: "TitleK", difficulty: "MEDIUM", time_in_minutes_needed: 6),
+        create(:recipe, title: "TitleL", difficulty: "MEDIUM", time_in_minutes_needed: 11)
+      ]
+      8.times do |i|
+        create(:recipe_score, recipe: recipes[i], score: (i % 5) + 1)
+      end
+    end
+
+    context "when kind: title, order: ASC" do
+      subject { Recipe.sort_by_kind_and_order("title", "ASC").map(&:title) }
+
+      it { expect(subject).to eq(("A".."L").map { |letter| "Title#{letter}" }) }
+    end
+
+    context "when kind: title, order: DESC" do
+      subject { Recipe.sort_by_kind_and_order("title", "DESC").map(&:title) }
+
+      it { expect(subject).to eq(("A".."L").to_a.reverse.map { |letter| "Title#{letter}" }) }
+    end
+
+    context "when kind: difficulty, order: ASC" do
+      subject { Recipe.sort_by_kind_and_order("difficulty", "ASC").map(&:difficulty) }
+
+      it { expect(subject).to eq(["EASY"] * 2 + ["MEDIUM"] * 5 + ["HARD"] * 5) }
+    end
+
+    context "when kind: difficulty, order: DESC" do
+      subject { Recipe.sort_by_kind_and_order("difficulty", "DESC").map(&:difficulty) }
+
+      it { expect(subject).to eq(["HARD"] * 5 + ["MEDIUM"] * 5 + ["EASY"] * 2) }
+    end
+
+    context "when kind: time_in_minutes_needed, order: ASC" do
+      subject { Recipe.sort_by_kind_and_order("time_in_minutes_needed", "ASC").map(&:time_in_minutes_needed) }
+
+      it { expect(subject).to eq([6, 7, 10, 10, 11, 12, 19, 19, 19, 29, 29, 29]) }
+    end
+
+    context "when kind: time_in_minutes_needed, order: DESC" do
+      subject { Recipe.sort_by_kind_and_order("time_in_minutes_needed", "DESC").map(&:time_in_minutes_needed) }
+
+      it { expect(subject).to eq([29, 29, 29, 19, 19, 19, 12, 11, 10, 10, 7, 6]) }
+    end
+
+    context "when kind: score, order: ASC" do
+      subject { Recipe.sort_by_kind_and_order("score", "ASC").map(&:average_score) }
+
+      it { expect(subject).to eq([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0, 5.0]) }
+    end
+
+    context "when kind: score, order: DESC" do
+      subject { Recipe.sort_by_kind_and_order("score", "DESC").map(&:average_score) }
+
+      it { expect(subject).to eq([5.0, 4.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]) }
+    end
+  end
 end

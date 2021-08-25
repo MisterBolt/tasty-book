@@ -34,6 +34,14 @@ en:
   all_rights: "©2021 Tasty Book. All rights reserved."
   minutes: "minutes"
 
+  sort:
+    ascending: "Ascending"
+    descending: "Descending"
+    by_title: "By title"
+    by_score: "By score"
+    by_time: "By time"
+    by_difficulty: "By difficulty"
+
   recipes:
     not_found: "No recipes yet"
     edit:

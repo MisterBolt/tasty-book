@@ -1,10 +1,12 @@
 .px-10.mt-3
-  .flex.justify-center.mt-1.mb-4
-    == pagy_nav(@pagy) if @pagy.pages > 1
+  .flex.justify-between.my-2.px-3
+    .flex.items-center
+      == pagy_nav(@pagy) if @pagy.pages > 1
+    = render "sort_form"
   - if @recipes.present?
     = render @recipes
   - else 
     p.text-center.mt-4
       = t("recipes.not_found")
-  .flex.justify-center.my-4
+  .pl-2.my-2
     == pagy_nav(@pagy) if @pagy.pages > 1
