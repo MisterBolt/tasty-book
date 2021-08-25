@@ -34,7 +34,7 @@ class RecipesController < ApplicationController
           flash.now[:error] = e
         end
         @ingredients = []
-        if recipe_params[:ingredients_recipes_attributes]
+        if recipe_params.has_key?(:ingredients_recipes_attributes)
           recipe_params[:ingredients_recipes_attributes].values.each do |i|
             if i[:_destroy] != 1
               @ingredients.append(i.except(:_destroy))

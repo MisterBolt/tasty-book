@@ -116,10 +116,16 @@ RSpec.describe CookBooksController, type: :controller do
       it { expect(-> { delete_destroy_action(cook_book) }).to change { CookBook.count }.by(-1) }
     end
 
-    context "when user isn't the owner of the cook book" do
-      let!(:cook_book) { create(:cook_book) }
+    context "when user isn't the owner of the cook book that's out of his scope" do
+      let!(:cook_book) { create(:cook_book, visibility: :private) }
 
       it { expect(-> { delete_destroy_action(cook_book) }).to raise_error(ActiveRecord::RecordNotFound) }
+    end
+
+    context "when user isn't the owner of the cook book that's in his scope" do
+      let!(:cook_book) { create(:cook_book, visibility: :public) }
+
+      it { expect(-> { delete_destroy_action(cook_book) }).to raise_error(Pundit::NotAuthorizedError) }
     end
   end
 end
