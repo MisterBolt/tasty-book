@@ -9,8 +9,8 @@
         |  • 
         dd = recipe.difficulty
         |  • 
-        dd = recipe.time_in_minutes_needed
-        | m
+        dd = "#{recipe.time_in_minutes_needed} min" 
+
       dl.flex.text-sm.font-medium.whitespace-pre
         dd.italic = recipe.user.username
     .flex.items-start

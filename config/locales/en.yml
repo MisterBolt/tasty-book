@@ -40,6 +40,7 @@ en:
     create:
       action: "Add new recipe"
       notice: "Recipe was successfully created."
+      not_enough_ingredients: "Recipe must has at least one ingredient"
     destroy:
       action: "Delete recipe"
       notice: "Recipe was successfully deleted."
@@ -89,7 +90,10 @@ en:
     recipes: "Recipes"
     cook_books: "Tasty Books"
     cancel: "Cancel"
-
+    create_new_recipe: "Create new recipe"
+    update_recipe: "Update recipe"
+    add_ingredient: "Add ingredient"
+    
   cook_book_recipes:
     create:
       action: "Add recipe to a tasty book"

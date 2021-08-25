@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
 
+
   def index
     @pagy, @recipes = pagy(Recipe.all, items: per_page)
   end
@@ -16,17 +17,31 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @ingredients = []
   end
 
   def edit
+    set_ingredients
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
+        @recipe.errors.full_messages.each do |e|
+          flash.now[:error] = e
+        end
+        @ingredients = []
+        if recipe_params[:ingredients_recipes_attributes]
+          for i in recipe_params[:ingredients_recipes_attributes].values do
+            if i[:_destroy] != 1
+              @ingredients.append(i.except(:_destroy))
+            end
+          end
+        end
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -42,13 +57,29 @@ class RecipesController < ApplicationController
     end
   end
 
-  def update
-    if @recipe.update(recipe_params)
-      flash[:notice] = t(".notice")
-    else
-      flash[:alert] = t(".alert")
+  def update 
+    respond_to do |format|
+      params = recipe_params
+      if !params.key?(:category_ids)
+        params[:category_ids] = []
+      end
+      if !params.key?(:ingredients_recipes_attributes)
+        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
+        params[:ingredients_recipes_attributes] = {}
+      end
+      @recipe.attributes = params
+      if @recipe.valid? && params[:ingredients_recipes_attributes] != {}
+        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
+        @recipe.save
+        format.html { redirect_to @recipe, notice: t(".notice") }
+      else
+        set_ingredients
+        @recipe.errors.full_messages.each do |e|
+          flash.now[:error] = e
+        end
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
-    redirect_to(@recipe)
   end
 
   def update_cook_books
@@ -67,10 +98,19 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed)
+    params.require(:recipe).permit(:title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [], 
+      ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 
   def cook_books_params
     params.require(:recipe).permit(cook_book_ids: [])
+  end
+
+  def set_ingredients
+    @ingredients = []
+    for i in IngredientsRecipe.where("recipe_id=#{@recipe.id}") do
+      j = { ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit] }
+      @ingredients.append(j)
+    end
   end
 end

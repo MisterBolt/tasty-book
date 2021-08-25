@@ -5,6 +5,7 @@
     = link_to t("buttons.cook_books"), cook_books_path, class: "btn-nav"
   .flex.space-x-5.items-center
     - if user_signed_in?
+      = link_to t("buttons.create_new_recipe"), new_recipe_path, class: "btn-nav"
       = link_to t("buttons.log_out"), destroy_user_session_path, method: :delete, class: "btn-nav"
     - else
       = link_to t("buttons.log_in"), new_user_session_path, class: "btn-nav"

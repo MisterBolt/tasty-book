@@ -24,3 +24,28 @@ def fill_in_and_resend_confirmation(email)
 
   click_button I18n.t("devise.confirmations.resend_confirmation")
 end
+
+def fill_in_recipe_data(title, description, time)
+  fill_in "Title", with: title
+  fill_in "Preparation description", with: description
+  fill_in "Time needed (in minutes)", with: time
+end
+
+def add_ingredients_to_recipe(how_many)
+  how_many.times do
+    add_ingredient(Ingredient.find(Ingredient.ids.sample).name, rand(1..10), rand(0..3))
+  end
+end
+
+def add_ingredient(name, quantity, unit)
+  find(:css, "#add_ingredient").click
+  all("fieldset input[list='ingredients_dropdown']").last.set(name)
+  all("fieldset input[type='number']").last.set(quantity)
+  all("fieldset select option")[unit].select_option
+end
+
+def add_categories()
+  for c in Category.all do
+    find(:css, "input[value='#{c.id}']").set(true)
+  end
+end
