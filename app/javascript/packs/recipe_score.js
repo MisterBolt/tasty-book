@@ -1,11 +1,3 @@
-fillPercent = () => {
-  let score = gon.avgScore;
-  let decimal = score % 1;
-  let percent = (decimal * 100)+"%";
-  document.getElementById('stop1').setAttribute("offset", percent);
-  document.getElementById('stop2').setAttribute("offset", percent);
-}
-
 starHighlight = () => {
   let starScore = document.getElementById('score-all');
   for (let i = 0; i < starScore.children.length; i++) {
@@ -59,7 +51,6 @@ emptyStar = (element) => {
 }
 
 document.addEventListener("turbo:load", () => {
-  fillPercent();
   starHighlight();
   closeModal();
 })
