@@ -1,12 +1,13 @@
 require "rails_helper"
 
 RSpec.describe ProfileController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, username: "oldUsername", password: "password") }
 
   describe "GET #index" do
     def get_index_action
       get :index
     end
+
     context "when user isn't signed in" do
       before { get_index_action }
 
@@ -57,6 +58,114 @@ RSpec.describe ProfileController, type: :controller do
       it { expect(statistics.recipes_average_score).to eq(3) }
       it { expect(statistics.cook_books).to eq(2) }
       # TODO: recipes_draft test
+    end
+  end
+
+  describe "GET #settings" do
+    def get_settings_action
+      get :settings
+    end
+
+    context "when user isn't signed in" do
+      before { get_settings_action }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when user is signed in" do
+      before do
+        sign_in user
+        get_settings_action
+      end
+      let(:minimum_password_length) { assigns(:minimum_password_length) }
+
+      it { expect(response).not_to redirect_to(new_user_session_path) }
+      it { expect(minimum_password_length).to eq(User.password_length.min) }
+    end
+  end
+
+  describe "PATCH #update_username" do
+    def patch_update_username_action(username)
+      get :update_username, params: {user: {username: username}}
+    end
+
+    context "when user isn't signed in" do
+      before { patch_update_username_action("newUsername") }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when logged in user changes his username" do
+      before do
+        sign_in user
+        patch_update_username_action("newUsername")
+      end
+
+      it { expect(response).not_to redirect_to(new_user_session_path) }
+      it { expect(flash[:notice]).to eq(I18n.t("profile.update_username.notice")) }
+      it { expect(user.reload.username).to eq("newUsername") }
+    end
+
+    context "when logged in user tries to change username with invalid data" do
+      let(:other_user) { create(:user, username: "otherUser") }
+      before do
+        sign_in user
+        patch_update_username_action("  ")
+      end
+
+      it { expect(flash[:notice]).not_to be_present }
+      it { expect(flash[:alert]).to be_present }
+      it { expect(user.reload.username).to eq("oldUsername") }
+    end
+  end
+
+  describe "PATCH #update_password" do
+    def patch_update_password_action(password, password_confirmation, current_password)
+      get :update_password, params: {user: {
+        password: password,
+        password_confirmation: password_confirmation,
+        current_password: current_password
+      }}
+    end
+
+    context "when user isn't signed in" do
+      before { patch_update_password_action("123456", "123456", "password") }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when logged in user succesfully changes password" do
+      before do
+        sign_in user
+        patch_update_password_action("123456", "123456", "password")
+      end
+
+      it { expect(flash[:notice]).to eq(I18n.t("profile.update_password.notice")) }
+      it { expect(user.reload.valid_password?("123456")).to be(true) }
+    end
+
+    context "when logged in user tries to change password with invalid data" do
+      before { sign_in user }
+
+      it "displays an alert flash message" do
+        patch_update_password_action("abcdefg", "123456", "badpassword")
+        expect(flash[:alert]).to be_present
+      end
+
+      it "doesn't change password when password and password_confirmation doesn't match" do
+        expect(-> { patch_update_password_action("123456789", "123456", "password") })
+          .not_to change { User.find_by(id: user.id).valid_password?("password") }
+      end
+
+      it "doesn't change password when current_password is wrong" do
+        expect(-> { patch_update_password_action("123456", "123456", "false_password") })
+          .not_to change { User.find_by(id: user.id).valid_password?("password") }
+      end
+
+      it "doesn't change password when new password is too short" do
+        expect(-> { patch_update_password_action("123", "123", "password") })
+          .not_to change { User.find_by(id: user.id).valid_password?("password") }
+      end
     end
   end
 end

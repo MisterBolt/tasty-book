@@ -1,5 +1,5 @@
 article.p-4.space-x-4.border-solid.border-2.flex#user-profile
-  = user_avatar_for(user, size: local_assigns[:size] || "100x100")
+  = image_tag(user.default_or_attached_avatar, class: "rounded-lg border border-gray-300 object-cover w-#{user_image_size(local_assigns[:size])} h-#{user_image_size(local_assigns[:size])}", id: "user-image")
 
   .flex-1.relative
     .text-2xl.font-bold.hover:opacity-50
