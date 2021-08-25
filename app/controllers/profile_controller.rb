@@ -22,37 +22,15 @@ class ProfileController < ApplicationController
   end
 
   def update_password
-    if @user.update_with_password(user_password_params)
-      bypass_sign_in(@user)
-      flash[:notice] = t(".notice")
-    elsif @user.errors.any?
-      flash[:alert] = @user.errors.full_messages[0]
-    else
-      flash[:alert] = t(".alert")
-    end
-    redirect_to(settings_profile_index_path)
+    update_action(@user.update_with_password(user_password_params) && bypass_sign_in(@user))
   end
 
   def update_username
-    if @user.update(user_username_params)
-      flash[:notice] = t(".notice")
-    elsif @user.errors.any?
-      flash[:alert] = @user.errors.full_messages[0]
-    else
-      flash[:alert] = t(".alert")
-    end
-    redirect_to(settings_profile_index_path)
+    update_action(@user.update(user_username_params))
   end
 
   def update_avatar
-    if @user.update(user_avatar_params)
-      flash[:notice] = t(".notice")
-    elsif @user.errors.any?
-      flash[:alert] = @user.errors.full_messages[0]
-    else
-      flash[:alert] = t(".alert")
-    end
-    redirect_to(settings_profile_index_path)
+    update_action(@user.update(user_avatar_params))
   end
 
   private
@@ -71,5 +49,16 @@ class ProfileController < ApplicationController
 
   def user_avatar_params
     params.require(:user).permit(:avatar)
+  end
+
+  def update_action(condition)
+    if condition
+      flash[:notice] = t(".notice")
+    elsif @user.errors.any?
+      flash[:alert] = @user.errors.full_messages.join(", ")
+    else
+      flash[:alert] = t(".alert")
+    end
+    redirect_to(settings_profile_index_path)
   end
 end
