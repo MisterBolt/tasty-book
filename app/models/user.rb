@@ -55,6 +55,14 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
+  def default_or_attached_avatar
+    if avatar.attached?
+      avatar
+    else
+      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629268606/sample/blank-profile-picture.png"
+    end
+  end
+
   private
 
   def resize_avatar
