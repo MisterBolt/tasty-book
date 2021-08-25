@@ -47,9 +47,11 @@ module.exports = {
       },
       backgroundColor: {
         'mustard': '#c89c4c',
+        "mustard-50": "#f9f5ed",
       },
       borderColor: {
         'mustard': '#c89c4c',
+        "mustard-100": "#f4ebdb "
       },
       textColor: {
         'mustard': '#c89c4c',

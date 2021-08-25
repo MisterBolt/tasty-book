@@ -32,9 +32,10 @@
 en:
   confirm: "Are you sure?"
   all_rights: "©2021 Tasty Book. All rights reserved."
+  minutes: "minutes"
 
   recipes:
-    not_found: "No recipes found"
+    not_found: "No recipes yet"
     edit:
       action: "Edit recipe"
     create:
@@ -96,19 +97,29 @@ en:
     
   cook_book_recipes:
     create:
-      action: "Add recipe to a tasty book"
+      action: "Add recipe to a Tasty Book"
 
   cook_books:
+    not_found: "No Tasty Books yet"
+    recipes_inside:
+      one: " and 1 more recipe"
+      other: " and %{count} more recipes"
     form:
-      title_placeholder: "My tasty book"
+      title_placeholder: "My Tasty Book"
     visibilities:
       private: "Private"
       public: "Public"
       followers: "Followers"
     create:
-      action: "Create new tasty book"
-      notice: "Tasty book was successfully created."
-      alert: "Error occured, tasty book couldn't be created."
+      action: "Create new Tasty Book"
+      notice: "Tasty Book was successfully created."
+      alert: "Error occured, Tasty Book couldn't be created."
+    destroy:
+      action: "Delete Tasty Book"
+      notice: "Tasty Book was successfully deleted."
+      alert: "Tasty Book couldn't be deleted."
+    edit:
+      action: "Edit Tasty Book"
 
   users:
     recipes_count: "Recipes: %{count}"
@@ -116,10 +127,10 @@ en:
       title: "Recipes"
     followings:
       title: "Followings"
-      not_found: "No followings found"
+      not_found: "No followings yet"
     followers:
       title: "Followers"
-      not_found: "No followers found"
+      not_found: "No followers yet"
 
   follows:
     create:

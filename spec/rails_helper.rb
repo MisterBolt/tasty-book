@@ -18,6 +18,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.include RSpecHtmlMatchers
   config.include Capybara::DSL, type: :view
   config.include ShowMeTheCookies, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :view

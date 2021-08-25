@@ -35,6 +35,7 @@ gem "cloudinary"
 gem "gon", "~> 6.4"
 gem "active_model_serializers", "~> 0.10.12"
 gem "hotwire-rails", "~> 0.1.3"
+gem "pundit"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +45,7 @@ group :development, :test do
   gem "shoulda-matchers", "~> 5.0"
   gem "rails-controller-testing", "~> 1.0", ">= 1.0.5"
   gem "capybara"
+  gem "rspec-html-matchers"
   gem "show_me_the_cookies"
   gem "dotenv-rails"
   gem "selenium-webdriver", "~> 3.142"

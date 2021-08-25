@@ -44,8 +44,8 @@ def add_ingredient(name, quantity, unit)
   all("fieldset select option")[unit].select_option
 end
 
-def add_categories()
-  for c in Category.all do
+def add_categories
+  Category.all.each do |c|
     find(:css, "input[value='#{c.id}']").set(true)
   end
 end

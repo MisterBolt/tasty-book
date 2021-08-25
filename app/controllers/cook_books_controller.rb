@@ -3,10 +3,28 @@
 class CookBooksController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :set_visibilities, only: [:index]
+  before_action :set_cook_book, only: [:show, :edit, :destroy]
 
   def index
     @cook_book = CookBook.new
-    @cook_books = CookBook.where(favourite: false, visibility: :public)
+    @cook_books = policy_scope(CookBook).for_public_and_followers
+    @pagy, @cook_books = pagy(@cook_books, items: per_page)
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def destroy
+    authorize @cook_book
+    if @cook_book.destroy
+      flash[:notice] = t(".notice")
+    else
+      flash[:alert] = t(".alert")
+    end
+    redirect_back(fallback_location: cook_books_path)
   end
 
   def create
@@ -25,7 +43,11 @@ class CookBooksController < ApplicationController
   private
 
   def set_visibilities
-    @visibilities = CookBook.visibilities.map { |key, value| [t("cook_books.visibilities.#{key}"), key] }
+    @visibilities = CookBook.visibilities_strings
+  end
+
+  def set_cook_book
+    @cook_book = policy_scope(CookBook).find(params[:id])
   end
 
   def cook_book_params

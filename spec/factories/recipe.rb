@@ -7,5 +7,9 @@ FactoryBot.define do
     time_in_minutes_needed { rand(5..60) }
     categories { create_list(:category, rand(1..3)) }
     layout { rand(0..2) }
+
+    after(:build) do |recipe|
+      recipe.ingredients_recipes << build(:ingredients_recipe, recipe: recipe)
+    end
   end
 end
