@@ -18,7 +18,7 @@
                 = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
             .mb-4.
                 p class="block text-gray-700 text-sm font-bold mb-2" Categories:
-                .flex.flex-row.justify-start
+                .flex.flex-wrap
                     - categories = @recipe.categories.map { |cat| cat.id }
                     - Category.all.each do |cat|
                         .p-3

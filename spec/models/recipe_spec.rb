@@ -114,7 +114,7 @@ RSpec.describe Recipe, type: :model do
 
     context "when kind: time_in_minutes_needed, order: ASC" do
       subject { Recipe.sort_by_kind_and_order("time_in_minutes_needed", "ASC").map(&:time_in_minutes_needed) }
-      
+
       it { expect(subject).to eq([6, 7, 10, 10, 11, 12, 19, 19, 19, 29, 29, 29]) }
     end
 

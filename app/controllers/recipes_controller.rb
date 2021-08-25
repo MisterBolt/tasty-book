@@ -116,7 +116,8 @@ class RecipesController < ApplicationController
       j = {ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit]}
       @ingredients.append(j)
     end
-  
+  end
+
   def validate_sort_params!
     sort_params = params.permit(:page, :items, :kind, :order)
     validator = RecipesSortParamsValidator.new(sort_params)
