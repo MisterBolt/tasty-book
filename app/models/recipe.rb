@@ -15,7 +15,7 @@ class Recipe < ApplicationRecord
 
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
-  enum status: {'draft': 0, 'published': 1}
+  enum status: {draft: 0, published: 1}
 
   has_one_attached :image
 
