@@ -13,9 +13,9 @@ module RecipeHelper
       }
     }
   end
-  
+
   def recipe_image_for(recipe, img_variant)
-    image_tag(check_image(recipe, img_variant), class: "flex-none rounded-lg object-cover bg-gray-100", alt: "", size:"100x100")
+    image_tag(check_image(recipe, img_variant), class: "flex-none rounded-lg object-cover bg-gray-100", alt: "", size: "100x100")
   end
 
   def check_image(recipe, img_variant)
@@ -30,12 +30,10 @@ module RecipeHelper
       when :layout3
         recipe.image
       end
+    elsif img_variant == :thumbnail
+      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832231/sample/default_recipe_thumbnail_yarrcr.png"
     else
-      if img_variant == :thumbnail
-        "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832231/sample/default_recipe_thumbnail_yarrcr.png"
-      else
-        "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832221/sample/default_recipe_u9wld9.png"
-      end
+      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832221/sample/default_recipe_u9wld9.png"
     end
   end
 end

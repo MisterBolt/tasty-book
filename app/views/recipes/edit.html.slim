@@ -13,21 +13,21 @@
 			.mb-4.input-text-white
 					= f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
 					= f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-			.mb-4
+			.mb-4.input-select-white
 					= f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
 					= f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-			.mb-4
+			.mb-4.input-select-white
 					= f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
 					= f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-			.mb-4
-					p class="block text-gray-700 text-sm font-bold mb-2" Categories:
-					.flex.flex-wrap
-							- categories = @recipe.categories.map { |cat| cat.id }
-							- Category.all.each do |cat|
-									.p-3
-											= check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id)
-											= label_tag :category_id, cat.name
-			.m-4.border-2.p-4.border-gray-500
+			.m-3.input-base
+				p class="block text-gray-700 text-sm font-bold mb-2" Categories:
+				.flex.flex-wrap.border.p-4.border-gray-300.rounded-md.shadow-md
+						- categories = @recipe.categories.map { |cat| cat.id }
+						- Category.all.each do |cat|
+								.p-3.
+										= check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id), class: "mr-1"
+										= label_tag :category_id, cat.name
+			.m-3.border.p-4.border-gray-300.rounded-md.shadow-md
 					- html_options = link_to_add__ingredients_fields t('buttons.add_ingredient'), f, :ingredients_recipes, { partial: 'ingredient_fields' }
 					p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
 					- for link in @ingredients do 
