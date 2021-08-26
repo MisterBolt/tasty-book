@@ -19,7 +19,7 @@ RSpec.describe "recipes/create", type: :view do
 
   context "with no ingredients" do
     it "displays error", js: true do
-      remove_ingredients  
+      remove_ingredients
       click_button I18n.t("buttons.update_recipe")
       expect(page).to have_selector("#flash-error")
     end
@@ -28,18 +28,17 @@ RSpec.describe "recipes/create", type: :view do
   context "with no categories" do
     it "displays error", js: true do
       remove_categories
+      add_ingredients_to_recipe(1)
       click_button I18n.t("buttons.update_recipe")
       expect(page).to have_selector("#flash-error")
     end
   end
 
   context "with valid data" do
-    it "updates recipe" do
+    it "updates recipe", js: true do
       fill_in_recipe_data("Soup", "test", "20")
       add_ingredients_to_recipe(1)
-      add_categories
       click_button I18n.t("buttons.update_recipe")
-      sleep(1)
       expect(page).to have_content("Soup")
     end
   end
