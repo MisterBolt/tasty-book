@@ -1,0 +1,3 @@
+- current_class = "current"
+.side-menu 
+  = link_to "Comments", comments_admin_panel_path, class: (current_page?(comments_admin_panel_path) ? current_class : "")

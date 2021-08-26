@@ -108,6 +108,7 @@ en:
     recipes: "Recipes"
     cook_books: "Tasty Books"
     dashboard: "Dashboard"
+    admin_panel: "Admin Panel"
     add_new_recipe: "Add new recipe"
     my_profile: "My Profile"
     cancel: "Cancel"

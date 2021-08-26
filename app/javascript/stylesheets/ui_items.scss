@@ -64,7 +64,6 @@
   }
 }
 
-
 @mixin input-file-inner-button{
   @apply text-white text-sm font-normal bg-black opacity-80 border-none p-2.5 mr-2;
   &:hover{ @apply opacity-75 }

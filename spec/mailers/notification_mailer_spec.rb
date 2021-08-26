@@ -4,7 +4,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   let(:user) { FactoryBot.create(:user) }
 
   describe "comment_notification" do
-    let(:comment) { FactoryBot.create(:comment) }
+    let(:comment) { FactoryBot.create(:comment, body: "sample body") }
     let(:mail) { NotificationMailer.comment_notification(user, comment) }
     describe "headers" do
       it "is titled 'Comment notification'" do
