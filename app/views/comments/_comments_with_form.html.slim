@@ -1,0 +1,4 @@
+.mx-16
+  .w-full
+    = render "comments/form"
+  = render "comments/comments", resource: @recipe, comments: @recipe.comments, id: "#{dom_id(@recipe)}_comments" 

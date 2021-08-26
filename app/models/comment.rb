@@ -14,4 +14,12 @@ class Comment < ApplicationRecord
   def send_notification_email
     NotificationMailer.comment_notification(recipe.user, self).deliver_now
   end
+
+  def default_or_user_avatar
+    if user&.avatar&.attached?
+      user.avatar
+    else
+      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629268606/sample/blank-profile-picture.png"
+    end
+  end
 end

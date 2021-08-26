@@ -3,5 +3,6 @@
     .text-4xl.text-gray-400.font-black
       = t("buttons.admin_panel")
     = render "sidebar"
-  .px-3.flex-grow.flex.flex-col
-    
+  .px-3.flex-grow
+    - if @comments.size > 0
+      = render "comments/comments", resource: @comments, comments: @comments, id: "admin_comments"
