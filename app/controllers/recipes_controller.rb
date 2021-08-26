@@ -2,8 +2,8 @@
 
 class RecipesController < ApplicationController
   DEFAULT_SORT_KIND = "title"
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_recipe, except: [:index, :new, :create]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_recipe, except: %i[index new create]
   before_action :validate_sort_params!, only: [:index]
 
   def index
