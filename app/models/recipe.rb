@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
   validates :preparation_description, presence: true
   validates :time_in_minutes_needed, presence: true
   validates :difficulty, presence: true
+  validates :status, presence: true
   validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
   validates_with RecipeImageValidator

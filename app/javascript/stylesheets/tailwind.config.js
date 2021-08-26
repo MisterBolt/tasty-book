@@ -58,7 +58,6 @@ module.exports = {
       },
       textColor: {
         'mustard': '#c89c4c',
-       'layout1': '15vh minmax(0, 1fr) 8vh',
       }
     },
   },
