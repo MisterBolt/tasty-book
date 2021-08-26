@@ -31,23 +31,19 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-    respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to @recipe, notice: t(".notice") }
-      else
-        @recipe.errors.full_messages.each do |e|
-          flash.now[:error] = e
-        end
-        @ingredients = []
-        if recipe_params.has_key?(:ingredients_recipes_attributes)
-          recipe_params[:ingredients_recipes_attributes].values.each do |i|
-            if i[:_destroy] != 1
-              @ingredients.append(i.except(:_destroy))
-            end
+    if @recipe.save
+      redirect_to(@recipe, notice: t(".notice"))
+    else
+      flash[:error] = @recipe.errors.full_messages.join(". ") + "."
+      @ingredients = []
+      if recipe_params.has_key?(:ingredients_recipes_attributes)
+        recipe_params[:ingredients_recipes_attributes].values.each do |i|
+          if i[:_destroy] != 1
+            @ingredients.append(i.except(:_destroy))
           end
         end
-        format.html { render :new, status: :unprocessable_entity }
       end
+      redirect_to(new_recipe_path)
     end
   end
 
@@ -78,9 +74,7 @@ class RecipesController < ApplicationController
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
         set_ingredients
-        @recipe.errors.full_messages.each do |e|
-          flash.now[:error] = e
-        end
+        flash.now[:error] = @recipe.errors.full_messages.join(". ") + "."
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
