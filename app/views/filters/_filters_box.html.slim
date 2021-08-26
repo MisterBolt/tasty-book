@@ -1,4 +1,4 @@
-= form_for :query, url: filter_recipes_path(format: :turbo_stream), method: :post, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
+= form_for :query, url: filter_recipes_path, method: :post, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
   = form.hidden_field :my_books, value: 0
   .filter-subbox
       = t("filters.filter_box.difficulty")
@@ -43,7 +43,7 @@
 
   .grid-flow-col.grid-cols-2.m-auto.w-1/6
     .m-auto
-      = form.submit t("buttons.apply"), class: "bg-blue-500 w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded"
+      = form.submit t("buttons.apply"), class: "bg-blue-500 w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded", data: { disable_with: false }
 
     .m-auto
       = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "bg-gray-500 w-24 hover:bg-gray-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-gray-700 rounded")
