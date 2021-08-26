@@ -31,6 +31,8 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
+    @recipe.resize_image if params[:recipe].key?(:image)
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
@@ -62,27 +64,28 @@ class RecipesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      params = recipe_params
-      if !params.key?(:category_ids)
-        params[:category_ids] = []
-      end
-      if !params.key?(:ingredients_recipes_attributes)
-        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
-        params[:ingredients_recipes_attributes] = {}
-      end
-      @recipe.attributes = params
-      if @recipe.valid? && params[:ingredients_recipes_attributes] != {}
-        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
-        @recipe.save
-        format.html { redirect_to @recipe, notice: t(".notice") }
-      else
-        set_ingredients
-        @recipe.errors.full_messages.each do |e|
-          flash.now[:error] = e
+    params = recipe_params
+    if !params.key?(:category_ids)
+      params[:category_ids] = []
+    end
+    if !params.key?(:ingredients_recipes_attributes)
+      IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
+      params[:ingredients_recipes_attributes] = {}
+    end
+    @recipe.attributes = params
+    @recipe.resize_image if params.key?(:image)
+      respond_to do |format|
+        if @recipe.valid? && params[:ingredients_recipes_attributes] != {}
+          IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
+          @recipe.save
+          format.html { redirect_to @recipe, notice: t(".notice") }
+        else
+          set_ingredients
+          @recipe.errors.full_messages.each do |e|
+            flash.now[:error] = e
+          end
+          format.html { render :edit, status: :unprocessable_entity }
         end
-        format.html { render :edit, status: :unprocessable_entity }
-      end
     end
   end
 

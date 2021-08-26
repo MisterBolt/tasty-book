@@ -14,8 +14,6 @@ class Recipe < ApplicationRecord
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
 
-  before_save :resize_image, unless: :persisted?
-
   has_one_attached :image
 
   belongs_to :user
@@ -82,8 +80,6 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients_recipes,
     allow_destroy: true,
     reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
-
-  private
 
   def resize_image
     return unless image.attached?
