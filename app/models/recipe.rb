@@ -58,8 +58,10 @@ class Recipe < ApplicationRecord
       .to_f.round(1)
   end
   accepts_nested_attributes_for :ingredients_recipes,
+                                allow_destroy: true,
                                 reject_if: -> (attributes) { attributes[:ingredient_name].blank? }
 
   accepts_nested_attributes_for :sections,
+                                allow_destroy: true,
                                 reject_if: -> (attributes) { attributes[:title].blank? || attributes[:body].blank? }
 end

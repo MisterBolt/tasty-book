@@ -7,8 +7,8 @@
             .mb-4.border-2.p-4.border-gray-500
                 p.text-m.text-gray-700.font-bold.mb-3 = t("recipes.create.section")
                 - html_options = link_to_add_fields f, :sections, 'section_form', "add_section"
-                - for link in @sections do 
-                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_title: link[:title], data_body: link[:body], class: "section"
+                - for link in @recipe.sections do 
+                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_title: link.title, data_body: link.body, class: "section"
                 = link_to t("buttons.add_section"), "#", html_options
             .mb-4
                 = f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
@@ -30,8 +30,8 @@
             .mb-4.border-2.p-4.border-gray-500
                 - html_options = link_to_add_fields f, :ingredients_recipes, 'ingredient_fields', "add_ingredient"
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
-                - for link in @ingredients do 
-                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link[:ingredient_name], data_quantity: link[:quantity], data_unit: link[:unit], class: "ingredient"
+                - for link in @recipe.ingredients_recipes do 
+                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link.ingredient_name, data_quantity: link.quantity, data_unit: link.unit, class: "ingredient"
                 = link_to t("buttons.add_ingredient"), "#", html_options
             = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
 

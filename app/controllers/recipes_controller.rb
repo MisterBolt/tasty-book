@@ -17,13 +17,9 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @ingredients = []
-    @sections = []
   end
 
   def edit
-    set_ingredients
-    set_sections
   end
 
   def create
@@ -36,8 +32,6 @@ class RecipesController < ApplicationController
         @recipe.errors.full_messages.each do |e|
           flash.now[:error] = e
         end
-        @ingredients = recipe_params.has_key?(:ingredients_recipes_attributes) ? recipe_params[:ingredients_recipes_attributes].values : []
-        @sections = recipe_params.has_key?(:sections_attributes) ? recipe_params[:sections_attributes].values : []
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -58,14 +52,10 @@ class RecipesController < ApplicationController
       params = recipe_params
       params = validate_params(params)
       @recipe.attributes = params
-      if @recipe.valid? && params[:ingredients_recipes_attributes] != {} && params[:sections_attributes] != {}
-        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
-        Section.where(recipe_id: @recipe.id).destroy_all
+      if @recipe.valid?
         @recipe.save
         format.html { redirect_to @recipe, notice: t(".notice") }
       else
-        set_ingredients
-        set_sections
         @recipe.errors.full_messages.each do |e|
           flash.now[:error] = e
         end
@@ -91,7 +81,7 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [], 
-      sections_attributes: [:id, :title, :body],
+      sections_attributes: [:id, :title, :body, :_destroy],
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit])
   end
 
@@ -99,31 +89,9 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(cook_book_ids: [])
   end
 
-  def set_ingredients
-    @ingredients = []
-    for i in IngredientsRecipe.where(recipe_id: @recipe.id) do
-      j = { ingredient_name: i.ingredient.name, quantity: i.quantity, unit: IngredientsRecipe.units[i.unit] }
-      @ingredients.append(j)
-    end
-  end
-
-  def set_sections
-    @sections = []
-    for i in Section.where(recipe_id: @recipe.id) do
-      j = { title: i.title, body: i.body }
-      @sections.append(j)
-    end
-  end
-
   def validate_params(params)
     if !params.key?(:category_ids)
       params[:category_ids] = []
-    end
-    if !params.key?(:ingredients_recipes_attributes)
-      params[:ingredients_recipes_attributes] = {}
-    end
-    if !params.key?(:sections_attributes)
-      params[:sections_attributes] = {}
     end
     params
   end

@@ -1,5 +1,5 @@
 .flex.flex-row.justify-around.border-t-2.border-gray-500.p-2.mb-3
-    = f.hidden_field :id
+    = f.hidden_field :id, class: "id_value"
     .item
         = f.label :ingredient_name, class: "block text-gray-700 text-sm font-bold"
         = f.text_field :ingredient_name, list: :ingredients_dropdown, class: "block appearance-none bg-white border border-gray-400 hover:border-gray-500 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -11,4 +11,5 @@
     .item
         = f.label :unit, class: "block text-gray-700 text-sm font-bold"
         = f.select :unit, IngredientsRecipe.units
+    = f.hidden_field :_destroy, value: 0
     p class="delete bg-transparent hover:bg-red-500 text-red-700 font-semibold cursor-pointer hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" X    
