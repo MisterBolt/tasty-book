@@ -18,7 +18,6 @@ export default class extends Controller {
     if (window.pageYOffset >= height - window.innerHeight) {
       this.loadMore(url)
     }
-    
   }
 
   loadMore(url) {
@@ -30,7 +29,6 @@ export default class extends Controller {
         this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
         this.paginationTarget.innerHTML = data.pagination
       }
-
     })
   }
 }
