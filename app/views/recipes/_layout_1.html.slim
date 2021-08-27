@@ -8,19 +8,19 @@
   .w-1/2.flex.flex-col.items-center data-controller="recipe"
     .min-h-10v.flex.flex-col.justify-center
       ul#recipe-nav.flex.flex-row.items-center.text-mustard.font-bold.text-2xl.rounded-md 
-        li#ingredients-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-l-md.selected data-action="click->recipe#ingredients" data-target="recipe.ingredients_button"
+        li#ingredients-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-l-md.selected data-action="click->recipe#ingredients" data-recipe-target="ingredients_button"
           = t("recipes.show.ingredients")
-        li#method-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700 data-action="click->recipe#method" data-target="recipe.method_button"
+        li#method-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700 data-action="click->recipe#method" data-recipe-target="method_button"
           = t("recipes.show.method")
-        li#comments-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md data-action="click->recipe#comments" data-target="recipe.comments_button"
+        li#comments-button.cursor-pointer.py-2.px-4.bg-gray-900.hover:bg-gray-700.rounded-r-md data-action="click->recipe#comments" data-recipe-target="comments_button"
           = t("recipes.show.comments")
     #recipe-field.w-full.h-full.border-r-2.border-mustard
-      #ingredients-content data-target="recipe.ingredients_content"
+      #ingredients-content data-recipe-target="ingredients_content"
         .m-16
           = render @ingredients_recipe, position: :center
-      #method-content.hidden data-target="recipe.method_content"
+      #method-content.hidden data-recipe-target="method_content"
         .text-center 
           = render 'description'
-      #comments-content.hidden.h-74v.overflow-y-scroll.scrollbar-hide data-target="recipe.comments_content"
+      #comments-content.hidden.h-74v.overflow-y-scroll.scrollbar-hide data-recipe-target="comments_content"
         = render 'comments/comments'
     .min-h-8v.w-full
