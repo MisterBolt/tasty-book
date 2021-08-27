@@ -31,7 +31,7 @@ module ApplicationHelper
     html_options["data-form-prepend"] = raw CGI.escapeHTML(fields)
     html_options["href"] = "#"
     html_options["id"] = "add_ingredient"
-    html_options["class"] = "bg-transparent hover:bg-blue-500 text-blue-700 mt-4 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+    html_options["class"] = "btn-primary"
     html_options
   end
 end

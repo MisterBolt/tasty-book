@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, presence: true
   validates_with UsernameValidator
-  validates_with ImageValidator
+  validates_with UserImageValidator
 
   before_save :resize_avatar, unless: :persisted?
 

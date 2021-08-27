@@ -10,8 +10,8 @@
   @apply px-3;
   label{ @apply block capitalize tracking-wide text-gray-700 text-xs font-bold mb-2 }
   input, select{
-    @apply appearance-none block w-full bg-gray-200 border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
-    &:hover{ @apply bg-gray-300 cursor-pointer }
+    @apply  block w-full bg-white border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
+    &:hover{ @apply bg-gray-100 cursor-pointer }
   }
   input[type=text]:hover, input[type=password]:hover, input[type=email]:hover{ @apply cursor-text }
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }

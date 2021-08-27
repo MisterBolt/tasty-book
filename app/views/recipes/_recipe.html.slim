@@ -1,9 +1,10 @@
 article.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
-  = image_tag("/images/default_recipe_thumbnail.png", class: "flex-none rounded-lg object-cover bg-gray-100", alt: "", size:"100x100")
+  .max-h-100-px.w-100.flex-none.rounded-lg
+    = recipe_image_for_index(recipe)
   .flex-1
     = link_to recipe.title, recipe_path(recipe), class: "text-lg font-semibold text-black mb-0.5 break-all hover:opacity-75"
-    dl.flex.text-sm.font-medium.whitespace-pre
-      dd
+    dl.flex.flex-row.text-sm.font-medium.whitespace-pre
+      dd 
         = recipe.categories.map{|c| c.name}.join(", ")
       |  • 
       dd
