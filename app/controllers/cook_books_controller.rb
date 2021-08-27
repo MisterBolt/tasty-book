@@ -14,6 +14,9 @@ class CookBooksController < ApplicationController
   def show
     @cook_book = CookBook.find_by(id: params[:id])
     @recipes = @cook_book.recipes
+    @recipes.each do |recipe|
+      gon.avgScore = recipe.average_score
+    end
   end
 
   def edit
