@@ -9,6 +9,8 @@ RSpec.describe Recipe, type: :model do
     it { is_expected.to validate_presence_of(:time_in_minutes_needed) }
     it { is_expected.to validate_presence_of(:difficulty) }
     it { is_expected.to validate_presence_of(:categories) }
+    it { is_expected.to validate_presence_of(:status) }
+    it { should define_enum_for(:status).with_values([:draft, :published]) }
     it { should define_enum_for(:difficulty).with_values([:EASY, :MEDIUM, :HARD]) }
   end
 

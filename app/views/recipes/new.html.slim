@@ -34,6 +34,8 @@
                     = field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link[:ingredient_name], data_quantity: link[:quantity], data_unit: link[:unit]
                 = link_to t("buttons.add_ingredient"), "#", html_options
             .ml-3
-								= f.submit(t('buttons.create_new_recipe'),class: "btn-secondary")
+                = f.hidden_field :status, value: "draft"
+                = f.submit(t('buttons.save_recipe_as_draft'), id: "draft_submit",class: "btn-secondary")
+                = f.submit(t('buttons.publish_recipe'), onclick: "document.getElementById('recipe_status').value = 'published'",id: "save_submit",class: "btn-secondary")
 
 = javascript_pack_tag "add_ingredient"

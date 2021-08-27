@@ -15,7 +15,7 @@ RSpec.describe "recipes/create", type: :view do
       fill_in_recipe_data("", "", "")
       add_categories
       add_ingredients_to_recipe(4)
-      click_button I18n.t("buttons.create_new_recipe")
+      click_button I18n.t("buttons.publish_recipe")
       expect(page).to have_selector("#flash-error")
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe "recipes/create", type: :view do
     it "displays error" do
       fill_in_recipe_data("Soup", "test", "20")
       add_categories
-      click_button I18n.t("buttons.create_new_recipe")
+      click_button I18n.t("buttons.publish_recipe")
       expect(page).to have_selector("#flash-error")
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe "recipes/create", type: :view do
     it "displays error", js: true do
       fill_in_recipe_data("Soup", "test", "20")
       add_ingredients_to_recipe(2)
-      click_button I18n.t("buttons.create_new_recipe")
+      click_button I18n.t("buttons.publish_recipe")
       expect(page).to have_selector("#flash-error")
     end
   end
@@ -42,14 +42,22 @@ RSpec.describe "recipes/create", type: :view do
     it "saves it in DB", js: true do
       fill_in_recipe_data("Soup", "test", "20")
       add_categories
-      find(:css, "#add_ingredient").click
-      all("fieldset input[list='ingredients_dropdown']").last.set("New Ingredient")
+      add_ingredient("New Ingredient", 2, 0)
       expect {
-        click_button I18n.t("buttons.create_new_recipe")
+        click_button I18n.t("buttons.publish_recipe")
         # Wait for page to load
         sleep(1)
       }.to change { Ingredient.count }.by(1)
       expect(page).to have_content("New Ingredient")
+    end
+  end
+
+  context "with no categories" do
+    it "displays error", js: true do
+      fill_in_recipe_data("Soup", "test", "20")
+      add_ingredients_to_recipe(2)
+      click_button I18n.t("buttons.publish_recipe")
+      expect(page).to have_selector("#flash-error")
     end
   end
 
@@ -59,7 +67,7 @@ RSpec.describe "recipes/create", type: :view do
       add_ingredients_to_recipe(3)
       add_categories
       expect {
-        click_button I18n.t("buttons.create_new_recipe")
+        click_button I18n.t("buttons.publish_recipe")
         # Wait for page to load
         sleep(1)
       }.to change { Recipe.count }.by(1)

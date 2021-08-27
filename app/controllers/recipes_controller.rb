@@ -9,14 +9,20 @@ class RecipesController < ApplicationController
   def index
     @sort_order = sort_order
     @sort_kind = sort_kind
-    recipes = Recipe.sort_by_kind_and_order(@sort_kind, @sort_order)
+    recipes = Recipe.published.sort_by_kind_and_order(@sort_kind, @sort_order)
     @pagy, @recipes = pagy(recipes, items: per_page)
   end
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
-    @ingredients_recipe = @recipe.ingredients_recipes
-    gon.avgScore = @recipe.average_score
+    if @recipe.draft? && @recipe.user != current_user
+      respond_to do |format|
+        format.html { redirect_to recipes_path, notice: t(".warning") }
+      end
+    else
+      @ingredients_recipe = @recipe.ingredients_recipes
+      gon.avgScore = @recipe.average_score
+    end
   end
 
   def new
@@ -25,7 +31,14 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    set_ingredients
+    @recipe = Recipe.find_by(id: params[:id])
+    if @recipe.draft? && @recipe.user != current_user
+      respond_to do |format|
+        format.html { redirect_to recipes_path, notice: t(".warning") }
+      end
+    else
+      set_ingredients
+    end
   end
 
   def create
@@ -105,7 +118,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:image, :title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [],
+    params.require(:recipe).permit(:image, :title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :status, :layout, category_ids: [],
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 
