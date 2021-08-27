@@ -73,10 +73,10 @@ class Recipe < ApplicationRecord
   end
 
   def toggle_favourite(user)
-    if user.cook_books[0].recipes.include?(self)
-      user.cook_books[0].recipes.delete(self)
+    if user.favourites_cook_book.recipes.include?(self)
+      user.favourites_cook_book.recipes.delete(self)
     else
-      user.cook_books[0].recipes << self
+      user.favourites_cook_book.recipes << self
     end
   end
 

@@ -1,4 +1,4 @@
-- if current_user.cook_books[0].recipes.include?(@recipe)
+- if current_user.favourites_cook_book.recipes.include?(@recipe)
   - hover_title = t("recipes.update_favourite.remove_favourite")
   - filled = "fill-red-500"
 - else
