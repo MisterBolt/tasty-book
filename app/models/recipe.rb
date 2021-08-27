@@ -81,7 +81,7 @@ class Recipe < ApplicationRecord
       .pluck("avg(recipe_scores.score)")[0]
       .to_f.round(1)
   end
-  
+
   accepts_nested_attributes_for :ingredients_recipes,
     allow_destroy: true,
     reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
