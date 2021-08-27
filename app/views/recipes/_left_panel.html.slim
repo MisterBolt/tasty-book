@@ -23,11 +23,10 @@
           = render 'recipe_scores/new_score'
         .text-4xl.font-semibold
           = user_recipe_score(current_user, @recipe)
-    .justify-self-end.w-1/2
+    .text-center
       .text-sm
         = t("recipes.show.added")
       .mb-2
-        = @recipe.user.username
-      .rounded-2xl.shadow-lg.overflow-hidden
-        = link_to image_tag("/images/cook.png"), @recipe.user
+        = link_to @recipe.user.username, user_path(@recipe.user), class: "hover:opacity-80"
+      = link_to image_tag(@recipe.user.default_or_attached_avatar, class:"w-24 h-24 object-cover rounded-2xl shadow-lg border border-gray-300"), @recipe.user
   .h-8v
