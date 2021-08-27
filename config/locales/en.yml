@@ -120,6 +120,7 @@ en:
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
     comments: "Comments"
+    got_it: "Got it"
     
   cook_book_recipes:
     create:

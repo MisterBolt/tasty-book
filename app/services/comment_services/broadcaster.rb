@@ -31,7 +31,7 @@ module CommentServices
         @comment.broadcast_append_to(
           :admin_comments,
           target: "admin_comments",
-          locals: { viewable: true, comment: @comment }
+          locals: {viewable: true, comment: @comment}
         )
       end
     end
@@ -50,7 +50,7 @@ module CommentServices
           target,
           target: target,
           partial: "admin_panels/#{target}",
-          locals: { comments_size: Comment.awaiting.size }
+          locals: {comments_size: Comment.awaiting.size}
         )
       end
     end
@@ -63,6 +63,5 @@ module CommentServices
                     I18n.t("notifications.guest_comment", title: @comment.recipe.title) :
                     I18n.t("notifications.comment", title: @comment.recipe.title, user: @comment.user.username)}
     end
-
   end
 end

@@ -1,5 +1,7 @@
 .mx-16
   .w-full
     = render("comments/form")
+    - unless user_signed_in?
+      = render "shared/modal", id: "guest_comment_modal", body: "comments/guest_comment_modal", form_data: {}
   = render("comments/comments", streamable: @recipe, attribute: :comments, \
     comments: @recipe.comments.approved, id: "#{dom_id(@recipe)}_comments" , order: :desc, viewable: false)

@@ -1,0 +1,8 @@
+
+.flex.flex-col.items-center.p-5.text-center
+  .text-2xl
+    = "Your comment is waiting for moderation approval, it might take some time."
+  .text-lg.mt-3.mb-6.text-gray-800
+    = "When logged in, comments are accepted automatically."
+  button.btn-secondary. type="button" onclick="toggleDisplay('#{id}')"
+    = t("buttons.got_it")
