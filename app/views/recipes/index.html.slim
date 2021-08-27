@@ -6,7 +6,7 @@
     div[data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll"]
       div[data-infinite-scroll-target="entries"]
         = render "recipes"
-      div[data-infinite-scroll-target="pagination"]
+      div[data-infinite-scroll-target="pagination" class="ml-5"]
         == pagy_nav(@pagy) if @pagy.pages > 1
   - else 
     p.text-center.mt-4

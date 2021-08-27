@@ -5,7 +5,10 @@ export default class extends Controller {
   static targets = ["entries", "pagination"]
 
   scroll () {
-    let url = this.paginationTarget.querySelector("a[rel='next']").hredf
+    let next_page = this.paginationTarget.querySelector("a[rel='next']").href
+    if (next_page == null) { return }
+
+    let url = next_page.href
 
     var body = document.body,
       html = document.documentElement

@@ -10,12 +10,12 @@ class RecipesController < ApplicationController
     @sort_order = sort_order
     @sort_kind = sort_kind
     recipes = Recipe.sort_by_kind_and_order(@sort_kind, @sort_order)
-    @pagy, @recipes = pagy(Recipe.all, items: per_page)
+    @pagy, @recipes = pagy(recipes, items: per_page)
 
-    respond_to do |format| 
+    respond_to do |format|
       format.html
       format.json {
-        render json: { entries: render_to_string(partial: "recipes/recipes", formats: [:html]), pagination: view_context.pagy_nav(@pagy) }
+        render json: {entries: render_to_string(partial: "recipes/recipes", formats: [:html]), pagination: view_context.pagy_nav(@pagy)}
       }
     end
   end
