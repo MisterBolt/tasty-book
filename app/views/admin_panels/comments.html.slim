@@ -1,8 +1,12 @@
-.px-7.my-6.flex.flex-grow
+.px-7.my-6.flex.flex-grow.min-w-0
   .px-3.flex.flex-col.space-y-4
-    .text-4xl.text-gray-400.font-black
+    .text-4xl.text-gray-400.font-black.text-center
       = t("buttons.admin_panel")
-    = render "sidebar"
-  .px-3.flex-grow
-    - if @comments.size > 0
-      = render "comments/comments", resource: @comments, comments: @comments, id: "admin_comments"
+    = render("sidebar")
+  .px-3.flex-grow.overflow-hidden
+    = render("comments/comments", attribute: :admin_comments, comments: @comments, id: "admin_comments", \
+      order: :asc, viewable: current_user.admin)
+    = turbo_stream_from("no_comments_left")
+    = render("admin_panels/no_comments_left", comments_size: @comments.size)
+  = turbo_stream_from("comments_left")
+  = render("admin_panels/comments_left", comments_size: @comments.size)

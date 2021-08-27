@@ -7,6 +7,7 @@ class Comment < ApplicationRecord
   validates_inclusion_of :status, in: statuses
 
   after_create_commit -> { CommentServices::Broadcaster.new(self).process_created_comment }
+  after_update_commit -> { CommentServices::Broadcaster.new(self).process_destroyed_comment }
 
   scope :awaiting, -> { where(status: :awaiting) }
   scope :approved, -> { where(status: :approved) }

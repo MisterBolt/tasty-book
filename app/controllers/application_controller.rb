@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
+  include ActionView::RecordIdentifier
   DEFAULT_PER_PAGE = 12
   DEFAULT_SORT_ORDER = "ASC"
   before_action :store_user_location!, if: :storable_location?

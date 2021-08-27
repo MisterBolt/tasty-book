@@ -1,6 +1,6 @@
-.flex.flex-row.my-4.space-x-6.bg-white.shadow-md.rounded-lg.p-4.pt-3.pr-8
+.flex.flex-row.my-4.space-x-6.bg-white.shadow-md.rounded-lg.p-4.pt-3.pr-8.overflow-hidden id = "#{dom_id(comment)}_comment"
   = avatar_with_or_without_href(comment, 14)
-  .flex.flex-col.space-y-1
+  .flex.flex-grow.flex-col.space-y-1.overflow-hidden
     .flex.flex-row.items-center
       .mr-3
         - if comment.user.present?
@@ -10,5 +10,9 @@
             = t("comments.show.guest")
       .text-gray-400.text-sm 
         | #{ time_ago_in_words(comment.created_at) } ago
-    .text-lg
+    .text-lg.break-words.overflow-hidden
       = comment.body
+  - if comment.status_awaiting? && viewable
+    .flex.space-x-3
+      = link_to render("shared/accept"), comment_approve_admin_panel_path(comment), method: :patch, class: "opacity-60 hover:opacity-100"
+      = link_to render("shared/reject"), comment_reject_admin_panel_path(comment), method: :delete, class: "opacity-60 hover:opacity-100"

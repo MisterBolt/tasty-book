@@ -1,3 +1,6 @@
-= turbo_stream_from resource, :comments
-div id = id
-= render comments.order(created_at: :desc)
+= defined?(streamable) ? turbo_stream_from(streamable, attribute) : turbo_stream_from(attribute)
+- if order == :desc
+  div id = id
+= render(comments.order(created_at: order), viewable: viewable)
+- if order == :asc
+  div id = id

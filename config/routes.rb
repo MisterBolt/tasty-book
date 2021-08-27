@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   resource :admin_panel, only: [:show] do
     collection do
       get :comments
-      post :comment, action: :comment_approve
-      delete :comment, action: :comment_reject
+      patch "/comment/:id", action: :comment_approve, as: :comment_approve
+      delete "/comment/:id", action: :comment_reject, as: :comment_reject
     end
   end
   namespace :api do
