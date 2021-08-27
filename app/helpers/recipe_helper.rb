@@ -29,7 +29,7 @@ module RecipeHelper
 
   def recipe_image_for_layout1(recipe)
     if recipe.image.attached?
-      image_tag(recipe.image.variant(resize_to_fill: [1280, 1600]), class: IMAGE_CLASS , alt: IMAGE_ALT)
+      image_tag(recipe.image.variant(resize_to_fill: [1280, 1600]), class: IMAGE_CLASS, alt: IMAGE_ALT)
     else
       image_tag(IMAGE_DEFAULT, class: IMAGE_CLASS)
     end

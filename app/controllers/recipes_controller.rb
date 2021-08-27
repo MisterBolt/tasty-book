@@ -74,18 +74,18 @@ class RecipesController < ApplicationController
     end
     @recipe.attributes = params
     @recipe.resize_image if params.key?(:image)
-      respond_to do |format|
-        if @recipe.valid? && params[:ingredients_recipes_attributes] != {}
-          IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
-          @recipe.save
-          format.html { redirect_to @recipe, notice: t(".notice") }
-        else
-          set_ingredients
-          @recipe.errors.full_messages.each do |e|
-            flash.now[:error] = e
-          end
-          format.html { render :edit, status: :unprocessable_entity }
+    respond_to do |format|
+      if @recipe.valid? && params[:ingredients_recipes_attributes] != {}
+        IngredientsRecipe.where(recipe_id: @recipe.id).destroy_all
+        @recipe.save
+        format.html { redirect_to @recipe, notice: t(".notice") }
+      else
+        set_ingredients
+        @recipe.errors.full_messages.each do |e|
+          flash.now[:error] = e
         end
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
