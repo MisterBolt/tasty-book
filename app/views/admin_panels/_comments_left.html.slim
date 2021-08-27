@@ -3,6 +3,6 @@
     .text-5xl.font-black
       = comments_size
     .text-2xl.font-bold
-      = "comments"
+      = t("admin_panel.comments", count: comments_size)
     .text-2xl.font-medium.text-gray-500
-      = "more to go"
+      = t("admin_panel.more_to_go", count: comments_size)

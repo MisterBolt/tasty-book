@@ -119,7 +119,8 @@ en:
     update_and_save_as_draft: "Save changes and save as draft"
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
-
+    comments: "Comments"
+    
   cook_book_recipes:
     create:
       action: "Add recipe to a Tasty Book"
@@ -219,3 +220,11 @@ en:
     comment: "Your %{title} recipe has been commented by %{user}"
     follow: "%{follower} is now following you"
     recipe_score: "Your %{title} recipe has been scored %{score} by %{user}"
+
+  admin_panel:
+    comments:
+      one: "comment"
+      other: "comments"
+    more_to_go: "more to go"
+    all_comments: "all comments"
+    overviewed: "overviewed"

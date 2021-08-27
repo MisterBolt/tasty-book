@@ -1,6 +1,6 @@
 = turbo_frame_tag "comment_form" do 
   .flex.flex-row.items-center
-    = image_tag(current_user.default_or_attached_avatar, class:"w-14 h-14 object-cover rounded-full border border-gray-400 mr-4")
+    = image_tag(avatar_for_user_or_guest(current_user||nil), class:"w-14 h-14 object-cover rounded-full border border-gray-300 mr-4")
     .flex-grow
       = form_with model: [ @recipe, @recipe.comments.build ], class: "flex flex-row items-center" do |form|
         .input-text-white.flex-grow

@@ -28,7 +28,7 @@ module CommentServices
 
     def update_awaiting_comments_list_with_new_comment
       if @comment.status_awaiting?
-        @comment.broadcast_prepend_to(
+        @comment.broadcast_append_to(
           :admin_comments,
           target: "admin_comments",
           locals: { viewable: true, comment: @comment }
