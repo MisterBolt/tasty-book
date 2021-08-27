@@ -1,2 +1,5 @@
-.mt-5.text-2xl.text-center
-  = @cook_book.title
+.container.mx-auto 
+  .mt-5.text-2xl.text-center
+    = @cook_book.title
+  .flex.flex-row
+    = render 'recipe'
