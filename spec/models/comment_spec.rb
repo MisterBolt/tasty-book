@@ -32,6 +32,13 @@ RSpec.describe Comment, type: :model do
     it { expect(subject).to eq(["approved"] * 2) }
   end
 
+  describe ".rejected" do
+    before { 6.times { |n| create(:comment, status: Comment.statuses.keys[n % 3]) } }
+    subject { Comment.rejected.map(&:status) }
+
+    it { expect(subject).to eq(["rejected"] * 2) }
+  end
+
   describe "class methods" do
     describe "#send_notification_email" do
       it "sends notification email" do

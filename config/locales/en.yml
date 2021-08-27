@@ -100,6 +100,9 @@ en:
       awaiting: "Awaiting"
       approved: "Approved"
       rejected: "Rejected"
+    guest_comment_modal:
+      title: "Your comment is waiting for moderation approval, it might take some time."
+      subtitle: "When logged in, comments are accepted automatically."
 
   buttons:
     sign_up: "Sign up"

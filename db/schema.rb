@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2021_08_25_185423) do
     t.integer "difficulty", default: 0, null: false
     t.integer "time_in_minutes_needed", null: false
     t.integer "layout", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 

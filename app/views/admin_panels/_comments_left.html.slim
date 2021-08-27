@@ -1,6 +1,6 @@
 #comments_left
   .p-4.flex.flex-col.items-center.text-gray-600 class = comments_left_opacity_class(comments_size)
-    .text-5xl.font-black
+    #awaiting_comment_number.text-5xl.font-black
       = comments_size
     .text-2xl.font-bold
       = t("admin_panel.comments", count: comments_size)

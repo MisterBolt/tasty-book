@@ -11,6 +11,7 @@ class Comment < ApplicationRecord
 
   scope :awaiting, -> { where(status: :awaiting) }
   scope :approved, -> { where(status: :approved) }
+  scope :rejected, -> { where(status: :rejected) }
 
   def send_notification_email
     NotificationMailer.comment_notification(recipe.user, self).deliver_now
