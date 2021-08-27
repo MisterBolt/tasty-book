@@ -33,8 +33,8 @@ module ApplicationHelper
     html_options["id"] = "add_ingredient"
     html_options["class"] = "btn-primary"
     html_options
-  def link_to_add_fields(partial, type)
-    field = render partial
+  end
+
   def link_to_add_fields(partial, type, builder)
     field = render partial: partial, locals: {form: builder}
     content_tag(:a, I18n.t("buttons.add"), data: {prepend: field, type: type}, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 m-1 cursor-pointer border border-blue-700 rounded")

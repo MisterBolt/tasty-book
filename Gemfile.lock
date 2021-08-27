@@ -200,7 +200,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.1)
+    rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (6.1.4.1)
       actionpack (= 6.1.4.1)
@@ -309,7 +309,7 @@ GEM
     temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
-    turbo-rails (0.7.4)
+    turbo-rails (0.5.12)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -372,6 +372,8 @@ DEPENDENCIES
   slim-rails (~> 3.2)
   spring
   standard (~> 1.1)
+  stimulus-rails
+  turbo-rails (~> 0.5.12)
   tzinfo-data
   web-console (>= 4.1.0)
   webpacker (~> 5.0)

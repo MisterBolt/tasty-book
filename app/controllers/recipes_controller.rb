@@ -131,7 +131,7 @@ class RecipesController < ApplicationController
   def sort_kind
     params[:kind].presence || DEFAULT_SORT_KIND
   end
-  
+
   def query_params
     query_params = params[:query]
     query_params ? query_params.permit(:text) : {}

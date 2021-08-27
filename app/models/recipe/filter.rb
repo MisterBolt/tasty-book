@@ -20,7 +20,7 @@ class Recipe::Filter
     if query_params[:ingredients].present?
       scope = scope.joins(:ingredients).where("ingredients.name IN (?)", query_params[:ingredients])
     end
-    
+
     if query_params[:time].present?
       scope = case query_params[:time]
       when "all"

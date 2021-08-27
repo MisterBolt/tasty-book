@@ -90,7 +90,7 @@ RSpec.describe "recipes/index", type: :view do
       @pagy, @recipes = pagy_array(@recipes, items: 10)
       visit recipes_path
     end
-    
+
     it "displays only recipes with valid title", js: true do
       find(:css, "#query_text").set("one")
       sleep(1)
