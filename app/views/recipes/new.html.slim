@@ -6,10 +6,11 @@
                 = f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             .mb-4.border-2.p-4.border-gray-500
                 p.text-m.text-gray-700.font-bold.mb-3 = t("recipes.create.section")
-                - html_options = link_to_add_fields f, :sections, 'section_form', "add_section"
                 - for link in @recipe.sections do 
-                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_title: link.title, data_body: link.body, class: "section"
-                = link_to t("buttons.add_section"), "#", html_options
+                    fieldset
+                        = f.fields_for "sections_attributes", link, index: rand(10000..900000) do |builder|
+                            = render partial: "section_form", locals: {f: builder, section_id: link.id, title: link.title, body: link.body}
+                = link_to_add_fields t("buttons.add_section"), f, :sections, "section_form", "add_section", { section_id: nil, title: nil, body: nil }
             .mb-4
                 = f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -28,11 +29,12 @@
                             = check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id)
                             = label_tag :category_id, cat.name
             .mb-4.border-2.p-4.border-gray-500
-                - html_options = link_to_add_fields f, :ingredients_recipes, 'ingredient_fields', "add_ingredient"
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
                 - for link in @recipe.ingredients_recipes do 
-                    = field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link.ingredient_name, data_quantity: link.quantity, data_unit: link.unit, class: "ingredient"
-                = link_to t("buttons.add_ingredient"), "#", html_options
-            = f.submit(t('buttons.create_new_recipe'),class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
+                    fieldset
+                        = f.fields_for "ingredients_recipes_attributes", link, index: rand(10000..900000) do |builder|
+                            = render partial: "ingredient_fields", locals: {f: builder, ingredient_id: link.id, ingredient_name: link.ingredient_name, quantity: link.quantity, unit: link.unit}
+                = link_to_add_fields t("buttons.add_ingredient"), f, :ingredients_recipes, 'ingredient_fields', "add_ingredient", {ingredient_id: nil, ingredient_name: nil, quantity: nil, unit: nil}
+            = f.submit(t('buttons.create_new_recipe'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
 
 = javascript_pack_tag "create_recipe"

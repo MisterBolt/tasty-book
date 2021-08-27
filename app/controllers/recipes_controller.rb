@@ -50,7 +50,9 @@ class RecipesController < ApplicationController
   def update 
     respond_to do |format|
       params = recipe_params
-      params = validate_params(params)
+      if !params.key?(:category_ids)
+        params[:category_ids] = []
+      end
       @recipe.attributes = params
       if @recipe.valid?
         @recipe.save
@@ -82,17 +84,10 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [], 
       sections_attributes: [:id, :title, :body, :_destroy],
-      ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit])
+      ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 
   def cook_books_params
     params.require(:recipe).permit(cook_book_ids: [])
-  end
-
-  def validate_params(params)
-    if !params.key?(:category_ids)
-      params[:category_ids] = []
-    end
-    params
   end
 end
