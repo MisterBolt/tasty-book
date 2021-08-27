@@ -17,12 +17,14 @@ class User < ApplicationRecord
     through: :recipe_scores,
     source: :recipe
 
-  has_many :recipes
+  has_many :recipes,
+    dependent: :destroy
 
   has_many :cook_books,
     dependent: :destroy
 
-  has_many :comments
+  has_many :comments,
+    dependent: :destroy
 
   # returns an array of follows a user gave to someone else
   has_many :given_follows,
