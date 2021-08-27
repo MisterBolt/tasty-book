@@ -40,7 +40,6 @@ class ProfileController < ApplicationController
 
   def delete_user_with_data
     @user.destroy
-    Devise.sign_out_all_scopes ? sign_out : sign_out(@user)
     flash[:notice] = t(".notice")
     redirect_to root_path
   end
