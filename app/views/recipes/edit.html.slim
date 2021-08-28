@@ -2,27 +2,33 @@
   .w-4/5.m-auto.content-center
 		= form_with(model: @recipe, local:true, url: "/recipes/#{@recipe.id}", method: :patch, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
 			.mb-4.input-file-white
-					= f.label :image, value: "Image (optional)"
-					= f.file_field :image, accept: "image/png,image/jpeg"
+			  = f.label :image, value: "Image (optional)"
+			  = f.file_field :image, accept: "image/png,image/jpeg"
 			.mb-4.input-text-white
-					= f.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
-					= f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+			  = f.label :title
+			  = f.text_field :title
 			.mb-4.input-text-white
-					= f.label :preparation_description, class: "block text-gray-700 text-sm font-bold mb-2"
-					= f.text_area :preparation_description, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+			  = f.label :preparation_description
+			  = f.text_area :preparation_description
 			.mb-4.input-text-white
-					= f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
-					= f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+			  = f.label :time_in_minutes_needed, "Time needed (in minutes)"
+			  = f.number_field :time_in_minutes_needed
 			.mb-4.input-select-white
-					= f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
-					= f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
+			  = f.label :difficulty
+			  .relative
+			    = f.select :difficulty, Recipe.difficulties.map { |key, value| [key.capitalize, key] }
+				.selector
+         		  = render "shared/arrow_down"
 			.mb-4.input-select-white
-					= f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
-					= f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
+			  = f.label :layout
+			  .relative
+			  	= f.select :layout, Recipe.layouts.keys
+				.selector
+         		  = render "shared/arrow_down"
 			.m-3.input-base
 				p class="block text-gray-700 text-sm font-bold mb-2" Categories:
 				.flex.flex-wrap.border.p-4.border-gray-300.rounded-md.shadow-md
-						- categories = @recipe.categories.map { |cat| cat.id }
+						- categories = @recipe.categories.map(&:id)
 						- Category.all.each do |cat|
 								.p-3.
 										= check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id), class: "mr-1"
