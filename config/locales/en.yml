@@ -32,9 +32,18 @@
 en:
   confirm: "Are you sure?"
   all_rights: "©2021 Tasty Book. All rights reserved."
+  minutes: "minutes"
+
+  sort:
+    ascending: "Ascending"
+    descending: "Descending"
+    by_title: "By title"
+    by_score: "By score"
+    by_time: "By time"
+    by_difficulty: "By difficulty"
 
   recipes:
-    not_found: "No recipes found"
+    not_found: "No recipes yet"
     edit:
       action: "Edit recipe"
     create:
@@ -62,6 +71,8 @@ en:
       action: "Update tasty books"
       notice: "Tasty books were successfully assigned to the recipe."
       alert: "Error occured, tasty books couldn't be assigned to the recipe."
+    show:
+      warning: "Recipe with this id doesn't exists"
 
   recipe_scores:
     create:
@@ -92,27 +103,44 @@ en:
     log_out: "Logout"
     recipes: "Recipes"
     cook_books: "Tasty Books"
+    dashboard: "Dashboard"
+    add_new_recipe: "Add new recipe"
+    my_profile: "My Profile"
     cancel: "Cancel"
     create_new_recipe: "Create new recipe"
+    publish_recipe: "Publish recipe"
+    save_recipe_as_draft: "Save recipe as draft"
+    update_and_publish: "Save changes and publish"
+    update_and_save_as_draft: "Save changes and save as draft"
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
     add_section: "Add section"
     
   cook_book_recipes:
     create:
-      action: "Add recipe to a tasty book"
+      action: "Add recipe to a Tasty Book"
 
   cook_books:
+    not_found: "No Tasty Books yet"
+    recipes_inside:
+      one: " and 1 more recipe"
+      other: " and %{count} more recipes"
     form:
-      title_placeholder: "My tasty book"
+      title_placeholder: "My Tasty Book"
     visibilities:
       private: "Private"
       public: "Public"
       followers: "Followers"
     create:
-      action: "Create new tasty book"
-      notice: "Tasty book was successfully created."
-      alert: "Error occured, tasty book couldn't be created."
+      action: "Create new Tasty Book"
+      notice: "Tasty Book was successfully created."
+      alert: "Error occured, Tasty Book couldn't be created."
+    destroy:
+      action: "Delete Tasty Book"
+      notice: "Tasty Book was successfully deleted."
+      alert: "Tasty Book couldn't be deleted."
+    edit:
+      action: "Edit Tasty Book"
 
   users:
     recipes_count: "Recipes: %{count}"
@@ -120,10 +148,10 @@ en:
       title: "Recipes"
     followings:
       title: "Followings"
-      not_found: "No followings found"
+      not_found: "No followings yet"
     followers:
       title: "Followers"
-      not_found: "No followers found"
+      not_found: "No followers yet"
 
   follows:
     create:
@@ -157,6 +185,23 @@ en:
         other: " drafts"
       average_recipes_score": "Average recipes score"
       cook_books: "Tasty books"
+    settings:
+      change_avatar: "Change avatar"
+      change_username: "Change username"
+      change_password: "Change password"
+      new_username: "New username"
+      new_password: "New password"
+      confirm_new_password: "Confirm new password"
+      current_password: "Current password"
+    update_password:
+      notice: "Password changed succesfully"
+      alert: "Password couldn't be changed"
+    update_username:
+      notice: "Username changed succesfully"
+      alert: "Username couldn't be changed"
+    update_avatar:
+      notice: "Avatar changed succesfully"
+      alert: "Avatar couldn't be changed"
   
   notifications:
     hello: "Hello %{user}!"

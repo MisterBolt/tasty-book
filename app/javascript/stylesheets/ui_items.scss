@@ -8,11 +8,13 @@
 
 @mixin input-base{
   @apply px-3;
-  label{ @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 }
+  label{ @apply block capitalize tracking-wide text-gray-700 text-xs font-bold mb-2 }
   input, select{
-    @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight;
-    &:focus{ @apply outline-none bg-white border-gray-500 }
+    @apply  block w-full bg-white border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
+    &:hover{ @apply bg-gray-100 cursor-pointer }
   }
+  input[type=text]:hover, input[type=password]:hover, input[type=email]:hover{ @apply cursor-text }
+  input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
 .btn-primary{
@@ -24,21 +26,66 @@
 
 .btn-secondary{
   @include btn-base;
-  @apply text-white bg-blue-600;
-  &:hover{ @apply bg-blue-700 }
-  &:focus{ @apply ring-indigo-500 }
+  @apply text-white bg-black opacity-80;
+  &:hover{ @apply opacity-90 }
+  &:focus{ @apply ring-gray-700 }
 }
 
 .btn-nav{
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
   &:hover{ @apply text-mustard }
 }
+.btn-nav-active{
+  @apply inline-flex justify-center items-center text-base font-medium text-mustard bg-none;
+  &:hover{ @apply opacity-80 }
+}
 
 .input-text{ @include input-base }
-
-.input-select{
+.input-text-white{
   @include input-base;
+  input{
+    @apply bg-white;
+    &:hover{ @apply bg-gray-100 }
+  }
+}
+
+@mixin input-select{
+  @include input-base;
+  select{ @apply pr-6 }
   .selector{ @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 }
+}
+.input-select{ @include input-select }
+.input-select-white{
+  @include input-select;
+  input{
+    @apply bg-white;
+    &:hover{ @apply bg-gray-100 }
+  }
+}
+
+
+@mixin input-file-inner-button{
+  @apply text-white text-sm font-normal bg-black opacity-80 border-none p-2.5 mr-2;
+  &:hover{ @apply opacity-75 }
+}
+@mixin input-file{
+  @include input-base;
+  *{ @apply cursor-pointer }
+  label{ @apply cursor-default }
+  ::-webkit-file-upload-button{ @include input-file-inner-button }
+  ::file-selector-button{ @include input-file-inner-button }
+  input{
+    @apply p-0;
+    &:focus{ @apply bg-gray-100 }
+  }
+}
+.input-file{ @include input-file }
+.input-file-white{
+  @include input-file;
+  input{
+    @apply bg-white;
+    &:hover{ @apply bg-gray-100 }
+  }
 }
 
 .checkbox-list{
@@ -49,7 +96,7 @@
 .input-checkbox{
   @apply border-2 border-gray-200 rounded-lg shadow-md;
   &:hover{ @apply bg-gray-100 opacity-80 }
-  input{ @apply pointer-events-none opacity-0 absolute }
+  input{ @apply pointer-events-none opacity-0 hidden }
   label{ @apply flex cursor-pointer }
   .label-text{ @apply flex-grow flex items-center justify-center m-3 mr-0 }
   .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 m-3 ml-0 }

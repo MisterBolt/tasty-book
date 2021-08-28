@@ -65,7 +65,7 @@ RSpec.describe "users/show", type: :view do
 
       context "with 11 recipes" do
         before do
-          @recipes = create_list(:recipe, 10)
+          @recipes = create_list(:recipe, 10, title: "titleA")
           @recipes << create(:recipe, title: "papardelle ala arrabiata")
           @pagy, @recipes = pagy_array(@recipes, items: 10)
           assign(:recipes, @recipes)

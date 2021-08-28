@@ -4,9 +4,8 @@ RSpec.describe RecipesController, type: :request do
   describe "api/v1/recipes:id" do
     context "with valid params" do
       let(:user) { create(:user) }
-      let(:ingredient) { create(:ingredient) }
       let(:recipe) { create(:recipe, user: user) }
-      let!(:ingredients_recipe) { create(:ingredients_recipe, recipe: recipe, ingredient: ingredient) }
+      let(:ingredients_recipe) { recipe.ingredients_recipes.first }
 
       it "should return json containing recipe ingredients data with status:'SUCCESS'" do
         get "/api/v1/recipes/#{recipe.id}"
@@ -15,7 +14,11 @@ RSpec.describe RecipesController, type: :request do
 
         expect(json["data"]).to contain_exactly(
           ["ingredients",
-            [{"name" => ingredient.name, "quantity" => ingredients_recipe.quantity, "unit" => ingredients_recipe.unit}]],
+            [{
+              "name" => ingredients_recipe.ingredient.name,
+              "quantity" => ingredients_recipe.quantity,
+              "unit" => ingredients_recipe.unit
+            }]],
           ["title", recipe.title.to_s]
         )
         expect(json["status"]).to eq(200)

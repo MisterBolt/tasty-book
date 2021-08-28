@@ -1,7 +1,10 @@
 .flex.flex-grow.w-full
     .w-4/5.m-auto.content-center
-        = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
-            .mb-4
+      = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
+            .mb-4.input-file-white
+								= f.label :image, value: "Image (optional)"
+								= f.file_field :image, accept: "image/png,image/jpeg"
+            .mb-4.input-text-white
                 = f.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             .mb-4.border-2.p-4.border-gray-500
@@ -11,30 +14,33 @@
                         = f.fields_for "sections_attributes", link, index: rand(10000..900000) do |builder|
                             = render partial: "section_form", locals: {f: builder, section_id: link.id, title: link.title, body: link.body}
                 = link_to_add_fields t("buttons.add_section"), f, :sections, "section_form", "add_section", { section_id: nil, title: nil, body: nil }
-            .mb-4
+            .mb-4.input-text-white
                 = f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            .mb-4
+            .mb-4.input-select-white
                 = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-            .mb-4 
+            .mb-4.input-select-white
                 = f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
                 = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-            .mb-4.
+            .mb-3.input-base
                 p class="block text-gray-700 text-sm font-bold mb-2" Categories:
-                .flex.flex-row.justify-start
+                .flex.flex-wrap.border.p-4.border-gray-300.rounded-md.shadow-md
                     - categories = @recipe.categories.map { |cat| cat.id }
                     - Category.all.each do |cat|
                         .p-3
-                            = check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id)
+                            = check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id), class: "mr-1"
                             = label_tag :category_id, cat.name
-            .mb-4.border-2.p-4.border-gray-500
+            .mb-3.border.p-4.border-gray-300.rounded-md.shadow-md
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
                 - for link in @recipe.ingredients_recipes do 
                     fieldset
                         = f.fields_for "ingredients_recipes_attributes", link, index: rand(10000..900000) do |builder|
                             = render partial: "ingredient_fields", locals: {f: builder, ingredient_id: link.id, ingredient_name: link.ingredient_name, quantity: link.quantity, unit: link.unit}
                 = link_to_add_fields t("buttons.add_ingredient"), f, :ingredients_recipes, 'ingredient_fields', "add_ingredient", {ingredient_id: nil, ingredient_name: nil, quantity: nil, unit: nil}
-            = f.submit(t('buttons.create_new_recipe'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline")
+            .ml-3
+                = f.hidden_field :status, value: "draft"
+                = f.submit(t('buttons.save_recipe_as_draft'), id: "draft_submit",class: "btn-secondary")
+                = f.submit(t('buttons.publish_recipe'), onclick: "document.getElementById('recipe_status').value = 'published'",id: "save_submit",class: "btn-secondary")
 
 = javascript_pack_tag "create_recipe"

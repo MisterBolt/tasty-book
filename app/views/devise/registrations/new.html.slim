@@ -1,36 +1,28 @@
 .flex.flex-grow
-  .w-full.max-w-xs.m-auto
+  .w-full.max-w-sm.m-auto
     = render "devise/shared/error_messages", resource: resource
-    = form_for(resource, as: resource_name, local: true, url: registration_path(resource_name), html: { class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" }) do |f|
-      .mb-4
-        = f.label :avatar, value: "Avatar(optional)", class: "block text-gray-700 text-sm font-bold mb-2"
-        = f.file_field :avatar, accept: "image/png,image/jpeg", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      .mb-4
-        = f.label :username, class: "block text-gray-700 text-sm font-bold mb-2"
-        = f.text_field :username, autofocus: true, autocomplete: "username", \
-          class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
-          placeholder: "Username"
-      .mb-4
-        = f.label :email, class: "block text-gray-700 text-sm font-bold mb-2"
-        = f.email_field :email, autocomplete: "email", \
-          class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
-          placeholder: "Email"
-      .mb-4
-        = f.label :password, class: "block text-gray-700 text-sm font-bold mb-2"
+    = form_for(resource, as: resource_name, local: true, url: registration_path(resource_name), html: { class: "bg-white shadow-md rounded px-8 pt-6 pb-8 flex flex-col space-y-4" }) do |f|
+      .input-file-white
+        = f.label :avatar, value: "Avatar (optional)"
+        = f.file_field :avatar, accept: "image/png,image/jpeg"
+      .input-text-white
+        = f.label :username
+        = f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "Username"
+      .input-text-white
+        = f.label :email
+        = f.email_field :email, autocomplete: "email", placeholder: "Email"
+      .input-text-white
+        = f.label :password
+        = f.password_field :password, autocomplete: "new-password", placeholder: "Password"
         - if @minimum_password_length
-          em
+          em.p-1.text-sm.text-gray-500
             | (
             = @minimum_password_length
             |  characters minimum)
-        = f.password_field :password, autocomplete: "new-password", \
-          class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
-          placeholder: "Password"
-      .mb-4
-        = f.label :password_confirmation, class: "block text-gray-700 text-sm font-bold mb-2"
-        = f.password_field :password_confirmation, autocomplete: "new-password", \
-          class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", \
-          placeholder: "Password confirmation"
-      .flex.items-center.justify-between
+      .input-text-white
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password confirmation"
+      .flex.items-center.justify-between.mx-2
         = f.submit t("buttons.sign_up"), class: "btn-secondary"
         = link_to t("buttons.log_in"), new_session_path(resource_name), class: "btn-primary"
       = render "devise/shared/links"

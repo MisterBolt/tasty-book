@@ -1,15 +1,16 @@
-#score-modal.z-10.absolute.inset-0.bg-gray-500.bg-opacity-75.flex.justify-center.items-center.hidden
-  .h-44.w-1/4.bg-gray-50.rounded-lg.flex.flex-col.items-center.p-5
-    .text-xl
-      = t("recipe_scores.form.text") 
-    #your-score.text-4xl.font-semibold
-      | 5
-    .flex.flex-row.mt-3
-      = form_with url: recipe_scores_url, method: :post do |form|
-        = form.hidden_field 'authenticity_token', value: form_authenticity_token
-        = form.hidden_field 'recipe_score[user_id]', value: current_user.id
-        = form.hidden_field 'recipe_score[recipe_id]', value: @recipe.id
-        = form.hidden_field 'recipe_score[score]', value: 0
-        = form.submit t("recipe_scores.form.confirm"), class: 'btn-primary'
-      button#close-modal.btn-secondary
-        = t("recipe_scores.form.cancel")
+div data-controller="score-modal"  
+  #score-modal.z-10.absolute.inset-0.bg-gray-500.bg-opacity-75.flex.justify-center.items-center.hidden data-score-modal-target="modalCard"
+    .h-44.w-1/4.bg-gray-50.rounded-lg.flex.flex-col.items-center.p-5
+      .text-xl
+        = t("recipe_scores.form.text") 
+      #your-score.text-4xl.font-semibold
+        | 5
+      .flex.flex-row.mt-3
+        = form_with url: recipe_scores_url, method: :post do |form|
+          = form.hidden_field 'authenticity_token', value: form_authenticity_token
+          = form.hidden_field 'recipe_score[user_id]', value: current_user.id
+          = form.hidden_field 'recipe_score[recipe_id]', value: @recipe.id
+          = form.hidden_field 'recipe_score[score]', value: 0
+          = form.submit t("recipe_scores.form.confirm"), class: 'btn-primary'
+        button#close-modal.btn-secondary data-action="click->score-modal#close"
+          = t("recipe_scores.form.cancel")

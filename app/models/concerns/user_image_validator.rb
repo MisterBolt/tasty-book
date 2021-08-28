@@ -1,4 +1,4 @@
-class ImageValidator < ActiveModel::Validator
+class UserImageValidator < ActiveModel::Validator
   def validate(record)
     return unless record.avatar.attached?
 

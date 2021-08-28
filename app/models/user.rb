@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, presence: true
   validates_with UsernameValidator
-  validates_with ImageValidator
+  validates_with UserImageValidator
 
   before_save :resize_avatar, unless: :persisted?
 
@@ -55,14 +55,20 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
-  private
+  def default_or_attached_avatar
+    if avatar.attached?
+      avatar
+    else
+      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629268606/sample/blank-profile-picture.png"
+    end
+  end
 
-  def resize_avatar
+  def resize_avatar(new_avatar = nil)
     return unless avatar.attached?
 
-    path = attachment_changes["avatar"].attachable.tempfile.path
-    v_filename = avatar.filename
-    v_content_type = avatar.content_type
+    path = new_avatar ? new_avatar.tempfile.path : attachment_changes["avatar"].attachable.tempfile.path
+    v_filename = new_avatar ? new_avatar.original_filename : avatar.filename
+    v_content_type = new_avatar ? new_avatar.content_type : avatar.content_type
     resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(150, 150)
     avatar.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
   end

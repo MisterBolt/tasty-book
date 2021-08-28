@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :section do
-    title { "MyString" }
-    body { "MyText" }
+    title { Faker::Food.dish }
+    body { Faker::Food.description }
   end
 end

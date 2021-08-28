@@ -4,15 +4,35 @@ RSpec.describe RecipesController, type: :controller do
   let(:user) { create(:user) }
 
   describe "GET #index" do
-    def get_index_action(page: 1, per_page: 10)
-      get :index, params: {page: page, per_page: per_page}
+    def get_index_action(page: 1, items: 10, kind: "title", order: "ASC")
+      get :index, params: {page: page, items: items, kind: kind, order: order}
+    end
+    let(:recipes_raw) do
+      [
+        create(:recipe, title: "TitleF", difficulty: "EASY", time_in_minutes_needed: 29),
+        create(:recipe, title: "TitleG", difficulty: "EASY", time_in_minutes_needed: 29),
+        create(:recipe, title: "TitleH", difficulty: "MEDIUM", time_in_minutes_needed: 12),
+        create(:recipe, title: "TitleI", difficulty: "MEDIUM", time_in_minutes_needed: 7),
+        create(:recipe, title: "TitleA", difficulty: "HARD", time_in_minutes_needed: 10),
+        create(:recipe, title: "TitleB", difficulty: "HARD", time_in_minutes_needed: 19),
+        create(:recipe, title: "TitleC", difficulty: "HARD", time_in_minutes_needed: 19),
+        create(:recipe, title: "TitleD", difficulty: "HARD", time_in_minutes_needed: 19),
+        create(:recipe, title: "TitleE", difficulty: "HARD", time_in_minutes_needed: 29),
+        create(:recipe, title: "TitleJ", difficulty: "MEDIUM", time_in_minutes_needed: 10),
+        create(:recipe, title: "TitleK", difficulty: "MEDIUM", time_in_minutes_needed: 6),
+        create(:recipe, title: "TitleL", difficulty: "MEDIUM", time_in_minutes_needed: 11)
+      ]
     end
     let(:recipes) { assigns(:recipes) }
     let(:pagy) { assigns(:pagy) }
-    before { create_list(:recipe, 12) }
+    before do
+      8.times do |i|
+        create(:recipe_score, recipe: recipes_raw[i], score: (i % 5) + 1)
+      end
+    end
 
-    context "when page = 1, per_page = 10 and recipes.length = 12" do
-      before { get_index_action(page: 1, per_page: 10) }
+    context "when page = 1, items = 10 and recipes.length = 12" do
+      before { get_index_action(page: 1, items: 10) }
 
       it { expect(response.status).to eq(200) }
       it { expect(recipes.length).to eq(10) }
@@ -25,8 +45,8 @@ RSpec.describe RecipesController, type: :controller do
       it { expect(pagy.prev).to eq(nil) }
     end
 
-    context "when page = 1, per_page = 15 and recipes.length = 12" do
-      before { get_index_action(page: 1, per_page: 15) }
+    context "when page = 1, items = 15 and recipes.length = 12" do
+      before { get_index_action(page: 1, items: 15) }
 
       it { expect(recipes.length).to eq(12) }
       it { expect(pagy.pages).to eq(1) }
@@ -36,14 +56,56 @@ RSpec.describe RecipesController, type: :controller do
       it { expect(pagy.next).to eq(nil) }
     end
 
-    context "when page = 2, per_page = 5 and recipes.length = 12" do
-      before { get_index_action(page: 2, per_page: 5) }
+    context "when page = 2, items = 5 and recipes.length = 12" do
+      before { get_index_action(page: 2, items: 5) }
 
       it { expect(recipes.length).to eq(5) }
       it { expect(pagy.page).to eq(2) }
       it { expect(pagy.pages).to eq(3) }
       it { expect(pagy.next).to eq(3) }
       it { expect(pagy.prev).to eq(1) }
+    end
+
+    context "when kind: title, order: ASC" do
+      before { get_index_action }
+      subject { recipes.map(&:title) }
+
+      it { expect(subject).to eq(("A".."J").map { |letter| "Title#{letter}" }) }
+    end
+
+    context "when kind: title, order: DESC" do
+      before { get_index_action(order: "DESC") }
+      subject { recipes.map(&:title) }
+
+      it { expect(subject).to eq(("C".."L").to_a.reverse.map { |letter| "Title#{letter}" }) }
+    end
+
+    context "when kind: difficulty, order: DESC" do
+      before { get_index_action(kind: "difficulty", order: "DESC") }
+      subject { recipes.map(&:difficulty) }
+
+      it { expect(subject).to eq(["HARD"] * 5 + ["MEDIUM"] * 5) }
+    end
+
+    context "when kind: time_in_minutes_needed, order: DESC" do
+      before { get_index_action(kind: "time_in_minutes_needed", order: "DESC") }
+      subject { recipes.map(&:time_in_minutes_needed) }
+
+      it { expect(subject).to eq([29, 29, 29, 19, 19, 19, 12, 11, 10, 10]) }
+    end
+
+    context "when kind: score, order: DESC" do
+      before { get_index_action(kind: "score", order: "DESC") }
+      subject { recipes.map(&:average_score) }
+
+      it { expect(subject).to eq([5.0, 4.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 0.0, 0.0]) }
+    end
+
+    context "when kind: score, order: ASC" do
+      before { get_index_action(kind: "score", order: "ASC") }
+      subject { recipes.map(&:average_score) }
+
+      it { expect(subject).to eq([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0]) }
     end
   end
 

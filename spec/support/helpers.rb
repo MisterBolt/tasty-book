@@ -44,8 +44,18 @@ def add_ingredient(name, quantity, unit)
   all("fieldset select option")[unit].select_option
 end
 
-def add_categories()
-  for c in Category.all do
+def remove_ingredients
+  find(:css, ".delete-ingredient").click
+end
+
+def remove_categories
+  page.all(:css, "input[checked='checked']").each do |btn|
+    btn.click
+  end
+end
+
+def add_categories
+  Category.all.each do |c|
     find(:css, "input[value='#{c.id}']").set(true)
   end
 end

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :ingredient do
-    name { Faker::Food.unique.ingredient }
+    sequence(:name) { |n| "ingredient##{n}" }
   end
 end
