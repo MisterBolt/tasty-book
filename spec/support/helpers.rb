@@ -25,9 +25,8 @@ def fill_in_and_resend_confirmation(email)
   click_button I18n.t("devise.confirmations.resend_confirmation")
 end
 
-def fill_in_recipe_data(title, description, time)
+def fill_in_recipe_data(title, time)
   fill_in "Title", with: title
-  fill_in "Preparation description", with: description
   fill_in "Time needed (in minutes)", with: time
 end
 
@@ -35,6 +34,18 @@ def add_ingredients_to_recipe(how_many)
   how_many.times do
     add_ingredient(Ingredient.find(Ingredient.ids.sample).name, rand(1..10), rand(0..3))
   end
+end
+
+def add_sections_to_recipe(how_many)
+  how_many.times do
+    add_section("Random name", "Random body")
+  end
+end
+
+def add_section(title, body)
+  find(:css, "#add_section").click
+  all("fieldset .section-title").last.set(title)
+  all("fieldset .section-body").last.set(body)
 end
 
 def add_ingredient(name, quantity, unit)
@@ -52,6 +63,10 @@ def remove_categories
   page.all(:css, "input[checked='checked']").each do |btn|
     btn.click
   end
+end
+
+def remove_sections
+  find(:css, ".delete-section").click
 end
 
 def add_categories

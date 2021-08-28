@@ -7,9 +7,9 @@
             = options_for_select(Ingredient.all.map { |ingredient| [ingredient.name, ingredient.name] })
     .item
         = f.label :quantity, class: "block text-gray-700 text-sm font-bold"
-        = f.number_field :quantity, value: quantity, min: 1, value: 1, step: 0.1, class: "shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        = f.number_field :quantity, value: quantity, min: 1, step: 0.1, class: "shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
     .item
         = f.label :unit, class: "block text-gray-700 text-sm font-bold"
         = f.select :unit, IngredientsRecipe.units, selected_index: unit
     = f.hidden_field :_destroy, value: 0, class: "destroy"
-    p class="delete bg-transparent hover:bg-red-500 text-red-700 font-semibold cursor-pointer hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" X    
+    p class="delete delete-ingredient bg-transparent hover:bg-red-500 text-red-700 font-semibold cursor-pointer hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" X    

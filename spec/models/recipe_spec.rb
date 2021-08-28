@@ -5,11 +5,11 @@ require "rails_helper"
 RSpec.describe Recipe, type: :model do
   describe "validations" do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:preparation_description) }
     it { is_expected.to validate_presence_of(:time_in_minutes_needed) }
     it { is_expected.to validate_presence_of(:difficulty) }
     it { is_expected.to validate_presence_of(:categories) }
     it { is_expected.to validate_presence_of(:status) }
+    it { is_expected.to validate_length_of(:sections) }
     it { should define_enum_for(:status).with_values([:draft, :published]) }
     it { should define_enum_for(:difficulty).with_values([:EASY, :MEDIUM, :HARD]) }
   end
@@ -21,6 +21,7 @@ RSpec.describe Recipe, type: :model do
     it { should belong_to(:user) }
     it { should have_and_belong_to_many(:cook_books) }
     it { should have_and_belong_to_many(:categories) }
+    it { should have_many(:sections) }
   end
 
   describe "#average_score" do
