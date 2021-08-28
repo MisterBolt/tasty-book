@@ -11,7 +11,14 @@
         | #{@recipe.average_score}
       .text-gray-500.mb-6
         | (#{@recipe.recipe_scores.count} #{t("recipe_scores.show.count_score")})
-      .mt-6.mb-3
+      .mt-6.mb-3 
+      = t("recipes.buy")
+      = link_to \
+        image_tag("/images/shopping-cart.png",\
+        class: "mx-auto py-2 opacity-90"),\
+        "https://shopping-troll.herokuapp.com/recipes/#{@recipe.id}",\
+        target:"_blank", class:"btn-yellow"
+        
       - if current_user
         - if user_recipe_score(current_user, @recipe)
           .mb-2

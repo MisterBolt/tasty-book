@@ -43,6 +43,7 @@ en:
     by_difficulty: "By difficulty"
 
   recipes:
+    buy: "Buy ingredients:"
     not_found: "No recipes yet"
     edit:
       action: "Edit recipe"
