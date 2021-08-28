@@ -30,7 +30,7 @@ class ProfileController < ApplicationController
   end
 
   def update_avatar
-    update_action(@user.resize_avatar(user_avatar_params) && @user.save)
+    update_action(@user.update(user_avatar_params))
   end
 
   private
@@ -48,7 +48,7 @@ class ProfileController < ApplicationController
   end
 
   def user_avatar_params
-    params.require(:user).permit(:avatar)[:avatar]
+    params.require(:user).permit(:avatar)
   end
 
   def update_action(condition)
