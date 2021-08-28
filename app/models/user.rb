@@ -65,7 +65,7 @@ class User < ApplicationRecord
 
   def resize_avatar
     return unless avatar.attached? && defined?(attachment_changes["avatar"].attachable.tempfile)
-    
+
     path = attachment_changes["avatar"].attachable.tempfile.path
     v_filename = avatar.filename
     v_content_type = avatar.content_type
