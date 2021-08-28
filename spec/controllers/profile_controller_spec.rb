@@ -166,6 +166,9 @@ RSpec.describe ProfileController, type: :controller do
         expect(-> { patch_update_password_action("123", "123", "password") })
           .not_to change { User.find_by(id: user.id).valid_password?("password") }
       end
+    end
+  end
+
   describe "GET #cook_books" do
     def get_cook_books_action(page: 1, items: 12)
       get :cook_books, params: {page: page, items: items}

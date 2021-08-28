@@ -1,6 +1,4 @@
-- if user_signed_in?
-  - id = "create_cook_book"
-
-  button.btn-secondary type="button" onclick="toggleDisplay('#{id}')"
-    = t("cook_books.create.action")
-  = render "shared/modal", id: id, body: "profile/form_cook_book", form_data: { model: @cook_book }
+- id = "create_cook_book"
+button.btn-secondary type="button" onclick="toggleDisplay('#{id}')"
+  = t("cook_books.create.action")
+= render "shared/modal", id: id, body: "profile/form_cook_book", form_data: { model: @cook_book }

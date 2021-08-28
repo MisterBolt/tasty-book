@@ -6,7 +6,8 @@
       = render "profile/create_cook_book"
       == pagy_nav(@pagy) if @pagy.pages > 1
     - if @cook_books.present?
-      = render @cook_books
+      .flex.flex-wrap.justify-center.items-stretch
+        = render @cook_books
     - else 
       p.text-center.mt-5
         = t("cook_books.not_found")

@@ -131,7 +131,7 @@ en:
       public: "Public"
       followers: "Followers"
     create:
-      action: "Create new Tasty Book"
+      action: "Add new Tasty Book"
       notice: "Tasty Book was successfully created."
       alert: "Error occured, Tasty Book couldn't be created."
     destroy:
