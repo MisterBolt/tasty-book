@@ -1,4 +1,4 @@
-.flex.flex-grow.w-full
+.flex.flex-grow.w-full.mt-5
   .w-4/5.m-auto.content-center
 		= form_with(model: @recipe, local:true, url: "/recipes/#{@recipe.id}", method: :patch, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
 			.mb-4.input-file-white
@@ -40,12 +40,11 @@
 							= field_set_tag nil, data_form: html_options['data-form-prepend'], data_ingredient: link[:ingredient_name], data_quantity: link[:quantity], data_unit: link[:unit]
 					= link_to t("buttons.add_ingredient"), "#", html_options
 			.ml-3
+				= f.hidden_field :status
                 - if @recipe.draft?
-                    = f.hidden_field :status, value: "published"
-                    = f.submit(t('buttons.update_and_publish'), class: "btn-secondary")
+                    = f.submit(t('buttons.update_and_publish'), onclick: "document.getElementById('recipe_status').value = 'published'", class: "btn-secondary")
                 - else 
-                    = f.hidden_field :status, value: "draft"
-                    = f.submit(t('buttons.update_and_save_as_draft'), class: "btn-secondary")
-                = f.submit(t('buttons.update_recipe'),class: "btn-secondary")
+                    = f.submit(t('buttons.update_and_save_as_draft'), onclick: "document.getElementById('recipe_status').value = 'draft'", class: "btn-secondary")
+                = f.submit(t('buttons.update_recipe'), class: "btn-secondary")
 
 = javascript_pack_tag "add_ingredient"

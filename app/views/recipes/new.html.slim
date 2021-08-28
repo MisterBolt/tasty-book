@@ -1,4 +1,4 @@
-.flex.flex-grow.w-full
+.flex.flex-grow.w-full.mt-5
     .w-4/5.m-auto.content-center
       = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
             .mb-4.input-file-white
@@ -41,7 +41,7 @@
                 = link_to t("buttons.add_ingredient"), "#", html_options
             .ml-3
                 = f.hidden_field :status, value: "draft"
-                = f.submit(t('buttons.save_recipe_as_draft'), id: "draft_submit",class: "btn-secondary")
-                = f.submit(t('buttons.publish_recipe'), onclick: "document.getElementById('recipe_status').value = 'published'",id: "save_submit",class: "btn-secondary")
+                = f.submit(t('buttons.save_recipe_as_draft'), id: "draft_submit", class: "btn-secondary")
+                = f.submit(t('buttons.publish_recipe'), onclick: "document.getElementById('recipe_status').value = 'published'", id: "save_submit", class: "btn-secondary")
 
 = javascript_pack_tag "add_ingredient"
