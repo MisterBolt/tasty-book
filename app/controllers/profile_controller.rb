@@ -9,10 +9,11 @@ class ProfileController < ApplicationController
   end
 
   def recipes
-    @pagy, @recipes = pagy(current_user.recipes, items: per_page)
+    @pagy, @recipes = pagy(current_user.recipes.published, items: per_page)
   end
 
   def recipe_drafts
+    @pagy, @recipes = pagy(current_user.recipes.drafted, items: per_page)
   end
 
   def cook_books

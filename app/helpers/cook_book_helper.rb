@@ -7,6 +7,10 @@ module CookBookHelper
     recipes_count > 0 ? text : t("recipes.not_found")
   end
 
+  def cook_book_visibility_svg(visibility)
+    visibility == "public" ? "" : render("shared/#{visibility}_cook_book")
+  end
+
   def authorize_cook_book_dropdown?(cook_book)
     user_signed_in? && (cook_book.user == current_user || current_user.admin?)
   end

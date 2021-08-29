@@ -1,5 +1,5 @@
 - current_class = "current"
-.side-menu 
+.side-menu
   = link_to t("profile.sidebar.dashboard"), profile_index_path, class: (current_page?(profile_index_path) ? current_class : "")
   = link_to t("profile.sidebar.recipes"), recipes_profile_index_path, class: (current_page?(recipes_profile_index_path) ? current_class : "")
   = link_to t("profile.sidebar.recipe_drafts"), recipe_drafts_profile_index_path, class: (current_page?(recipe_drafts_profile_index_path) ? current_class : "")

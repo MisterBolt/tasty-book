@@ -1,14 +1,1 @@
-.px-7.my-6.flex.flex-grow
-  .px-3
-    = render "sidebar"
-  .px-3.flex-grow.flex.flex-col
-    .flex.justify-between.items-center.flex-row-reverse.my-2
-      = link_to t("recipes.create.action"), new_recipe_path, class: "btn-secondary"
-      == pagy_nav(@pagy) if @pagy.pages > 1
-    - if @recipes.present?
-      = render @recipes
-    - else 
-      p.text-center.mt-5
-        = t("recipes.not_found")
-    .flex.my-2
-      == pagy_nav(@pagy) if @pagy.pages > 1
+= render("profile/recipes")
