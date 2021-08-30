@@ -2,3 +2,10 @@
   @apply bg-mustard text-gray-900 font-bold;
   &:hover { @apply bg-mustard }
 }
+
+.recipe-section{
+  .recipe-section-border{ @apply h-1 w-auto rounded-3xl bg-gray-500 my-8 mx-16 }
+  &:last-child{
+    .recipe-section-border{ @apply hidden }
+  }
+}
