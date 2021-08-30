@@ -12,6 +12,8 @@ class CookBooksController < ApplicationController
   end
 
   def show
+    @cook_book = CookBook.find_by(id: params[:id])
+    @recipes = @cook_book.recipes
   end
 
   def edit

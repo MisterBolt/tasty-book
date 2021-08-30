@@ -57,9 +57,6 @@ en:
     update:
       notice: "Recipe was successfully updated."
       alert: "Error occured, recipe couldn't be updated."
-      cook_books:
-        notice: "Tasty books were successfully assigned to the recipe."
-        alert: "Error occured, tasty books couldn't be assigned to the recipe."
     show:
       ingredients: "Ingredients"
       method: "Method"
@@ -151,6 +148,8 @@ en:
       alert: "Tasty Book couldn't be deleted."
     edit:
       action: "Edit Tasty Book"
+    show:
+      created: "created by"
 
   users:
     recipes_count: "Recipes: %{count}"

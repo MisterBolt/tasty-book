@@ -1,2 +1,7 @@
-.mt-5.text-2xl.text-center
-  = @cook_book.title
+.container.mx-auto 
+  .mt-8.mb-2.text-center.text-4xl.font-bold
+    = @cook_book.title
+  .text_sm.flex.flex-row.justify-center
+    | #{t("cook_books.show.created")} #{@cook_book.user.username}
+  .flex.flex-col
+    = render @recipes 

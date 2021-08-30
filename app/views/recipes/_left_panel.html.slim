@@ -6,7 +6,7 @@
     .flex.flex-col.items-center
       .mb-3
         = t("recipe_scores.show.avg_score")
-      = render 'recipe_scores/average_star_score'
+      = render 'recipe_scores/average_star_score', recipe: @recipe
       #avg-score.text-4xl.font-semibold.mr-2
         | #{@recipe.average_score}
       .text-gray-500.mb-6
