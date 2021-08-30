@@ -42,6 +42,7 @@ rails db:setup
 CLOUD_NAME=
 API_KEY=
 API_SECRET=
+SHOPPING_TROLL_API_URL=
 ```
 
 <!-- DEVELOPMENT -->
