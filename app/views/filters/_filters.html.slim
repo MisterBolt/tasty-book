@@ -1,16 +1,5 @@
-.flex.justify-end.relatived
+.flex.justify-end.relatived.flex-grow
   - sort_options = recipes_sort_options
-
-  .input-select
-    .relative
-      = select_tag :kind, options_for_select(sort_options[:kind], @sort_kind)
-      .selector
-        = render "shared/arrow_down"
-  .input-select
-    .relative
-      = select_tag :order, options_for_select(sort_options[:order], @sort_order)
-      .selector
-        = render "shared/arrow_down"
   
   - if user_signed_in?
     - if @my_books == "1"
@@ -25,14 +14,14 @@
     button.btn_filter_selector2.bg-yellow-200.cursor-default
       = t("filters.buttons.all")
 
+  = render "filters/search_bar"
+
   button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
     .flex.justify-end
       .mr-1.ml-2.mt-1
         = image_tag("/images/filter.png")
       .mr-2
         = t("filters.buttons.filter")
-
-  = render "filters/search_bar"
 
 = render "filters/filters_box"
      

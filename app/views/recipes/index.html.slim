@@ -1,14 +1,13 @@
 .px-10.mt-3
+  = render "filters/filters"
   .flex.justify-between.my-2.px-3
+    .flex.items-center
+      == pagy_nav(@pagy) if @pagy.pages > 1
+    = render "sort_form"
   - if @recipes.present?
-    = render "filters/filters"
-    div[data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll"]
-      .flex.justify-center 
-        == pagy_nav(@pagy) if @pagy.pages > 1
-      div[data-infinite-scroll-target="entries"]
-        = render "recipes"
-      .flex.justify-center 
-        == pagy_nav(@pagy) if @pagy.pages > 1
+    = render @recipes
   - else 
     p.text-center.mt-4
       = t("recipes.not_found")
+  .flex.my-2
+    == pagy_nav(@pagy) if @pagy.pages > 1

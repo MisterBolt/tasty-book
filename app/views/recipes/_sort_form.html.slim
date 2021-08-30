@@ -1,14 +1,14 @@
 - sort_options = recipes_sort_options
 
 = form_tag(recipes_path, method: "GET") do
-  .flex
+  .flex  
     .input-select
       .relative
-        = select_tag :kind, options_for_select(sort_options[:kind], @sort_kind), onchange: "this.form.submit()"
+        = select_tag :kind, options_for_select(sort_options[:kind], @sort_kind)
         .selector
           = render "shared/arrow_down"
     .input-select
       .relative
-        = select_tag :order, options_for_select(sort_options[:order], @sort_order), onchange: "this.form.submit()"
+        = select_tag :order, options_for_select(sort_options[:order], @sort_order)
         .selector
           = render "shared/arrow_down"
