@@ -48,6 +48,7 @@ en:
     by_difficulty: "By difficulty"
 
   recipes:
+    buy: "Buy ingredients:"
     not_found: "No recipes yet"
     edit:
       action: "Edit recipe"
@@ -61,18 +62,20 @@ en:
     update:
       notice: "Recipe was successfully updated."
       alert: "Error occured, recipe couldn't be updated."
-      cook_books:
-        notice: "Tasty books were successfully assigned to the recipe."
-        alert: "Error occured, tasty books couldn't be assigned to the recipe."
     show:
       ingredients: "Ingredients"
       method: "Method"
       comments: "Comments"
       added: "Added by"
+      warning: "Recipe with this id doesn't exists"
     update_cook_books:
       action: "Update tasty books"
       notice: "Tasty books were successfully assigned to the recipe."
       alert: "Error occured, tasty books couldn't be assigned to the recipe."
+    update_favourite:
+      notice: "Favourites updated."
+      add_favourite: "Add to favourites"
+      remove_favourite: "Remove from favourites"
 
   recipe_scores:
     create:
@@ -96,6 +99,13 @@ en:
       add: "Add"
     show:
       guest: "Guest"
+    statuses:
+      awaiting: "Awaiting"
+      approved: "Approved"
+      rejected: "Rejected"
+    guest_comment_modal:
+      title: "Your comment is waiting for moderation approval, it might take some time."
+      subtitle: "When logged in, comments are accepted automatically."
 
   buttons:
     sign_up: "Sign up"
@@ -104,12 +114,19 @@ en:
     recipes: "Recipes"
     cook_books: "Tasty Books"
     dashboard: "Dashboard"
+    admin_panel: "Admin Panel"
     add_new_recipe: "Add new recipe"
     my_profile: "My Profile"
     cancel: "Cancel"
     create_new_recipe: "Create new recipe"
+    publish_recipe: "Publish recipe"
+    save_recipe_as_draft: "Save recipe as draft"
+    update_and_publish: "Save changes and publish"
+    update_and_save_as_draft: "Save changes and save as draft"
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
+    comments: "Comments"
+    got_it: "Got it"
     
     apply: "Apply"
     add: "Add"
@@ -130,7 +147,7 @@ en:
       public: "Public"
       followers: "Followers"
     create:
-      action: "Create new Tasty Book"
+      action: "Add new Tasty Book"
       notice: "Tasty Book was successfully created."
       alert: "Error occured, Tasty Book couldn't be created."
     destroy:
@@ -139,6 +156,8 @@ en:
       alert: "Tasty Book couldn't be deleted."
     edit:
       action: "Edit Tasty Book"
+    show:
+      created: "created by"
 
   users:
     recipes_count: "Recipes: %{count}"
@@ -166,6 +185,12 @@ en:
       other: "%{count} Followers"
 
   profile:
+    sidebar:
+      dashboard: "Dashboard"
+      recipes: "Recipes"
+      recipe_drafts: "Recipes (draft)"
+      cook_books: "Tasty Books"
+      settings: "Settings"
     index:
       social: "Social"
       followers: "Followers"
@@ -200,7 +225,7 @@ en:
     update_avatar:
       notice: "Avatar changed succesfully"
       alert: "Avatar couldn't be changed"
-  
+
   notifications:
     hello: "Hello %{user}!"
     guest_comment: "Your %{title} recipe has been commented by guest"
@@ -230,3 +255,11 @@ en:
       categories: "Categories:"
       ingredients: "Ingredients:"
 
+
+  admin_panel:
+    comments:
+      one: "comment"
+      other: "comments"
+    more_to_go: "more to go"
+    all_comments: "all comments"
+    overviewed: "overviewed"

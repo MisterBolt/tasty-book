@@ -24,8 +24,14 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find_by(id: params[:id])
-    @ingredients_recipe = @recipe.ingredients_recipes
-    gon.avgScore = @recipe.average_score
+    if @recipe.draft? && @recipe.user != current_user
+      respond_to do |format|
+        format.html { redirect_to recipes_path, notice: t(".warning") }
+      end
+    else
+      @ingredients_recipe = @recipe.ingredients_recipes
+      gon.avgScore = @recipe.average_score
+    end
   end
 
   def new
@@ -34,7 +40,14 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    set_ingredients
+    @recipe = Recipe.find_by(id: params[:id])
+    if @recipe.draft? && @recipe.user != current_user
+      respond_to do |format|
+        format.html { redirect_to recipes_path, notice: t(".warning") }
+      end
+    else
+      set_ingredients
+    end
   end
 
   def create
@@ -107,6 +120,12 @@ class RecipesController < ApplicationController
     redirect_back(fallback_location: recipes_path)
   end
 
+  def update_favourite
+    @recipe.toggle_favourite(current_user)
+    flash[:notice] = t(".notice")
+    redirect_to(@recipe)
+  end
+
   private
 
   def set_recipe
@@ -114,7 +133,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:image, :title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :layout, category_ids: [],
+    params.require(:recipe).permit(:image, :title, :preparation_description, :time_in_minutes_needed, :difficulty, :user_id, :status, :layout, category_ids: [],
       ingredients_recipes_attributes: [:id, :ingredient_name, :quantity, :unit, :_destroy])
   end
 

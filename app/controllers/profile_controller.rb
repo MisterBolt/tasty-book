@@ -9,12 +9,17 @@ class ProfileController < ApplicationController
   end
 
   def recipes
+    @pagy, @recipes = pagy(current_user.recipes.published, items: per_page)
   end
 
   def recipe_drafts
+    @pagy, @recipes = pagy(current_user.recipes.drafted, items: per_page)
   end
 
   def cook_books
+    @cook_book = CookBook.new
+    @visibilities = CookBook.visibilities_strings
+    @pagy, @cook_books = pagy(current_user.cook_books, items: per_page)
   end
 
   def settings
@@ -30,9 +35,7 @@ class ProfileController < ApplicationController
   end
 
   def update_avatar
-    resize_avatar
-    @user.save
-    redirect_to(settings_profile_index_path)
+    update_action(@user.update(user_avatar_params))
   end
 
   private
@@ -62,9 +65,5 @@ class ProfileController < ApplicationController
       flash[:alert] = t(".alert")
     end
     redirect_to(settings_profile_index_path)
-  end
-
-  def resize_avatar
-    current_user.resize_avatar(params[:user][:avatar])
   end
 end

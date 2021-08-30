@@ -23,6 +23,11 @@ RSpec.describe CommentsController, type: :controller do
         expect(Comment.last.user).to eq(user)
       end
 
+      it "set comment as approved" do
+        subject
+        expect(Comment.last.status).to eq("approved")
+      end
+
       it "sends new comment notification email" do
         expect { subject }.to change { ActionMailer::Base.deliveries.count }.by(1)
       end

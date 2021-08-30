@@ -20,6 +20,7 @@ module.exports = {
 				"92v": "92vh",
         "95v": "95vh",
         "2-screen": "200vh",
+        '64': '32rem',
       },
       minHeight: {
         '8v': '8vh',
@@ -58,7 +59,12 @@ module.exports = {
       },
       textColor: {
         'mustard': '#c89c4c',
-      }
+      },
+      fill: theme => ({
+        'gray-400': theme('colors.gray.400'),
+        'red-500': theme('colors.red.500'),
+        'red-700': theme('colors.red.700')
+      })
     },
   },
   variants: {

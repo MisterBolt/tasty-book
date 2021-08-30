@@ -1,4 +1,9 @@
 module RecipeHelper
+  IMAGE_CLASS = "flex-none rounded-lg object-cover bg-gray-100"
+  IMAGE_ALT = "image showing dish"
+  IMAGE_DEFAULT = "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832221/sample/default_recipe_u9wld9.png"
+  IMAGE_THUMBNAIL_DEFAULT = "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832231/sample/default_recipe_thumbnail_yarrcr.png"
+
   def recipes_sort_options
     {
       kind: {
@@ -13,11 +18,6 @@ module RecipeHelper
       }
     }
   end
-
-  IMAGE_CLASS = "flex-none rounded-lg object-cover bg-gray-100"
-  IMAGE_ALT = "image showing dish"
-  IMAGE_DEFAULT = "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832221/sample/default_recipe_u9wld9.png"
-  IMAGE_THUMBNAIL_DEFAULT = "https://res.cloudinary.com/hp7f0176d/image/upload/v1629832231/sample/default_recipe_thumbnail_yarrcr.png"
 
   def recipe_image_for_index(recipe)
     if recipe.image.attached?
@@ -49,5 +49,9 @@ module RecipeHelper
     else
       image_tag(IMAGE_DEFAULT, class: IMAGE_CLASS)
     end
+  end
+
+  def authorize_recipe_action_links?(recipe)
+    user_signed_in? && (recipe.user == current_user || current_user.admin?)
   end
 end

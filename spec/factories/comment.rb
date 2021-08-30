@@ -3,5 +3,6 @@ FactoryBot.define do
     user
     recipe
     body { Faker::Quote.yoda }
+    status { :approved }
   end
 end

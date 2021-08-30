@@ -1,7 +1,7 @@
 .flex.flex-row.items-center
-  - average_stars_count(@recipe, :full).times do
+  - average_stars_count(recipe, :full).times do
     = render 'shared/star', filled: :full 
-  - average_stars_count(@recipe, :percent).times do
+  - average_stars_count(recipe, :percent).times do
     = render 'shared/star', filled: :percent
-  - average_stars_count(@recipe, :empty).times do
+  - average_stars_count(recipe, :empty).times do
     = render 'shared/star', filled: false

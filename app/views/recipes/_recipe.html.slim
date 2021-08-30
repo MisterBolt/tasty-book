@@ -1,4 +1,4 @@
-article.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
+article.recipe.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
   .max-h-100-px.w-100.flex-none.rounded-lg
     = recipe_image_for_index(recipe)
   .flex-1
@@ -37,7 +37,7 @@ article.p-4.flex.space-x-4.bg-white.shadow-lg.rounded-lg.my-3
             button.drop-item type="button" onclick="toggleDisplay('#{id}')" tabindex="-1"
               = t("cook_book_recipes.create.action")
             py-1
-              - if current_user.admin? || recipe.user == current_user
+              - if authorize_recipe_action_links?(recipe)
                 = link_to t("recipes.edit.action"), edit_recipe_path(recipe), class: "drop-item", tab_index: "-1"
                 = link_to t("recipes.destroy.action"), recipe_path(recipe), method: :delete, data: {confirm: t("confirm")}, class: "drop-item", tab_index: "-1"
         = render "shared/modal", id: id, body: "recipes/form_cook_books", form_data: { model: recipe }

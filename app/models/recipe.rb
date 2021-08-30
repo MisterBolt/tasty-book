@@ -5,6 +5,7 @@ class Recipe < ApplicationRecord
   validates :preparation_description, presence: true
   validates :time_in_minutes_needed, presence: true
   validates :difficulty, presence: true
+  validates :status, presence: true
   validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
   validates_with RecipeImageValidator
@@ -13,6 +14,7 @@ class Recipe < ApplicationRecord
 
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
+  enum status: {draft: 0, published: 1}
 
   has_one_attached :image
 
@@ -57,6 +59,10 @@ class Recipe < ApplicationRecord
   #   end
   # end
 
+  accepts_nested_attributes_for :ingredients_recipes,
+    allow_destroy: true,
+    reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
+
   def cook_books_update(cook_book_ids_raw, user)
     cook_book_id_strings = cook_book_ids_raw.filter { |cook_book_id| cook_book_id != "" }
     cook_book_ids = cook_book_id_strings.map { |cook_book_id| cook_book_id.to_i }
@@ -65,6 +71,14 @@ class Recipe < ApplicationRecord
       cook_books << CookBook.where(id: cook_book_ids)
     else
       false
+    end
+  end
+
+  def toggle_favourite(user)
+    if user.favourites_cook_book.recipes.include?(self)
+      user.favourites_cook_book.recipes.delete(self)
+    else
+      user.favourites_cook_book.recipes << self
     end
   end
 
@@ -77,9 +91,11 @@ class Recipe < ApplicationRecord
       .pluck("avg(recipe_scores.score)")[0]
       .to_f.round(1)
   end
-  accepts_nested_attributes_for :ingredients_recipes,
-    allow_destroy: true,
-    reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
+
+  def short_preparation_description(max_char = 175)
+    return preparation_description if preparation_description.size <= max_char
+    preparation_description[0...max_char - 3] + "..."
+  end
 
   def resize_image
     return unless image.attached?

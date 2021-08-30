@@ -9,11 +9,11 @@
 @mixin input-base{
   @apply px-3;
   label{ @apply block capitalize tracking-wide text-gray-700 text-xs font-bold mb-2 }
-  input, select{
-    @apply  block w-full bg-white border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
-    &:hover{ @apply bg-gray-100 cursor-pointer }
+  input, select, textarea{
+    @apply outline-none appearance-none block w-full bg-gray-200 border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
+    &:hover{ @apply bg-gray-300 cursor-pointer }
   }
-  input[type=text]:hover, input[type=password]:hover, input[type=email]:hover{ @apply cursor-text }
+  input[type=text]:hover, input[type=password]:hover, input[type=email]:hover, input[type=number]:hover, textarea:hover{ @apply cursor-text }
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
@@ -43,6 +43,12 @@
   &:focus{ @apply ring-gray-700 }
 }
 
+.btn-yellow{
+  @apply text-white w-12 h-10 rounded bg-yellow-400 opacity-90 mt-1;
+  &:hover{ @apply opacity-100 }
+  &:focus{ @apply ring-gray-700 }
+}
+
 .btn-nav{
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
   &:hover{ @apply text-mustard }
@@ -60,9 +66,10 @@
 .input-text{ @include input-base }
 .input-text-white{
   @include input-base;
-  input{
+  input, textarea{
     @apply bg-white;
     &:hover{ @apply bg-gray-100 }
+    &:focus{ @apply bg-gray-50 }
   }
 }
 
@@ -74,12 +81,11 @@
 .input-select{ @include input-select }
 .input-select-white{
   @include input-select;
-  input{
+  select{
     @apply bg-white;
     &:hover{ @apply bg-gray-100 }
   }
 }
-
 
 @mixin input-file-inner-button{
   @apply text-white text-sm font-normal bg-black opacity-80 border-none p-2.5 mr-2;
@@ -118,7 +124,7 @@
   .label-text{ @apply flex-grow flex items-center justify-center m-3 mr-0 }
   .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 m-3 ml-0 }
   svg{ @apply opacity-0 }
-  
+
   input:checked +label{
     .checkboxer{ @apply border-none bg-green-400 }
     svg{ @apply opacity-100 }
@@ -155,3 +161,8 @@
 .filter-subbox {
   @apply my-5 mx-3 p-6 relative shadow;
 }
+.heart-button{
+  &:hover{ @apply fill-red-700 cursor-pointer }
+}
+
+form.hide-submit input[type="submit"] { display: none;}
