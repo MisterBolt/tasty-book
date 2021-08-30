@@ -1,7 +1,24 @@
 .flex.justify-end.relatived
+  - sort_options = recipes_sort_options
+
+  .input-select
+    .relative
+      = select_tag :kind, options_for_select(sort_options[:kind], @sort_kind)
+      .selector
+        = render "shared/arrow_down"
+  .input-select
+    .relative
+      = select_tag :order, options_for_select(sort_options[:order], @sort_order)
+      .selector
+        = render "shared/arrow_down"
+  
   - if user_signed_in?
-    = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "btn_filter_selector1 cursor-pointer bg-white hover:bg-yellow-100", form: "search_title", data: { disable_with: false }
-    = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: " btn_filter_selector2 cursor-pointer bg-yellow-200" , form: "search_title", data: { disable_with: false }
+    - if @my_books == "1"
+      = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "btn_filter_selector1 cursor-pointer bg-yellow-200", form: "filters", data: { disable_with: false }
+      = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: " btn_filter_selector2 cursor-pointer bg-white hover:bg-yellow-100" , form: "filters", data: { disable_with: false }
+    - else 
+      = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "btn_filter_selector1 cursor-pointer bg-white hover:bg-yellow-100", form: "filters", data: { disable_with: false }
+      = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: " btn_filter_selector2 cursor-pointer bg-yellow-200" , form: "filters", data: { disable_with: false }
   - else 
     button.btn_filter_selector1.bg-gray.cursor-not-allowed   
       = t("filters.buttons.my_books")

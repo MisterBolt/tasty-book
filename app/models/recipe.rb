@@ -38,24 +38,24 @@ class Recipe < ApplicationRecord
 
   has_and_belongs_to_many :categories
 
-  scope :sort_by_default, ->(sort_kind, sort_order) {
-    order(sort_kind => sort_order)
-  }
-  scope :sort_by_score, ->(sort_order, nulls_presence) {
-    left_outer_joins(:recipe_scores)
-      .select("recipes.*")
-      .group("recipes.id")
-      .order("avg(recipe_scores.score) #{sort_order} #{nulls_presence}")
-  }
-  scope :sort_by_kind_and_order, ->(sort_kind, sort_order) do
-    case sort_kind
-    when "title", "difficulty", "time_in_minutes_needed"
-      sort_by_default(sort_kind, sort_order)
-    when "score"
-      nulls_presence = sort_order == "DESC" ? "NULLS LAST" : "NULLS FIRST"
-      sort_by_score(sort_order, nulls_presence)
-    end
-  end
+  # scope :sort_by_default, ->(sort_kind, sort_order) {
+  #   order(sort_kind => sort_order)
+  # }
+  # scope :sort_by_score, ->(sort_order, nulls_presence) {
+  #   left_outer_joins(:recipe_scores)
+  #     .select("recipes.*")
+  #     .group("recipes.id")
+  #     .order("avg(recipe_scores.score) #{sort_order} #{nulls_presence}")
+  # }
+  # scope :sort_by_kind_and_order, ->(sort_kind, sort_order) do
+  #   case sort_kind
+  #   when "title", "difficulty", "time_in_minutes_needed"
+  #     sort_by_default(sort_kind, sort_order)
+  #   when "score"
+  #     nulls_presence = sort_order == "DESC" ? "NULLS LAST" : "NULLS FIRST"
+  #     sort_by_score(sort_order, nulls_presence)
+  #   end
+  # end
 
   def cook_books_update(cook_book_ids_raw, user)
     cook_book_id_strings = cook_book_ids_raw.filter { |cook_book_id| cook_book_id != "" }
@@ -90,5 +90,8 @@ class Recipe < ApplicationRecord
     resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(1280, 1920)
     image.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
   end
-  scope :filtered, ->(query_params) { Recipe::Filter.new.filter(self, query_params) }
+
+  scope :searched, -> (text) { Recipe.where("LOWER(title) LIKE :text", text: "%#{text.downcase}%") }
+
+  scope :filtered_and_sorted, ->(filters_params) { Recipe::Filter.new.filter(self, filters_params) }
 end

@@ -1,6 +1,5 @@
 .px-10.mt-3
   .flex.justify-between.my-2.px-3
-    = render "sort_form"
   - if @recipes.present?
     = render "filters/filters"
     div[data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll"]

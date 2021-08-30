@@ -4,20 +4,22 @@ class RecipesController < ApplicationController
   DEFAULT_SORT_KIND = "title"
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
-  before_action :validate_sort_params!, only: [:index]
 
   def index
-    @sort_order = sort_order
-    @sort_kind = sort_kind
-    recipes = Recipe.sort_by_kind_and_order(@sort_kind, @sort_order)
+    params = filters_params
+    @sort_order = params[:order].present? ? params[:order] : "ASC"
+    @sort_kind = params[:kind].present? ? params[:kind] : "title"
+    @my_books = params[:my_books].present? ? params[:my_books] : 0
+    byebug
+    recipes = Recipe.filtered_and_sorted(filters_params)
     @pagy, @recipes = pagy(recipes, items: per_page)
 
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: {entries: render_to_string(partial: "recipes/recipes", formats: [:html]), pagination: view_context.pagy_nav(@pagy)}
-      }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json {
+    #     render json: {entries: render_to_string(partial: "recipes/recipes", formats: [:html]), pagination: view_context.pagy_nav(@pagy)}
+    #   }
+    # end
   end
 
   def show
@@ -137,6 +139,11 @@ class RecipesController < ApplicationController
 
   def sort_kind
     params[:kind].presence || DEFAULT_SORT_KIND
+  end
+
+  def filters_params
+    filters_params = params[:filters]
+    filters_params ? filters_params.permit(:my_books, :kind, :order, :difficulties, :time, :categories, :ingredients) : {}
   end
 
   def query_params

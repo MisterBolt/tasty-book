@@ -3,7 +3,7 @@ let categories_list = document.getElementById("categories");
 let closeBtn = document.getElementById("cancel");
 let myBooks = document.getElementById("btn_filter_selector1");
 let all = document.getElementById("btn_filter_selector2");
-let scopes = document.querySelectorAll("input[name='query[my_books]']");
+let scopes = document.querySelectorAll("input[name='filters[my_books]']");
 let current_scope = 'all';
 
 document.querySelectorAll("a[data-prepend]").forEach(i=>{
@@ -55,4 +55,17 @@ all.addEventListener("click", e => {
         i.value = 0;
     })
     current_scope = 'all';
+})
+
+//sorting recipes js:
+let form = document.getElementById("filters");
+
+document.getElementById("order").addEventListener("change", e => {
+    document.getElementById("filters_order").value = e.target.value;
+    form.submit();
+})
+
+document.getElementById("kind").addEventListener("change", e => {
+    document.getElementById("filters_kind").value = e.target.value;
+    form.submit();
 })

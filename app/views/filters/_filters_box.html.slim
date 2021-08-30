@@ -1,9 +1,12 @@
-= form_for :query, url: filter_recipes_path, method: :post, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
-  = form.hidden_field :my_books, value: 0
+= form_for :filters, url: recipes_path, method: :get, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
+  = form.hidden_field :my_books, value: @my_books
+  = form.hidden_field :kind, value: @sort_kind
+  = form.hidden_field :order, value: @sort_order
+
   .filter-subbox
       = t("filters.filter_box.difficulty")
       div
-        = form.check_box :difficulties, {id: "query_easy", multiple: true, include_hidden: false, checked: true}, 0
+        = form.check_box :difficulties, {id: "query_easy", multiple: true, include_hidden: false}, 0
         = form.label "easy", t("filters.filter_box.difficulty_box.easy")
       div
         = form.check_box :difficulties, {id: "query_medium", include_hidden: false, multiple: true}, 1

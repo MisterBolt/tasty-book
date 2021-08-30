@@ -3,10 +3,7 @@ class FiltersController < ApplicationController
     respond_to do |format|
       format.turbo_stream {
         params = query_params
-        if current_user
-          params[:current_user] = current_user.id
-        end
-        @pagy, @recipes = pagy(Recipe.filtered(params), items: per_page)
+        @pagy, @recipes = pagy(Recipe.searched(params[:text]), items: per_page)
         render turbo_stream: turbo_stream.replace(
           "recipes_listing",
           partial: "recipes/recipes"
@@ -19,6 +16,6 @@ class FiltersController < ApplicationController
 
   def query_params
     query_params = params[:query]
-    query_params ? query_params.permit(:text, :time, :my_books, categories: [], ingredients: [], difficulties: []) : {}
+    query_params ? query_params.permit(:text) : {}
   end
 end
