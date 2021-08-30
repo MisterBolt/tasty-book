@@ -29,7 +29,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "devise", "~> 4.8"
 gem "slim-rails", "~> 3.2"
 gem "factory_bot_rails", "~> 6.1"
-gem "faker", "~> 2.18"
+gem "faker", "~> 2.19"
 gem "pagy", "~> 4.8"
 gem "cloudinary"
 gem "gon", "~> 6.4"

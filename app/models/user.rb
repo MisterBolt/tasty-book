@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates_with UsernameValidator
   validates_with UserImageValidator
 
-  before_save :resize_avatar, unless: :persisted?
+  before_save :resize_avatar
 
   has_one_attached :avatar
 
@@ -63,12 +63,12 @@ class User < ApplicationRecord
     end
   end
 
-  def resize_avatar(new_avatar = nil)
-    return unless avatar.attached?
+  def resize_avatar
+    return unless avatar.attached? && defined?(attachment_changes["avatar"].attachable.tempfile)
 
-    path = new_avatar ? new_avatar.tempfile.path : attachment_changes["avatar"].attachable.tempfile.path
-    v_filename = new_avatar ? new_avatar.original_filename : avatar.filename
-    v_content_type = new_avatar ? new_avatar.content_type : avatar.content_type
+    path = attachment_changes["avatar"].attachable.tempfile.path
+    v_filename = avatar.filename
+    v_content_type = avatar.content_type
     resized_image = ImageProcessing::MiniMagick.source(path).resize_to_fill!(150, 150)
     avatar.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
   end

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def show
-    @pagy, @recipes = pagy(@user.recipes, items: per_page)
+    @pagy, @recipes = pagy(@user.recipes.published, items: per_page)
   end
 
   def followings

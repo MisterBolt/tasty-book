@@ -9,7 +9,7 @@ RSpec.describe "update user data process", type: :feature do
       visit user_session_path
       fill_in_and_log_in(user.email, user.password)
       visit settings_profile_index_path
-      attach_file("user_avatar", Rails.root + "spec/fixtures/files/cook.png")
+      attach_file("user_avatar", Rails.root + "spec/files/avatar.png")
       find("#change_avatar").click
     end
 
@@ -23,7 +23,7 @@ RSpec.describe "update user data process", type: :feature do
       visit user_session_path
       fill_in_and_log_in(user.email, user.password)
       visit settings_profile_index_path
-      attach_file("user_avatar", Rails.root + "spec/fixtures/files/empty_text.txt")
+      attach_file("user_avatar", Rails.root + "spec/files/avatar.txt")
       find("#change_avatar").click
     end
 

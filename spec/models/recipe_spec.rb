@@ -138,4 +138,24 @@ RSpec.describe Recipe, type: :model do
       it { expect(subject).to eq([5.0, 4.0, 3.0, 3.0, 2.0, 2.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]) }
     end
   end
+
+  describe ".published" do
+    before do
+      create_list(:recipe, 6, status: :published)
+      create_list(:recipe, 4, status: :draft)
+    end
+    subject { Recipe.published }
+
+    it { expect(subject.size).to eq(6) }
+  end
+
+  describe ".drafted" do
+    before do
+      create_list(:recipe, 6, status: :published)
+      create_list(:recipe, 4, status: :draft)
+    end
+    subject { Recipe.drafted }
+
+    it { expect(subject.size).to eq(4) }
+  end
 end

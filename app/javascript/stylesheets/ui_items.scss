@@ -9,11 +9,11 @@
 @mixin input-base{
   @apply px-3;
   label{ @apply block capitalize tracking-wide text-gray-700 text-xs font-bold mb-2 }
-  input, select{
-    @apply  block w-full bg-white border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
-    &:hover{ @apply bg-gray-100 cursor-pointer }
+  input, select, textarea{
+    @apply outline-none appearance-none block w-full bg-gray-200 border border-gray-300 text-gray-600 text-base font-medium rounded-lg py-3 px-4 leading-tight shadow-md;
+    &:hover{ @apply bg-gray-300 cursor-pointer }
   }
-  input[type=text]:hover, input[type=password]:hover, input[type=email]:hover{ @apply cursor-text }
+  input[type=text]:hover, input[type=password]:hover, input[type=email]:hover, input[type=number]:hover, textarea:hover{ @apply cursor-text }
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
@@ -43,9 +43,10 @@
 .input-text{ @include input-base }
 .input-text-white{
   @include input-base;
-  input{
+  input, textarea{
     @apply bg-white;
     &:hover{ @apply bg-gray-100 }
+    &:focus{ @apply bg-gray-50 }
   }
 }
 
@@ -57,7 +58,7 @@
 .input-select{ @include input-select }
 .input-select-white{
   @include input-select;
-  input{
+  select{
     @apply bg-white;
     &:hover{ @apply bg-gray-100 }
   }

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Recipe < ApplicationRecord
-  scope :published, -> { where("status = 1") }
-
   validates :title, presence: true
   validates :preparation_description, presence: true
   validates :time_in_minutes_needed, presence: true
@@ -42,6 +40,8 @@ class Recipe < ApplicationRecord
 
   has_and_belongs_to_many :categories
 
+  scope :published, -> { where(status: :published) }
+  scope :drafted, -> { where(status: :draft) }
   scope :sort_by_default, ->(sort_kind, sort_order) {
     order(sort_kind => sort_order)
   }
