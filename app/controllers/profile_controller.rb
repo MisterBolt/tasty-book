@@ -44,6 +44,12 @@ class ProfileController < ApplicationController
     redirect_to root_path
   end
 
+  def delete_user_and_keep_data
+    @user.anonymize_user
+    flash[:notice] = t(".notice")
+    redirect_to root_path
+  end
+
   private
 
   def set_user

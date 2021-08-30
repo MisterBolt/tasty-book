@@ -222,6 +222,8 @@ en:
       alert: "Avatar couldn't be changed"
     delete_user_with_data:
       notice: "Your account and all related data was deleted succesfully"
+    delete_user_and_keep_data:
+      notice: "Your account was deleted succesfully"
 
   notifications:
     hello: "Hello %{user}!"

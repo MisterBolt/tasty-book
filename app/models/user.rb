@@ -69,6 +69,15 @@ class User < ApplicationRecord
     cook_books[0]
   end
 
+  def anonymize_user
+    self.username = "Deleted_user#{id}"
+    self.email = "deleted_user#{id}@deleted.user"
+    self.password = Devise.friendly_token
+    skip_reconfirmation!
+    avatar.purge
+    save(validate: false)
+  end
+
   private
 
   def resize_avatar
