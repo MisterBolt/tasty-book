@@ -31,6 +31,12 @@
   &:focus{ @apply ring-gray-700 }
 }
 
+.btn-yellow{
+  @apply text-white w-12 h-10 rounded bg-yellow-400 opacity-90 mt-1;
+  &:hover{ @apply opacity-100 }
+  &:focus{ @apply ring-gray-700 }
+}
+
 .btn-nav{
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
   &:hover{ @apply text-mustard }
