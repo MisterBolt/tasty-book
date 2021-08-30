@@ -1,37 +1,43 @@
-.flex.flex-grow.w-full
+.flex.flex-grow.w-full.mt-5
     .w-4/5.m-auto.content-center
       = form_with(model: @recipe, local:true, url: "/recipes", method: :post, class: "bg-white shadow-md rounded px-6 pt-6 pb-12 mb-12") do |f|
             .mb-4.input-file-white
-								= f.label :image, value: "Image (optional)"
-								= f.file_field :image, accept: "image/png,image/jpeg"
-            .mb-4.input-text-white
-                = f.label :title, class: "block text-gray-700 text-sm font-bold mb-2"
-                = f.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            .mb-4.border-2.p-4.border-gray-500
+			  = f.label :image, value: "Image (optional)"
+			  = f.file_field :image, accept: "image/png,image/jpeg"
+			.mb-4.input-text-white
+			  = f.label :title
+			  = f.text_field :title
+			.mb-4.border-2.p-4.border-gray-500
                 p.text-m.text-gray-700.font-bold.mb-3 = t("recipes.create.section")
                 - for link in @recipe.sections do 
                     fieldset.section_set
                         = f.fields_for "sections_attributes", link, index: rand(10000..900000) do |builder|
                             = render partial: "section_form", locals: {f: builder, section_id: link.id, title: link.title, body: link.body}
                 = link_to_add_fields t("buttons.add_section"), f, :sections, "section_form", "add_section", { section_id: nil, title: nil, body: nil }
-            .mb-4.input-text-white
-                = f.label :time_in_minutes_needed, "Time needed (in minutes)",class: "block text-gray-700 text-sm font-bold mb-2"
-                = f.number_field :time_in_minutes_needed, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            .mb-4.input-select-white
-                = f.label :difficulty, class: "block text-gray-700 text-sm font-bold mb-2"
-                = f.select :difficulty, Recipe.difficulties.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-            .mb-4.input-select-white
-                = f.label :layout, class: "block text-gray-700 text-sm font-bold mb-2"
-                = f.select :layout, Recipe.layouts.keys, class: "w-full border bg-white rounded px-3 py-2 outline-none"
-            .mb-3.input-base
-                p class="block text-gray-700 text-sm font-bold mb-2" Categories:
-                .flex.flex-wrap.border.p-4.border-gray-300.rounded-md.shadow-md
-                    - categories = @recipe.categories.map { |cat| cat.id }
-                    - Category.all.each do |cat|
-                        .p-3
-                            = check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id), class: "mr-1"
-                            = label_tag :category_id, cat.name
-            .mb-3.border.p-4.border-gray-300.rounded-md.shadow-md
+			.mb-4.input-text-white
+			  = f.label :time_in_minutes_needed, "Time needed (in minutes)"
+			  = f.number_field :time_in_minutes_needed
+			.mb-4.input-select-white
+			  = f.label :difficulty
+			  .relative
+			    = f.select :difficulty, Recipe.difficulties.map { |key, value| [key.capitalize, key] }
+				.selector
+         		  = render "shared/arrow_down"
+			.mb-4.input-select-white
+			  = f.label :layout
+			  .relative
+			  	= f.select :layout, Recipe.layouts.keys
+				.selector
+         		  = render "shared/arrow_down"
+            .m-3.input-base
+							p class="block text-gray-700 text-sm font-bold mb-2" Categories:
+							.flex.flex-wrap.border.p-4.border-gray-300.rounded-md.shadow-md
+								- categories = @recipe.categories.map { |cat| cat.id }
+								- Category.all.each do |cat|
+									.p-3.
+										= check_box_tag "recipe[category_ids][]", cat.id, categories.include?(cat.id), class: "mr-1"
+										= label_tag :category_id, cat.name
+            .m-3.border.p-4.border-gray-300.rounded-md.shadow-md
                 p.text-lg.text-gray-700.font-bold.mb-3 Ingredients:
                 - for link in @recipe.ingredients_recipes do 
                     fieldset.ingredient_set
@@ -40,8 +46,8 @@
                 = link_to_add_fields t("buttons.add_ingredient"), f, :ingredients_recipes, 'ingredient_fields', "add_ingredient", {ingredient_id: nil, ingredient_name: nil, quantity: nil, unit: nil}
             .ml-3
                 = f.hidden_field :status, value: "draft"
-                = f.submit(t('buttons.save_recipe_as_draft'), id: "draft_submit",class: "btn-secondary")
-                = f.submit(t('buttons.publish_recipe'), onclick: "document.getElementById('recipe_status').value = 'published'",id: "save_submit",class: "btn-secondary")
+                = f.submit(t('buttons.save_recipe_as_draft'), id: "draft_submit", class: "btn-secondary")
+                = f.submit(t('buttons.publish_recipe'), onclick: "document.getElementById('recipe_status').value = 'published'", id: "save_submit", class: "btn-secondary")
 
 = javascript_pack_tag "createRecipe"
 = javascript_pack_tag "loadCurrentState"

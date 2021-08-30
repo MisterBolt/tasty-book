@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Recipe < ApplicationRecord
-  scope :published, -> { where("status = 1") }
-
   validates :title, presence: true
   validates :time_in_minutes_needed, presence: true
   validates :difficulty, presence: true
@@ -43,6 +41,8 @@ class Recipe < ApplicationRecord
 
   has_many :sections, dependent: :destroy
 
+  scope :published, -> { where(status: :published) }
+  scope :drafted, -> { where(status: :draft) }
   scope :sort_by_default, ->(sort_kind, sort_order) {
     order(sort_kind => sort_order)
   }
@@ -70,6 +70,14 @@ class Recipe < ApplicationRecord
       cook_books << CookBook.where(id: cook_book_ids)
     else
       false
+    end
+  end
+
+  def toggle_favourite(user)
+    if user.favourites_cook_book.recipes.include?(self)
+      user.favourites_cook_book.recipes.delete(self)
+    else
+      user.favourites_cook_book.recipes << self
     end
   end
 

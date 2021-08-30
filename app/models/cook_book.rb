@@ -15,6 +15,14 @@ class CookBook < ApplicationRecord
     where(visibility: :followers, user_id: followings_ids)
   end
 
+  def recipes_visible_for_user(user)
+    if user.present?
+      recipes.published.or(recipes.drafted.where(user_id: user.id))
+    else
+      recipes.published
+    end
+  end
+
   def self.visibilities_strings
     CookBook.visibilities.map { |key, value| [I18n.t("cook_books.visibilities.#{key}"), key] }
   end

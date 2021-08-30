@@ -67,12 +67,15 @@ en:
       method: "Method"
       comments: "Comments"
       added: "Added by"
+      warning: "Recipe with this id doesn't exists"
     update_cook_books:
       action: "Update tasty books"
       notice: "Tasty books were successfully assigned to the recipe."
       alert: "Error occured, tasty books couldn't be assigned to the recipe."
-    show:
-      warning: "Recipe with this id doesn't exists"
+    update_favourite:
+      notice: "Favourites updated."
+      add_favourite: "Add to favourites"
+      remove_favourite: "Remove from favourites"
 
   recipe_scores:
     create:
@@ -202,7 +205,7 @@ en:
     update_avatar:
       notice: "Avatar changed succesfully"
       alert: "Avatar couldn't be changed"
-  
+
   notifications:
     hello: "Hello %{user}!"
     guest_comment: "Your %{title} recipe has been commented by guest"

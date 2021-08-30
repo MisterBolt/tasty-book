@@ -30,9 +30,7 @@ class ProfileController < ApplicationController
   end
 
   def update_avatar
-    resize_avatar
-    @user.save
-    redirect_to(settings_profile_index_path)
+    update_action(@user.update(user_avatar_params))
   end
 
   private
@@ -62,9 +60,5 @@ class ProfileController < ApplicationController
       flash[:alert] = t(".alert")
     end
     redirect_to(settings_profile_index_path)
-  end
-
-  def resize_avatar
-    current_user.resize_avatar(params[:user][:avatar])
   end
 end

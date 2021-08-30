@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :recipe do
+    transient do
+      unique_ingredient { nil }
+    end
+
     user
     title { Faker::Food.dish }
     difficulty { rand(0..2) }
@@ -8,8 +12,12 @@ FactoryBot.define do
     layout { rand(0..2) }
     status { 1 }
 
-    after(:build) do |recipe|
-      recipe.ingredients_recipes << build(:ingredients_recipe, recipe: recipe)
+    after(:build) do |recipe, evaluator|
+      recipe.ingredients_recipes << build(
+        :ingredients_recipe,
+        recipe: recipe,
+        ingredient: evaluator.unique_ingredient || create(:ingredient)
+      )
       recipe.sections << build(:section, recipe: recipe)
     end
   end

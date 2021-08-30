@@ -1,19 +1,20 @@
 .col-start-1.col-span-2.flex.flex-col.h-92v
   .flex.flex-row.justify-center.items-center.h-10v
-    = render "shared/heart", filled: false
+    - if current_user
+      = render "shared/heart"
   .flex.flex-col.flex-grow.justify-between.items-center
     .flex.flex-col.items-center
-      .mb-3  
+      .mb-3
         = t("recipe_scores.show.avg_score")
       = render 'recipe_scores/average_star_score'
       #avg-score.text-4xl.font-semibold.mr-2
-        | #{@recipe.average_score} 
+        | #{@recipe.average_score}
       .text-gray-500.mb-6
         | (#{@recipe.recipe_scores.count} #{t("recipe_scores.show.count_score")})
-      .mt-6.mb-3 
+      .mt-6.mb-3
       - if current_user
         - if user_recipe_score(current_user, @recipe)
-          .mb-2  
+          .mb-2
             = t("recipe_scores.show.user_score")
           = render 'recipe_scores/current_user_star_score'
         - else
