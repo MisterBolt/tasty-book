@@ -107,7 +107,8 @@ class Recipe < ApplicationRecord
     image.attach(io: File.open(resized_image.path), filename: v_filename, content_type: v_content_type)
   end
 
+  scope :published, -> { where(status: :published) }
+  scope :drafted, -> { where(status: :draft) }
   scope :searched, -> (text) { Recipe.where("LOWER(title) LIKE :text", text: "%#{text.downcase}%") }
-
   scope :filtered_and_sorted, ->(filters_params) { Recipe::Filter.new.filter(self, filters_params) }
 end

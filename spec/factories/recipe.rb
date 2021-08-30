@@ -3,10 +3,8 @@ FactoryBot.define do
     transient do
       unique_ingredient { nil }
     end
-
     user
     title { Faker::Food.dish }
-    preparation_description { Faker::Food.description }
     difficulty { rand(0..2) }
     time_in_minutes_needed { rand(5..60) }
     categories { create_list(:category, rand(1..3)) }

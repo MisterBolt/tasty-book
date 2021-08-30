@@ -7,6 +7,9 @@ class RecipesController < ApplicationController
 
   def index
     params = filters_params
+    if current_user
+      params[:current_user] = current_user
+    end
     @sort_order = params[:order].present? ? params[:order] : "ASC"
     @sort_kind = params[:kind].present? ? params[:kind] : "title"
     @my_books = params[:my_books].present? ? params[:my_books] : 0

@@ -1,7 +1,7 @@
 class Recipe::Filter
   def filter(scope, filters_params)
 
-    if filters_params[:my_books] == "1" && filters_params[:current_user]
+    if filters_params[:my_books] == "1" && filters_params[:current_user].present?
       scope = scope.joins(:cook_books).where(cook_books: {user_id: filters_params[:current_user]})
     end
 
