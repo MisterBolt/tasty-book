@@ -10,10 +10,9 @@ class RecipesController < ApplicationController
     if current_user
       params[:current_user] = current_user
     end
-    @sort_order = params[:order].present? ? params[:order] : "ASC"
-    @sort_kind = params[:kind].present? ? params[:kind] : "title"
-    @my_books = params[:my_books].present? ? params[:my_books] : 0
-    recipes = Recipe.filtered_and_sorted(filters_params)
+    set_filters_variables
+    byebug
+    recipes = Recipe.filtered_and_sorted(params)
     @pagy, @recipes = pagy(recipes, items: per_page)
 
     # respond_to do |format|
@@ -164,7 +163,17 @@ class RecipesController < ApplicationController
 
   def filters_params
     filters_params = params[:filters]
-    filters_params ? filters_params.permit(:my_books, :kind, :order, :difficulties, :time, :categories, :ingredients) : {}
+    filters_params ? filters_params.permit(:my_books, :kind, :order, :time, difficulties: [], categories: [], ingredients: []) : {}
+  end
+
+  def set_filters_variables
+    @sort_order = params[:order].present? ? params[:order] : "ASC"
+    @sort_kind = params[:kind].present? ? params[:kind] : "title"
+    @my_books = params[:my_books].present? ? params[:my_books] : 0
+    @time = params[:time].present? ? params[:time] : "all"
+    @difficulties = params[:difficulties].present? ? params[:difficulties] : []
+    @categories = params[:categories].present? ? params[:categories] : []
+    @ingredients = params[:ingredients].present? ? params[:ingredients] : []
   end
 
   def query_params
