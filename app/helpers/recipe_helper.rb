@@ -50,4 +50,8 @@ module RecipeHelper
       image_tag(IMAGE_DEFAULT, class: IMAGE_CLASS)
     end
   end
+
+  def authorize_recipe_action_links?(recipe)
+    user_signed_in? && (recipe.user == current_user || current_user.admin?)
+  end
 end
