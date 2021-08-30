@@ -60,6 +60,7 @@ module.exports = {
         'mustard': '#c89c4c',
       },
       fill: theme => ({
+        'gray-400': theme('colors.gray.400'),
         'red-500': theme('colors.red.500'),
         'red-700': theme('colors.red.700')
       })

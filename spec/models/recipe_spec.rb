@@ -11,7 +11,7 @@ RSpec.describe Recipe, type: :model do
     it { is_expected.to validate_presence_of(:categories) }
     it { is_expected.to validate_presence_of(:layout) }
     it { is_expected.to validate_presence_of(:status) }
-    it { should define_enum_for(:status).with_values([:draft, :published]) }
+    it { should define_enum_for(:status).with_values(%i[draft published]) }
     it { should define_enum_for(:difficulty).with_values(%i[EASY MEDIUM HARD]) }
     it { should define_enum_for(:layout).with_values(%i[layout_1 layout_2 layout_3]) }
   end
