@@ -131,7 +131,7 @@ en:
       public: "Public"
       followers: "Followers"
     create:
-      action: "Create new Tasty Book"
+      action: "Add new Tasty Book"
       notice: "Tasty Book was successfully created."
       alert: "Error occured, Tasty Book couldn't be created."
     destroy:
@@ -167,6 +167,12 @@ en:
       other: "%{count} Followers"
 
   profile:
+    sidebar:
+      dashboard: "Dashboard"
+      recipes: "Recipes"
+      recipe_drafts: "Recipes (draft)"
+      cook_books: "Tasty Books"
+      settings: "Settings"
     index:
       social: "Social"
       followers: "Followers"

@@ -17,6 +17,7 @@ RSpec.describe "profile/index", type: :view do
     end
 
     it { expect(current_path).to eql(profile_index_path) }
+    it { expect(page).to have_css("a.current", text: t("profile.sidebar.dashboard")) }
     it { expect(page).to have_css("#dashboard_username", text: user.username) }
     it { expect(page).to have_css("#dashboard_#{I18n.t("profile.index.followers").parameterize.underscore}", text: "0") }
     it { expect(page).to have_css("#dashboard_#{I18n.t("profile.index.following").parameterize.underscore}", text: "0") }
