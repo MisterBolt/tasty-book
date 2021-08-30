@@ -20,9 +20,22 @@ RSpec.describe RecipeScore, type: :model do
 
   describe "class methods" do
     describe "#send_notification_email" do
-      let(:recipe_score) { FactoryBot.create(:recipe_score) }
+      let(:user) { create(:user) }
+      let(:recipe) { create(:recipe, user: user) }
+      let(:recipe_score) { create(:recipe_score, recipe: recipe) }
+
       it "sends notification email" do
         expect { recipe_score.send_notification_email }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
+      context "when author of recipe is deleted" do
+        before do
+          user.anonymize_user
+        end
+
+        it "doesn't send notification email" do
+          expect { recipe_score.send_notification_email }.not_to change { ActionMailer::Base.deliveries.count }
+        end
       end
     end
   end

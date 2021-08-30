@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
       expect(user.favourites_cook_book.favourite).to eq(true)
     end
   end
-  
+
   describe "#deleted?" do
     let(:user) { create(:user) }
 
