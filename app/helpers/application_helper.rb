@@ -36,10 +36,6 @@ module ApplicationHelper
   end
 
   def avatar_for_user_or_guest(user)
-    if user
-      user.default_or_attached_avatar
-    else
-      "https://res.cloudinary.com/hp7f0176d/image/upload/v1629268606/sample/blank-profile-picture.png"
-    end
+    user&.default_or_attached_avatar || "https://res.cloudinary.com/hp7f0176d/image/upload/v1629268606/sample/blank-profile-picture.png"
   end
 end
