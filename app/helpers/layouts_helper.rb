@@ -4,6 +4,6 @@ module LayoutsHelper
   end
 
   def btn_nav_class_overall(path)
-    request.path.match?(/^#{path}/) ? "btn-nav-active" : "btn-nav"
+    /^#{path}/.match?(request.path) ? "btn-nav-active" : "btn-nav"
   end
 end

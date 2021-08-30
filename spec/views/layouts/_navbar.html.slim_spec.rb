@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "layouts/_navbar", type: :view do
-  let(:user) { create(:user) }
+  let(:admin) { create(:user, admin: true) }
+  let(:user) { create(:user, admin: false) }
 
   context "when user isn't logged in" do
     before { visit root_path }
@@ -11,6 +12,7 @@ RSpec.describe "layouts/_navbar", type: :view do
     it { expect(page).to have_link(I18n.t("buttons.log_in"), class: "btn-nav", href: new_user_session_path) }
     it { expect(page).to have_link(I18n.t("buttons.sign_up"), class: "btn-nav", href: new_user_registration_path) }
     it { expect(page).not_to have_link(I18n.t("buttons.add_new_recipe")) }
+    it { expect(page).not_to have_link(I18n.t("buttons.admin_panel")) }
     it { expect(page).not_to have_css("#dropdown_navbar") }
 
     it "highlight the recipes link after clicking on it" do
@@ -46,6 +48,7 @@ RSpec.describe "layouts/_navbar", type: :view do
     it { expect(page).not_to have_link(I18n.t("buttons.log_in"), class: "btn-nav", href: new_user_session_path) }
     it { expect(page).not_to have_link(I18n.t("buttons.sign_up"), class: "btn-nav", href: new_user_registration_path) }
     it { expect(page).to have_link(I18n.t("buttons.add_new_recipe"), class: "btn-nav", href: new_recipe_path) }
+    it { expect(page).not_to have_link(I18n.t("buttons.admin_panel")) }
     it { expect(page).to have_css("#dropdown_navbar") }
     it { expect(page).to have_link(I18n.t("buttons.dashboard"), href: profile_index_path) }
     it { expect(page).to have_link(I18n.t("buttons.my_profile"), href: user_path(user)) }
@@ -55,5 +58,15 @@ RSpec.describe "layouts/_navbar", type: :view do
       find("a", text: I18n.t("buttons.add_new_recipe")).click
       expect(page).to have_link(I18n.t("buttons.add_new_recipe"), class: "btn-nav-active", href: new_recipe_path)
     end
+  end
+
+  context "when admin is logged in" do
+    before do
+      visit user_session_path
+      fill_in_and_log_in(admin.email, admin.password)
+      visit root_path
+    end
+
+    it { expect(page).to have_link(I18n.t("buttons.admin_panel")) }
   end
 end
