@@ -17,18 +17,6 @@
   input:focus{ @apply outline-none border-gray-500 bg-gray-50 text-gray-700 }
 }
 
-#btn_filter{
-  @apply shadow mb-4 mt-1 mr-5 w-20 h-11 relative rounded;
-}
-
-.btn_filter_selector1{
-  @apply mb-4 mt-1 w-20 rounded-l-lg relative shadow border-r-2 border-black;
-}
-
-.btn_filter_selector2{
-  @apply mb-4 mt-1 mr-5 w-20 rounded-r-lg relative shadow;
-}
-
 .btn-primary{
   @include btn-base;
   @apply text-gray-700 bg-white;
@@ -43,12 +31,6 @@
   &:focus{ @apply ring-gray-700 }
 }
 
-.btn-yellow{
-  @apply text-white w-12 h-10 rounded bg-yellow-400 opacity-90 mt-1;
-  &:hover{ @apply opacity-100 }
-  &:focus{ @apply ring-gray-700 }
-}
-
 .btn-nav{
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
   &:hover{ @apply text-mustard }
@@ -56,11 +38,6 @@
 .btn-nav-active{
   @apply inline-flex justify-center items-center text-base font-medium text-mustard bg-none;
   &:hover{ @apply opacity-80 }
-}
-
-.btn-filter-box{
-  @include btn-base;
-  @apply text-gray-400 bg-white;
 }
 
 .input-text{ @include input-base }
@@ -158,9 +135,6 @@
   }
 }
 
-.filter-subbox {
-  @apply my-5 mx-3 p-6 relative shadow;
-}
 .heart-button{
   &:hover{ @apply fill-red-700 cursor-pointer }
 }

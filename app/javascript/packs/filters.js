@@ -33,30 +33,6 @@ function deleteFromList(fieldset, type){
     }
 }
 
-myBooks.addEventListener("click", e => {
-    if(current_scope == 1){
-        return
-    }
-    toggleColor('btn_filter_selector1'); 
-    toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
-    scopes.forEach(i=>{
-        i.value = 1;
-    })
-    current_scope = 1;
-})
-
-all.addEventListener("click", e => {
-    if(current_scope == 0){
-        return
-    }
-    toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
-    toggleColor('btn_filter_selector1');
-    scopes.forEach(i=>{
-        i.value = 0;
-    })
-    current_scope = 0;
-})
-
 //sorting recipes js:
 let form = document.getElementById("filters");
 

@@ -1,9 +1,9 @@
 .px-10.mt-3
   = render "filters/filters"
-  .flex.justify-between.my-2.px-3
+  .flex.justify-between.my-3.px-3
     .flex.items-center
       == pagy_nav(@pagy) if @pagy.pages > 1
-    = render "sort_form"
+    = render "recipes/sort_form"
   - if @recipes.present?
     = render @recipes
   - else 

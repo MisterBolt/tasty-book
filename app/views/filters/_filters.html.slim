@@ -1,36 +1,23 @@
-.flex.justify-end.relatived.flex-grow
+- button_class = "flex items-center font-medium shadow-md p-3 border border-gray-300 font-medium cursor-pointer"
+- active_button_class = "bg-gray-400 text-white"
+- unactive_button_class = "bg-gray-200 text-gray-700 hover:bg-gray-300"
+.flex.justify-center.flex-grow.space-x-6.px-6
   - sort_options = recipes_sort_options
   
-  - if user_signed_in?
-    - if @my_books == "1"
-      = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "btn_filter_selector1 cursor-pointer bg-yellow-200", form: "filters", data: { disable_with: false }
-      = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: " btn_filter_selector2 cursor-pointer bg-white hover:bg-yellow-100" , form: "filters", data: { disable_with: false }
-    - else 
-      = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "btn_filter_selector1 cursor-pointer bg-white hover:bg-yellow-100", form: "filters", data: { disable_with: false }
-      = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: " btn_filter_selector2 cursor-pointer bg-yellow-200" , form: "filters", data: { disable_with: false }
-  - else 
-    button.btn_filter_selector1.bg-gray.cursor-not-allowed   
-      = t("filters.buttons.my_books")
-    button.btn_filter_selector2.bg-yellow-200.cursor-default
-      = t("filters.buttons.all")
+  .flex
+    - if user_signed_in?
+      / Check which one is active, true and false change into proper condition
+      / Preferably put this checking logic into a helper method, not a must though
+      = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: "#{(false ? active_button_class : unactive_button_class)} #{button_class} rounded-l-lg", form: "filters", data: { disable_with: false }
+      = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: "#{(true ? active_button_class : unactive_button_class)} #{button_class} rounded-r-lg", form: "filters", data: { disable_with: false }
 
   = render "filters/search_bar"
 
-  button#btn_filter.bg-white.hover:bg-yellow-100 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
-    .flex.justify-end
-      .mr-1.ml-2.mt-1
-        = image_tag("/images/filter.png")
-      .mr-2
-        = t("filters.buttons.filter")
+  button#btn_filter.flex.items-center.rounded-md.shadow-md.space-x-2.p-3.bg-gray-200.text-gray-700.border.border-gray-300.font-medium.hover:bg-gray-300 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
+    = image_tag("/images/filter.png")
+    div 
+      = t("filters.buttons.filter")
 
 = render "filters/filters_box"
-     
+
 = javascript_pack_tag "toggleColor"
-
-
-
-    
- 
- 
-
-  
