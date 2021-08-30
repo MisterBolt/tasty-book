@@ -3,6 +3,6 @@ FactoryBot.define do
     user
     title { "Title" }
     visibility { rand(0..2) }
-    favourite { [true, false].sample }
+    favourite { false }
   end
 end

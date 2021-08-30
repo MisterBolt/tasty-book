@@ -127,5 +127,11 @@ RSpec.describe CookBooksController, type: :controller do
 
       it { expect(-> { delete_destroy_action(cook_book) }).to raise_error(Pundit::NotAuthorizedError) }
     end
+
+    context "when user tries to delete his favourite cook book" do
+      let!(:cook_book) { user.cook_books[0] }
+
+      it { expect(-> { delete_destroy_action(cook_book) }).to raise_error(Pundit::NotAuthorizedError) }
+    end
   end
 end

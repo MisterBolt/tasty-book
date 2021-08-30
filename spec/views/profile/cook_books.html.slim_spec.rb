@@ -18,6 +18,7 @@ RSpec.describe "profile/cook_books", type: :view do
       assign(:cook_books, user.cook_books)
       assign(:pagy, @pagy)
       assign(:visibilities, CookBook.visibilities_strings)
+      sign_in user
       visit user_session_path
       fill_in_and_log_in(user.email, user.password)
       visit cook_books_profile_index_path
@@ -28,6 +29,9 @@ RSpec.describe "profile/cook_books", type: :view do
     it { expect(rendered).to have_tag("a.current", text: t("profile.sidebar.cook_books")) }
     it { expect(rendered).to have_tag("button.btn-secondary", text: t("cook_books.create.action")) }
     it { expect(rendered).to have_tag("article.cook-book", count: 1) }
+    it { expect(rendered).to have_tag("div.drop-menu") }
+    it { expect(rendered).to have_text(t("cook_books.edit.action")) }
+    it { expect(rendered).not_to have_text(t("cook_books.destroy.action")) }
   end
 
   context "with 13 cook books" do
