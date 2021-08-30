@@ -10,7 +10,6 @@ class RecipesController < ApplicationController
     @sort_order = params[:order].present? ? params[:order] : "ASC"
     @sort_kind = params[:kind].present? ? params[:kind] : "title"
     @my_books = params[:my_books].present? ? params[:my_books] : 0
-    byebug
     recipes = Recipe.filtered_and_sorted(filters_params)
     @pagy, @recipes = pagy(recipes, items: per_page)
 

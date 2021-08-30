@@ -3,8 +3,8 @@ let categories_list = document.getElementById("categories");
 let closeBtn = document.getElementById("cancel");
 let myBooks = document.getElementById("btn_filter_selector1");
 let all = document.getElementById("btn_filter_selector2");
-let scopes = document.querySelectorAll("input[name='filters[my_books]']");
-let current_scope = 'all';
+let scopes = document.querySelectorAll("input[name='filters[my_books]'");
+let current_scope = scopes[0].value;
 
 document.querySelectorAll("a[data-prepend]").forEach(i=>{
     i.addEventListener("click", e=>{
@@ -34,7 +34,7 @@ function deleteFromList(fieldset, type){
 }
 
 myBooks.addEventListener("click", e => {
-    if(current_scope == "my_books"){
+    if(current_scope == 1){
         return
     }
     toggleColor('btn_filter_selector1'); 
@@ -42,11 +42,11 @@ myBooks.addEventListener("click", e => {
     scopes.forEach(i=>{
         i.value = 1;
     })
-    current_scope = "my_books";
+    current_scope = 1;
 })
 
 all.addEventListener("click", e => {
-    if(current_scope == "all"){
+    if(current_scope == 0){
         return
     }
     toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
@@ -54,7 +54,7 @@ all.addEventListener("click", e => {
     scopes.forEach(i=>{
         i.value = 0;
     })
-    current_scope = 'all';
+    current_scope = 0;
 })
 
 //sorting recipes js:

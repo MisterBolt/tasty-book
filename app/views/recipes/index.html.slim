@@ -3,12 +3,12 @@
   - if @recipes.present?
     = render "filters/filters"
     div[data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll"]
+      .flex.justify-center 
+        == pagy_nav(@pagy) if @pagy.pages > 1
       div[data-infinite-scroll-target="entries"]
         = render "recipes"
-      div[data-infinite-scroll-target="pagination" class="flex justify-center"]
+      .flex.justify-center 
         == pagy_nav(@pagy) if @pagy.pages > 1
   - else 
     p.text-center.mt-4
       = t("recipes.not_found")
-  .flex.justify-center.my-2
-    == pagy_nav(@pagy) if @pagy.pages > 1
