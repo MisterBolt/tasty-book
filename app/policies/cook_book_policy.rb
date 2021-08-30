@@ -10,6 +10,6 @@ class CookBookPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user && (record.user == user || user.admin?)
+    user && (record.user == user || user.admin?) && !record.favourite
   end
 end

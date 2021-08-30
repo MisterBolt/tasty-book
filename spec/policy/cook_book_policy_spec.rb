@@ -41,6 +41,10 @@ RSpec.describe CookBookPolicy, type: :policy do
       it { expect(subject).to permit(user, create(:cook_book, user: user)) }
     end
 
+    context "with user and his 'favourite' cook book" do
+      it { expect(subject).not_to permit(user, create(:cook_book, user: user, favourite: true)) }
+    end
+
     context "with user not owning the cook book" do
       it { expect(subject).not_to permit(user, create(:cook_book)) }
     end
