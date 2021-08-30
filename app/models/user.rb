@@ -78,6 +78,10 @@ class User < ApplicationRecord
     save(validate: false)
   end
 
+  def deleted?
+    username.starts_with?("Deleted_user")
+  end
+
   private
 
   def resize_avatar

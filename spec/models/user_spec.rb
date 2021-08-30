@@ -60,4 +60,17 @@ RSpec.describe User, type: :model do
       expect(user.favourites_cook_book.favourite).to eq(true)
     end
   end
+  
+  describe "#deleted?" do
+    let(:user) { create(:user) }
+
+    context "when user isn't deleted" do
+      it { expect(user.deleted?).to eq(false) }
+    end
+
+    context "when user is deleted" do
+      before { user.anonymize_user }
+      it { expect(user.deleted?).to eq(true) }
+    end
+  end
 end
