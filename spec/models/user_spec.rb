@@ -52,4 +52,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "#favourites_cook_book" do
+    let(:user) { create(:user) }
+
+    it "returns favourites cook book" do
+      expect(user.favourites_cook_book.favourite).to eq(true)
+    end
+  end
 end

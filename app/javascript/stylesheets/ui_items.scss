@@ -102,7 +102,7 @@
   .label-text{ @apply flex-grow flex items-center justify-center m-3 mr-0 }
   .checkboxer{ @apply cursor-pointer bg-white border-4 rounded-md border-gray-300 flex justify-center items-center h-6 w-6 m-3 ml-0 }
   svg{ @apply opacity-0 }
-  
+
   input:checked +label{
     .checkboxer{ @apply border-none bg-green-400 }
     svg{ @apply opacity-100 }
@@ -135,3 +135,9 @@
     &:hover{ @apply opacity-100 }
   }
 }
+
+.heart-button{
+  &:hover{ @apply fill-red-700 cursor-pointer }
+}
+
+form.hide-submit input[type="submit"] { display: none;}

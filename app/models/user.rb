@@ -63,6 +63,12 @@ class User < ApplicationRecord
     end
   end
 
+  def favourites_cook_book
+    cook_books[0]
+  end
+
+  private
+
   def resize_avatar
     return unless avatar.attached? && defined?(attachment_changes["avatar"].attachable.tempfile)
 
