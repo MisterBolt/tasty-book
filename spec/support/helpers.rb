@@ -25,6 +25,12 @@ def fill_in_and_resend_confirmation(email)
   click_button I18n.t("devise.confirmations.resend_confirmation")
 end
 
+def fill_in_and_send_reset_password_instructions(email)
+  within("#new_user") { fill_in "Email", with: email }
+
+  click_button I18n.t("devise.passwords.reset_password")
+end
+
 def fill_in_recipe_data(title, description, time)
   fill_in "Title", with: title
   fill_in "Preparation description", with: description
