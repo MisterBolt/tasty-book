@@ -1,6 +1,7 @@
 .container.mx-auto 
-  .mt-8.mb-2.text-2xl.text-center.text-4xl.font-bold
+  .mt-8.mb-2.text-center.text-4xl.font-bold
     = @cook_book.title
-  .flex.flex-row.flex-wrap.justify-center
-    - @recipes.each do |recipe|
-      = render(partial: "recipe", locals: {recipe: recipe})
+  .text_sm.flex.flex-row.justify-center
+    | #{t("cook_books.show.created")} #{@cook_book.user.username}
+  .flex.flex-col
+    = render @recipes 
