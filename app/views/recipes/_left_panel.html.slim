@@ -16,7 +16,7 @@
       = link_to \
         image_tag("/images/shopping-cart.png",\
         class: "mx-auto py-2 opacity-90"),\
-        "https://shopping-troll.herokuapp.com/recipes/#{@recipe.id}",\
+        "#{ENV['SHOPPING_TROLL_API_URL']}/#{@recipe.id}",\
         target:"_blank", class:"btn-yellow"
         
       - if current_user
