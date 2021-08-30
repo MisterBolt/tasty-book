@@ -106,6 +106,30 @@ RSpec.describe "registration process", type: :feature do
     end
   end
 
+  context "filling in username with 'Guest'" do
+    before { fill_in_and_sign_up("Guest", "email@exmaple.com", "123456", "123456") }
+
+    it "displays error" do
+      expect(page).to have_content("Username can't be 'Guest'")
+    end
+
+    it "does not send the user an email" do
+      expect(Devise.mailer.deliveries.count).to eq(0)
+    end
+  end
+
+  context "filling in username starting with 'Deleted_user'" do
+    before { fill_in_and_sign_up("Deleted_user12", "email@exmaple.com", "123456", "123456") }
+
+    it "displays error" do
+      expect(page).to have_content("Username can't be 'Deleted_user'")
+    end
+
+    it "does not send the user an email" do
+      expect(Devise.mailer.deliveries.count).to eq(0)
+    end
+  end
+
   context "filling in taken email" do
     before { create(:user) }
     before { fill_in_and_sign_up("Username", User.last.email, "123456", "123456") }
