@@ -69,7 +69,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when user is deleted" do
-      before { user.anonymize_user }
+      before { user.anonymize }
       it { expect(user.deleted?).to eq(true) }
     end
   end

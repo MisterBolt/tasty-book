@@ -17,7 +17,7 @@ RSpec.describe Follow, type: :model do
 
       context "when followed_user is deleted" do
         before do
-          user.anonymize_user
+          user.anonymize
         end
 
         it "doesn't send notification email" do

@@ -51,7 +51,7 @@ RSpec.describe Comment, type: :model do
 
       context "when author of recipe is deleted" do
         before do
-          user.anonymize_user
+          user.anonymize
         end
 
         it "doesn't send notification email" do

@@ -69,7 +69,7 @@ class User < ApplicationRecord
     cook_books[0]
   end
 
-  def anonymize_user
+  def anonymize
     self.username = "Deleted_user#{id}"
     self.email = "deleted_user#{id}@deleted.user"
     self.password = Devise.friendly_token
