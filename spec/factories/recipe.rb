@@ -6,6 +6,7 @@ FactoryBot.define do
     user
     title { Faker::Food.dish }
     difficulty { rand(0..2) }
+    preparation_description {Faker::Food.description}
     time_in_minutes_needed { rand(5..60) }
     categories { create_list(:category, rand(1..3)) }
     layout { rand(0..2) }
