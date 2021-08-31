@@ -1,11 +1,11 @@
 .flex.flex-grow
-  .w-full.max-w-xs.m-auto
+  .w-full.max-w-sm.m-auto
     = render "devise/shared/error_messages", resource: resource
     = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4" }) do |f|
       .input-text-white
         = f.label :email
         = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: "Email"
-      .flex.justify-center
+      .flex.mx-2
         = f.submit t("devise.confirmations.resend_confirmation"), class: "btn-secondary", id: "resend_confirmation"
       = render "devise/shared/links"
     = render "devise/shared/all_rights"

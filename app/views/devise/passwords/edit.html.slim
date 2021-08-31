@@ -1,22 +1,20 @@
-h2
-  | Change your password
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  = f.hidden_field :reset_password_token
-  .field
-    = f.label :password, "New password"
-    br
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-      br
-    = f.password_field :password, autofocus: true, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation, "Confirm new password"
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Change my password"
-= render "devise/shared/links"
+.flex.flex-grow
+  .w-full.max-w-sm.m-auto
+    = render "devise/shared/error_messages", resource: resource
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col space-y-4" }) do |f|
+      = f.hidden_field :reset_password_token
+      .input-text-white
+        = f.label :password, t("devise.passwords.new_password")
+        = f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: t("devise.passwords.new_password")
+        - if @minimum_password_length
+          em.p-1.text-sm.text-gray-500
+            | (
+            = @minimum_password_length
+            |  characters minimum)
+      .input-text-white
+        = f.label :password_confirmation, t("devise.passwords.confirm_new_password")
+        = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: t("devise.passwords.confirm_new_password")
+      .flex.mx-2
+        = f.submit t("devise.passwords.change_my_password"), class: "btn-secondary", id: "reset-password"
+      = render "devise/shared/links"
+    = render "devise/shared/all_rights"
