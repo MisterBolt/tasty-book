@@ -91,5 +91,6 @@ class Recipe < ApplicationRecord
   scope :published, -> { where(status: :published) }
   scope :drafted, -> { where(status: :draft) }
   scope :searched, ->(text) { Recipe.where("LOWER(title) LIKE :text", text: "%#{text.downcase}%") }
+  scope :sort_by_kind_and_order, ->(kind, order) { Recipe::Filter.new.sort(self, kind, order) }
   scope :filtered_and_sorted, ->(filters_params) { Recipe::Filter.new.filter(self, filters_params) }
 end

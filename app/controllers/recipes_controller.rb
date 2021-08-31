@@ -151,7 +151,7 @@ class RecipesController < ApplicationController
     @search_text = params[:search].present? ? params[:search] : ""
     @sort_order = params[:order].present? ? params[:order] : "ASC"
     @sort_kind = params[:kind].present? ? params[:kind] : "title"
-    @my_books = params[:my_books].present? ? params[:my_books] : 0
+    @my_books = params[:my_books].present? ? params[:my_books] : "0"
     @time = params[:time].present? ? params[:time] : "all"
     @difficulties = params[:difficulties].present? ? params[:difficulties] : []
     @categories = params[:categories].present? ? params[:categories] : []

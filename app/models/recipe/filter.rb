@@ -1,11 +1,11 @@
 class Recipe::Filter
   def filter(scope, filters_params)
-    if filters_params[:search].present? && filters_params[:search] != ""
-      scope = scope.searched(filters_params[:search])
+    if filters_params[:my_books] == "1" && filters_params[:current_user].present?
+      scope = scope.joins(:cook_books).where(cook_books: {user_id: filters_params[:current_user].id})
     end
 
-    if filters_params[:my_books] == "1" && filters_params[:current_user].present?
-      scope = scope.joins(:cook_books).where(cook_books: {user_id: filters_params[:current_user]})
+    if filters_params[:search].present? && filters_params[:search] != ""
+      scope = scope.searched(filters_params[:search])
     end
 
     if filters_params[:difficulties].present?
@@ -37,18 +37,21 @@ class Recipe::Filter
     end
 
     if filters_params[:kind].present? && filters_params[:order].present?
-      case filters_params[:kind]
-      when "title", "difficulty", "time_in_minutes_needed"
-        scope = scope.order(filters_params[:kind] => filters_params[:order])
-      when "score"
-        nulls_presence = filters_params[:order] == "DESC" ? "NULLS LAST" : "NULLS FIRST"
-        scope = scope.left_outer_joins(:recipe_scores)
-          .select("recipes.*")
-          .group("recipes.id")
-          .order("avg(recipe_scores.score) #{filters_params[:order]} #{nulls_presence}")
-      end
+      scope = sort(scope, filters_params[:kind], filters_params[:order])
     end
+  end
 
+  def sort(scope, kind, order)
+    case kind
+    when "title", "difficulty", "time_in_minutes_needed"
+      scope = scope.order(kind => order)
+    when "score"
+      nulls_presence = order == "DESC" ? "NULLS LAST" : "NULLS FIRST"
+      scope = scope.left_outer_joins(:recipe_scores)
+        .select("recipes.*")
+        .group("recipes.id")
+        .order("avg(recipe_scores.score) #{order} #{nulls_presence}")
+    end
     scope
   end
 end

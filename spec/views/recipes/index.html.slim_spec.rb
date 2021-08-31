@@ -3,6 +3,9 @@ require "rails_helper"
 RSpec.describe "recipes/index", type: :view do
   include Pagy::Backend
   let(:user) { create(:user) }
+  before { assign(:difficulties, []) }
+  before { assign(:ingredients, []) }
+  before { assign(:categories, []) }
 
   context "with no recipes" do
     before do
@@ -41,7 +44,7 @@ RSpec.describe "recipes/index", type: :view do
     end
 
     it "doesn't display the dropdown menu" do
-      expect(rendered).not_to match /dropdown/
+      expect(rendered).not_to match /drop-menu/
     end
 
     it "doesn't display pagination" do
@@ -69,7 +72,7 @@ RSpec.describe "recipes/index", type: :view do
     end
 
     it "displays the dropdown menu" do
-      expect(rendered).to match /dropdown/
+      expect(rendered).to match /drop-menu/
     end
 
     it "doesn't allow moving to previous page" do

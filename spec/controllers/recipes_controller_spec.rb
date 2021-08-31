@@ -5,7 +5,7 @@ RSpec.describe RecipesController, type: :controller do
 
   describe "GET #index" do
     def get_index_action(page: 1, items: 10, kind: "title", order: "ASC")
-      get :index, params: {page: page, items: items, kind: kind, order: order}
+      get :index, params: {page: page, items: items, filters: {kind: kind, order: order}}
     end
     let(:recipes_raw) do
       [
