@@ -1,5 +1,6 @@
 class CreateSections < ActiveRecord::Migration[6.1]
   class Recipe < ApplicationRecord; end
+
   class Section < ApplicationRecord; end
 
   def up
