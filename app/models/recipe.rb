@@ -105,7 +105,7 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :sections,
     allow_destroy: true,
-    reject_if: ->(attributes) { attributes[:title].blank? || attributes[:body].blank? }
+    reject_if: ->(attributes) { attributes[:title].blank? && attributes[:body].blank? }
 
   def resize_image
     return unless image.attached?
