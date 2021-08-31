@@ -14,6 +14,6 @@ class Comment < ApplicationRecord
   scope :rejected, -> { where(status: :rejected) }
 
   def send_notification_email
-    NotificationMailer.comment_notification(recipe.user, self).deliver_now unless recipe.user.deleted?
+    NotificationMailer.comment_notification(recipe.user, self).deliver_now unless recipe.user.disabled?
   end
 end

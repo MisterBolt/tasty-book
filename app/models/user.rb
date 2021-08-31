@@ -46,7 +46,7 @@ class User < ApplicationRecord
     source: :follower
 
   def follow(other_user)
-    given_follows.create(followed_user_id: other_user.id) unless self == other_user || other_user.deleted?
+    given_follows.create(followed_user_id: other_user.id) unless self == other_user || other_user.disabled?
   end
 
   def unfollow(other_user)
@@ -78,7 +78,7 @@ class User < ApplicationRecord
     save(validate: false)
   end
 
-  def deleted?
+  def disabled?
     username.starts_with?("Deleted_user")
   end
 

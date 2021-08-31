@@ -11,6 +11,6 @@ class RecipeScore < ApplicationRecord
   after_create_commit -> { RecipeScoreServices::Broadcaster.new(self).notify_about_new_score }
 
   def send_notification_email
-    NotificationMailer.recipe_score_notification(recipe.user, self).deliver_now unless recipe.user.deleted?
+    NotificationMailer.recipe_score_notification(recipe.user, self).deliver_now unless recipe.user.disabled?
   end
 end

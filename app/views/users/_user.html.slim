@@ -11,5 +11,5 @@ article.p-4.space-x-4.border-solid.border-2.flex#user-profile
       .absolute.bottom-0.right-0
         - if current_user.following?(user)
           = render "follows/unfollow", user: user
-        - elsif !user.deleted?
+        - elsif !user.disabled?
           = render "follows/follow", user: user
