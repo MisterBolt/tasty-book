@@ -1,4 +1,4 @@
-= turbo_frame_tag "comment_form" do 
+= turbo_frame_tag "comment_form" do
   .flex.flex-row.items-center
     = image_tag(avatar_for_user_or_guest(current_user||nil), class:"w-14 h-14 object-cover rounded-full border border-gray-300 mr-4")
     .flex-grow
@@ -6,5 +6,4 @@
         .input-text-white.flex-grow
           = form.text_area :body, placeholder: t("comments.form.placeholder"), class: "h-20 resize-none"
         .ml-4
-          = form.submit t("comments.form.add"), class: "bg-gray-800 px-4 py-2 rounded-md text-white font-semibold cursor-pointer hover:opacity-90"
-
+          = form.submit t("comments.form.add"), class: "btn-secondary"

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProfileController, type: :controller do
-  let(:user) { create(:user, username: "oldUsername", password: "password") }
+  let!(:user) { create(:user, username: "oldUsername", password: "password") }
 
   describe "GET #index" do
     def get_index_action
@@ -288,6 +288,106 @@ RSpec.describe ProfileController, type: :controller do
       it { expect(recipes.size).to eq(10) }
       it { expect(pagy.page).to eq(1) }
       it { expect(pagy.pages).to eq(1) }
+    end
+  end
+
+  describe "DELETE #delete_user_with_data" do
+    def delete_user_with_data
+      delete :delete_user_with_data
+    end
+
+    context "when user isn't signed in" do
+      it "does not delete user from database" do
+        expect(-> { delete_user_with_data }).not_to change { User.count }
+      end
+
+      it "redirects to login page" do
+        delete_user_with_data
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "when user is signed in" do
+      let(:user2) { create(:user) }
+      let(:recipe) { create(:recipe, user: user2) }
+      before do
+        user.avatar.attach(io: File.open(Rails.root.join("spec", "files", "avatar.png")), filename: "avatar.png", content_type: "image/png")
+        create(:recipe, user: user)
+        create(:cook_book, user: user)
+        create(:recipe_score, user: user, recipe: recipe)
+        create(:follow, follower_id: user.id, followed_user_id: user2.id)
+        create(:follow, follower_id: user2.id, followed_user_id: user.id)
+        create(:comment, user: user, recipe: recipe)
+        sign_in user
+        delete_user_with_data
+      end
+
+      it "deletes user and all his data from database" do
+        expect(User.count).to eq(1)
+        expect(ActiveStorage::Attachment.count).to eq(0)
+        expect(Recipe.count).to eq(1)
+        expect(CookBook.count).to eq(1)
+        expect(RecipeScore.count).to eq(0)
+        expect(Follow.count).to eq(0)
+        expect(Comment.count).to eq(0)
+      end
+
+      it "redirects to landing page" do
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  describe "PATCH #disable_user_and_keep_data" do
+    def patch_disable_user_and_keep_data
+      patch :disable_user_and_keep_data
+    end
+
+    context "when user isn't signed in" do
+      it "does not delete user from database" do
+        expect(-> { patch_disable_user_and_keep_data }).not_to change { User.count }
+      end
+
+      it "redirects to login page" do
+        patch_disable_user_and_keep_data
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context "when user is signed in" do
+      let(:user2) { create(:user) }
+      let(:recipe) { create(:recipe, user: user2) }
+      before do
+        user.avatar.attach(io: File.open(Rails.root.join("spec", "files", "avatar.png")), filename: "avatar.png", content_type: "image/png")
+        create(:recipe, user: user)
+        create(:cook_book, user: user)
+        create(:recipe_score, user: user, recipe: recipe)
+        create(:follow, follower_id: user.id, followed_user_id: user2.id)
+        create(:follow, follower_id: user2.id, followed_user_id: user.id)
+        create(:comment, user: user, recipe: recipe)
+        sign_in user
+        patch_disable_user_and_keep_data
+        user.reload
+      end
+
+      it "anonymizes user" do
+        expect(user.username).to eq("Deleted_user#{user.id}")
+        expect(user.email).to eq("deleted_user#{user.id}@deleted.user")
+        expect(Devise.mailer.deliveries.count).to eq(0)
+        expect(user.avatar.attached?).to eq(false)
+      end
+
+      it "keeps all user data in database" do
+        expect(Recipe.count).to eq(2)
+        expect(CookBook.count).to eq(3)
+        expect(RecipeScore.count).to eq(1)
+        expect(Follow.count).to eq(2)
+        expect(Comment.count).to eq(1)
+      end
+
+      it "redirects to landing page" do
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end

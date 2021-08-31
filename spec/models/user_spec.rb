@@ -60,4 +60,17 @@ RSpec.describe User, type: :model do
       expect(user.favourites_cook_book.favourite).to eq(true)
     end
   end
+
+  describe "#disabled?" do
+    let(:user) { create(:user) }
+
+    context "when user isn't disabled" do
+      it { expect(user.disabled?).to eq(false) }
+    end
+
+    context "when user is disabled" do
+      before { user.anonymize }
+      it { expect(user.disabled?).to eq(true) }
+    end
+  end
 end

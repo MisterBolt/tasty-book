@@ -17,12 +17,14 @@ class User < ApplicationRecord
     through: :recipe_scores,
     source: :recipe
 
-  has_many :recipes
+  has_many :recipes,
+    dependent: :destroy
 
   has_many :cook_books,
     dependent: :destroy
 
-  has_many :comments
+  has_many :comments,
+    dependent: :destroy
 
   # returns an array of follows a user gave to someone else
   has_many :given_follows,
@@ -44,7 +46,7 @@ class User < ApplicationRecord
     source: :follower
 
   def follow(other_user)
-    given_follows.create(followed_user_id: other_user.id) unless self == other_user
+    given_follows.create(followed_user_id: other_user.id) unless self == other_user || other_user.disabled?
   end
 
   def unfollow(other_user)
@@ -65,6 +67,19 @@ class User < ApplicationRecord
 
   def favourites_cook_book
     cook_books[0]
+  end
+
+  def anonymize
+    self.username = "Deleted_user#{id}"
+    self.email = "deleted_user#{id}@deleted.user"
+    self.password = Devise.friendly_token
+    skip_reconfirmation!
+    avatar.purge
+    save(validate: false)
+  end
+
+  def disabled?
+    username.starts_with?("Deleted_user")
   end
 
   private

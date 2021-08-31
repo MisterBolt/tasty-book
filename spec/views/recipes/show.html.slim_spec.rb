@@ -99,8 +99,8 @@ RSpec.describe "recipes/show", type: :view do
     it "can add a comment", js: true do
       fill_in "comment[body]", with: "Test content"
       click_on t("comments.form.add")
-      expect(page).to have_content("Test content")
-      expect(page).to have_content(t("comments.show.guest"))
+      expect(page).to have_content(t("comments.guest_comment_modal.title"))
+      expect(page).to have_content(t("comments.guest_comment_modal.subtitle"))
     end
   end
 end

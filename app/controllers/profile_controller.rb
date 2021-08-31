@@ -38,6 +38,18 @@ class ProfileController < ApplicationController
     update_action(@user.update(user_avatar_params))
   end
 
+  def delete_user_with_data
+    @user.destroy
+    flash[:notice] = t(".notice")
+    redirect_to root_path
+  end
+
+  def disable_user_and_keep_data
+    @user.anonymize
+    flash[:notice] = t(".notice")
+    redirect_to root_path
+  end
+
   private
 
   def set_user

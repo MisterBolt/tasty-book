@@ -37,6 +37,13 @@
   &:focus{ @apply ring-gray-700 }
 }
 
+.btn-danger{
+  @include btn-base;
+  @apply text-white bg-red-700 opacity-80;
+  &:hover{ @apply opacity-90 }
+  &:focus{ @apply ring-gray-700 }
+}
+
 .btn-nav{
   @apply inline-flex justify-center items-center text-base font-medium text-white bg-none;
   &:hover{ @apply text-mustard }

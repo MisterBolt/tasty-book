@@ -126,7 +126,7 @@ en:
     add_section: "Add section"
     comments: "Comments"
     got_it: "Got it"
-    
+
   cook_book_recipes:
     create:
       action: "Add recipe to a Tasty Book"
@@ -212,6 +212,9 @@ en:
       new_password: "New password"
       confirm_new_password: "Confirm new password"
       current_password: "Current password"
+      delete_account: "Delete account"
+      delete_account_with_related_data: "Delete account and all data"
+      confirm_delete_account_with_related_data: "It will also delete all your data like recipes, comments, scores, etc.\nAre you sure?"
     update_password:
       notice: "Password changed succesfully"
       alert: "Password couldn't be changed"
@@ -221,6 +224,10 @@ en:
     update_avatar:
       notice: "Avatar changed succesfully"
       alert: "Avatar couldn't be changed"
+    delete_user_with_data:
+      notice: "Your account and all related data was deleted succesfully"
+    disable_user_and_keep_data:
+      notice: "Your account was deleted succesfully"
 
   notifications:
     hello: "Hello %{user}!"

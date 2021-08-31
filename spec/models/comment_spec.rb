@@ -41,8 +41,22 @@ RSpec.describe Comment, type: :model do
 
   describe "class methods" do
     describe "#send_notification_email" do
+      let(:user) { create(:user) }
+      let(:recipe) { create(:recipe, user: user) }
+      let(:comment) { create(:comment, recipe: recipe) }
+
       it "sends notification email" do
         expect { comment.send_notification_email }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
+      context "when author of recipe is deleted" do
+        before do
+          user.anonymize
+        end
+
+        it "doesn't send notification email" do
+          expect { comment.send_notification_email }.not_to change { ActionMailer::Base.deliveries.count }
+        end
       end
     end
   end

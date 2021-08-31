@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     get :followings, :followers, on: :member
   end
-  resources :profile do
+  resources :profile, only: [:index] do
     collection do
-      get :index, :recipes, :recipe_drafts, :cook_books, :settings
-      patch :update_password, :update_username, :update_avatar
+      get :recipes, :recipe_drafts, :cook_books, :settings
+      patch :update_password, :update_username, :update_avatar, :disable_user_and_keep_data
+      delete :delete_user_with_data
     end
   end
   resources :recipes do
