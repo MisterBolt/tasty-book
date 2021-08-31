@@ -24,6 +24,6 @@ RSpec.describe "profile/settings", type: :view do
     it { expect(page.find("#user_password_confirmation")["placeholder"]).to have_content(I18n.t("profile.settings.confirm_new_password")) }
     it { expect(page.find("#user_current_password")["placeholder"]).to have_content(I18n.t("profile.settings.current_password")) }
     it { expect(page).to have_link(I18n.t("profile.settings.delete_account_with_related_data"), href: "/profile/delete_user_with_data") }
-    it { expect(page).to have_link(I18n.t("profile.settings.delete_account"), href: "/profile/delete_user_and_keep_data") }
+    it { expect(page).to have_link(I18n.t("profile.settings.delete_account"), href: "/profile/disable_user_and_keep_data") }
   end
 end

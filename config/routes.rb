@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :profile, only: [:index] do
     collection do
       get :recipes, :recipe_drafts, :cook_books, :settings
-      patch :update_password, :update_username, :update_avatar, :delete_user_and_keep_data
+      patch :update_password, :update_username, :update_avatar, :disable_user_and_keep_data
       delete :delete_user_with_data
     end
   end

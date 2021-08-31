@@ -122,7 +122,7 @@ en:
     add_ingredient: "Add ingredient"
     comments: "Comments"
     got_it: "Got it"
-    
+
   cook_book_recipes:
     create:
       action: "Add recipe to a Tasty Book"
@@ -222,7 +222,7 @@ en:
       alert: "Avatar couldn't be changed"
     delete_user_with_data:
       notice: "Your account and all related data was deleted succesfully"
-    delete_user_and_keep_data:
+    disable_user_and_keep_data:
       notice: "Your account was deleted succesfully"
 
   notifications:

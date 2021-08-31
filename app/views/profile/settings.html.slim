@@ -41,5 +41,5 @@
     .text-2xl.text-gray-500.mt-6.mb-4
       = t(".delete_account")
     .m-2.flex.flex-col.lg:flex-row
-      = link_to t(".delete_account"), delete_user_and_keep_data_profile_index_path, data: { confirm: t("confirm") }, method: :patch, class: "btn-secondary", id: "delete_account_and_keep_data"
+      = link_to t(".delete_account"), disable_user_and_keep_data_profile_index_path, data: { confirm: t("confirm") }, method: :patch, class: "btn-secondary", id: "delete_account_and_keep_data"
       = link_to t(".delete_account_with_related_data"), delete_user_with_data_profile_index_path, data: { confirm: t(".confirm_delete_account_with_related_data") }, method: :delete, class: "btn-danger", id: "delete_account_with_data"

@@ -338,18 +338,18 @@ RSpec.describe ProfileController, type: :controller do
     end
   end
 
-  describe "PATCH #delete_user_and_keep_data" do
-    def patch_delete_user_and_keep_data
-      patch :delete_user_and_keep_data
+  describe "PATCH #disable_user_and_keep_data" do
+    def patch_disable_user_and_keep_data
+      patch :disable_user_and_keep_data
     end
 
     context "when user isn't signed in" do
       it "does not delete user from database" do
-        expect(-> { patch_delete_user_and_keep_data }).not_to change { User.count }
+        expect(-> { patch_disable_user_and_keep_data }).not_to change { User.count }
       end
 
       it "redirects to login page" do
-        patch_delete_user_and_keep_data
+        patch_disable_user_and_keep_data
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -366,7 +366,7 @@ RSpec.describe ProfileController, type: :controller do
         create(:follow, follower_id: user2.id, followed_user_id: user.id)
         create(:comment, user: user, recipe: recipe)
         sign_in user
-        patch_delete_user_and_keep_data
+        patch_disable_user_and_keep_data
         user.reload
       end
 
