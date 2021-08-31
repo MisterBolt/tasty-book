@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class Recipe < ApplicationRecord
+  with_options unless: :draft? do
+    validates :preparation_description, presence: true
+    validates :time_in_minutes_needed, presence: true
+    validates :difficulty, presence: true
+    validates :categories, length: {maximum: 5}, presence: true
+    validates :ingredients_recipes, length: {minimum: 1}
+  end
   validates :title, presence: true
-  validates :preparation_description, presence: true
-  validates :time_in_minutes_needed, presence: true
-  validates :difficulty, presence: true
   validates :status, presence: true
-  validates :categories, length: {maximum: 5}, presence: true
   validates :layout, presence: true
   validates_with RecipeImageValidator
-
-  validates :ingredients_recipes, length: {minimum: 1}
 
   enum difficulty: {EASY: 0, MEDIUM: 1, HARD: 2}
   enum layout: {layout_1: 0, layout_2: 1, layout_3: 2}
