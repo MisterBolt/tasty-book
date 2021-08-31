@@ -3,7 +3,7 @@
 class RecipesController < ApplicationController
   DEFAULT_SORT_KIND = "title"
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_recipe, only: [:update, :update_cook_books, :show, :edit, :destroy]
+  before_action :set_recipe, only: [:update, :update_favourite, :update_cook_books, :show, :edit, :destroy]
 
   def index
     params = filters_params
@@ -144,10 +144,11 @@ class RecipesController < ApplicationController
 
   def filters_params
     filters_params = params[:filters]
-    filters_params ? filters_params.permit(:my_books, :kind, :order, :time, difficulties: [], categories: [], ingredients: []) : {}
+    filters_params ? filters_params.permit(:search, :my_books, :kind, :order, :time, difficulties: [], categories: [], ingredients: []) : {}
   end
 
   def set_filters_variables(params)
+    @search_text = params[:search].present? ? params[:search] : ""
     @sort_order = params[:order].present? ? params[:order] : "ASC"
     @sort_kind = params[:kind].present? ? params[:kind] : "title"
     @my_books = params[:my_books].present? ? params[:my_books] : 0
@@ -155,10 +156,5 @@ class RecipesController < ApplicationController
     @difficulties = params[:difficulties].present? ? params[:difficulties] : []
     @categories = params[:categories].present? ? params[:categories] : []
     @ingredients = params[:ingredients].present? ? params[:ingredients] : []
-  end
-
-  def query_params
-    query_params = params[:query]
-    query_params ? query_params.permit(:text) : {}
   end
 end

@@ -1,18 +1,19 @@
-.flex.justify-center.flex-grow.space-x-6.px-6
-  - sort_options = recipes_sort_options
-  
-  .flex
-    - if user_signed_in?
-      = submit_tag t("filters.buttons.my_books"), id: "btn_filter_selector1", class: filter_books_button_class(@my_books, t("filters.buttons.my_books")), form: "filters"
-      = submit_tag t("filters.buttons.all"), id: "btn_filter_selector2", class: filter_books_button_class(@my_books, t("filters.buttons.all")), form: "filters"
+= form_for :filters, url: recipes_path, method: :get, html: { id: "filters" } do |form|
+  .flex.justify-center.flex-grow.space-x-6.px-6
+    - sort_options = recipes_sort_options
 
-  = render "filters/search_bar"
+    .flex
+      - if user_signed_in?
+        = form.submit t("filters.buttons.my_books"), id: "btn_filter_selector1", class: filter_books_button_class(@my_books, t("filters.buttons.my_books"))
+        = form.submit t("filters.buttons.all"), id: "btn_filter_selector2", class: filter_books_button_class(@my_books, t("filters.buttons.all"))
 
-  button#btn_filter.flex.items-center.rounded-md.shadow-md.space-x-2.p-3.bg-gray-200.text-gray-700.border.border-gray-300.font-medium.hover:bg-gray-300 [onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"]
-    = image_tag("/images/filter.png")
-    div 
-      = t("filters.buttons.filter")
+    = render "filters/search_bar", form: form
 
-= render "filters/filters_box"
+    #btn_filter.flex.items-center.rounded-md.cursor-pointer.shadow-md.space-x-2.p-3.bg-gray-200.text-gray-700.border.border-gray-300.font-medium.hover:bg-gray-300 onclick="toggleDisplay('filters','block'); toggleColor('btn_filter');"
+      = image_tag("/images/filter.png")
+      div 
+        = t("filters.buttons.filter")
+
+  = render "filters/filters_box", form: form
 
 = javascript_pack_tag "toggleColor"

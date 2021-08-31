@@ -1,7 +1,6 @@
-= form_for :query, url: filter_recipes_path(format: :turbo_stream), method: :post, html: {id: "search_title", class: "flex-grow"}, data: { controller: 'filters', filters_target: "form" } do |form|
-  .shadow-md.rounded-lg.overflow-hidden.flex.flex-grow.bg-white
-    .flex-grow.bg-current
-      = form.text_field :text, placeholder: true, value: params.dig('query', 'text'), data: { action: "input->filters#search" }, class: "outline-none appearance-none block w-full text-base font-medium py-3 px-4 "
-    .bg-white.opacity-2.opacity-white.w-auto.flex.justify-end
-      button.w-auto.flex.justify-end.items-center.p-2.pr-4.opacity-50.hover:opacity-100
-        = image_submit_tag("/images/loupe.png")
+.shadow-md.rounded-lg.overflow-hidden.flex.flex-grow.bg-white
+  .flex-grow
+    = form.text_field :search, placeholder: true, value: @search_text, class: "outline-none appearance-none block w-full text-base font-medium py-3 px-4 "
+  .bg-white.opacity-2.opacity-white.w-auto.flex.justify-end
+    button.w-auto.flex.justify-end.items-center.p-2.pr-4.opacity-50.hover:opacity-100
+      = image_submit_tag("/images/loupe.png")
