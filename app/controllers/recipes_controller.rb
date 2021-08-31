@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
       params[:current_user] = current_user
     end
     set_filters_variables(params)
-    recipes = Recipe.filtered_and_sorted(params)
+    recipes = Recipe.published.filtered_and_sorted(params)
     @pagy, @recipes = pagy(recipes, items: per_page)
   end
 

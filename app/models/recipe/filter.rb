@@ -45,6 +45,6 @@ class Recipe::Filter
       end
     end
 
-    scope
+    scope.distinct
   end
 end
