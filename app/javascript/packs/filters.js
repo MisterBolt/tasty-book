@@ -36,8 +36,6 @@ if(myBooks){
         if(current_scope == 1){
             return
         }
-        toggleColor('btn_filter_selector1'); 
-        toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
         scopes.forEach(i=>{
             i.value = 1;
         })
@@ -50,8 +48,6 @@ if(all){
         if(current_scope == 0){
             return
         }
-        toggleColor('btn_filter_selector2',from = 'bg-yellow-200', to = 'bg-white');
-        toggleColor('btn_filter_selector1');
         scopes.forEach(i=>{
             i.value = 0;
         })

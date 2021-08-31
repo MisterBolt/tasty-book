@@ -54,4 +54,15 @@ module RecipeHelper
   def authorize_recipe_action_links?(recipe)
     user_signed_in? && (recipe.user == current_user || current_user.admin?)
   end
+
+  def filter_books_button_class(my_books, btn)
+    button_class = "flex items-center font-medium shadow-md p-3 border border-gray-300 font-medium cursor-pointer"
+    active_button_class = "bg-gray-400 text-white"
+    unactive_button_class = "bg-gray-200 text-gray-700 hover:bg-gray-300"
+    if btn == t("filters.buttons.my_books")
+      return "#{(@my_books == "1" ? active_button_class : unactive_button_class)} #{button_class} rounded-l-lg"
+    else
+      return "#{( @my_books != "1" ? active_button_class : unactive_button_class)} #{button_class} rounded-r-lg"
+    end
+  end
 end

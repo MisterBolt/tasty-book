@@ -47,7 +47,6 @@
               = render partial: "filters/categories_field", locals: {form: form, name: c}
         = link_to_add_fields("filters/categories_field", "category", form, {name: nil})
 
-
       .flex.flex-col.items-center
         .font-medium.text-gray-700
           = t("filters.filter_box.ingredients")
@@ -56,12 +55,7 @@
             = render partial: "filters/ingredient_field", locals: {form: form, name: i}
         = link_to_add_fields("filters/ingredient_field", "ingredient", form, {name: nil})
 
-    .flex.justify-center.mt-3
-      .m-auto
-        = form.submit t("buttons.apply"), class: "bg-blue-500 w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded", data: { disable_with: false }
-
-      .m-auto 
-        = button_tag(t("buttons.clear_filters"), type: "buttons", id: "clear_filters", class: "btn-secondary")
-
-      .m-auto
-        = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "bg-gray-500 w-24 hover:bg-gray-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-gray-700 rounded")
+    .flex.items-center.justify-center.mt-3
+        = form.submit t("buttons.apply"), class: "btn-secondary", data: { disable_with: false }
+        = button_tag(t("buttons.clear_filters"), type: "buttons", id: "clear_filters", class: "btn-primary")
+        = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "btn-primary")
