@@ -2,7 +2,6 @@
 
 class Recipe < ApplicationRecord
   with_options unless: :draft? do
-    validates :preparation_description, presence: true
     validates :time_in_minutes_needed, presence: true
     validates :difficulty, presence: true
     validates :categories, length: {maximum: 5}, presence: true
