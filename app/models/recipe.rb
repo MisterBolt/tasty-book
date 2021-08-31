@@ -62,6 +62,10 @@ class Recipe < ApplicationRecord
     end
   end
 
+  accepts_nested_attributes_for :ingredients_recipes,
+    allow_destroy: true,
+    reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
+
   def cook_books_update(cook_book_ids_raw, user)
     cook_book_id_strings = cook_book_ids_raw.filter { |cook_book_id| cook_book_id != "" }
     cook_book_ids = cook_book_id_strings.map { |cook_book_id| cook_book_id.to_i }
@@ -93,6 +97,11 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients_recipes,
     allow_destroy: true,
     reject_if: ->(attributes) { attributes[:ingredient_name].blank? }
+
+  def short_preparation_description(max_char = 175)
+    return preparation_description if preparation_description.size <= max_char
+    preparation_description[0...max_char - 3] + "..."
+  end
 
   accepts_nested_attributes_for :sections,
     allow_destroy: true,

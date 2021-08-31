@@ -12,6 +12,8 @@ class CookBooksController < ApplicationController
   end
 
   def show
+    @cook_book = CookBook.find_by(id: params[:id])
+    @recipes = @cook_book.recipes
   end
 
   def edit
@@ -37,7 +39,7 @@ class CookBooksController < ApplicationController
     else
       flash[:alert] = @cook_book.errors.full_messages[0]
     end
-    redirect_to(cook_books_path)
+    redirect_to(cook_books_profile_index_path)
   end
 
   private

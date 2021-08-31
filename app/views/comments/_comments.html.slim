@@ -1,6 +1,6 @@
-.mx-16
-  .w-full
-    = render 'comments/form'
-  = turbo_stream_from @recipe, :comments
-  div id="#{dom_id(@recipe)}_comments" 
-  = render @recipe.comments.order(created_at: :desc)
+= defined?(streamable) ? turbo_stream_from(streamable, attribute) : turbo_stream_from(attribute)
+- if order == :desc
+  div id = id
+= render(comments.order(created_at: order), viewable: viewable)
+- if order == :asc
+  div id = id

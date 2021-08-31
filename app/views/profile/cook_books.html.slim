@@ -1,4 +1,15 @@
 .px-7.my-6.flex.flex-grow
-  .px-3
+  .px-3.flex-shrink-0
     = render "sidebar"
   .px-3.flex-grow.flex.flex-col
+    .flex.justify-between.items-center.flex-row-reverse.my-2
+      = render "profile/create_cook_book"
+      == pagy_nav(@pagy) if @pagy.pages > 1
+    - if @cook_books.present?
+      .flex.flex-wrap.justify-center.items-stretch
+        = render @cook_books
+    - else 
+      p.text-center.mt-5
+        = t("cook_books.not_found")
+    .flex.my-2
+      == pagy_nav(@pagy) if @pagy.pages > 1

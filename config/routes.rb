@@ -18,7 +18,13 @@ Rails.application.routes.draw do
   resources :cook_books
   resources :recipe_scores, only: :create
   resources :follows, only: [:create, :destroy]
-
+  resource :admin_panel, only: [:show] do
+    collection do
+      get :comments
+      patch "/comment/:id", action: :comment_approve, as: :comment_approve
+      delete "/comment/:id", action: :comment_reject, as: :comment_reject
+    end
+  end
   namespace :api do
     namespace :v1 do
       resources :recipes, only: [:show]

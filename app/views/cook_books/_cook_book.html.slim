@@ -10,6 +10,8 @@ article.relative.my-3.w-full.lg:w-1/2.2xl:w-1/3.cook-book
           = link_to image_tag("/images/default_recipe.png", class: "rounded-2xl object-cover h-24 w-auto transition-opacity opacity-75 hover:opacity-100", alt: ""), recipe_path(recipe)
     .text-gray-700.text-lg.px-16.mt-4
       = cook_book_recipes_text(recipes)
+  .absolute.top-0.left-0.ml-5.mt-2
+    = cook_book_visibility_svg(cook_book.visibility)
   .absolute.top-0.right-0.mr-4.mt-2
     - if authorize_cook_book_dropdown?(cook_book)
       input.drop-btn-hidden type="radio" name="dropdown" id="dropdown_cook_book#{cook_book.id}"
@@ -20,5 +22,5 @@ article.relative.my-3.w-full.lg:w-1/2.2xl:w-1/3.cook-book
               = render "shared/dots_vertical"
         .drop-menu tabindex="-1"
           = link_to t("cook_books.edit.action"), edit_cook_book_path(cook_book), class: "drop-item", tab_index: "-1"
-          - if cook_book.visibility != :favourite
+          - unless cook_book.favourite
             = link_to t("cook_books.destroy.action"), cook_book_path(cook_book), method: :delete, data: {confirm: t("confirm")}, class: "drop-item", tab_index: "-1"

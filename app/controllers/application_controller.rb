@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     authenticate_user!
-    redirect_to new_user_session_path unless current_user.admin?
+    redirect_to(root_path) unless current_user.admin?
   end
 
   protected

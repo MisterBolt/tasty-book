@@ -43,6 +43,7 @@ en:
     by_difficulty: "By difficulty"
 
   recipes:
+    buy: "Buy ingredients:"
     not_found: "No recipes yet"
     edit:
       action: "Edit recipe"
@@ -59,9 +60,6 @@ en:
     update:
       notice: "Recipe was successfully updated."
       alert: "Error occured, recipe couldn't be updated."
-      cook_books:
-        notice: "Tasty books were successfully assigned to the recipe."
-        alert: "Error occured, tasty books couldn't be assigned to the recipe."
     show:
       ingredients: "Ingredients"
       method: "Method"
@@ -99,6 +97,13 @@ en:
       add: "Add"
     show:
       guest: "Guest"
+    statuses:
+      awaiting: "Awaiting"
+      approved: "Approved"
+      rejected: "Rejected"
+    guest_comment_modal:
+      title: "Your comment is waiting for moderation approval, it might take some time."
+      subtitle: "When logged in, comments are accepted automatically."
 
   buttons:
     sign_up: "Sign up"
@@ -107,6 +112,7 @@ en:
     recipes: "Recipes"
     cook_books: "Tasty Books"
     dashboard: "Dashboard"
+    admin_panel: "Admin Panel"
     add_new_recipe: "Add new recipe"
     my_profile: "My Profile"
     cancel: "Cancel"
@@ -118,6 +124,8 @@ en:
     update_recipe: "Update recipe"
     add_ingredient: "Add ingredient"
     add_section: "Add section"
+    comments: "Comments"
+    got_it: "Got it"
     
   cook_book_recipes:
     create:
@@ -135,7 +143,7 @@ en:
       public: "Public"
       followers: "Followers"
     create:
-      action: "Create new Tasty Book"
+      action: "Add new Tasty Book"
       notice: "Tasty Book was successfully created."
       alert: "Error occured, Tasty Book couldn't be created."
     destroy:
@@ -144,6 +152,8 @@ en:
       alert: "Tasty Book couldn't be deleted."
     edit:
       action: "Edit Tasty Book"
+    show:
+      created: "created by"
 
   users:
     recipes_count: "Recipes: %{count}"
@@ -171,6 +181,12 @@ en:
       other: "%{count} Followers"
 
   profile:
+    sidebar:
+      dashboard: "Dashboard"
+      recipes: "Recipes"
+      recipe_drafts: "Recipes (draft)"
+      cook_books: "Tasty Books"
+      settings: "Settings"
     index:
       social: "Social"
       followers: "Followers"
@@ -212,3 +228,11 @@ en:
     comment: "Your %{title} recipe has been commented by %{user}"
     follow: "%{follower} is now following you"
     recipe_score: "Your %{title} recipe has been scored %{score} by %{user}"
+
+  admin_panel:
+    comments:
+      one: "comment"
+      other: "comments"
+    more_to_go: "more to go"
+    all_comments: "all comments"
+    overviewed: "overviewed"

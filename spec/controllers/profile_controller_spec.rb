@@ -168,4 +168,126 @@ RSpec.describe ProfileController, type: :controller do
       end
     end
   end
+
+  describe "GET #cook_books" do
+    def get_cook_books_action(page: 1, items: 12)
+      get :cook_books, params: {page: page, items: items}
+    end
+    let(:cook_books) { assigns(:cook_books) }
+    let(:pagy) { assigns(:pagy) }
+    before do
+      create_list(:cook_book, 10, user: user)
+      create_list(:cook_book, 5)
+    end
+
+    context "when user isn't signed in" do
+      before { get_cook_books_action }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when page = 1, items = 8 and user created 10 new cook books" do
+      before do
+        sign_in user
+        get_cook_books_action(page: 1, items: 8)
+      end
+
+      it { expect(cook_books.size).to eq(8) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(2) }
+    end
+
+    context "when page = 1, items = 15 and user created 10 new cook books" do
+      before do
+        sign_in user
+        get_cook_books_action(page: 1, items: 15)
+      end
+
+      it { expect(cook_books.size).to eq(11) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(1) }
+    end
+  end
+
+  describe "GET #recipes" do
+    def get_recipes_action(page: 1, items: 12)
+      get :recipes, params: {page: page, items: items}
+    end
+    let(:recipes) { assigns(:recipes) }
+    let(:pagy) { assigns(:pagy) }
+    before do
+      create_list(:recipe, 10, status: :published, user: user)
+      create_list(:recipe, 2, status: :draft, user: user)
+      create_list(:recipe, 5)
+    end
+
+    context "when user isn't signed in" do
+      before { get_recipes_action }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when page = 1, items = 8 and user created 10 new recipes" do
+      before do
+        sign_in user
+        get_recipes_action(page: 1, items: 8)
+      end
+
+      it { expect(recipes.size).to eq(8) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(2) }
+    end
+
+    context "when page = 1, items = 15 and user created 10 new recipes" do
+      before do
+        sign_in user
+        get_recipes_action(page: 1, items: 15)
+      end
+
+      it { expect(recipes.size).to eq(10) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(1) }
+    end
+  end
+
+  describe "GET #recipe_drafts" do
+    def get_recipe_drafts_action(page: 1, items: 12)
+      get :recipe_drafts, params: {page: page, items: items}
+    end
+    let(:recipes) { assigns(:recipes) }
+    let(:pagy) { assigns(:pagy) }
+    before do
+      create_list(:recipe, 10, status: :draft, user: user)
+      create_list(:recipe, 2, status: :published, user: user)
+      create_list(:recipe, 5)
+    end
+
+    context "when user isn't signed in" do
+      before { get_recipe_drafts_action }
+
+      it { expect(response).to redirect_to(new_user_session_path) }
+    end
+
+    context "when page = 1, items = 8 and user created 10 new recipes" do
+      before do
+        sign_in user
+        get_recipe_drafts_action(page: 1, items: 8)
+      end
+
+      it { expect(recipes.size).to eq(8) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(2) }
+    end
+
+    context "when page = 1, items = 15 and user created 10 new recipes" do
+      before do
+        sign_in user
+        get_recipe_drafts_action(page: 1, items: 15)
+      end
+
+      it { expect(recipes.size).to eq(10) }
+      it { expect(pagy.page).to eq(1) }
+      it { expect(pagy.pages).to eq(1) }
+    end
+  end
 end
