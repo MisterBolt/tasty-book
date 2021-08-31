@@ -22,5 +22,5 @@ article.relative.my-3.w-full.lg:w-1/2.2xl:w-1/3.cook-book
               = render "shared/dots_vertical"
         .drop-menu tabindex="-1"
           = link_to t("cook_books.edit.action"), edit_cook_book_path(cook_book), class: "drop-item", tab_index: "-1"
-          - if cook_book.visibility != :favourite
+          - unless cook_book.favourite
             = link_to t("cook_books.destroy.action"), cook_book_path(cook_book), method: :delete, data: {confirm: t("confirm")}, class: "drop-item", tab_index: "-1"
