@@ -1,6 +1,5 @@
 class Recipe::Filter
   def filter(scope, filters_params)
-
     if filters_params[:my_books] == "1" && filters_params[:current_user].present?
       scope = scope.joins(:cook_books).where(cook_books: {user_id: filters_params[:current_user]})
     end
@@ -40,9 +39,9 @@ class Recipe::Filter
       when "score"
         nulls_presence = filters_params[:order] == "DESC" ? "NULLS LAST" : "NULLS FIRST"
         scope = scope.left_outer_joins(:recipe_scores)
-                              .select("recipes.*")
-                              .group("recipes.id")
-                              .order("avg(recipe_scores.score) #{filters_params[:order]} #{nulls_presence}")
+          .select("recipes.*")
+          .group("recipes.id")
+          .order("avg(recipe_scores.score) #{filters_params[:order]} #{nulls_presence}")
       end
     end
 

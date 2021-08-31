@@ -10,17 +10,9 @@ class RecipesController < ApplicationController
     if current_user
       params[:current_user] = current_user
     end
-    set_filters_variables
-    byebug
+    set_filters_variables(params)
     recipes = Recipe.filtered_and_sorted(params)
     @pagy, @recipes = pagy(recipes, items: per_page)
-
-    # respond_to do |format|
-    #   format.html
-    #   format.json {
-    #     render json: {entries: render_to_string(partial: "recipes/recipes", formats: [:html]), pagination: view_context.pagy_nav(@pagy)}
-    #   }
-    # end
   end
 
   def show
@@ -150,23 +142,12 @@ class RecipesController < ApplicationController
     end
   end
 
-  def validate_sort_params!
-    sort_params = params.permit(:page, :items, :kind, :order)
-    validator = RecipesSortParamsValidator.new(sort_params)
-    return if validator.valid?
-    redirect_to recipes_path
-  end
-
-  def sort_kind
-    params[:kind].presence || DEFAULT_SORT_KIND
-  end
-
   def filters_params
     filters_params = params[:filters]
     filters_params ? filters_params.permit(:my_books, :kind, :order, :time, difficulties: [], categories: [], ingredients: []) : {}
   end
 
-  def set_filters_variables
+  def set_filters_variables(params)
     @sort_order = params[:order].present? ? params[:order] : "ASC"
     @sort_kind = params[:kind].present? ? params[:kind] : "title"
     @my_books = params[:my_books].present? ? params[:my_books] : 0

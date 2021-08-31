@@ -16,6 +16,6 @@ class FiltersController < ApplicationController
 
   def query_params
     query_params = params[:query]
-    query_params ? query_params.permit(:text) : {}
+    query_params ? query_params.permit(:text, :my_books) : {}
   end
 end
