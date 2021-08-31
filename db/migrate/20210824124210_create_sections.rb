@@ -22,7 +22,7 @@ class CreateSections < ActiveRecord::Migration[6.1]
     add_column :recipes, :preparation_description, :text
 
     Recipe.find_each do |recipe|
-      recipe.update!(preparation_description: Section.where(recipe_id: recipe.id).pluck(:description).join)
+      recipe.update!(preparation_description: Section.where(recipe_id: recipe.id).pluck(:body).join)
     end
 
     drop_table :sections
