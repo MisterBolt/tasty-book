@@ -1,6 +1,7 @@
-toggleColor = ((elementId, from = "bg-white", to = "bg-yellow-200", hover = "hover:bg-yellow-100") => {
+toggleColor = ((elementId, unclicked = "bg-gray-200", clicked = "bg-gray-300") => {
   element = document.getElementById(elementId);
-  element.classList.toggle(from);
-  element.classList.toggle(hover);
-  element.classList.toggle(to);  
+  element.classList.toggle(unclicked);
+  element.classList.toggle(clicked);
+  element.classList.toggle("hover:"+unclicked);
+  element.classList.toggle("hover:"+clicked);
 })

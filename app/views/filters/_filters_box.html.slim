@@ -1,59 +1,67 @@
-= form_for :filters, url: recipes_path, method: :get, html: { id: "filters", class: "w-4/5 m-auto bg-white shadow rounded flex justify-start relative hidden" } do |form|
-  = form.hidden_field :my_books, value: @my_books
-  = form.hidden_field :kind, value: @sort_kind
-  = form.hidden_field :order, value: @sort_order
+= form_for :filters, url: recipes_path, method: :get, html: { id: "filters", class: "relative hidden mt-4" } do |form|
+  .flex.flex-col.w-auto.m-auto.p-5.bg-white.shadow-md.rounded-xl
+    .flex.justify-around
+      = form.hidden_field :my_books, value: @my_books
+      = form.hidden_field :kind, value: @sort_kind
+      = form.hidden_field :order, value: @sort_order
 
-  .filter-subbox
-      = t("filters.filter_box.difficulty")
-      div
-        = form.check_box :difficulties, {id: "query_easy", multiple: true, include_hidden: false, checked: @difficulties.include?("0")}, 0
-        = form.label "easy", t("filters.filter_box.difficulty_box.easy")
-      div
-        = form.check_box :difficulties, {id: "query_medium", include_hidden: false, multiple: true, checked: @difficulties.include?("1")}, 1
-        = form.label "medium", t("filters.filter_box.difficulty_box.medium")
-      div
-        = form.check_box :difficulties, {id: "query_hard", include_hidden: false, multiple: true, checked: @difficulties.include?("2")}, 2
-        = form.label "hard", t("filters.filter_box.difficulty_box.hard")
+      .flex.flex-col.items-center
+        .font-medium.text-gray-700
+          = t("filters.filter_box.difficulty")
+        .flex-start
+          div
+            = form.check_box :difficulties, {id: "query_easy", multiple: true, include_hidden: false, checked: @difficulties.include?("0")}, 0
+            = form.label "easy", t("filters.filter_box.difficulty_box.easy")
+          div
+            = form.check_box :difficulties, {id: "query_medium", include_hidden: false, multiple: true, checked: @difficulties.include?("1")}, 1
+            = form.label "medium", t("filters.filter_box.difficulty_box.medium")
+          div
+            = form.check_box :difficulties, {id: "query_hard", include_hidden: false, multiple: true, checked: @difficulties.include?("2")}, 2
+            = form.label "hard", t("filters.filter_box.difficulty_box.hard")
 
-  .filter-subbox
-    = t("filters.filter_box.time")
-    div
-      = form.radio_button :time, "all", {checked: @time == "all"}
-      = form.label "time_all", t("filters.filter_box.time_box.all")
-    div
-      = form.radio_button :time, "less_than_15_minutes", {checked: @time == "less_than_15_minutes"}
-      = form.label "time_less_then_15_minutes", t("filters.filter_box.time_box.15m")
-    div
-      = form.radio_button :time, "less_than_30_minutes", {checked: @time == "less_than_30_minutes"}
-      = form.label "time_less_then_30_minutes", t("filters.filter_box.time_box.30m")
-    div
-    = form.radio_button :time, "less_than_hour", {checked: @time == "less_than_hour"}
-    = form.label "time_less_then_hour", t("filters.filter_box.time_box.1h")
-    div
-    = form.radio_button :time, "longer_then_hour", {checked: @time == "longer_then_hour"}
-    = form.label "time_longer_then_hour", t("filters.filter_box.time_box.more_than_an_hour")
+      .flex.flex-col.items-center
+        .font-medium.text-gray-700
+          = t("filters.filter_box.time")
+        .flex-start
+          div
+            = form.radio_button :time, "all", {checked: @time == "all"}
+            = form.label "time_all", t("filters.filter_box.time_box.all")
+          div
+            = form.radio_button :time, "less_than_15_minutes", {checked: @time == "less_than_15_minutes"}
+            = form.label "time_less_then_15_minutes", t("filters.filter_box.time_box.15m")
+          div
+            = form.radio_button :time, "less_than_30_minutes", {checked: @time == "less_than_30_minutes"}
+            = form.label "time_less_then_30_minutes", t("filters.filter_box.time_box.30m")
+          div
+          = form.radio_button :time, "less_than_hour", {checked: @time == "less_than_hour"}
+          = form.label "time_less_then_hour", t("filters.filter_box.time_box.1h")
+          div
+          = form.radio_button :time, "longer_then_hour", {checked: @time == "longer_then_hour"}
+          = form.label "time_longer_then_hour", t("filters.filter_box.time_box.more_than_an_hour")
 
-  .filter-subbox.w-1/4 
-    = t("filters.filter_box.categories")
-    div#categories.pt-2
-      - for c in @categories
-          = render partial: "filters/categories_field", locals: {form: form, name: c}
-    = link_to_add_fields("filters/categories_field", "category", form, {name: nil})
+      .flex.flex-col.items-center
+        .font-medium.text-gray-700
+          = t("filters.filter_box.categories")
+        div#categories.pt-2
+          - for c in @categories
+              = render partial: "filters/categories_field", locals: {form: form, name: c}
+        = link_to_add_fields("filters/categories_field", "category", form, {name: nil})
 
 
-  .filter-subbox.w-1/4
-    = t("filters.filter_box.ingredients")
-    div#ingredients.pt-2
-      - for i in @ingredients
-        = render partial: "filters/ingredient_field", locals: {form: form, name: i}
-    = link_to_add_fields("filters/ingredient_field", "ingredient", form, {name: nil})
+      .flex.flex-col.items-center
+        .font-medium.text-gray-700
+          = t("filters.filter_box.ingredients")
+        div#ingredients.pt-2
+          - for i in @ingredients
+            = render partial: "filters/ingredient_field", locals: {form: form, name: i}
+        = link_to_add_fields("filters/ingredient_field", "ingredient", form, {name: nil})
 
-  .grid-flow-col.grid-cols-2.m-auto.w-1/6
-    .m-auto
-      = form.submit t("buttons.apply"), class: "bg-blue-500 w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded", data: { disable_with: false }
+    .flex.justify-center.mt-3
+      .m-auto
+        = form.submit t("buttons.apply"), class: "bg-blue-500 w-24 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-blue-700 rounded", data: { disable_with: false }
 
-    .m-auto 
-      = button_tag(t("buttons.clear_filters"), type: "buttons", id: "clear_filters", class: "btn-secondary")
+      .m-auto 
+        = button_tag(t("buttons.clear_filters"), type: "buttons", id: "clear_filters", class: "btn-secondary")
 
-    .m-auto
-      = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "bg-gray-500 w-24 hover:bg-gray-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-gray-700 rounded")
+      .m-auto
+        = button_tag(t('buttons.cancel'), id: "cancel", type: "button", class: "bg-gray-500 w-24 hover:bg-gray-700 text-white font-bold py-2 px-4 m-1 cursor-pointer border border-gray-700 rounded")
