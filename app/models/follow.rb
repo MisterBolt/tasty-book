@@ -9,6 +9,6 @@ class Follow < ApplicationRecord
   after_create_commit -> { FollowServices::Broadcaster.new(self).notify_about_new_follower }
 
   def send_notification_email
-    NotificationMailer.follow_notification(followed_user, follower).deliver_now
+    NotificationMailer.follow_notification(followed_user, follower).deliver_now unless followed_user.disabled?
   end
 end
